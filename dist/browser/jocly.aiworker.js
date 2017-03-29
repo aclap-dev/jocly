@@ -27,7 +27,7 @@
  *    then also delete it in the license file.
  */
 
-window = self;
+var window = self;
 
 var Jocly;
 
