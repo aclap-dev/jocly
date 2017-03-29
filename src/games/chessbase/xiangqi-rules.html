@@ -1,0 +1,82 @@
+<p>Two opponents called <b>Black</b> and <b>Red</b>.</p>
+
+<p>To win you have to checkmate the General of your opponent.</p>
+
+<h2>Board</h2>
+
+<p>The board is a 9x10 grid but is virtually divided into 2 fields separated by a river. Each field has a palace.</p>
+
+<p>Pieces’ positions are called points defined by line intersections.</p>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/xq-emptyboard.jpg"/></p>
+
+<h2>Pieces</h2>
+
+<p>for each team:
+<ul>
+<li>1 general (king)</li>
+<li>2 advisors </li>
+<li>2 elephants (= minister for red)</li>
+<li>2 cannons</li>
+<li>2 chariots (rooks)</li>
+<li>2 horses (knights)</li>
+<li>5 soldiers (pawns)</li>
+</ul>
+</p>
+<p>We made a western set of pieces for players who might not be familiar with the traditional chinese version. From left to right: <b>General</b>, <b>Advisor</b>, <b>Horse</b>, <b>Elephant</b>, <b>Chariot</b>, <b>Cannon</b>, <b>Soldier</b>.
+(red and black pieces are different in the traditional set, not in the western set)</p>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/xiangqi/xiangqi-pieces-sprites.png"/></p>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/xiangqi/xiangqi-pieces-sprites-western.png"/></p>
+
+<h2>Initial setup</h2>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d-wall.jpg"/></p>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d-western-wall.jpg"/></p>
+
+<h2>Pieces actions and properties</h2>
+
+<p>(cheat sheet available below)</p>
+
+<ul>
+<li><b>General</b>: moves and captures 1 point orthogonally and can not leave his palace.  Exception: if no pieces between them, the general captures the opponents general if they are on the same line.</li>
+
+<li><b>Advisors</b>: move and capture 1 point diagonally. Can’t leave the palace. This makes only 5 available positions.</li>
+
+<li><b>Elephants</b>: move and capture exactly 2 points diagonally. Can’t jump over pieces. Can’t cross the river. This makes only 7 available positions.</li>
+
+<li><b>Horses</b>: move and capture 1 orthogonally, then one diagonally away from its former position. Can’t jump over pieces.</li>
+
+<li><b>Chariots</b>: move and capture any number of points orthogonally. Can’t jump over pieces.</li>
+
+<li><b>Cannons</b>: move like chariots but not for capture. Can’t jump over pieces. Exception: 
+the cannon can only capture by jumping over one and only one piece on its orthogonal way to its target.</li>
+
+<li><b>Soldiers</b> (pawns): move and capture 1 point forward. Once he has crossed the river, the soldier can also move and capture 1 point horizontally but not backwards. This is the only possible promotion in the game.</li>
+</ul>
+<p>
+You can use our cheat sheet for a start, for more detailed rules and explanations, you can also read the <a href="http://en.wikipedia.org/wiki/Xiangqi" target="_blank">Xiangqi Wikipedia page</a>.
+</p>
+
+
+<h2>Jocly Xiangqi cheat sheet</h2>
+<p><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/xq-cheatsheetx800.jpg"/></p>
+<p>Higher resolution is available <a href="http://wiki.jocly.com/index.php/File:Xiangqi-Cheatsheet.png"  target="_blank">on our wiki</a></p>
+
+<h2>Available skins</h2>
+<p>2D skins are available for all, 3D skins need WebGL so please use Chrome or Firefox.</p>
+<h3>3D Classic</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d.jpg"/></p>
+<h3>3D Wall</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d-wall.jpg"/></p>
+<h3>3D Western</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d-western.jpg"/></p>
+<h3>3D Western Wall</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-3d-western-wall.jpg"/></p>
+<h3>2D Classic</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-2d.jpg"/></p>
+<h3>2D Western</h3>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/xiangqi/ss-xq-2d-western.jpg"/></p>
+
+

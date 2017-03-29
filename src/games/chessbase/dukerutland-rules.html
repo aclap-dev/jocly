@@ -1,0 +1,285 @@
+<style>
+	table.psymbs {
+		text-align: center;
+	}
+	.psymb {
+		background-image: url({GAME}/res/images/wikipedia.png);
+		width: 100px;
+		height: 200px;
+	}
+	.psymbs td {
+		padding: 0 10px 0 10px;
+	}
+	.psymb-bold {
+		font-weight: bold;
+	}
+	.side {
+		float: right;
+		max-width: 100%;
+	}
+	@media screen and (max-width: 520px) {
+		.side {
+			float: none;
+			display: block;
+			max-width: 100%;
+			margin-right: auto;
+			margin-left: auto;
+		}		
+	}
+	h1,h2,h3,h4 {
+		clear: both;
+	}
+</style>
+<h1>Differences from orthodox chess</h1>
+<p>Played on a 14x10 board, 2 fairy pieces:
+<ul>
+	<li>The Concubine: moves and captures like Knight + Rook
+		<p style='text-align:center'><img style="max-width:100%;" src="{GAME}/res/rules/fairy/chancellor.png"/></p>
+		</li>
+	<li>The Crowned Rook: moves and captures like King + Rook
+		<p style='text-align:center'><img style="max-width:100%;" src="{GAME}/res/rules/fairy/crowned-rook.png"/></p>
+		</li>
+</ul>
+</p>
+
+<h2>Inital setup</h2>
+
+<p style='text-align:center'><img style="max-width:100%;" src="{GAME}/res/rules/dukerutland/dukerutland-initial.jpg"/></p>
+
+<p>Each player starts with:
+<ul>
+<li>14 Pawns</li>	
+<li>2 Rooks</li>	
+<li>2 Crowned Rooks</li>	
+<li>3 Knights</li>	
+<li>4 Bishops</li>
+<li>1 Concubine</li>
+<li>1 Queen</li>	
+<li>1 king</li>	
+</ul> 
+</p>
+
+
+
+<p>Castling: no.</p>
+<p>"En passant" capture: yes.</p>
+<p>Triple move for Pawns (start).</p>
+
+<p>Please see below for orthodox Chess rules.</p>
+<hr>
+<h1>Orthodox Chess rules</h1>
+<p>The following text is extracted from Wikipedia, under <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 License</a>.
+For more details and references, please access the <a href="http://en.wikipedia.org/wiki/Rules_of_chess" target="_blank">original article</a>.</p>
+
+<p>Chess is a game played by two people on a chessboard, with sixteen pieces (of six types) for each player. Each type of piece moves in a distinct way. 
+The goal of the game is to checkmate, i.e. to threaten the opponent's king with inevitable capture. In addition, there are several ways that a game can end in a draw.</p>
+
+<h2>Initial setup</h2>
+
+
+<p>Chess is played on a chessboard, a square board divided into 64 squares (eight-by-eight) of alternating color, which is similar to that used in 
+draughts (checkers). No matter what the actual colors of the board, the lighter-colored squares are called "light" or "white", and the darker-colored squares 
+are called "dark" or "black". Sixteen "white" and sixteen "black" pieces are placed on the board at the beginning of the game. The board is placed so that a 
+white square is in each player's near-right corner.</p>
+
+<p>Each player controls sixteen pieces:</p>
+
+<table width="100%">
+	<tr>
+		<td>Name</td><td>Number</td><td>White Symbols</td><td>Black Symbols</td>
+	</tr>
+	<tr>
+		<td class="symbname">King</td>
+		<td class="symbnumber">1</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_klt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_kdt45.svg.png"/></td>
+	</tr>
+	<tr>
+		<td class="symbname">Queen</td>
+		<td class="symbnumber">1</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_qlt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_qdt45.svg.png"/></td>
+	</tr>
+	<tr>
+		<td class="symbname">Rook</td>
+		<td class="symbnumber">2</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_rlt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_rdt45.svg.png"/></td>
+	</tr>
+	<tr>
+		<td class="symbname">Bishop</td>
+		<td class="symbnumber">2</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_blt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_bdt45.svg.png"/></td>
+	</tr>
+	<tr>
+		<td class="symbname">Knight</td>
+		<td class="symbnumber">2</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_nlt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_ndt45.svg.png"/></td>
+	</tr>
+	<tr>
+		<td class="symbname">Pawn</td>
+		<td class="symbnumber">8</td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_plt45.svg.png"/></td>
+		<td class="symbimg"><img src="{GAME}/res/rules/pieces/50px-Chess_pdt45.svg.png"/></td>
+	</tr>
+</table>
+
+<p>At the beginning of the game, the pieces are arranged as shown in the diagram. The second row from the player contains the eight pawns; 
+the row nearest the player contains the remaining pieces. Popular phrases used to remember the setup, often heard in beginners' clubs, 
+are "queen on her own color" and "white on right". The latter refers to setting up the board so that the square closest to each player's right 
+is white.</p>
+
+<h2>Play of the game</h2>
+
+<p>The player controlling the white army is named "White"; the player controlling the black pieces is named "Black". White moves first, 
+then players alternate moves. Making a move is required; it is not legal to skip a move, even when having to move is detrimental. Play 
+continues until a king is checkmated, a player resigns, or a draw is declared, as explained below. In addition, if the game is being played 
+under a time control players who exceed their time limit lose the game.</p>
+
+<h3>Movement</h3>
+
+<h4>Basic moves</h4>
+
+<p>Each chess piece has its own method of movement. Moves are made to vacant squares except when capturing an opponent's piece.</p>
+
+<p>With the exception of any movement of the knight and the occasional castling maneuver, pieces cannot jump over each other. When a piece is 
+captured (or taken), the attacking piece replaces the enemy piece on its square (en passant being the only exception). The captured piece is 
+thus removed from the game and may not be returned to play for the remainder of the game. The king can be put in check but cannot be 
+captured (see below).<p>
+
+
+<h4>King</h4>
+<img class="side" src="{GAME}/res/rules/movek.png"/>
+<p><span class="psymb-bold">The king</span> can move exactly one square horizontally, vertically, or diagonally. Only once per player, per game, is a king allowed to make a
+ special move known as castling (see below).</p>
+<br style="clear: both;">
+
+<h4>Rooks</h4>
+<img class="side" src="{GAME}/res/rules/mover.png"/>
+<p><span class="psymb-bold">The rook</span> moves any number of vacant squares vertically or horizontally. It also is moved while castling.</p>
+<br style="clear: both;">
+
+<h4>Bishops</h4>
+<img class="side" src="{GAME}/res/rules/moveb.png"/>
+<p><span class="psymb-bold">The bishop</span> moves any number of vacant squares in any diagonal direction.</p>
+<br style="clear: both;">
+
+<h4>Queen</h4>
+<img class="side" src="{GAME}/res/rules/moveq.png"/>
+<p><span class="psymb-bold">The queen</span> can move any number of vacant squares diagonally, horizontally, or vertically.</p>
+<br style="clear: both;">
+
+<h4>Knights</h4>
+<img class="side" src="{GAME}/res/rules/moven.png"/>
+<p><span class="psymb-bold">The knight</span> moves to the nearest square not on the same rank, file, or diagonal. In other words, the knight moves 
+two squares horizontally then one square vertically, or one square horizontally then two squares vertically. Its move is not 
+blocked by other pieces: it jumps to the new location.</p>
+<br style="clear: both;">
+
+<h4>Pawns</h4>
+<img class="side" src="{GAME}/res/rules/movep.png"/>
+<p><span class="psymb-bold">Pawns</span> have the most complex rules of movement:</p>
+<ul>
+<li>A pawn can move forward one square, if that square is unoccupied. If it has not yet moved, each pawn has the option of moving two squares 
+forward provided both squares in front of the pawn are unoccupied. A pawn cannot move backwards.</li>
+<li>Pawns are the only pieces that capture differently from how they move. They can capture an enemy piece on either of the two spaces adjacent to the space in front of them (i.e., the two squares diagonally in front of them) but cannot move to these spaces if they are vacant.</li>
+<p>The pawn is also involved in the two special moves en passant and promotion.</p>
+</ul>
+
+<h4>Castling</h4>
+
+<p>Castling consists of moving the king two squares towards a rook, then placing the rook on the other side of the king, adjacent to it. 
+Castling is only permissible if all of the following conditions hold:</p>
+
+<ul>
+<li>The king and rook involved in castling must not have previously moved;</li>
+<li>There must be no pieces between the king and the rook;</li>
+<li>The king may not currently be in check, nor may the king pass through or end up in a square that is under attack by an enemy piece (though the 
+rook is permitted to be under attack and to pass over an attacked square);</li>
+</ul>
+
+
+	<img class="side" src="{GAME}/res/rules/castling2.png"/>
+	<img class="side" src="{GAME}/res/rules/castling1.png"/>
+
+
+<h4>En passant</h4>
+
+<img class="side" src="{GAME}/res/rules/ep.png"/>
+
+<p>If player A's pawn moves forward two squares and player B has a pawn on its fifth rank on an adjacent file, 
+B's pawn can capture A's pawn as if A's pawn had only moved one square. This capture can only be made on the immediately 
+subsequent move. In this example, if the white pawn moves from a2 to a4, the black pawn on b4 can capture it en passant, ending up on a3.</p>
+
+<h4>Pawn promotion</h4>
+
+<p>If a pawn advances to its eighth rank, it is then promoted (converted) to a queen, rook, bishop, or knight of the same color, the choice 
+being at the discretion of its player (a queen is usually chosen). The choice is not limited to previously captured pieces. Hence it is 
+theoretically possible for a player to have up to nine queens or up to ten rooks, bishops, or knights if all of their pawns are promoted. 
+If the desired piece is not available, the player should call the arbiter to provide the piece.</p>
+
+<h3>Check</h3>
+
+<img class="side" src="{GAME}/res/rules/check.png"/>
+
+<p>A king is in check when it is under attack by one or more enemy pieces. A piece unable to move because it would place its own king in check 
+(it is pinned against its own king) may still deliver check to the opposing player.</p>
+
+<p>A player may not make any move which places or leaves his king in check. The possible ways to get out of check are:</p>
+
+
+<ul>
+<li>Move the king to a square where it is not threatened.</li>
+<li>Capture the threatening piece (possibly with the king).</li>
+<li>Block the check by placing a piece between the king and the opponent's threatening piece.</li>
+</ul>
+
+<h2>End of the game</h2>
+
+<h3>Checkmate</h3>
+
+<img class="side" src="{GAME}/res/rules/checkmate.png"/>
+
+<p>If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, 
+the game ends, and that player loses. Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends 
+the game.</p>
+
+<p>The diagram shows a typical checkmate position. The white king is threatened by the black queen; every square to which the king could move is
+ also threatened; it cannot capture the queen, because it would then be threatened by the rook.</p>
+ 
+ <h3>Draws</h3>
+ 
+<img class="side" src="{GAME}/res/rules/draw.png"/>
+
+ <p>The game ends in a draw if any of these conditions occur:</p>
+ <ul>
+ <li>The game is automatically a draw if the player to move is not in check but has no legal move. This situation is called a stalemate. 
+ An example of such a position is shown in the diagram to the right.</li>
+ <li><p>The game is immediately drawn when there is no possibility of checkmate for either side with any series of legal moves. This draw is
+  often due to insufficient material, including the endgames</p>
+ <ul>
+ 	<li>king against king;</li>
+    <li>king against king and bishop;</li>
+    <li>king against king and knight;</li>
+    <li>king and bishop against king and bishop, with both bishops on diagonals of the same color.</li>
+ </ul>  
+</li>
+<li>Both players agree to a draw after one of the players makes such an offer.</li>
+</ul>
+
+<p>The player having the move may claim a draw by declaring that one of the following conditions exists, or by declaring an intention to 
+make a move which will bring about one of these conditions:</p>
+ 
+<ul>
+<li>Fifty-move rule: There has been no capture or pawn move in the last fifty moves by each player.</li>
+<li>Threefold repetition: The same board position has occurred three times with the same player to move and all pieces having the same 
+rights to move, including the right to castle or capture en passant.</li>
+</ul> 
+
+<p>If the claim is proven true, the game is drawn.</p>
+
+<p>At one time, if a player was able to check the opposing king continually (perpetual check) and the player indicated their intention to do so, 
+the game was drawn. This rule is no longer in effect; however, players will usually agree to a draw in such a situation, since either the rule on 
+threefold repetition or the fifty-move rule will eventually be applicable.</p>
