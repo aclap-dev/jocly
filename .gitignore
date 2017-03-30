@@ -3,3 +3,4 @@ src/
 third_party/
 package.json
 gulpfile.js
+update-gh-pages.sh
