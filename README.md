@@ -29,6 +29,7 @@ Building
 - install [git](https://git-scm.com/downloads)
 - clone Jocly from *github*: `git clone https://github.com/mi-g/jocly.git`
 - enter the `jocly` directory
+- download require modules: `npm install`
 - build: `gulp build`
 - `dist/browser` contains the javascript library to build web applications, `dist/node` is the module to be used for node.js applications
 
