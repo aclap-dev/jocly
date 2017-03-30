@@ -24,7 +24,7 @@ Building
 --------
 
 - install the *node.js* environment (using [nvm](https://github.com/creationix/nvm) is probably a good idea)
-- install *gulp*: `nvm install -g gulp`
+- install *gulp*: `npm install -g gulp`
 - install [git](https://git-scm.com/downloads)
 - clone Jocly from *github*: `git clone https://github.com/mi-g/jocly.git`
 - enter the `jocly` directory
