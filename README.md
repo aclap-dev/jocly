@@ -1,5 +1,6 @@
 
-**Warning: This is work in progress**
+**Warning: This is work in progress, APIs are subject to changes 
+until Jocly is released as version 1.0.0**
 
 Jocly is a library and set of tools to integrate boards games into Web environments.
 It comes with a large collection of abstract strategy games, 2D and 3D user interface,
