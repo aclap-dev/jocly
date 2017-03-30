@@ -400,6 +400,18 @@
 						clipx : 0,
 					}
 				},
+				"fr-marshall":{			
+					"2d": {
+						file: this.mViewOptions.fullPath + "/res/musketeer/wikipedia-fairy-musketeer-all-sprites.png",
+						clipx : 4000,
+					}
+				},
+				"fr-cardinal":{			
+					"2d": {
+						file: this.mViewOptions.fullPath + "/res/musketeer/wikipedia-fairy-musketeer-all-sprites.png",
+						clipx : 3900,
+					}
+				},
 				"default": {
 					"3d": {
 						scale: [.5,.5,.5],
