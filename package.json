@@ -31,5 +31,8 @@
   },
   "dependencies": {
     "systemjs": "^0.20.10"
-  }
+  },
+  "engines" : { 
+      "node" : ">=5.10.1" 
+  } 
 }
