@@ -58,7 +58,10 @@ function ExportFunction(fName) {
     }
 }
 
-["listGames","createGame","createInternalGame"].forEach((fName)=>{
+["listGames","createMatch"].forEach((fName)=>{
     ExportFunction(fName);
 });
 
+exports.PLAYER_A = 1;
+exports.PLAYER_B = -1;
+exports.DRAW = 2;

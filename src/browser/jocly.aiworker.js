@@ -44,7 +44,7 @@ onmessage = function(e) {
             importTime = Date.now() - t0;
             break;
         case "Play":
-            Jocly.createInternalGame(message.gameName,options).then((game)=>{
+            Jocly._createInternalGame(message.gameName,options).then((game)=>{
                 game.mBoard.mMoves = [];
                 game.Load({
                     playedMoves: message.playedMoves

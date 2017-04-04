@@ -151,7 +151,8 @@ function ProcessJS(stream,concatName,skipBabel) {
         stream = stream.pipe(sourcemaps.init());
     if(!skipBabel)
         stream = stream.pipe(babel({
-            presets: ['es2015']
+            presets: ['es2015'],
+            compact: !!argv.prod
         }));
     if(argv.prod)
         stream = stream.pipe(uglify())
@@ -184,17 +185,11 @@ gulp.task("build-node-core",function() {
             "src/node/package.json",
         ]);
 
-    var joclyExtraScriptStream = 
-        ProcessJS(gulp.src([
-            "src/node/jocly.proxy.js"
-        ]));
-
     var allGamesStream = source('jocly-allgames.js');
     allGamesStream.end('exports.games = '+JSON.stringify(allGames));
     allGamesStream = ProcessJS(allGamesStream.pipe(buffer()));
 
-    return merge(joclyCoreStream,allGamesStream,joclyBaseStream,
-        joclyExtraStream,joclyExtraScriptStream)
+    return merge(joclyCoreStream,allGamesStream,joclyBaseStream,joclyExtraStream)
         .pipe(gulp.dest("dist/node"));
 
 })
@@ -248,7 +243,6 @@ gulp.task("build-browser-core",function() {
 
     var joclyExtraScriptsStream = ProcessJS(gulp.src([
             "src/browser/jocly.aiworker.js",
-            "src/browser/jocly.proxy.js",
             "src/browser/jocly.embed.js"
         ]));
 
@@ -322,8 +316,8 @@ gulp.task("clean",function() {
 
 gulp.task("watch",function() {
     gulp.watch("src/games/**/*",["build-node-games","build-browser-games"]);
-    gulp.watch("src/{browser,core,lib}",["build-browser-core","build-browser-xdview"]);
-    gulp.watch("src/{node,core}",["build-node-core"]);
+    gulp.watch("src/{browser,core,lib}/**/*",["build-browser-core","build-browser-xdview"]);
+    gulp.watch("src/{node,core}/**/*",["build-node-core"]);
 });
 
 gulp.task("help", function() {

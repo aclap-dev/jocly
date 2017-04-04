@@ -25,39 +25,57 @@
  *    then also delete it in the license file.
  */
 
-var gameId;
-var gGame;
+var matchId;
+var gMatch;
 
-window.addEventListener("message", receiveMessage, false);
+window.addEventListener("message", ReceiveMessage, false);
 
-function receiveMessage(event)
+function ReceiveMessage(event)
 {
-    console.info("embed receives message",event.data);
+    //console.info("embed receives message",event.data);
     var origin = event.origin || event.originalEvent.origin;
     var url = new URL(window.location);
     if(origin!=url.origin)
         return;
     function Reply(message) {
+        message = message || {};
         window.parent.postMessage({
-            joclyEmbeddedGameId: gameId,
+            joclyEmbeddedGameId: matchId,
             replyId: event.data.replyId,
             message: message
         },"*");
     }
+    function ReplyError(error) {
+        if(typeof error=="object")
+            error = {
+                message: error.message,
+                fileName: error.fileName,
+                lineNumber: error.lineNumber,
+                stack: error.stack
+            }
+        Reply({
+            type: "error",
+            error: error
+        });
+    }
     var message = event.data.message;
     switch(message.type) {
         case "init":
-            gameId = message.id;
+            matchId = message.id;
             var area = document.getElementById("area");
-            Jocly.createInternalGame(message.gameName).then((game) => {
-                gGame = game;
-                game.AddListener(Listen);
+            Jocly.createMatch(message.gameName).then((match) => {
+                gMatch = match;
+                match.game.Load({
+                    playedMoves: message.playedMoves
+                });
                 function Start() {
-                    game.AttachElement(area).then(()=>{
-                        game.GameInitView();
-                        game.DisplayBoard();
-                        Reply();
-                    });
+                    match.game.AttachElement(area).then(()=>{
+                            match.area = area;
+                            match.game.GameInitView();
+                            match.game.DisplayBoard();
+                            Reply();
+                        })
+                        .catch(ReplyError);
                 }
                 if (document.readyState === "complete"
                     || document.readyState === "loaded"
@@ -67,65 +85,30 @@ function receiveMessage(event)
                     window.addEventListener("DOMContentLoaded", () => {
                         Start();
                     });
-            });
+            })
+            .catch(ReplyError);
             break;
-        case "humanTurn":
-            gGame.HumanTurn();
+        case "method":
+            //console.info("embed execute method",message.methodName,message.args);
+            try {
+                gMatch[message.methodName].apply(gMatch,message.args)
+                    .then( function() {
+                        Reply({
+                            args: Array.from(arguments)
+                        })
+                    },ReplyError)
+            } catch(e) {
+                ReplyError(e);
+            }
             break;
-        case "machineTurn":
-            gGame.StartMachine(message.options);
-            break;
-        case "getFinished":
-            var finished = gGame.GetFinished();
-            Reply({
-                finished: !!finished,
-                winner: finished
-            });
-            break;
-        case "getMoveString":
-            var move = new (gGame.GetMoveClass())(message.move);
-            Reply(move.ToString());
-            break;
-    }
-}
-
-function Listen(message) {
-    switch(message.type) {
-        case "human-move":
-            gGame.ApplyMove(message.move);
-            var finished = gGame.GetFinished();
-            if(!finished)
-                gGame.InvertWho();
-            gGame.DisplayBoard();
-            Object.assign(message,{
-                finished: !!finished,
-                winner: finished
-            });
-            break;
-        case "machine-move":
-            var move = message.result.move;
-            delete message.result.move;
-            gGame.PlayMove(move)
-                .then(()=>{
-                    var finished = gGame.GetFinished();
-                    if(!finished)
-                        gGame.InvertWho();
-                    gGame.DisplayBoard();
-                    window.parent.postMessage({
-                        joclyEmbeddedGameId: gameId,
-                        message: {
-                            type: "machine-move",
-                            moveData: message.result,
-                            move: move,
-                            finished: !!finished,
-                            winner: finished
-                        }
-                    },"*");
+        case "destroy":
+            var playedMoves = gMatch.game.mPlayedMoves;
+            gMatch.destroy()
+                .then( ()=> {
+                    Reply({
+                        playedMoves: playedMoves
+                    });
                 });
-            return;
+            break;
     }
-    window.parent.postMessage({
-        joclyEmbeddedGameId: gameId,
-        message: message
-    },"*");
 }
