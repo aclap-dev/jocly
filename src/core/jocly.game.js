@@ -414,7 +414,7 @@ JocGame.prototype.GetWho = function() {
 }
 
 JocGame.prototype.HumanTurn = function() {
-	if(this.mBoard.mMoves.length==0) {
+	if(!this.mBoard.mMoves || this.mBoard.mMoves.length==0) {
 		this.mCurrentLevel=-1; 
 		this.mBoard.GenerateMoves(this);
 	}
@@ -581,6 +581,17 @@ JocGame.prototype.StartThreadedMachine = function(aOptions,algo) {
 		algo: algo,
 		t0: t0
 	});
+}
+
+JocGame.prototype.StopThreadedMachine = function() {
+	if(this.aiWorker) {
+		try {
+			this.aiWorker.terminate();
+			delete this.aiWorker;
+		} catch(e) {
+			console.warn("Cannot terminate worker",e);
+		}
+	}
 }
 
 JocGame.prototype.ScheduleStep = function() {
