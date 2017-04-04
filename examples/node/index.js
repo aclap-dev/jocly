@@ -1,58 +1,50 @@
-var jocly = require("../../dist/node");
+var Jocly = require("../../dist/node");
 
 var moveCount = 0;
 
-process.on('uncaughtException', function(err) {
-    console.error(err,err.stack)
-});
+function RunMatch(match) {
+    function NextMove() {
+        var move;
+        match.machineSearch()
+            .then( (result) => {
+                move = result.move;
+                return match.getMoveString(move);
+            })
+            .then( (moveStr) => {
+                console.info(
+                    ((!(moveCount%2) && ((moveCount>>1)+1)+".  ") || "")
+                    +(moveCount%2 && "            " || "")+" "+moveStr
+                );
+                moveCount++;
+            })
+            .then( () => {
+                return match.applyMove(move);
+            })
+            .then( (result) => {
+                if(result.finished) {
+                    if(result.winner==Jocly.PLAYER_A)
+                        console.info("Player A wins");
+                    else if(result.winner==Jocly.PLAYER_B)
+                        console.info("Player B wins");
+                    else if(result.winner==Jocly.DRAW)
+                        console.info("Draw");
+                } else
+                    NextMove();
+            })
+            .catch( (e) => {
+                console.info("Error",e);
+            })
 
-function Turn(game) {
-    game.machineTurn({
-            level: game.config.model.levels[2],
-        })
-        .then(()=>{
-        },(e)=>{
-            console.error("cannot machine turn",e);
-        })
-        .catch((e)=>{
-            console.error("error in machine turn",e);            
-        })
-        ;
-}
-
-function Listen(message) {
-    //console.info("Top receives",message);
-    switch(message.type) {
-        case "machine-move":
-            var move = this.getMoveString(message.move)
-                .then((move)=>{
-                    console.info(
-                        ((!(moveCount%2) && ((moveCount>>1)+1)+".  ") || "")
-                        +(moveCount%2 && "            " || "")+" "+move
-                    );
-                    moveCount++;
-                    if(message.finished)
-                        switch(message.winner) {
-                            case 1: console.info("Player A wins"); break;
-                            case -1: console.info("Player B wins"); break;
-                            case 2: console.info("Draw"); break;
-                        }
-                    else
-                        Turn(this);
-                    });
-            break;
     }
+    NextMove();
 }
 
-jocly.createGame("classic-chess")
-    .then((game)=>{
-        game.listen(Listen);
-        Turn(game);
-    },(e)=>{
-        console.info("error",e);        
+
+Jocly.createMatch("classic-chess")
+    .then((match)=>{
+        RunMatch(match);
     })
     .catch((e)=>{
-        console.info("error",e);                
-    })
-    ;
+        console.info("Error creating match",e);                
+    });
 
