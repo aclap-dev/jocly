@@ -36,7 +36,7 @@ Building
 Using Jocly in a Web page
 -------------------------
 
-After building Jocly, copy the `dist/browser` directory as `jocly` into your project filesystem.
+After building Jocly, copy the `dist/browser/` directory as `jocly/` into your project filesystem.
 
 Insert this line to your HTML source code:
 ````
@@ -45,8 +45,25 @@ Insert this line to your HTML source code:
 
 You are now ready to use the Jocly API through the `Jocly` global object.
 
+Using Jocly in a node.js application
+------------------------------------
+
+After building Jocly, the `dist/node/` directory as the Jocly module:
+
+````Javascript
+const Jocly = require("../jocly/dist/node");
+````
+
+Or, you can figure out how to use [`npm link`](https://docs.npmjs.com/cli/link) and just do:
+````Javascript
+const Jocly = require("jocly");
+````
+
+You are now ready to use the Jocly API through the `Jocly` entry point.
+
 API Documentation
 -----------------
 
-This section is to be written. For now, check the examples into the `examples/browser` 
-and `examples/node` sub-directories.
+Jocly offers two distinct APIs:
+- the [Application API](https://github.com/mi-g/jocly/wiki/Application-API) to make Web applications
+- the [Game API](https://github.com/mi-g/jocly/wiki/Game-API) to create games to run with Jocly features
