@@ -112,3 +112,17 @@ function ReceiveMessage(event)
             break;
     }
 }
+
+window.addEventListener("resize", Resize, false);
+
+function Resize() {
+    var game = gMatch && gMatch.game;
+    if(!game)
+        return;
+    game.mGeometry = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    }
+    game.GameDestroyView();
+    game.GameInitView();
+}
