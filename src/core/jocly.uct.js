@@ -793,6 +793,7 @@ if(typeof process!=="undefined" && process.title === "node") {
 				progressPercent=Math.max(progressPercent,100*loopCount/uctParams.maxLoops);
 			if(uctParams.maxNodes>0)
 				progressPercent=Math.max(progressPercent,100*nodeCount/uctParams.maxNodes);
+			progressPercent = Math.min(100,progressPercent);
 			if(progressPercent!=lastProgressPercent) {
 				lastProgressPercent=progressPercent;
 				if(aGame.mProgressCallback)
