@@ -215,11 +215,12 @@ $(document).ready(function () {
                 });
 
                 // yeah, using the fullscreen API is not as easy as it should be
-                var requestFullscreen = area.requestFullscreen || area.webkitRequestFullscreen;
+                var requestFullscreen = area.requestFullscreen || area.webkitRequestFullscreen || 
+                    area.webkitRequestFullScreen || area.mozRequestFullScreen;
                 if(requestFullscreen) {
-                    
-                    $(document).on("webkitfullscreenchange fullscreenchange",()=>{
-                        var isFullscreen = document.webkitFullscreenElement || document.fullscreenElement;
+                    $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange",()=>{
+                        var isFullscreen = document.webkitFullscreenElement || document.webkitFullScreenElement || 
+                            document.mozFullScreenElement || document.fullscreenElement;
                         if(isFullscreen)
                             area.style.display = "block";
                         else
