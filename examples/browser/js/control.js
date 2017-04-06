@@ -107,7 +107,7 @@ $(document).ready(function () {
         match.getConfig()
             .then( (config) => {
                 $("#game-title").show().text(config.model["title-en"]);
-                $("#close-games span").show().text("<< Back to "+config.model["title-en"]);
+                $("#close-games span").show();
                 $("#game-status").show();
 
                 var viewOptions = config.view;
