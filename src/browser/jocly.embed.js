@@ -46,6 +46,7 @@ function ReceiveMessage(event)
         },"*");
     }
     function ReplyError(error) {
+        console.warn("Embed error:",error);
         if(typeof error=="object")
             error = {
                 message: error.message,
