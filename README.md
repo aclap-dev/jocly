@@ -9,9 +9,10 @@ artificial intelligence to play against.
 Demos
 -----
 
-Simple human vs computer:
+[Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
+Click _**Other Jocly games**_ to switch to other games.
 
-[Classic chess](https://mi-g.github.com/jocly/examples/browser/simple.html?classic-chess),
+Simple human vs computer: [Classic chess](https://mi-g.github.com/jocly/examples/browser/simple.html?classic-chess),
 [Circular chess](https://mi-g.github.com/jocly/examples/browser/simple.html?circular-chess),
 [Multi layers chess](https://mi-g.github.com/jocly/examples/browser/simple.html?raumschach),
 [Hexagonal chess](https://mi-g.github.com/jocly/examples/browser/simple.html?glinski-chess),
