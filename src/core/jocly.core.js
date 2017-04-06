@@ -226,14 +226,17 @@
         var promise = new Promise((resolve, reject) => {
             if(typeof SystemJS!="undefined")
                 SystemJS.import("jocly-allgames.js").then((m) => {
+                    var games = m.games;
                     if(typeof SystemJS!="undefined") {
+                        games = {};
                         var baseURL = SystemJS.getConfig().baseURL;
                         for(var gameName in m.games) {
-                            var game = m.games[gameName];
+                            var game = Object.assign({},m.games[gameName]);
                             game.thumbnail = baseURL + "games/" + game.module + "/" + game.thumbnail;
+                            games[gameName] = game;
                         }
                     }
-                    resolve(m.games);
+                    resolve(games);
                 }, (e) => {
                     console.warn("Could not load Jocly games", e);
                     reject(e);
@@ -480,8 +483,7 @@
                 self.game.PlayMove(move)
                     .then(()=>{
                         var finished = self.game.GetFinished();
-                        if(!finished)
-                            self.game.InvertWho();
+                        self.game.InvertWho();
                         self.game.DisplayBoard();
                         resolve({
                             finished: !!finished,
@@ -504,8 +506,7 @@
 
                 self.game.ApplyMove(move);
                 var finished = self.game.GetFinished();
-                if(!finished)
-                    self.game.InvertWho();
+                self.game.InvertWho();
                 if(self.area)
                     self.game.DisplayBoard();
                 resolve({
@@ -554,9 +555,6 @@
         if(this.game) {
             var self = this;
 
-            if(this.userTurnReject)
-                return Promise.reject(new Error("userTurn(): already in user input mode"));
-
             var savedHumanMove;
 
             function Restore() {
@@ -565,24 +563,34 @@
             }
 
             var promise = new Promise( function(resolve, reject) {
-                self.userTurnReject = reject;
 
-                function HumanMove(move) {
-                    self.game.ApplyMove(move);
-                    var finished = self.game.GetFinished();
-                    if(!finished)
-                        self.game.InvertWho();
-                    self.game.DisplayBoard();
-                    resolve({
-                        move: move,
-                        finished: !!finished,
-                        winner: finished
+                // ensure match is not already in user input
+                var promise2;
+                if(self.userTurnReject)
+                    promise2 = self.abortUserTurn();
+                else
+                    promise2 = new Promise((resolve)=>{resolve()});
+                promise2.then( ()=>{}, ()=>{})
+                    .then( ()=>{
+
+                        self.userTurnReject = reject;
+
+                        function HumanMove(move) {
+                            self.game.ApplyMove(move);
+                            var finished = self.game.GetFinished();
+                            self.game.InvertWho();
+                            self.game.DisplayBoard();
+                            resolve({
+                                move: move,
+                                finished: !!finished,
+                                winner: finished
+                            });
+                        }
+                        savedHumanMove = self.game.HumanMove;
+                        self.game.HumanMove = HumanMove;
+
+                        self.game.HumanTurn();
                     });
-                }
-                savedHumanMove = self.game.HumanMove;
-                self.game.HumanMove = HumanMove;
-
-                self.game.HumanTurn();
             });
             return promise
                 .then( (result) => {
@@ -597,7 +605,7 @@
             return ProxiedMethod(this,"userTurn");
     }
 
-    GameProxy.prototype.abortUserTurn = function() {
+    GameProxy.prototype.abortUserTurn = function(failOnNotUserTurn) {
         if(jsContext=="node")
             return Promise.reject(new Error("abortUserTurn(): not supported in node.js"));
         if(!this.area && !this.iframe)
@@ -607,7 +615,10 @@
             var self = this;
 
             if(!this.userTurnReject)
-                return Promise.reject(new Error("abortUserTurn(): not in user input mode"));
+                if(failOnNotUserTurn)
+                    return Promise.reject(new Error("abortUserTurn(): not in user input mode"));
+                else
+                    return Promise.resolve();
 
             var promise = new Promise( function(resolve, reject) {
                 self.game.HumanTurnEnd();
@@ -618,7 +629,7 @@
             });
             return promise;
         } else
-            return ProxiedMethod(this,"abortUserTurn");
+            return ProxiedMethod(this,"abortUserTurn",arguments);
     }
 
     GameProxy.prototype.machineSearch = function(options) {
@@ -641,35 +652,46 @@
             }
 
             var promise = new Promise( function(resolve, reject) {
-                self.machineSearchReject = reject;
 
-                function MachineMove(result) {
-                    var move = result.move;
-                    delete result.move;
-                    var finished = self.game.GetFinished();
-                    resolve({
-                        move: move,
-                        finished: !!finished,
-                        winner: finished
+                // ensure match is not already in user input
+                var promise2;
+                if(self.machineSearchReject)
+                    promise2 = self.abortMachineSearch();
+                else
+                    promise2 = new Promise((resolve)=>{resolve()});
+                promise2.then( ()=>{}, ()=>{})
+                    .then( ()=>{
+
+                        self.machineSearchReject = reject;
+
+                        function MachineMove(result) {
+                            var move = result.move;
+                            delete result.move;
+                            var finished = self.game.GetFinished();
+                            resolve({
+                                move: move,
+                                finished: !!finished,
+                                winner: finished
+                            });
+                        }
+                        savedMachineMove = self.game.MachineMove;
+                        self.game.MachineMove = MachineMove;
+
+                        function MachineProgress(percent) {
+                            if(self.area)
+                                window.parent.postMessage({
+                                    joclyEmbeddedGameId: self.id,
+                                    message: {
+                                        type: "machine-progress",
+                                        progress: percent
+                                    }
+                                },"*");
+                        }
+                        savedMachineProgress = self.game.MachineProgress;
+                        self.game.MachineProgress = MachineProgress;
+
+                        self.game.StartMachine(options);
                     });
-                }
-                savedMachineMove = self.game.MachineMove;
-                self.game.MachineMove = MachineMove;
-
-                function MachineProgress(percent) {
-                    if(self.area)
-                        window.parent.postMessage({
-                            joclyEmbeddedGameId: self.id,
-                            message: {
-                                type: "machine-progress",
-                                progress: percent
-                            }
-                        },"*");
-                }
-                savedMachineProgress = self.game.MachineProgress;
-                self.game.MachineProgress = MachineProgress;
-
-                self.game.StartMachine(options);
             });
             return promise
                 .then( (result) => {
@@ -700,12 +722,15 @@
         }
     }
 
-    GameProxy.prototype.abortMachineSearch = function() {
+    GameProxy.prototype.abortMachineSearch = function(failOnNotMachineSearch) {
         if(this.game) {
             var self = this;
 
             if(!this.machineSearchReject)
-                return Promise.reject(new Error("abortMachineSearch(): machine not searching"));
+                if(failOnNotMachineSearch)
+                    return Promise.reject(new Error("abortMachineSearch(): machine not searching"));
+                else
+                    return Promise.resolve();
 
             var promise = new Promise( function(resolve, reject) {
                 self.game.StopThreadedMachine();
@@ -746,6 +771,28 @@
             return promise;
         } else
             return ProxiedMethod(this,"setViewOptions",arguments);
+    }
+
+    GameProxy.prototype.getViewOptions = function() {
+        if(this.game) {
+            var self = this;
+
+            var promise = new Promise( function(resolve, reject) {
+                var options = {
+                    skin: self.game.mSkin,
+                    sounds: self.game.mSounds
+                }
+                if(self.game.mViewOptions.useNotation)
+                    options.notation = !!self.game.mNotation;
+                if(self.game.mViewOptions.useShowMoves)
+                    options.showMoves = !!self.game.mShowMoves;
+                if(self.game.mViewOptions.useAutoComplete)
+                    options.autoComplete = !!self.game.mAutoComplete;
+                resolve(options);
+            });
+            return promise;
+        } else
+            return ProxiedMethod(this,"getViewOptions");
     }
 
     GameProxy.prototype.getFinished = function() {
@@ -822,6 +869,18 @@
             return promise;
         } else
             return ProxiedMethod(this,"load",arguments);
+    }
+
+    GameProxy.prototype.getConfig = function() {
+        if(this.game) {
+            var self = this;
+
+            var promise = new Promise( function(resolve, reject) {
+                resolve(self.game.config);
+            });
+            return promise;
+        } else
+            return ProxiedMethod(this,"getConfig");
     }
 
     exports.createMatch = CreateMatch;
