@@ -445,6 +445,11 @@ JocGame.prototype.EvaluateBoard = function() {
 }
 
 JocGame.prototype.GetFinished = function() {
+	this.EvaluateBoard();
+	if(this.mBoard.mFinished)
+		return this.mBoard.mWinner;
+	else
+		return 0;
 	this.SetWho(-this.mWho);
 	var moves=this.mBoard.mMoves;
 	this.EvaluateBoard();
