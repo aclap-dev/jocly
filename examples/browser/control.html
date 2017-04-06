@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Jocly Game Control</title>
+    <meta name="description" content="Jocly Game Control">
+    <meta name="author" content="Jocly">
+
+    <link rel="stylesheet" href="css/control-styles.css">
+
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="applet">
+            <div id="progress-bar"></div>
+        </div>
+		<div id="controls">
+            <div id="game-title" style="display: none;" class="box">Jocly Game</div>
+            <div id="game-status" style="display: none;" class="box">Status</div>
+	       	<div id="mode-panel" style="display: none;" class="box">
+	       		<h3>Controls</h3>
+	       		<button id="restart">Restart game</button><br/><br/>
+	       		<button id="takeback">Take back</button><br/><br/>
+	       		<select id="mode">
+	       			<option value="self-self">Self / Self</option>
+	       			<option value="self-comp">Self / Computer</option>
+	       			<option value="comp-self">Computer / Self</option>
+	       			<option value="comp-comp">Computer / Computer</option>
+	       		</select><br/><br/>
+	       		<label id="level-a" for="select-level-PLAYER_A">Computer(A) level<br/>
+	        		<select id="select-level-a"></select><br/><br/>
+	       		</label>
+	       		<label id="level-b" for="select-level-b">Computer(B) level<br/>
+	        		<select id="select-level-b"></select><br/><br/>
+	       		</label>
+	       		<button id="fullscreen" style="display: none;">Full screen</button><br/><br/>
+	       	</div>
+	       	<div id="options" style="display: none;"  class="box">
+	       		<h3>Options</h3>
+	       		<select id="options-skin"></select><br/><br/>
+	       		<label id="options-notation" for="options-notation-input">
+	       			<input id="options-notation-input" type="checkbox"/> Notation<br/>
+	       		</label>
+	       		<label id="options-moves" for="options-moves-input">
+	       			<input id="options-moves-input" type="checkbox"/> Show possible moves<br/>
+	       		</label>
+	       		<label id="options-autocomplete" for="options-autocomplete-input">
+	       			<input id="options-autocomplete-input" type="checkbox"/> Auto-complete moves<br/>
+	       		</label>
+	       		<label id="options-sounds" for="options-sounds-input">
+	       			<input id="options-sounds-input" type="checkbox"/> Sounds<br/>
+	       		</label>
+	       	</div>
+            <div id="links">
+                <a href="https://github.com/mi-g/jocly">Jocly on Github</a> - 
+                <a href="javascript:void(0)" id="other-games">Other Jocly games</a>
+            </div>
+		</div>
+        <div id="games" style="display:none">
+            <div id="close-games">
+                <span></span>
+            </div>
+            <div id="game-list"></div>
+        </div>
+
+
+    </div>
+
+    <script src="../../dist/browser/jocly.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="js/control.js"></script>
+</body>
+
+</html>
