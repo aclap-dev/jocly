@@ -23,6 +23,15 @@ html,body {
 	vertical-align: top;
 	padding: 0 .5em 0 .5em;
 }
+#controls h3 {
+    margin: .0 0 1em 0;
+}
+#controls button {
+    margin-right: 1em;
+}
+#controls label select {
+    margin-left: 1em;
+}
 .box {
 	background-color: #f0f0f0;
 	border: 2px solid #e0e0e0;

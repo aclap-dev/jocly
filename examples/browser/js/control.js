@@ -87,7 +87,12 @@ function RunMatch(match, progressBar) {
                     });
             })
     }
-    NextMove();
+    match.getFinished()
+        .then( (result) => {
+            // make sure the game is not finished to request next move
+            if(!result.finished)
+                NextMove();
+        });
 }
 
 $(document).ready(function () {
@@ -209,10 +214,21 @@ $(document).ready(function () {
                         });
                 });
 
-                if(area.requestFullscreen)
-                    $("#fullscreen").show().on("click",function() {
-                        area.requestFullscreen();
+                // yeah, using the fullscreen API is not as easy as it should be
+                var requestFullscreen = area.requestFullscreen || area.webkitRequestFullscreen;
+                if(requestFullscreen) {
+                    
+                    $(document).on("webkitfullscreenchange fullscreenchange",()=>{
+                        var isFullscreen = document.webkitFullscreenElement || document.fullscreenElement;
+                        if(isFullscreen)
+                            area.style.display = "block";
+                        else
+                            area.style.display = "table-cell";
                     });
+                    $("#fullscreen").show().on("click",function() {
+                        requestFullscreen.call(area);
+                    });
+                }
 
                 $("#links").on("click",()=>{
                     $("#controls").hide();
