@@ -132,7 +132,7 @@ $(document).ready(function () {
                         if(options.autocomplete!==undefined)
                             $("#options-autocomplete").show().children("input").prop("checked",options.autocomplete);
 
-                        $("#options").on("change",function() {
+                        $("#view-options").on("change",function() {
                             var opts={};
                             if($("#options-skin").is(":visible")) 
                                 opts.skin=$("#options-skin").val();
@@ -151,12 +151,34 @@ $(document).ready(function () {
                                 })
                         });
 
+                        $("#anaglyph-input").on("change",function() {
+                            if($(this).is(":checked"))
+                                match.viewControl("enterAnaglyph");
+                            else
+                                match.viewControl("exitAnaglyph");
+                        });
+
                         // the match need to be attached to a DOM element for displaying the board
                         match.attachElement(area)
                             .then( () => {
                                 RunMatch(match,progressBar);
                             });
 
+                    });
+
+                if(config.view.switchable)
+                    $("#view-as").show().on("change",()=>{
+                        var playerMode = $("#view-as").val();
+                        var player;
+                        if(playerMode=="player-a")
+                            player = Jocly.PLAYER_A;
+                        else if(playerMode=="player-b")
+                            player = Jocly.PLAYER_B;
+                        if(player)
+                            match.viewAs(player)
+                                .then( () => {
+                                    RunMatch(match,progressBar);                                
+                                });
                     });
 
                 // configure computer levels
