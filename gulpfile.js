@@ -286,6 +286,7 @@ gulp.task("build-browser-xdview",function() {
             lib+"threex.domevent.js",
             lib+"threex.domevent.object3d.js",
             lib+"StereoEffect.js",
+            lib+"AnaglyphEffect.js",
             srcLib+"VRGamepad.js",
             lib+"VRControls.js",
             lib+"VREffect.js",

@@ -132,7 +132,7 @@ $(document).ready(function () {
                         if(options.autocomplete!==undefined)
                             $("#options-autocomplete").show().children("input").prop("checked",options.autocomplete);
 
-                        $("#options").on("change",function() {
+                        $("#view-options").on("change",function() {
                             var opts={};
                             if($("#options-skin").is(":visible")) 
                                 opts.skin=$("#options-skin").val();
@@ -149,6 +149,13 @@ $(document).ready(function () {
                                 .then( () => {
                                     RunMatch(match,progressBar);                                
                                 })
+                        });
+
+                        $("#anaglyph-input").on("change",function() {
+                            if($(this).is(":checked"))
+                                match.viewControl("enterAnaglyph");
+                            else
+                                match.viewControl("exitAnaglyph");
                         });
 
                         // the match need to be attached to a DOM element for displaying the board

@@ -2495,6 +2495,7 @@ if(window.JoclyXdViewCleanup)
 					threeCtx.camera.updateProjectionMatrix();
 			} else {
 				threeCtx.renderer.setSize(this.mGeometry.width,this.mGeometry.height);
+				threeCtx.anaglyphEffect.setSize(this.mGeometry.width,this.mGeometry.height);
 				threeCtx.camera.aspect=this.mGeometry.width/this.mGeometry.height;
 				threeCtx.camera.updateProjectionMatrix();
 			}
@@ -2726,6 +2727,25 @@ if(window.JoclyXdViewCleanup)
 		options = options || {};
 		var promise = new Promise( function(resolve, reject) {
 			switch(cmd) {
+				case "enterAnaglyph":
+					if(threeCtx) {
+						threeCtx.anaglyph = true;
+						var factor = 2.5;
+						threeCtx.scene.scale.set(1/factor,1/factor,1/factor);
+						threeCtx.camera.scale.set(factor,factor,factor);
+						threeCtx.animControl.trigger();
+					};
+					resolve();
+					break;
+				case "exitAnaglyph":
+					if(threeCtx) {
+						threeCtx.anaglyph = false;
+						threeCtx.scene.scale.set(1,1,1);
+						threeCtx.camera.scale.set(1,1,1);
+						threeCtx.animControl.trigger();
+					};
+					resolve();
+					break;				
 				default:
 					reject(new Error("ViewControl: unsupported command "+cmd));
 			}
@@ -3045,6 +3065,9 @@ if(window.JoclyXdViewCleanup)
 		var stereoEffect = new THREE.StereoEffect(renderer);
 		stereoEffect.setSize( area.width(), area.height() );
 
+		var anaglyphEffect = new THREE.AnaglyphEffect( renderer );
+		anaglyphEffect.setSize( area.width(), area.height() );
+
         var gamepads = new VRGamepads({
             camera: camera,
             scene: scene,
@@ -3204,7 +3227,9 @@ if(window.JoclyXdViewCleanup)
 						if(stereo) {
 							gamepads.update();
 	                        stereoEffect.render( scene, camera );
-						} else
+						} else if(ctx.anaglyph)
+							anaglyphEffect.render(scene,camera);
+						else
                         	renderer.render( scene, camera );
                     }
 					if(showStats) {
@@ -3279,6 +3304,8 @@ if(window.JoclyXdViewCleanup)
             body: body,
             harbor: harbor,
             defaultHarborQuaternion: harbor.quaternion.clone(),
+			anaglyphEffect: anaglyphEffect,
+			anaglyph: false
 		};
 
 		function VRGetIntersect(position,direction,callback) {
