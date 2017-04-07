@@ -45,9 +45,6 @@ if(window.JoclyXdViewCleanup)
 		}
 		if(arStream)
 			AR(null);
-
-		$(document).unbind("joclyhub.webrtc",WebRTCHandler);
-			
 	}
 
 	var area, currentSkin, logger, xdv, VSIZE, VHALF, htStateMachine, threeCtx = null, 
@@ -59,11 +56,6 @@ if(window.JoclyXdViewCleanup)
 	/* ======================================== */
 	
 	var LOADING_TEXT_RESOURCE="";
-	if(typeof JoclyHub!="undefined") {
-		LOADING_TEXT_RESOURCE=JoclyHub.hubPath+"/res/images/loading-txt.png";
-	} else if(typeof JoclyPlazza!="undefined") {
-		LOADING_TEXT_RESOURCE=JoclyPlazza.config.baseURL+JoclyPlazza.config.pzPath+"/images/loading-txt.png";		
-	}
 	
 	if(typeof CustomEvent == "undefined") {
 		  function CustomEvent ( event, params ) {
@@ -116,11 +108,6 @@ if(window.JoclyXdViewCleanup)
 	/* ======================================== */
 
 	var WebRTC;
-	if(typeof JoclyPlazza!="undefined") {
-		logger=JoclyPlazza.getLogger("htsm","logHTSM");
-		WebRTC=JoclyPlazza.webrtc;
-	} else if(typeof JoclyHub!="undefined")
-		WebRTC=JoclyHub.webrtc;
 	var logResourcesLoad=false;
 
 	function Log() {
@@ -134,19 +121,10 @@ if(window.JoclyXdViewCleanup)
 	HTStateMachine.prototype=new JHStateMachine();
 	
 	HTStateMachine.prototype.smError=function() { 
-		if(typeof JoclyPlazza!="undefined" || (JoclyHub && JoclyHub.request.debughtsm)) {
-			Log.apply(null,arguments); 
-		};
 	}
 	HTStateMachine.prototype.smWarning=function() { 
-		if(typeof JoclyPlazza!="undefined" || (JoclyHub && JoclyHub.request.debughtsm)) {
-			Log.apply(null,arguments);
-		}
 	};
 	HTStateMachine.prototype.smDebug=function() { 
-		if(typeof JoclyPlazza!="undefined" || (typeof JoclyHub!="undefined" && JoclyHub.request.debughtsm)) {
-			Log.apply(null,arguments);
-		}
 	}
 	
 	function Diff(oOld,oNew) {
@@ -2012,12 +1990,7 @@ if(window.JoclyXdViewCleanup)
 						if(typeof(ccv)=="undefined") { // ccv library not loaded
 							if(!this.ccvLibRequested) {
 								var path=null;
-								if(typeof JoclyHub!="undefined")
-									path=JoclyHub.hubPath+"/lib";
-								else if(typeof JoclyPlazza!="undefined")
-									path=JoclyPlazza.config.baseURL+JoclyPlazza.config.joclyPath+"/ccv";
-								else
-									console.error("No CCV path available");
+								console.error("No CCV path available");
 								this.ccvLibRequested=true;
 								if(path) {
 									$("<script/>").attr("src",path+"/face.js").attr("type","text/javascript")
@@ -3071,7 +3044,7 @@ if(window.JoclyXdViewCleanup)
         var gamepads = new VRGamepads({
             camera: camera,
             scene: scene,
-            resBase: typeof JoclyPlazza!="undefined" ? JoclyPlazza.config.baseURL + JoclyPlazza.config.joclyPath + "/res/vr/" : "todo-setup-res-path",
+            resBase: aGame.config.baseURL + "res/vr/",
             drag: function(position,direction,pointerObject,pointerRescale) {
                 var intersectPoint = null;
                 var pointedObject = null;
@@ -3097,12 +3070,7 @@ if(window.JoclyXdViewCleanup)
 
        	var vrRay = new THREE.Raycaster();
 
-		var camAnim=null
-		
-		if(typeof JoclyHub!="undefined" && JoclyHub.mode=="demo")
-			camAnim=true;
-		else
-			camAnim=!!aGame.mViewOptions.camAnim;
+		var camAnim = !!aGame.mViewOptions.camAnim;
 
 		var animateCallbacks={};
 
@@ -3167,7 +3135,7 @@ if(window.JoclyXdViewCleanup)
 				function Animate(timestamp) {
                     frameBacklog--;
 					var t0,t1;
-					var showStats=typeof JoclyPlazza!="undefined" && JoclyPlazza.config.show3DStats;
+					var showStats=false;
 					if(showStats) {
 						var sec=Math.floor(Date.now()/1000);
 						if(sec==statsCurrentSec)
@@ -3248,22 +3216,8 @@ if(window.JoclyXdViewCleanup)
 			},
 		}
 		var animControl=new AnimControl();
-        //JoclyPlazza.config.show3DStats = true;
 
 		var statsPanel = null;
-		if(typeof JoclyPlazza!="undefined" && JoclyPlazza.config.show3DStats) {
-			statsPanel = document.createElement("div");
-			statsPanel.id = "stats-panel";
-	        Object.assign(statsPanel.style,{
-				position: "absolute",
-				bottom: "8px",
-				left: "8px",
-				zIndex: 2147483647,
-				backgroundColor: "rgba(255,255,255,1)",
-				padding: "4px",
-			});
-        	area[0].appendChild(statsPanel);
-		}
 
 		var cameraControls = new THREE.OrbitControls( camera, body, renderer.domElement);
 
@@ -3336,13 +3290,8 @@ if(window.JoclyXdViewCleanup)
 			function MakeButton() {
 				ctx.vrButton = document.createElement("img");
 				ctx.vrButton.className = "vr-button";
-				if(typeof JoclyPlazza!="undefined") {
-					ctx.vrButton.setAttribute("data-vr-enter-src",JoclyPlazza.config.baseURL + JoclyPlazza.config.joclyPath + "/res/vr/vr-enter.png");
-					ctx.vrButton.setAttribute("data-vr-exit-src",JoclyPlazza.config.baseURL + JoclyPlazza.config.joclyPath + "/res/vr/vr-exit.png");
-				} else {
-					ctx.vrButton.setAttribute("data-vr-enter-src",aGame.config.baseURL + "res/vr/vr-enter.png");
-					ctx.vrButton.setAttribute("data-vr-exit-src",aGame.config.baseURL + "res/vr/vr-exit.png");					
-				}
+				ctx.vrButton.setAttribute("data-vr-enter-src",aGame.config.baseURL + "res/vr/vr-enter.png");
+				ctx.vrButton.setAttribute("data-vr-exit-src",aGame.config.baseURL + "res/vr/vr-exit.png");					
 				ctx.vrButton.setAttribute("src",ctx.vrButton.getAttribute("data-vr-enter-src"));
 				Object.assign(ctx.vrButton.style,{
 					position: "absolute",
