@@ -904,6 +904,19 @@
             return ProxiedMethod(this,"viewAs",arguments);
     }
 
+    GameProxy.prototype.viewControl = function(command,options) {
+        if(jsContext=="node")
+            return Promise.reject(new Error("viewAs(): not supported in node.js"));
+        if(!this.area && !this.iframe)
+            return Promise.reject(new Error("viewAs(): match is not attached to DOM element"));
+
+        if(this.game) {
+            var self = this;
+            return self.game.ViewControl(command,options)
+        } else
+            return ProxiedMethod(this,"viewControl",arguments);
+    }
+
     exports.createMatch = CreateMatch;
     exports._createInternalGame = CreateInternalGame; // do not use this
 

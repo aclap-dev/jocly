@@ -2722,6 +2722,17 @@ if(window.JoclyXdViewCleanup)
 		}
 	}
 
+	View.Game.ViewControl = function(cmd, options) {
+		options = options || {};
+		var promise = new Promise( function(resolve, reject) {
+			switch(cmd) {
+				default:
+					reject(new Error("ViewControl: unsupported command "+cmd));
+			}
+		});
+		return promise;
+	}
+
 	View.Board.Display = function(aGame) {
 		//Log("### View.Board.Display");
 		this.xdDisplay(xdv,aGame);
@@ -3301,6 +3312,9 @@ if(window.JoclyXdViewCleanup)
 				if(typeof JoclyPlazza!="undefined") {
 					ctx.vrButton.setAttribute("data-vr-enter-src",JoclyPlazza.config.baseURL + JoclyPlazza.config.joclyPath + "/res/vr/vr-enter.png");
 					ctx.vrButton.setAttribute("data-vr-exit-src",JoclyPlazza.config.baseURL + JoclyPlazza.config.joclyPath + "/res/vr/vr-exit.png");
+				} else {
+					ctx.vrButton.setAttribute("data-vr-enter-src",aGame.config.baseURL + "res/vr/vr-enter.png");
+					ctx.vrButton.setAttribute("data-vr-exit-src",aGame.config.baseURL + "res/vr/vr-exit.png");					
 				}
 				ctx.vrButton.setAttribute("src",ctx.vrButton.getAttribute("data-vr-enter-src"));
 				Object.assign(ctx.vrButton.style,{
@@ -3357,7 +3371,7 @@ if(window.JoclyXdViewCleanup)
 					}
 					animControl.trigger();
 				});
-				
+
 			}
 
 			vr = {};
