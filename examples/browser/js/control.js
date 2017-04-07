@@ -159,6 +159,21 @@ $(document).ready(function () {
 
                     });
 
+                if(config.view.switchable)
+                    $("#view-as").show().on("change",()=>{
+                        var playerMode = $("#view-as").val();
+                        var player;
+                        if(playerMode=="player-a")
+                            player = Jocly.PLAYER_A;
+                        else if(playerMode=="player-b")
+                            player = Jocly.PLAYER_B;
+                        if(player)
+                            match.viewAs(player)
+                                .then( () => {
+                                    RunMatch(match,progressBar);                                
+                                });
+                    });
+
                 // configure computer levels
                 ["a","b"].forEach( (which) => {
                     $("#level-"+which).hide();

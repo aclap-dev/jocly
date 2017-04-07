@@ -883,6 +883,27 @@
             return ProxiedMethod(this,"getConfig");
     }
 
+    GameProxy.prototype.viewAs = function(player) {
+        if(jsContext=="node")
+            return Promise.reject(new Error("viewAs(): not supported in node.js"));
+        if(!this.area && !this.iframe)
+            return Promise.reject(new Error("viewAs(): match is not attached to DOM element"));
+
+        if(this.game) {
+            var self = this;
+
+            var promise = new Promise( function(resolve, reject) {
+                self.game.GameDestroyView();
+                self.game.mViewAs = player;
+                self.game.GameInitView();
+                self.game.DisplayBoard();
+                resolve();
+            });
+            return promise;
+        } else
+            return ProxiedMethod(this,"viewAs",arguments);
+    }
+
     exports.createMatch = CreateMatch;
     exports._createInternalGame = CreateInternalGame; // do not use this
 
