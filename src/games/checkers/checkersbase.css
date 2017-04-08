@@ -1,0 +1,68 @@
+
+.checkersbase-board {
+	position: absolute;
+}
+
+.piece {
+	position: absolute;
+	z-index: 100;
+	font-size: 0;
+}
+
+.piece-white {
+	Xbackground-color: White;
+}
+
+.piece-black {
+	Xbackground-color: Black;
+}
+
+.possible {
+	position: absolute;
+	z-index: 50;
+	background-color: rgba(204,238,61,0.7);
+	Xopacity: 0.5;
+}
+
+.front {
+	position: absolute;
+	z-index: 200;
+	background-color: rgba(255,255,255,0.0);
+}
+
+.choice {
+	cursor: pointer;
+}
+
+.xd-choice {
+	cursor: pointer;
+}
+
+.xd-choice-view {
+	background-image: url(res/images/select-target-2d.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+}
+
+.xd-cancel {
+	background-image: url(res/images/select-target-2d-cancel.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;}
+
+.back {
+	background-image: url(res/images/backarrow2.png);
+	background-repeat: no-repeat;
+	background-size: 70% 70%;
+	background-position: center center;
+}
+
+.notation {
+	position: absolute;
+	z-index: 150;
+	color: White;
+	padding: 2px 0px 0px 2px;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+}

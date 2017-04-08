@@ -1,0 +1,11 @@
+
+.cell {
+	position: absolute;
+	z-index: 25;
+}
+
+.cell-black {
+	background-color: Black;
+	opacity: 0.1;
+}
+
