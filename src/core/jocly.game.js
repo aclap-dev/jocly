@@ -223,6 +223,20 @@ JocGame.prototype.AttachElement = function (element, options) {
 			}
 			game.mWidget = jQuery(game.widget);
 
+			var defaultViewOptions = game.mViewOptions && game.mViewOptions.defaultOptions;
+			if(defaultViewOptions) {
+			    const optDefs = {
+                    "mSkin": "skin",
+                    "mNotation": "notation",
+                    "mSounds": "sounds",
+                    "mShowMoves": "moves",
+                    "mAutoComplete": "autocomplete"
+                }
+				for(var opt in optDefs)
+					if(typeof defaultViewOptions[optDefs[opt]]!="undefined")
+						game[opt] = defaultViewOptions[optDefs[opt]];
+			}
+
 			game.UpdateSounds();
 			resolve();
 		}, function(e) {

@@ -116,54 +116,55 @@ $(document).ready(function () {
                     $("<option/>").attr("value",skin.name).text(skin.title).appendTo($("#options-skin"));
                 });
                 $("#options").show();
-                // get options for the game view
-                match.getViewOptions()
+
+                // the match need to be attached to a DOM element for displaying the board
+                match.attachElement(area)
+                    .then( () => {
+                            return match.getViewOptions();
+                        })
+                    // get options for the game view
                     .then( (options) => {
-                        $("#options-skin").show().val(options.skin);
-                        if(options.sounds!==undefined)
-                            $("#options-sounds").show().children("input").prop("checked",options.sounds);
-                        $("#options-notation").hide();
-                        if(options.notation!==undefined)
-                            $("#options-notation").show().children("input").prop("checked",options.notation);
-                        $("#options-moves").hide();
-                        if(options.showMoves!==undefined)
-                            $("#options-moves").show().children("input").prop("checked",options.showMoves);
-                        $("#options-autocomplete").hide();
-                        if(options.autocomplete!==undefined)
-                            $("#options-autocomplete").show().children("input").prop("checked",options.autocomplete);
+                            $("#options-skin").show().val(options.skin);
+                            if(options.sounds!==undefined)
+                                $("#options-sounds").show().children("input").prop("checked",options.sounds);
+                            $("#options-notation").hide();
+                            if(options.notation!==undefined)
+                                $("#options-notation").show().children("input").prop("checked",options.notation);
+                            $("#options-moves").hide();
+                            if(options.showMoves!==undefined)
+                                $("#options-moves").show().children("input").prop("checked",options.showMoves);
+                            $("#options-autocomplete").hide();
+                            if(options.autoComplete!==undefined)
+                                $("#options-autocomplete").show().children("input").prop("checked",options.autoComplete);
 
-                        $("#view-options").on("change",function() {
-                            var opts={};
-                            if($("#options-skin").is(":visible")) 
-                                opts.skin=$("#options-skin").val();
-                            if($("#options-notation").is(":visible"))
-                                opts.notation=$("#options-notation-input").prop("checked");
-                            if($("#options-moves").is(":visible"))
-                                opts.showMoves=$("#options-moves-input").prop("checked");
-                            if($("#options-autocomplete").is(":visible"))
-                                opts.autoComplete=$("#options-autocomplete-input").prop("checked");
-                            if($("#options-sounds").is(":visible"))
-                                opts.sounds=$("#options-sounds-input").prop("checked");
-                            // changed options, tell Jocly about it
-                            match.setViewOptions(opts)
-                                .then( () => {
-                                    RunMatch(match,progressBar);                                
-                                })
-                        });
-
-                        $("#anaglyph-input").on("change",function() {
-                            if($(this).is(":checked"))
-                                match.viewControl("enterAnaglyph");
-                            else
-                                match.viewControl("exitAnaglyph");
-                        });
-
-                        // the match need to be attached to a DOM element for displaying the board
-                        match.attachElement(area)
-                            .then( () => {
-                                RunMatch(match,progressBar);
+                            $("#view-options").on("change",function() {
+                                var opts={};
+                                if($("#options-skin").is(":visible")) 
+                                    opts.skin=$("#options-skin").val();
+                                if($("#options-notation").is(":visible"))
+                                    opts.notation=$("#options-notation-input").prop("checked");
+                                if($("#options-moves").is(":visible"))
+                                    opts.showMoves=$("#options-moves-input").prop("checked");
+                                if($("#options-autocomplete").is(":visible"))
+                                    opts.autoComplete=$("#options-autocomplete-input").prop("checked");
+                                if($("#options-sounds").is(":visible"))
+                                    opts.sounds=$("#options-sounds-input").prop("checked");
+                                // changed options, tell Jocly about it
+                                match.setViewOptions(opts)
+                                    .then( () => {
+                                        RunMatch(match,progressBar);                                
+                                    })
                             });
 
+                            $("#anaglyph-input").on("change",function() {
+                                if($(this).is(":checked"))
+                                    match.viewControl("enterAnaglyph");
+                                else
+                                    match.viewControl("exitAnaglyph");
+                            });
+                        })
+                    .then( () => {
+                        RunMatch(match,progressBar);
                     });
 
                 if(config.view.switchable)
