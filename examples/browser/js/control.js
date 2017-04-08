@@ -247,6 +247,7 @@ $(document).ready(function () {
                             area.style.display = "block";
                         else
                             area.style.display = "table-cell";
+                        RunMatch(match,progressBar);    
                     });
                     $("#fullscreen").show().on("click",function() {
                         requestFullscreen.call(area);
