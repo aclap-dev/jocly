@@ -1,0 +1,40 @@
+<p>Les joueurs jouent chacun leur tour en ajoutant une boule de leur couleur sur n'importe quelle position libre sur le plateau
+ou sur une plateforme 2x2 formée par 4 autres boules.</p>
+
+<p>Les boules d'une même couleur forment des groupes en se touchant. Dans la figure en dessous, les 5 boules blanches forment un groupe,
+la boule isolée en bas à droite, un autre groupe.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-groups.png"/></td>
+</tr></table>
+
+<p>Un groupe de boules doit toujours avoir au moins une position libre adjacente au niveau du plateau. Sinon, toutes les boules formant le groupe
+sont retirées, excepté celles qui ont une boule adverse au-dessus d'elles. Dans la figure suivante, si blanc ajoute une boule dans le coin en haut à gauche,
+les 3 boules noires autour seront retirées.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-capture.png"/></td>
+</tr></table>
+
+<p>Comme au Go, la règle du Ko s'applique: il est interdit d'ajouter une boule si cela résulte en une configuration de jeu déjà rencontrée
+à un tour précédent. Dans la figure de gauche en dessous, les blancs jouent dans le coin en haut à gauche, générant la configuration de la figure de droite.
+Au tour suivant, noir ne pourra pas jouer le 2eme rang, 1ere colonne, sinon on rebouclerait sur la première figure.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-ko1.png"/></td>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-ko2.png"/></td>
+</tr></table>
+
+<p>Le suicide n'est pas permis: un joueur ne peut poser une boule qui résulterait en la suppression d'une ou plusieurs de ses boules.</p>
+
+<p>Coupures: seules les connections visibles sont considérées. Donc dans la figure suivante, la connection blanche du dessus (visible) casse la connection noire
+du dessous (invisible). Au final, il y a 2 groupes noirs et un blanc.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-overpass.png"/></td>
+</tr></table>
+
+<p>Quand un joueur ne peut plus poser de boule, le vainqueur est celui qui a le plus de boules de sa couleur.</p>
+
+<p>Plus d'information sur <a href="http://www.cameronius.com/games/margo/" target="_blank">le site officiel de Margo</a> et/ou
+lisez le livre <a href="http://www.cameronius.com/games/margo/margo-basics-41.pdf" target="_blank">Margo Basics</a>.</p>
