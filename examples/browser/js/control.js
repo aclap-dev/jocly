@@ -267,9 +267,24 @@ $(document).ready(function () {
 
                 // list all available games
                 Jocly.listGames()
-                    .then( (games)=>{
-                        for(let gameName in games) {
-                            var game = games[gameName];
+                    .then( (_games)=>{
+                        // _games is an object, make an array from it
+                        var games = Object.keys(_games).map((gameName)=>{
+                            return Object.assign(_games[gameName],{
+                                gameName: gameName
+                            });
+                        });
+                        // sorting by title
+                        games.sort( (a,b)=> {
+                            if(b.title<a.title)
+                                return 1;
+                            else if(b.title>a.title)
+                                return -1;
+                            else
+                                return 0;
+                        });
+                        // build the list of games
+                        games.forEach( (game) => {
                             $("<div>")
                                 .addClass("game-descr")
                                 .css({
@@ -279,10 +294,11 @@ $(document).ready(function () {
                                 .append($("<div>").addClass("game-descr-summary").text(game.summary))
                                 .bind("click",()=>{
                                     var url0 = window.location;
-                                    var url = url0.origin + url0.pathname + "?game=" + gameName;
+                                    var url = url0.origin + url0.pathname + "?game=" + game.gameName;
                                     window.location = url;
                                 }).appendTo($("#game-list"));
-                        }
+
+                        })
                     });
 
                 $("#mode-panel").show();
