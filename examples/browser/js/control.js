@@ -278,7 +278,7 @@ $(document).ready(function () {
                                 .bind("click",()=>{
                                     var url0 = window.location;
                                     var url = url0.origin + url0.pathname + "?game=" + gameName;
-                                    window.open(url);
+                                    window.location = url;
                                 }).appendTo($("#game-list"));
                         }
                     });
