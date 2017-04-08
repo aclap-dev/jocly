@@ -1,0 +1,28 @@
+.mana-text {
+	color : Black;
+	text-align : center;
+	background-color: rgba(255,255,255,1);	
+	border-radius : 50%;
+	border: 1px inset Black;
+}
+
+.mana-select {
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(res/images/select.png);
+	opacity: 0;
+	cursor: pointer;
+}
+
+.mana-select-view {
+	opacity: 1.0;
+}
+
+.mana-cancel {
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(res/images/select-cancel.png);
+	cursor: pointer;
+}
