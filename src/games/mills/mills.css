@@ -1,0 +1,78 @@
+
+#jocly-board {
+}
+
+.mills-board {
+	position: absolute;
+}
+
+.piece {
+	position: absolute;
+	z-index: 100;
+	font-size: 0;
+}
+
+.piece-white {
+	Xbackground-color: White;
+}
+
+.piece-black {
+	Xbackground-color: Black;
+}
+
+.possible {
+	position: absolute;
+	z-index: 50;
+	/*background-color: rgba(244,238,61,0.4);*/
+	background-image: url(res/images/dot.png);
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;	
+	/* opacity: 0.5; */
+}
+
+.possible-piece {
+	background-image: url(res/images/circle.png);
+}
+
+.possible-back {
+	background-color: rgba(244,188,61,0.4);
+}
+
+.front {
+	position: absolute;
+	z-index: 200;
+	background-color: rgba(255,255,255,0.0);
+}
+
+.choice {
+	cursor: pointer;
+}
+
+.back {
+	background-image: url(res/images/backarrow2.png);
+	background-repeat: no-repeat;
+	background-size: 70% 70%;
+	background-position: center center;
+}
+
+.notation {
+	position: absolute;
+	z-index: 150;
+	color: Black;
+	padding: 2px 0px 0px 2px;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+	text-align: center;
+	text-shadow: 2px 2px #ffffff;
+}
+
+.xd-choice-view {
+	background-color: Lime;
+	border-radius: 50%;
+}
+
+.xd-cancel {
+	background-color: #ffcc00;
+	border-radius: 50%;
+}
