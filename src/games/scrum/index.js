@@ -1,13 +1,15 @@
 
-
-exports.games = [{
-    name: "scrum",
-    modelScripts: ["scrum-model.js"],
-    viewScripts: ["scrum-xd-view.js"],
-    config: {
-        "status": true,
-        "model": {
+var mvs = {
+    "models": {
+        "scrum": {
+            "plazza": "true",
             "title-en": "Scrum",
+            "js": [
+                "scrum-model.js"
+            ],
+            "module": "scrum",
+            "maxLevel": 5,
+            "defaultLevel": 1,
             "summary": "A little rugby game",
             "rules": {
                 "en": "rules.html",
@@ -30,9 +32,70 @@ exports.games = [{
                 "width": 5,
                 "height": 12,
                 "initial": {
-                    "a": [[1,2],[2,0],[2,4],[3,2],[4,1],[5,2],[5,0]],
-                    "b": [[11,2],[10,0],[10,4],[9,2],[8,1],[7,2],[7,0]],
-                    "ball": [5,1]
+                    "a": [
+                        [
+                            1,
+                            2
+                        ],
+                        [
+                            2,
+                            0
+                        ],
+                        [
+                            2,
+                            4
+                        ],
+                        [
+                            3,
+                            2
+                        ],
+                        [
+                            4,
+                            1
+                        ],
+                        [
+                            5,
+                            2
+                        ],
+                        [
+                            5,
+                            0
+                        ]
+                    ],
+                    "b": [
+                        [
+                            11,
+                            2
+                        ],
+                        [
+                            10,
+                            0
+                        ],
+                        [
+                            10,
+                            4
+                        ],
+                        [
+                            9,
+                            2
+                        ],
+                        [
+                            8,
+                            1
+                        ],
+                        [
+                            7,
+                            2
+                        ],
+                        [
+                            7,
+                            0
+                        ]
+                    ],
+                    "ball": [
+                        5,
+                        1
+                    ]
                 },
                 "uctTransposition": "states",
                 "levelOptions": {
@@ -144,11 +207,11 @@ exports.games = [{
                     "maxNodes": 50000,
                     "maxLoops": 3000
                 }
-            ],
-            "name": "scrum3d",
-            "title": "Scrum"
-        },
-        "view": {
+            ]
+        }
+    },
+    "views": {
+        "scrum": {
             "title-en": "Scrum View",
             "preferredRatio": 0.58,
             "switchable": true,
@@ -301,7 +364,7 @@ exports.games = [{
                         "image|/res/xd-view/meshes/scrumfield8x12.jpg",
                         "image|/res/xd-view/meshes/teama-text.jpg",
                         "image|/res/xd-view/meshes/teamb-text.jpg",
-                        "image|/res/xd-view/meshes/ballUVslayout.jpg-",
+                        "image|/res/xd-view/meshes/ballUVslayout.jpg",
                         "image|/res/xd-view/meshes/pubs.jocly.jpg",
                         "smoothedfilegeo|0|/res/xd-view/meshes/target.js",
                         "smoothedfilegeo|0|/res/xd-view/meshes/stade2-xtra.js",
@@ -569,6 +632,10 @@ exports.games = [{
                 "moves": true,
                 "skin-scrum": "rugby"
             },
+            "xdView": true,
+            "js": [
+                "scrum-xd-view.js"
+            ],
             "visuals": {
                 "600x600": [
                     "res/visuals/scrum-600x600-3d.jpg",
@@ -580,5 +647,26 @@ exports.games = [{
             ]
         }
     }
-}];
+};
 
+var games = {};
+
+for(var name in mvs.models) {
+    games[name] = {
+        name: name,
+        modelScripts: mvs.models[name].js,
+        config: {
+            status: true,
+            model: mvs.models[name]
+        }
+    }
+}
+
+for(var name in mvs.views) {
+    games[name].viewScripts = mvs.views[name].js;
+    games[name].config.view = mvs.views[name];
+}
+
+exports.games = Object.keys(games).map((name)=>{
+    return games[name];
+});
