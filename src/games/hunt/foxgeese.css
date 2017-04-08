@@ -1,0 +1,57 @@
+.area-canvas.foxngeese{
+	background-image: url(res/images/foxngeese/foxngeese.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.foxngeese-black{
+	background-image: url(res/images/foxngeese/goose2.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.foxngeese-white{
+	background-image: url(res/images/foxngeese/fox2.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.foxngeese{
+	z-index: 15;
+	background: none;
+	background-image: url(res/images/foxngeese/ringwhite.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.foxngeese.back{
+	background-image: url(res/images/foxngeese/ringorange.png);
+}
+
+
+
+.area-canvas.iefox{
+	background-image: url(res/images/foxngeese/foxngeeseiefox.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.iefox-black{
+	background-image: url(res/images/foxngeese/chrome.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.iefox-white{
+	background-image: url(res/images/foxngeese/firefox.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.iefox{
+	z-index: 40;
+	background: none;
+	background-image: url(res/images/foxngeese/pointer.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.iefox.back{
+	background-image: url(res/images/foxngeese/undo.png);
+}

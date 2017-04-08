@@ -1,0 +1,32 @@
+.area-canvas.medieval{
+	background-image: url(res/images/liebre/liebreboard.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.medieval-hunter{
+	background-image: url(res/images/liebre/token_hunter.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.medieval-liebre{
+	background-image: url(res/images/liebre/token_liebre.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.medieval{
+	z-index: 15;
+	background: none;
+	background-image: url(res/images/liebre/circle_blue.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.medieval.back{
+	background-image: url(res/images/liebre/circle_red.png);
+}
+
+.notation.medieval {
+	color: #ffffff;
+	overflow: hidden;
+}

@@ -1,0 +1,27 @@
+.area-canvas.peruvian{
+	background-image: url(res/images/kukuli/kukuli.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.peruvian-black{
+	background-image: url(res/images/kukuli/bear.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.peruvian-white{
+	background-image: url(res/images/kukuli/girl.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.peruvian{
+	z-index: 40;
+	background: none;
+	background-image: url(res/images/kukuli/ring.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.peruvian.back{
+	background-image: url(res/images/kukuli/undo.png);
+}

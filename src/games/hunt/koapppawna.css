@@ -1,0 +1,27 @@
+.area-canvas.indian{
+	background-image: url(res/images/koapppawna/koapppawna.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.indian-black{
+	background-image: url(res/images/koapppawna/rabbit.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.indian-white{
+	background-image: url(res/images/koapppawna/sqaw.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.indian{
+	z-index: 40;
+	background: none;
+	background-image: url(res/images/koapppawna/ring.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.indian.back{
+	background-image: url(res/images/koapppawna/undo.png);
+}

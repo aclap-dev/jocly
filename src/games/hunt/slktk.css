@@ -1,0 +1,27 @@
+.area-canvas.asian{
+	background-image: url(res/images/slktk/slktk.jpg);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.asian-black{
+	background-image: url(res/images/slktk/black.png);
+	background-size: contain;
+	background-repeat: none;
+}
+
+.piece.asian-white{
+	background-image: url(res/images/slktk/white.png);
+	background-size: contain;
+	background-repeat: none;
+}
+.highlight.asian{
+	z-index: 40;
+	background: none;
+	background-image: url(res/images/slktk/ring.png);
+	background-size: contain;
+	background-repeat: none;	
+}
+.asian.back{
+	background-image: url(res/images/slktk/undo.png);
+}
