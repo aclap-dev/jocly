@@ -135,6 +135,10 @@ JocGame.prototype.HumanMove = function(move) {
 	});
 }
 
+JocGame.prototype.MakeMove = function(move) {
+	this.HumanMove(move);
+}
+
 JocGame.prototype.MachineMove = function(result) {
 	this.DispatchMessage({
 		type: "machine-move",
