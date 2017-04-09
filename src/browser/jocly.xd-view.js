@@ -2445,8 +2445,8 @@ if(window.JoclyXdViewCleanup)
 		}
 
 		var areaWidth = Math.min(this.mGeometry.width, this.mGeometry.height
-				* this.mViewOptions.preferredRatio);
-		var areaHeight = Math.min(this.mGeometry.width / this.mViewOptions.preferredRatio, this.mGeometry.height);
+				* (this.mViewOptions.preferredRatio || 1));
+		var areaHeight = Math.min(this.mGeometry.width / (this.mViewOptions.preferredRatio || 1), this.mGeometry.height);
 		var areaCenter;
 		if(currentSkin["3d"]) {
 			area.css({
