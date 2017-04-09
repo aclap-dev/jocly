@@ -72,6 +72,19 @@ function ReceiveMessage(event)
                 function Start() {
                     match.game.AttachElement(area).then(()=>{
                             match.area = area;
+                            var options = message.options && message.options.viewOptions;
+                            if(options) {
+                                const optDefs = {
+                                    "mSkin": "skin",
+                                    "mNotation": "notation",
+                                    "mSounds": "sounds",
+                                    "mShowMoves": "showMoves",
+                                    "mAutoComplete": "autoComplete"
+                                }
+                                for(var o in optDefs) 
+                                    if(typeof options[optDefs[o]]!="undefined")
+                                        match.game[o] = options[optDefs[o]];
+                            }
                             match.game.GameInitView();
                             match.game.DisplayBoard();
                             Reply();

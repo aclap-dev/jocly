@@ -367,7 +367,8 @@
                     type: "init",
                     id: self.id,
                     gameName: self.gameName,
-                    playedMoves: self.game.mPlayedMoves
+                    playedMoves: self.game.mPlayedMoves,
+                    options: options
                 },(error,reply)=>{
                     if(error)
                         reject(error);
