@@ -230,9 +230,9 @@ gulp.task("build-browser-core",function() {
         standalone: "Jocly"
     });
 
-    var joclyBrowserStream = b.bundle()
+    var joclyBrowserStream = ProcessJS(b.bundle()
         .pipe(source('jocly.js'))
-        .pipe(buffer());
+        .pipe(buffer()));
 
     var joclyCoreStream = ProcessJS(gulp.src([
         "src/core/jocly.core.js",
