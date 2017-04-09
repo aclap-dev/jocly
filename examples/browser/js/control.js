@@ -116,54 +116,55 @@ $(document).ready(function () {
                     $("<option/>").attr("value",skin.name).text(skin.title).appendTo($("#options-skin"));
                 });
                 $("#options").show();
-                // get options for the game view
-                match.getViewOptions()
+
+                // the match need to be attached to a DOM element for displaying the board
+                match.attachElement(area)
+                    .then( () => {
+                            return match.getViewOptions();
+                        })
+                    // get options for the game view
                     .then( (options) => {
-                        $("#options-skin").show().val(options.skin);
-                        if(options.sounds!==undefined)
-                            $("#options-sounds").show().children("input").prop("checked",options.sounds);
-                        $("#options-notation").hide();
-                        if(options.notation!==undefined)
-                            $("#options-notation").show().children("input").prop("checked",options.notation);
-                        $("#options-moves").hide();
-                        if(options.showMoves!==undefined)
-                            $("#options-moves").show().children("input").prop("checked",options.showMoves);
-                        $("#options-autocomplete").hide();
-                        if(options.autocomplete!==undefined)
-                            $("#options-autocomplete").show().children("input").prop("checked",options.autocomplete);
+                            $("#options-skin").show().val(options.skin);
+                            if(options.sounds!==undefined)
+                                $("#options-sounds").show().children("input").prop("checked",options.sounds);
+                            $("#options-notation").hide();
+                            if(options.notation!==undefined)
+                                $("#options-notation").show().children("input").prop("checked",options.notation);
+                            $("#options-moves").hide();
+                            if(options.showMoves!==undefined)
+                                $("#options-moves").show().children("input").prop("checked",options.showMoves);
+                            $("#options-autocomplete").hide();
+                            if(options.autoComplete!==undefined)
+                                $("#options-autocomplete").show().children("input").prop("checked",options.autoComplete);
 
-                        $("#view-options").on("change",function() {
-                            var opts={};
-                            if($("#options-skin").is(":visible")) 
-                                opts.skin=$("#options-skin").val();
-                            if($("#options-notation").is(":visible"))
-                                opts.notation=$("#options-notation-input").prop("checked");
-                            if($("#options-moves").is(":visible"))
-                                opts.showMoves=$("#options-moves-input").prop("checked");
-                            if($("#options-autocomplete").is(":visible"))
-                                opts.autoComplete=$("#options-autocomplete-input").prop("checked");
-                            if($("#options-sounds").is(":visible"))
-                                opts.sounds=$("#options-sounds-input").prop("checked");
-                            // changed options, tell Jocly about it
-                            match.setViewOptions(opts)
-                                .then( () => {
-                                    RunMatch(match,progressBar);                                
-                                })
-                        });
-
-                        $("#anaglyph-input").on("change",function() {
-                            if($(this).is(":checked"))
-                                match.viewControl("enterAnaglyph");
-                            else
-                                match.viewControl("exitAnaglyph");
-                        });
-
-                        // the match need to be attached to a DOM element for displaying the board
-                        match.attachElement(area)
-                            .then( () => {
-                                RunMatch(match,progressBar);
+                            $("#view-options").on("change",function() {
+                                var opts={};
+                                if($("#options-skin").is(":visible")) 
+                                    opts.skin=$("#options-skin").val();
+                                if($("#options-notation").is(":visible"))
+                                    opts.notation=$("#options-notation-input").prop("checked");
+                                if($("#options-moves").is(":visible"))
+                                    opts.showMoves=$("#options-moves-input").prop("checked");
+                                if($("#options-autocomplete").is(":visible"))
+                                    opts.autoComplete=$("#options-autocomplete-input").prop("checked");
+                                if($("#options-sounds").is(":visible"))
+                                    opts.sounds=$("#options-sounds-input").prop("checked");
+                                // changed options, tell Jocly about it
+                                match.setViewOptions(opts)
+                                    .then( () => {
+                                        RunMatch(match,progressBar);                                
+                                    })
                             });
 
+                            $("#anaglyph-input").on("change",function() {
+                                if($(this).is(":checked"))
+                                    match.viewControl("enterAnaglyph");
+                                else
+                                    match.viewControl("exitAnaglyph");
+                            });
+                        })
+                    .then( () => {
+                        RunMatch(match,progressBar);
                     });
 
                 if(config.view.switchable)
@@ -247,6 +248,7 @@ $(document).ready(function () {
                             area.style.display = "block";
                         else
                             area.style.display = "table-cell";
+                        RunMatch(match,progressBar);    
                     });
                     $("#fullscreen").show().on("click",function() {
                         requestFullscreen.call(area);
@@ -265,9 +267,24 @@ $(document).ready(function () {
 
                 // list all available games
                 Jocly.listGames()
-                    .then( (games)=>{
-                        for(let gameName in games) {
-                            var game = games[gameName];
+                    .then( (_games)=>{
+                        // _games is an object, make an array from it
+                        var games = Object.keys(_games).map((gameName)=>{
+                            return Object.assign(_games[gameName],{
+                                gameName: gameName
+                            });
+                        });
+                        // sorting by title
+                        games.sort( (a,b)=> {
+                            if(b.title<a.title)
+                                return 1;
+                            else if(b.title>a.title)
+                                return -1;
+                            else
+                                return 0;
+                        });
+                        // build the list of games
+                        games.forEach( (game) => {
                             $("<div>")
                                 .addClass("game-descr")
                                 .css({
@@ -277,10 +294,11 @@ $(document).ready(function () {
                                 .append($("<div>").addClass("game-descr-summary").text(game.summary))
                                 .bind("click",()=>{
                                     var url0 = window.location;
-                                    var url = url0.origin + url0.pathname + "?game=" + gameName;
-                                    window.open(url);
+                                    var url = url0.origin + url0.pathname + "?game=" + game.gameName;
+                                    window.location = url;
                                 }).appendTo($("#game-list"));
-                        }
+
+                        })
                     });
 
                 $("#mode-panel").show();
