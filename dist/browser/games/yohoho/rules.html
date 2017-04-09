@@ -1,0 +1,117 @@
+<style type='text/css'>
+img.imgfit {
+	width: auto !important;
+	width: 100%;
+	max-width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto 
+
+}
+</style>
+
+<h2>Aim</h2>
+
+<p>Bring your ADMIRAL to the last row or capture the opponent ADMIRAL.</p>
+
+<h2>Material</h2>
+
+<p>Each player owns:</p>
+<table style="width: 100%; background-color: White;">
+	<tr>
+		<td>One ADMIRAL</td>
+		<td><img src="{GAME}/res/images/amiral.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>Two GALLEONs</td>
+		<td><img src="{GAME}/res/images/big.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>One ROCK</td>
+		<td><img src="{GAME}/res/images/rock.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>Four FRIGATEs</td>
+		<td><img src="{GAME}/res/images/small.png" class="imgfit"/></td>
+	</tr>
+</table>
+
+<h2>Starting position</h2>
+<img style="width: 100%;" src="{GAME}/res/images/starting.png"/>
+
+<h2>Playing Yohoho!</h2>
+
+<p>Players take alternate turns either moving ships or capturing.</p>
+<p>When moving ships, a player must move two different pieces of his color.</p>
+<p>When capturing, he takes one and only one of the opponent ships without moving any of his pieces.</p>
+<p>White starts and exceptionnally, only moves one piece.</p>
+
+<h2>Moving pieces</h2>
+<img style="width: 100%;" src="{GAME}/res/images/moving-pieces.jpg"/>
+
+<p>The ships move in straight line in any board direction except facing the wind. The ADMIRAL moves one cell per turn, 
+the GALLEON, one or two, the FRIGATE, one, two or three. The ROCK can move any number of cells in any of the 6 directions, 
+including facing the wind. No piece can jump over another one.</p>
+
+<h2>Capturing ships</h2>
+
+<p>A ship can be captured if it is adjacent to one or several opponent ships of superior combined strength. 
+Capturing is not compulsory.</p>
+
+<h3>Ships strength</h3>
+
+<ul>
+	<li>ADMIRAL: <strong>5</strong></li>
+	<li>GALLEON: <strong>3</strong></li>
+	<li>FRIGATE: <strong>2</strong></li>
+</ul>
+
+<p>For instance</p>
+
+<ul>
+	<li>An ADMIRAL can capture a GALLEON</li>
+	<li>A GALLEON can capture a FRIGATE</li>
+	<li>Two FRIGATE can capture a GALLEON</li>
+	<li>Two GALLEON can capture the ADMIRAL</li>
+	<li>Three FRIGATE can capture the ADMIRAL</li>
+	<li>...</li>
+</ul>
+
+<p>ROCKS cannot capture and cannot be captured.</p>
+
+<h3>Additional rule (Arno rule)</h3>
+
+<p>A capturable ADMIRAL must escape the threat by its first action (capture or the first of both moves).</p>
+
+<h2>Capture situations</h2>
+
+<table style="width: 100%; background-color: White;">
+	<tr>
+		<td>
+			<img src="{GAME}/res/images/capture1.png" style="width: 100%;"/>
+			<p>The two black FRIGATE capture the white GALLEON. The white GALLEON captures either FRIGATE.</p>
+		</td>
+		<td>
+			<img src="{GAME}/res/images/capture2.png" style="width: 100%;"/>
+			<p>The black ADMIRAL captures any of the white FRIGATEs. The three white FRIGATEs capture the black ADMIRAL.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="{GAME}/res/images/capture3.png" style="width: 100%;"/>
+			<p>White captures the black ADMIRAL. Black captures the white ADMIRAL.</p>
+		</td>
+		<td>
+			<img src="{GAME}/res/images/capture4.png" style="width: 100%;"/>
+			<p>Arno rule: The white ADMIRAL cannot escape at first. Black wins.</p>
+		</td>
+	</tr>
+</table>
+
+<h3>Additional rule (Competition)</h3>
+
+<p>When played in competition, winners get points depending on the game outcome:</p>
+<ul>
+<li><i>1 point</i>: the ADMIRAL reached the last row</li>
+<li><i>2 points</i>: the opponent ADMIRAL was captured</li>
+</ul>

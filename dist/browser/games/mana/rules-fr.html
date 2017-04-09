@@ -1,0 +1,59 @@
+<style type='text/css'>
+img.imgfit {
+	width: auto !important;
+	width: 100%;
+	max-width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto 
+
+}
+</style>
+
+<p>Le Mana est un jeu de stratégie abstrait pour 2 joueurs. Chaque joueur contrôle un Damyo et cinq Ronins, et essaie de 
+capturer le Damyo de l'adversaire avec son propre Damyo ou l'un de ses Ronins.</p>
+<img class="imgfit" src="{GAME}/res/images/pieces.jpg" style=""/>
+
+<h2>Mise en place du jeu</h2>
+<img class="imgfit" src="{GAME}/res/images/stage1-stage2.jpg" style=""/>
+<p>Le premier joueur positionne le plateau en face de lui en choisissant lequel des 4 cotés lui fera face. Ensuite, 
+il place ses 6 pièces sur les cases de son choix des deux premières lignes. L'autre joueur place ensuite ses propres pièces 
+de la même manière.</p>
+<img class="imgfit" src="{GAME}/res/images/stage1-stage2-3d.jpg" style=""/>
+
+<h2>Déroulement du jeu</h2>
+<img class="imgfit" src="{GAME}/res/images/possiblemoves-fr.jpg" style=""/>
+<p>Les joueurs déplace une pièce chacun leur tour.</p>
+<ul>
+<li>Chaque case possède une marque simple, double ou triple. Une pièce démarrant son mouvement d'une case simple doit se déplacer d'une case,
+un pièce sur un case double se déplace de 2 cases, sur une case triple de 3 cases.</li>
+<li>Une pièce peut bouger horizontalement ou verticalement mais pas en diagonale.</li>
+<li>Une pièce peut changer de direction durant son mouvement (par exemple: une pièce située sur une case triple, devant donc effectuer 3 mouvements, peut
+avancer d'une case en avant, puis une sur la gauche et finalement une case en avant).</li>
+<li>Une pièce ne pas passer sur une case occupée.</li>
+<li>Une pièce ne peut pas passer plus d'une fois sur une même case lors de son mouvement.</li>
+<li>Une pièce terminant son mouvement sur une case contenant une pièce adversaire capture cette pièce (la pièce
+est retirée du plateau). NOTE: Si la pièce capturée est le Damyo de l'adversaire, le jeu se termine!</li>
+</ul>
+
+<h2>L'utilisation du Mana</h2>
+
+<p>Le Mana est utilisé pour restreindre les mouvements de l'adversaire. Lorsque le premier joueur termine son premier déplacement,
+le Mana se place juste au-dessus de la pièce bougée. L'autre joueur doit alors déplacer une pièce (Ronin ou Damyo) située sur le même
+type de case que celle portant le Mana. Lorsqu'il finit son tour, le mana se place sur la pièce qui vient juste d'être déplacée et ainsi de suite 
+(la dernière pièce déplacée est donc toujours celle portant le Mana).</p>
+
+<h2>Exceptions du Mana</h2>
+<p>Il y a deux exceptions:</p>
+<ol>
+<li>Aucune pièce n'est située sur le même type de case que celle du Mana, ou...</li>
+<li>Les pièces situées sur le même type de case que le Mana ne peuvent effectuer leur mouvement complet
+(car elles sont bloquées par d'autres pièces).</li>
+</ol>
+
+<p>Dans chacun de ces cas, le joueur a deux choix:<p>
+<p>Déplacer une autre de ses pièces (dans ce cas, la pièce se déplace en accord avec le type de case sur laquelle elle se trouve)</p>
+<p>ou</p>
+<p>Prendre l'un de ses Ronins capturés et le placer sur n'importe quelle case vide. (Ramener sur le plateau un Ronin capturé 
+termine le tour du joueur).</p>
+

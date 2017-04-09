@@ -1,0 +1,39 @@
+<p>Players take turns adding a ball of their color to an empty position on the board or on a 2x2 platform formed by 4 other balls.</p>
+
+<p>Balls of a same color form groups by touching each others. In the figure below, the 5 white balls on the left form a group, the 
+single ball at the bottom right another one.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-groups.png"/></td>
+</tr></table>
+
+<p>A group of balls must always have at least one empty position at layer 0 next to it. Otherwise, all the balls form this group are removed, except the ones
+that support an opponent ball. In the next figure, if white adds a ball at the top left corner, the 3 black balls around will be removed.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-capture.png"/></td>
+</tr></table>
+
+<p>As in Go, the Ko rule applies: it is not possible to add a ball that will result in a state similar to the previous round. In the left figure below, 
+white plays at the top left corner, resulting in the figure on the right. Then at the next move, black cannot play at second row , first column, otherwise we
+would loop back to the first figure.</p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-ko1.png"/></td>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-ko2.png"/></td>
+</tr></table>
+
+<p>Suicide is not allowed: players cannot add a ball that results in having some of their balls being removed.</p>
+
+<p>Overpasses cut underpasses: only visible connections count. So in the following figure, the white 
+connection across the top (visible) cuts the black connection that it passes over (hidden). As a result, there are 2 black groups and
+1 white one. </p>
+
+<table><tr>
+<td style="text-align: center;"><img src="{GAME}/res/rules/spargo-overpass.png"/></td>
+</tr></table>
+
+<p>When a player cannot add a ball anymore, the winner is the player with the most balls.</p>
+
+<p>More information on <a href="http://www.cameronius.com/games/margo/" target="_blank">Margo official site</a> and/or read the
+<a href="http://www.cameronius.com/games/margo/margo-basics-41.pdf" target="_blank">Margo Basics book</a>.</p>
