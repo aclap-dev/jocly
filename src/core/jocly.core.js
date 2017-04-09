@@ -856,7 +856,8 @@
 
             var promise = new Promise( function(resolve, reject) {
                 resolve({
-                    playedMoves: Array.from(self.game.mPlayedMoves)
+                    playedMoves: Array.from(self.game.mPlayedMoves),
+                    game: self.gameName
                 })
             });
             return promise;
@@ -869,6 +870,8 @@
             var self = this;
 
             var promise = new Promise( function(resolve, reject) {
+                if(data.game && data.game!=self.gameName)
+                    return reject(new Error("Trying to load "+data.game+" to "+self.gameName+" match"));
                 self.game.Load(data);
                 if(self.area)
                     self.game.DisplayBoard();
