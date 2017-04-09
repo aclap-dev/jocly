@@ -117,8 +117,12 @@ $(document).ready(function () {
                 });
                 $("#options").show();
 
+                // get saved view options if any
+                var viewOptions = window.localStorage && window.localStorage[gameName+".options"] && 
+                    JSON.parse(window.localStorage[gameName+".options"]) || undefined;
+
                 // the match need to be attached to a DOM element for displaying the board
-                match.attachElement(area)
+                match.attachElement(area, { viewOptions: viewOptions })
                     .then( () => {
                             return match.getViewOptions();
                         })
@@ -154,6 +158,8 @@ $(document).ready(function () {
                                     .then( () => {
                                         RunMatch(match,progressBar);                                
                                     })
+                                if(window.localStorage)
+                                    window.localStorage.setItem(gameName+".options",JSON.stringify(opts));
                             });
 
                             $("#anaglyph-input").on("change",function() {
