@@ -762,7 +762,7 @@ if(typeof process!=="undefined" && process.title === "node") {
 			return evaluation;
 		}
 
-		if(aGame.mBoard.mMoves.length==0)
+		if(!aGame.mBoard.mMoves || aGame.mBoard.mMoves.length==0)
 			aGame.mBoard.GenerateMoves(aGame);
 		if(aGame.mBoard.mMoves.length==1) { // only one possible move: pick it
 			aGame.mBestMoves=[aGame.mBoard.mMoves[0]];
