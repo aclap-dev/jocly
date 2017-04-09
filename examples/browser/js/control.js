@@ -212,6 +212,37 @@ $(document).ready(function () {
                         });
                 });
 
+                $("#save").on("click",function() {
+                    // save match to the file system
+                    match.save()
+                        .then( (data) => {
+                            var json = JSON.stringify(data,null,2);
+                            var a = document.createElement("a");
+                            var uriContent = "data:application/octet-stream," + encodeURIComponent(json);
+                            a.setAttribute("href",uriContent);
+                            a.setAttribute("download",gameName+".json");
+                            a.click();
+                        });
+                });
+
+                // reading file locally
+                var fileElem = $("#fileElem").on("change",function() {
+                    var fileReader = new FileReader();
+                    fileReader.readAsText(fileElem[0].files[0]);
+                    fileReader.onload = function(event) {
+                        var json = event.target.result;
+                        var data = JSON.parse(json);
+                        // load match 
+                        match.load(data)
+                            .catch((e)=>{
+                                console.info("Failed to load",e);
+                            });
+                    }
+                })
+                $("#load").on("click",function() {
+                    fileElem[0].click();
+                });
+
                 $("#takeback").on("click",function() {
                     match.getPlayedMoves()
                         .then( (playedMoves) => {
