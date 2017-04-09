@@ -773,6 +773,7 @@
                     if(typeof options[optDefs[o]]!="undefined")
                         self.game[o] = options[optDefs[o]];
                 self.game.GameInitView();
+                self.game.DisplayBoard();
                 resolve();
             });
             return promise;
