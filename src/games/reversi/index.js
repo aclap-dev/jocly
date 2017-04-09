@@ -787,7 +787,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -855,7 +854,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -923,7 +921,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -991,7 +988,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -1059,7 +1055,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -1127,7 +1122,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",
@@ -1195,7 +1189,6 @@ var mvs = {
             "useNotation": true,
             "useShowMoves": true,
             "module": "reversi",
-            "css": "reversi.css",
             "skins": [
                 {
                     "name": "classic3d",

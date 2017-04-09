@@ -177,7 +177,6 @@
 	}
 
 	Model.Board.InitialPosition = function(aGame) {
-		console.info("InitialPosition");
 		this.board=ArrayCreate(aGame.mOptions.width*aGame.mOptions.height);
 		this.counts=[0,0];
 		this.freeClose={};
@@ -267,8 +266,6 @@
 		};
 		var graph=aGame.g.Graph;
 		for(var pos in this.freeClose) {
-			//if(pos==34)
-			//	debugger;
 			var posGraph=graph[pos];
 			var isMove=0;
 			for(var d=0;d<8;d++) {
@@ -433,7 +430,6 @@
 	}
 	
 	Model.Board.Evaluate=function(aGame) {
-		var debug=arguments[3]=="debug";
 		this.mEvaluation=0;
 		var NBCOLS=aGame.mOptions.width;
 		var NBROWS=aGame.mOptions.height;
@@ -496,18 +492,17 @@
 
 		evalValues.count=(this.counts[0]-this.counts[1]);
 
-		evalValues.mobility=(this.movePoss[1].length-this.movePoss[-1].length)/(this.movePoss[1].length+this.movePoss[-1].length);
-		
+		var totalMovePoss = (this.movePoss[1].length+this.movePoss[-1].length);
+		if(totalMovePoss)
+			evalValues.mobility=(this.movePoss[1].length-this.movePoss[-1].length)/totalMovePoss;
+		else
+			evalValues.mobility=0;
+
 		for(var name in evalValues) {
 			var value=evalValues[name];
 			var factor=evParams[name+'Factor'] || 0;
 			var weighted=value*factor;
-			if(debug)
-				console.log(name,"=",value,"*",factor,"=>",weighted);
 			this.mEvaluation+=weighted;
-		}
-		if(debug) {
-			console.log("Evaluation",this.mEvaluation);
 		}
 	}
 

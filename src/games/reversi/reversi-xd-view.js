@@ -79,8 +79,9 @@
 					"background-color": "White",
 					"border-radius": "2rem",
 					"box-shadow": "1px 1px 12px #555",
-				},
-				initialClasses: "reversi-pass-panel-w"
+					"background-image": "url("+fullPath+"/res/xd-view/pass-light.png)",
+					"background-size": "contain"
+				}
 			},
 		});
 		xdv.createGadget("pass-board-b",{
@@ -97,8 +98,9 @@
 					"background-color": "Black",
 					"border-radius": "2rem",
 					"box-shadow": "1px 1px 12px #555",
-				},
-				initialClasses: "reversi-pass-panel-b"
+					"background-image": "url("+fullPath+"/res/xd-view/pass-dark.png)",
+					"background-size": "contain"
+				}
 			},
 		});
 
@@ -640,7 +642,11 @@
 					width:$this.g.CSIZE_2D,				
 					height:$this.g.CSIZE_2D,				
 					type: "element",
-					initialClasses: "reversi-clicker",
+					css: {
+						"background-image": "url("+fullPath+"/res/xd-view/select-target-2d.png)",
+						"background-size": "contain",
+						"cursor": "pointer"
+					}
 				},
 				"3d": {
 					type: "meshfile",
@@ -735,7 +741,6 @@
 		
 		for (var r=0; r<this.g.NBROWS; r++){		
 			for (var c=0; c<this.g.NBCOLS; c++){
-				//debugger;
 				xdv.updateGadget("piece#"+r+"#"+c, {	
 					"2d": {
 						visible : true,
@@ -1067,7 +1072,6 @@
 	View.Board.xdPlayedMove = function(xdv, aGame, aMove) {
 		
 		function passAnim(passBoard,callback){
-			
 			xdv.updateGadget(passBoard,{
 				base: {
 					visible: true,
@@ -1090,7 +1094,6 @@
 				});
 				
 			}
-			
 			xdv.updateGadget(passBoard,{
 				base: {
 					opacity:1,
