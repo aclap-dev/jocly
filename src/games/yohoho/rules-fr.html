@@ -1,0 +1,117 @@
+<style type='text/css'>
+img.imgfit {
+	width: auto !important;
+	width: 100%;
+	max-width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto 
+
+}
+</style>
+<h2>But du jeu</h2>
+
+<p>Amener l'Amiral sur la dernière ligne ou capturer l'Amiral adverse.</p>
+
+<h2>Pièces</h2>
+
+<p>Chaque joueur dispose de:</p>
+<table style="width: 100%; background-color: White;">
+	<tr>
+		<td>Un AMIRAL</td>
+		<td><img src="{GAME}/res/images/amiral.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>Deux GALIONS</td>
+		<td><img src="{GAME}/res/images/big.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>Un ROCHER</td>
+		<td><img src="{GAME}/res/images/rock.png" class="imgfit"/></td>
+	</tr>
+	<tr>
+		<td>Quatre CHEBECS</td>
+		<td><img src="{GAME}/res/images/small.png" class="imgfit"/></td>
+	</tr>
+</table>
+
+<h2>Position de départ</h2>
+<img style="width: 100%;" src="{GAME}/res/images/starting.png"/>
+
+<h2>Déroulement du jeu</h2>
+
+<p>Chacun leur tour les joueurs se déplacent ou capturent.</p>
+<p>Si on se déplace, on déplace deux de ses pièces (différentes).</p>
+<p>Si on capture, on enlève une et une seule pièce de l'adversaire sans déplacer aucune de ses propres pièces.</p>
+<p>Les Blancs commencent et pour ce premier coup ne déplacent exceptionnellement qu'une seule pièce.</p>
+
+<h2>Déplacement des pièces</h2>
+<img style="width: 100%;" src="{GAME}/res/images/moving-pieces.jpg"/>
+
+<p>Les bateaux se déplacent en ligne droite dans n'importe quelle direction sauf face au vent. 
+L'Amiral d'une seule case,Le Galion d'une ou deux, le Chébec d'une, deux ou trois cases. 
+Le rocher de n'importe quel nombre de cases, dans les 6 directions y compris face au vent. 
+Aucune pièce ne peut sauter par dessus une autre.</p>
+
+<h2>Capture des bateaux</h2>
+
+<p>Un bateau est capturable s'il est au contact d'un ou plusieurs bateaux adverses dont le total des forces est  supérieur. 
+La capture n'est pas obligatoire.</p>
+
+<h3>Force des bateaux</h3>
+
+<ul>
+	<li>AMIRAL: <strong>5</strong></li>
+	<li>GALION: <strong>3</strong></li>
+	<li>CHEBEC: <strong>2</strong></li>
+</ul>
+
+<p>Exemples de captures</p>
+
+<ul>
+	<li>L'AMIRAL peut prendre un GALION</li>
+	<li>Un GALION peut prendre un CHEBEC</li>
+	<li>Deux CHEBECS peuvent prendre un GALION</li>
+	<li>Les deux GALIONS peuvent prendre l'AMIRAL</li>
+	<li>Trois CHEBECS peuvent prendre l'AMIRAL</li>
+	<li>etc</li>
+</ul>
+
+<p>Le ROCHER ne peut pas prendre et n'est pas pris.</p>
+
+<h3>Règle d'Arno</h3>
+
+<p>Un AMIRAL capturable doit se libérer dès sa première action (capture ou déplacement).</p>
+
+<h2>Exemples de prises</h2>
+
+<table style="width: 100%; background-color: White;">
+	<tr>
+		<td>
+			<img src="{GAME}/res/images/capture1.png" style="width: 100%;"/>
+			<p>Les deux CHEBECS noirs prennent le GALION blanc. Le GALION blanc prend un CHEBEC au choix.</p>
+		</td>
+		<td>
+			<img src="{GAME}/res/images/capture2.png" style="width: 100%;"/>
+			<p>L'AMIRAL noir prend un CHEBEC au choix. Les trois CHEBECS blancs prennent l'AMIRAL noir.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="{GAME}/res/images/capture3.png" style="width: 100%;"/>
+			<p>Les Blancs prennent l'AMIRAL noir. Les Noirs prennent l'AMIRAL blanc.</p>
+		</td>
+		<td>
+			<img src="{GAME}/res/images/capture4.png" style="width: 100%;"/>
+			<p>Règle d'Arno: L'AMIRAL blanc ne peut pas se libérer par une première action. Les Noirs gagnent.</p>
+		</td>
+	</tr>
+</table>
+
+<h3>Règle additionnelle (Compétition)</h3>
+
+<p>Le score est différent selon le type de victoire:</p>
+<ul>
+<li><i>1 point</i>: L'AMIRAL atteint la dernière ligne</li>
+<li><i>2 points</i>: L'AMIRAL adverse est capturé</li>
+</ul>
