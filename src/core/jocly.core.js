@@ -576,15 +576,22 @@
                         self.userTurnReject = reject;
 
                         function HumanMove(move) {
-                            self.game.ApplyMove(move);
-                            var finished = self.game.GetFinished();
-                            self.game.InvertWho();
-                            self.game.DisplayBoard();
-                            resolve({
-                                move: move,
-                                finished: !!finished,
-                                winner: finished
-                            });
+                            function Resolve() {
+                                var finished = self.game.GetFinished();
+                                self.game.InvertWho();
+                                self.game.DisplayBoard();
+                                resolve({
+                                    move: move,
+                                    finished: !!finished,
+                                    winner: finished
+                                });                                
+                            }
+                            if(self.game.config.view.animateSelfMoves===false) {
+                                self.game.ApplyMove(move);
+                                Resolve();
+                            } else
+                                self.game.PlayMove(move)
+                                    .then(Resolve, reject);
                         }
                         savedHumanMove = self.game.HumanMove;
                         self.game.HumanMove = HumanMove;
