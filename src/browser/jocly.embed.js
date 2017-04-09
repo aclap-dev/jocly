@@ -126,4 +126,5 @@ function Resize() {
     }
     game.GameDestroyView();
     game.GameInitView();
+    game.DisplayBoard();
 }
