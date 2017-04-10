@@ -14,8 +14,15 @@ function NotifyWinner(winner) {
 /*
  * Run the game
  */
+var movePending = null;
 function RunMatch(match, progressBar) {
+    var movePendingResolver;
     function NextMove() {
+        if(movePending)
+            return;
+        movePending = new Promise((resolve,reject)=>{
+            movePendingResolver = resolve;
+        });
         // whose turn is it ?
         match.getTurn()
             .then((player) => {
@@ -62,6 +69,13 @@ function RunMatch(match, progressBar) {
                                 })
                             })
                             .then((result) => {
+                                return match.getMoveString(result.move)
+                                    .then((str)=>{
+                                        console.info("Played move:",str);
+                                        return result;
+                                    })
+                            })
+                            .then((result) => {
                                 // at this point we know the machine move but it has not been played yet
                                 // let's play that move
                                 return match.playMove(result.move);
@@ -73,12 +87,16 @@ function RunMatch(match, progressBar) {
                         return match.getFinished()
                     })
                     .then((result) => {
+                        movePending = null;
+                        movePendingResolver();
                         if (result.finished)
                             NotifyWinner(result.winner);
                         else
                             NextMove();
                         })
                     .catch((e)=>{
+                        movePending = null;
+                        movePendingResolver();
                         console.warn("Turn aborted:",e);
                     })
                     .then(() => {
@@ -90,8 +108,14 @@ function RunMatch(match, progressBar) {
     match.getFinished()
         .then( (result) => {
             // make sure the game is not finished to request next move
-            if(!result.finished)
-                NextMove();
+            if(!result.finished) {
+                if(movePending) {
+                    movePending.then(()=>{
+                        NextMove();                
+                    })
+                } else
+                    NextMove();
+            }
         });
 }
 
@@ -168,37 +192,53 @@ $(document).ready(function () {
                                 else
                                     match.viewControl("exitAnaglyph");
                             });
+
+                            if(config.view.switchable) {
+                                $("#view-as").show().on("change",()=>{
+                                    var playerMode = $("#view-as").val();
+                                    if(window.localStorage)
+                                        window.localStorage.setItem(gameName+".view-as",playerMode);
+                                    var player;
+                                    if(playerMode=="player-a")
+                                        player = Jocly.PLAYER_A;
+                                    else if(playerMode=="player-b")
+                                        player = Jocly.PLAYER_B;
+                                    if(player)
+                                        match.viewAs(player)
+                                            .then( () => {
+                                                RunMatch(match,progressBar);                                
+                                            });
+                                });
+                                var viewAs = window.localStorage && window.localStorage[gameName+".view-as"];
+                                if(viewAs)
+                                    $("#view-as").val(viewAs).trigger("change");
+                            }
+
                         })
                     .then( () => {
                         RunMatch(match,progressBar);
                     });
 
-                if(config.view.switchable)
-                    $("#view-as").show().on("change",()=>{
-                        var playerMode = $("#view-as").val();
-                        var player;
-                        if(playerMode=="player-a")
-                            player = Jocly.PLAYER_A;
-                        else if(playerMode=="player-b")
-                            player = Jocly.PLAYER_B;
-                        if(player)
-                            match.viewAs(player)
-                                .then( () => {
-                                    RunMatch(match,progressBar);                                
-                                });
-                    });
 
                 // configure computer levels
                 ["a","b"].forEach( (which) => {
-                    $("#level-"+which).hide();
+                    $("#level-"+which).hide().on("change", () => {
+                        if(window.localStorage)
+                            window.localStorage.setItem(gameName+".level-"+which,$("#select-level-"+which).val());
+                    });
                     $("<option/>").attr("value","-1").text("Random").appendTo($("#select-level-"+which));
                     config.model.levels.forEach( (level, index) => {
                         $("<option/>").attr("value",index).text(level.label).appendTo($("#select-level-"+which));
                     });
-                    $("#select-level-"+which).val(0);
+                    var level = window.localStorage && window.localStorage[gameName+".level-"+which] || 0;
+                    $("#select-level-"+which).val(level);
                 });
 
                 // dropdown to change the players (user/machine)
+                $("#mode").on("change",()=>{
+                    if(window.localStorage)
+                        window.localStorage.setItem(gameName+".mode",$("#mode").val());
+                });
                 $("#mode-panel").on("change", () => {
                     switch($("#mode").val()) {
                         case "self-self": $("#level-a,#level-b").hide(); break;
@@ -206,9 +246,10 @@ $(document).ready(function () {
                         case "self-comp": $("#level-a").hide(); $("#level-b").show(); break;
                         case "comp-self": $("#level-b").hide(); $("#level-a").show(); break;
                     }
-                    RunMatch(match,progressBar);
+                    //RunMatch(match,progressBar);
                 });
-                $("#mode").val("self-comp").trigger("change");
+                var mode = window.localStorage && window.localStorage[gameName+".mode"] || "self-comp";
+                $("#mode").val(mode).trigger("change");
 
                 $("#restart").on("click",function() {
                     // restart match from the beginning
