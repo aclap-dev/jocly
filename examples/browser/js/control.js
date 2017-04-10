@@ -17,6 +17,13 @@ function NotifyWinner(winner) {
 var movePending = null;
 function RunMatch(match, progressBar) {
     var movePendingResolver;
+
+    // first make sure there is no user input or machine search in progress
+    var promise = match.abortUserTurn() // just in case one is running
+        .then( () => {
+            return match.abortMachineSearch(); // just in case one is running
+        });
+
     function NextMove() {
         if(movePending)
             return;
@@ -29,11 +36,7 @@ function RunMatch(match, progressBar) {
                 // display whose turn
                 $("#game-status").text(player==Jocly.PLAYER_A?"A playing":"B playing");
                 var mode = $("#mode").val();
-                // first make sure there is no user input or machine search in progress
-                var promise = match.abortUserTurn() // just in case one is running
-                    .then( () => {
-                        return match.abortMachineSearch(); // just in case one is running
-                    });
+                var promise = Promise.resolve();
                 if((player==Jocly.PLAYER_A && (mode=="self-self" || mode=="self-comp")) ||
                     (player==Jocly.PLAYER_B && (mode=="self-self" || mode=="comp-self")))
                         // user to play
@@ -193,6 +196,24 @@ $(document).ready(function () {
                                     match.viewControl("exitAnaglyph");
                             });
 
+                            // dropdown to change the players (user/machine)
+                            $("#mode").on("change",()=>{
+                                if(window.localStorage)
+                                    window.localStorage.setItem(gameName+".mode",$("#mode").val());
+                                RunMatch(match,progressBar);
+                            });
+                            $("#mode-panel").on("change", () => {
+                                switch($("#mode").val()) {
+                                    case "self-self": $("#level-a,#level-b").hide(); break;
+                                    case "comp-comp": $("#level-a,#level-b").show(); break;
+                                    case "self-comp": $("#level-a").hide(); $("#level-b").show(); break;
+                                    case "comp-self": $("#level-b").hide(); $("#level-a").show(); break;
+                                }
+                                RunMatch(match,progressBar);
+                            });
+                            var mode = window.localStorage && window.localStorage[gameName+".mode"] || "self-comp";
+                            $("#mode").val(mode).trigger("change");
+
                             if(config.view.switchable) {
                                 $("#view-as").show().on("change",()=>{
                                     var playerMode = $("#view-as").val();
@@ -233,23 +254,6 @@ $(document).ready(function () {
                     var level = window.localStorage && window.localStorage[gameName+".level-"+which] || 0;
                     $("#select-level-"+which).val(level);
                 });
-
-                // dropdown to change the players (user/machine)
-                $("#mode").on("change",()=>{
-                    if(window.localStorage)
-                        window.localStorage.setItem(gameName+".mode",$("#mode").val());
-                });
-                $("#mode-panel").on("change", () => {
-                    switch($("#mode").val()) {
-                        case "self-self": $("#level-a,#level-b").hide(); break;
-                        case "comp-comp": $("#level-a,#level-b").show(); break;
-                        case "self-comp": $("#level-a").hide(); $("#level-b").show(); break;
-                        case "comp-self": $("#level-b").hide(); $("#level-a").show(); break;
-                    }
-                    //RunMatch(match,progressBar);
-                });
-                var mode = window.localStorage && window.localStorage[gameName+".mode"] || "self-comp";
-                $("#mode").val(mode).trigger("change");
 
                 $("#restart").on("click",function() {
                     // restart match from the beginning
