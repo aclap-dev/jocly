@@ -158,6 +158,7 @@ Model.Board.GenerateMoves = function(aGame) {
 			// only "meaningful" moves
 	}
 	*/
+	this.mMoves = [];
 	if(this.placing)
 		this.GeneratePlacingMoves(aGame);
 	else if(aGame.mOptions.canFly)
