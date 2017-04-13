@@ -502,8 +502,8 @@
 
 				self.game.PlayMove(move)
 					.then(() => {
-						var finished = self.game.GetFinished();
 						self.game.InvertWho();
+						var finished = self.game.GetFinished();
 						self.game.DisplayBoard();
 						resolve({
 							finished: !!finished,
@@ -525,8 +525,8 @@
 			var promise = new Promise(function (resolve, reject) {
 
 				self.game.ApplyMove(move);
-				var finished = self.game.GetFinished();
 				self.game.InvertWho();
+				var finished = self.game.GetFinished();
 				if (self.area)
 					self.game.DisplayBoard();
 				resolve({
@@ -597,8 +597,8 @@
 
 						function HumanMove(move) {
 							function Resolve() {
-								var finished = self.game.GetFinished();
 								self.game.InvertWho();
+								var finished = self.game.GetFinished();
 								self.game.DisplayBoard();
 								resolve({
 									move: move,
