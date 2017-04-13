@@ -58,7 +58,7 @@ function ExportFunction(fName) {
     }
 }
 
-["listGames","createMatch"].forEach((fName)=>{
+["listGames","createMatch","getGameConfig"].forEach((fName)=>{
     ExportFunction(fName);
 });
 
