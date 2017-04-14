@@ -948,6 +948,19 @@
 			return ProxiedMethod(this, "viewControl", arguments);
 	}
 
+	GameProxy.prototype.getPossibleMoves = function () {
+		var self = this;
+		if (this.game) {
+			var self = this;
+			return new Promise(function (resolve, reject) {
+				if (!self.game.mBoard.mMoves || self.game.mBoard.mMoves.length == 0)
+						self.game.mBoard.GenerateMoves(self.game);
+				resolve(self.game.mBoard.mMoves);
+			});
+		} else
+			return ProxiedMethod(this, "getPossibleMoves", arguments);
+	}
+
 	exports._createInternalGame = CreateInternalGame; // do not use this
 
 	exports.PLAYER_A = 1;
