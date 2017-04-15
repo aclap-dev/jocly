@@ -70,32 +70,39 @@ function HandleModuleGames(modelOnly) {
             }));
 
             // create some specified resources
-            if(!modelOnly)
-                ["thumbnail","rules","description","credits"].forEach((field)=>{
-                    var files = [];
-                    switch(typeof game.config.model[field]) {
-                        case "string":
-                            files.push(game.config.model[field]);
-                            break;
-                        case "object":
-                            for(var f in game.config.model[field])
-                                files.push(game.config.model[field][f]);
-                            break;
-                    }
-                    files = files.map((file)=>{
-                        return "src/games/"+moduleName+"/"+file;
-                    });
-                    var stream = gulp.src(files)
-                        .pipe(rename(function(path) {
-                            path.dirname = moduleName;
-                        }))
-                        .pipe(through.obj(function(file,enc,next) {
-                            push(file);
-                            next();
-                        }))
-                        ;
-                    streams.push(stream);
-                });
+            if(!modelOnly) {
+				var resources = {
+					model: ["thumbnail","rules","description","credits"],
+					view: ["css"]
+				};
+				["model","view"].forEach((modelView)=>{
+					resources[modelView].forEach((field)=>{
+						var files = [];
+						switch(typeof game.config[modelView][field]) {
+							case "string":
+								files.push(game.config[modelView][field]);
+								break;
+							case "object":
+								for(var f in game.config[modelView][field])
+									files.push(game.config[modelView][field][f]);
+								break;
+						}
+						files = files.map((file)=>{
+							return "src/games/"+moduleName+"/"+file;
+						});
+						var stream = gulp.src(files)
+							.pipe(rename(function(path) {
+								path.dirname = moduleName;
+							}))
+							.pipe(through.obj(function(file,enc,next) {
+								push(file);
+								next();
+							}))
+							;
+						streams.push(stream);
+					});
+				});
+			}
 
             // create model and view script files
             function Scripts(which) {

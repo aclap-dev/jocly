@@ -286,8 +286,27 @@ JocGame.prototype.InitView = function() {
 	console.log("Abstract InitView called");
 }
 
+JocGame.prototype.LoadCss = function() {
+	var styles = document.querySelectorAll("head link[class='jocly-css']");
+	styles.forEach(function(style) {
+		console.info("removing style",style.getAttribute("href"));
+		style.parentNode.removeChild(style);
+	});
+	var self = this;
+	var head = document.querySelector("head");
+	(this.mViewOptions.css||[]).forEach(function(css) {
+		var style = document.createElement("link");
+		style.setAttribute("rel","stylesheet");
+		style.setAttribute("type","text/css");
+		style.setAttribute("class","jocly-css");
+		style.setAttribute("href",self.mViewOptions.fullPath+"/"+css);
+		head.appendChild(style);
+	});
+}
+
 JocGame.prototype.GameInitView = function() {
 	if(this.mGeometry.width>0 && this.mGeometry.height>0) {
+		this.LoadCss();
 		this.InitView();
 		this.mViewInited=true;
 	}
