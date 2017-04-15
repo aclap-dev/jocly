@@ -792,6 +792,8 @@
 				for (var o in optDefs)
 					if (typeof options[optDefs[o]] != "undefined")
 						self.game[o] = options[optDefs[o]];
+				if(options.viewAs && self.game.mViewOptions.switchable)
+					self.game.mViewAs = options.viewAs;
 				self.game.GameInitView();
 				self.game.DisplayBoard();
 				resolve();
@@ -816,6 +818,8 @@
 					options.showMoves = !!self.game.mShowMoves;
 				if (self.game.mViewOptions.useAutoComplete)
 					options.autoComplete = !!self.game.mAutoComplete;
+				if(self.game.mViewOptions.switchable)
+					options.viewAs = self.game.mViewAs;
 				resolve(options);
 			});
 			return promise;
@@ -919,6 +923,8 @@
 			return Promise.reject(new Error("viewAs(): not supported in node.js"));
 		if (!this.area && !this.iframe)
 			return Promise.reject(new Error("viewAs(): match is not attached to DOM element"));
+
+		console.warn("Match.viewAs() is obsolete, use Match.setViewOptions() instead");
 
 		if (this.game) {
 			var self = this;

@@ -84,6 +84,8 @@ function ReceiveMessage(event)
                                 for(var o in optDefs) 
                                     if(typeof options[optDefs[o]]!="undefined")
                                         match.game[o] = options[optDefs[o]];
+								if(match.game.mViewOptions.switchable)
+									match.game.mViewAs = options.viewAs;
                             }
                             match.game.GameInitView();
                             match.game.DisplayBoard();
