@@ -79,7 +79,8 @@ function ReceiveMessage(event)
                                     "mNotation": "notation",
                                     "mSounds": "sounds",
                                     "mShowMoves": "showMoves",
-                                    "mAutoComplete": "autoComplete"
+                                    "mAutoComplete": "autoComplete",
+									"mAnaglyph": "anaglyph"
                                 }
                                 for(var o in optDefs) 
                                     if(typeof options[optDefs[o]]!="undefined")

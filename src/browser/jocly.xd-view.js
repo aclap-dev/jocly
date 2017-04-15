@@ -3195,7 +3195,7 @@ if(window.JoclyXdViewCleanup)
 						if(stereo) {
 							gamepads.update();
 	                        stereoEffect.render( scene, camera );
-						} else if(ctx.anaglyph)
+						} else if(ctx.anaglyph || aGame.mAnaglyph)
 							anaglyphEffect.render(scene,camera);
 						else
                         	renderer.render( scene, camera );
