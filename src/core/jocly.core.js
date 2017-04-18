@@ -268,6 +268,7 @@
 				if (typeof SystemJS != "undefined")
 					SystemJS.import("games/" + gameDescr.module + "/" + gameName + "-config.js")
 						.then((config) => {
+							config.config.view.fullPath = SystemJS.getConfig().baseURL + "games/" + gameDescr.module;
 							resolve(config.config);
 						})
 						.catch(reject);
