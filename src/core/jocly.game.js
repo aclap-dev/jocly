@@ -1209,7 +1209,7 @@ JocGame.prototype.GetBestMatchingMove = function(moveStr,candidateMoves) {
 		dist+=(str1.indexOf(str2)>=0 || str2.indexOf(str1)>=0)?0:1;
 		str1=moveStr.replace(/[a-z]/g,'');
 		str2=prettyMoves[index].replace(/[a-z]/g,'');
-		dist+=JocGame.Levenshtein(str1,str2).distance/(Math.max(str1.length,str2.length)+1);
+		dist+=JocGame.Levenshtein(str1,str2)/(Math.max(str1.length,str2.length)+1);
 		dist+=(str1.indexOf(str2)>=0 || str2.indexOf(str1)>=0)?0:1;
 		if(dist==bestDist)
 			bestMatches.push(index);
