@@ -698,8 +698,12 @@
 	
 	Model.Game.GetBestMatchingMove = function(moveStr,candidateMoves) {
 		var prettyMoves=[];
+		var $this = this;
 		candidateMoves.forEach(function(m) {
-			prettyMoves.push(m.ToString());
+			if(typeof m.ToString=="function")
+				prettyMoves.push(m.ToString());
+			else
+				prettyMoves.push($this.CreateMove(m).ToString());
 		});
 		moveStr=moveStr.replace(/0([1-9])/g,"$1");
 		var dbm=/^([0-9]+)[\-x]([0-9]+)([\-x][0-9]+)*$/.exec(moveStr);
