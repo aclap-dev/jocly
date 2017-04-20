@@ -2719,6 +2719,11 @@ if(window.JoclyXdViewCleanup)
 					};
 					resolve();
 					break;				
+				case "stopAnimations":
+					var animCount = TWEEN.getAll().length;
+					TWEEN.removeAll();
+					resolve(animCount>0);
+					break;				
 				default:
 					reject(new Error("ViewControl: unsupported command "+cmd));
 			}

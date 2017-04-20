@@ -970,6 +970,24 @@
 			return ProxiedMethod(this, "getPossibleMoves", arguments);
 	}
 
+	// experimental
+	GameProxy.prototype.resetView = function () {
+		if (jsContext == "node")
+			return Promise.reject(new Error("resetView(): not supported in node.js"));
+		if (!this.area && !this.iframe)
+			return Promise.reject(new Error("resetView(): match is not attached to DOM element"));
+
+		if (this.game) {
+			var self = this;
+			return self.viewControl("stopAnimations")
+				.then((shouldRedisplayBoard) => {
+					if(shouldRedisplayBoard)
+						self.game.DisplayBoard();			
+				})
+		} else
+			return ProxiedMethod(this, "resetView");
+	}
+
 	exports._createInternalGame = CreateInternalGame; // do not use this
 
 	exports.PLAYER_A = 1;
