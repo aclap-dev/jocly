@@ -1009,12 +1009,28 @@ JocGame.prototype.BackTo = function(aIndex,moves) {
 JocGame.prototype.Load = function(gameData) {
 	this.mWho = JocGame.PLAYER_A;
 	this.mBoard = new (this.GetBoardClass())(this);
+
+	if(gameData.initialBoard) {
+		if(typeof this.Import!="function")
+			throw new Error("Import not supported");
+		var importResult=this.Import("pjn",gameData.initialBoard);
+		if(!importResult.status) {
+			var error = new Error("import failed");
+			switch(importResult.error) {
+				case 'parse': error=new Error("import failed: parse error"); break;
+				case 'unsupported': error=new Error("import failed: unsupported format"); break;
+			}
+			throw error;
+		}
+		this.mInitial=importResult.initial;
+		if(this.mInitial.turn)
+			this.mWho = this.mInitial.turn;
+		this.mInitialString=gameData.initialBoard;
+	}
 	if(this.mBoard.InitialPosition)
 		this.mBoard.InitialPosition(this);
 	this.mBoard.mWho = this.mWho;
-	var board = this.GetBoardClass();
-	if(gameData.initialBoard)
-		board.CopyFrom(gameData.initialBoard);
+
 	this.mBestMoves = [];
 	this.mVisitedBoards={};
 	var moves=gameData.playedMoves;

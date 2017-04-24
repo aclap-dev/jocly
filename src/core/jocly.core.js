@@ -884,6 +884,7 @@
 			var promise = new Promise(function (resolve, reject) {
 				resolve({
 					playedMoves: Array.from(self.game.mPlayedMoves),
+					initialBoard: self.game.mInitialString,
 					game: self.gameName
 				})
 			});
