@@ -971,6 +971,17 @@
 			return ProxiedMethod(this, "getPossibleMoves", arguments);
 	}
 
+	GameProxy.prototype.getBoardState = function () {
+		var self = this;
+		if (this.game) {
+			var self = this;
+			return new Promise(function (resolve, reject) {
+				resolve(self.game.mBoard.ExportBoardState(self.game));
+			});
+		} else
+			return ProxiedMethod(this, "getBoardState", arguments);
+	}
+
 	// experimental
 	GameProxy.prototype.resetView = function () {
 		if (jsContext == "node")
