@@ -71,6 +71,73 @@
 			corners[POS(width-1,height-1)]=1;
 			return corners;
 		}
+
+		function ExportBoardState(board,cbVar,moveCount) {
+			var fenRows = [];
+			for(var r=height-1;r>=0;r--) {
+				var fenRow = "";
+				var emptyCount = 0;
+				for(var c=0;c<width;c++) {
+					var pieceIndex = board.board[POS(c,r)];
+					if(pieceIndex<0)
+						emptyCount++;
+					else {
+						if(emptyCount>0) {
+							fenRow += emptyCount;
+							emptyCount = 0;
+						}
+						var piece = board.pieces[pieceIndex];
+						var abbrev = cbVar.pieceTypes[piece.t].fenAbbrev || cbVar.pieceTypes[piece.t].abbrev || "?";
+						if(piece.s==-1)
+							fenRow += abbrev.toLowerCase();
+						else
+							fenRow += abbrev.toUpperCase();
+					}
+				}
+				if(emptyCount)
+					fenRow += emptyCount;
+				fenRows.push(fenRow);
+			}
+			var fen = fenRows.join("/");
+			fen += " ";
+			if(board.mWho==1)
+				fen += "w";
+			else
+				fen += "b";
+			fen += " ";
+			var castle = "";
+			if(board.castled) {
+				if(board.castled[1]===false)
+					castle += "KQ";
+				else {
+					if(board.castled[1].k)
+						castle+= "K";
+					if(board.castled[1].q)
+						castle+= "Q";
+				}
+				if(board.castled[-1]===false)
+					castle += "kq";
+				else {
+					if(board.castled[-1].k)
+						castle+= "k";
+					if(board.castled[-1].q)
+						castle+= "q";
+				}
+			}
+			if(castle.length==0)
+				castle = "-";
+			fen += castle;
+			fen += " ";
+			if(!board.epTarget)
+				fen += "-";
+			else
+				fen += PosName(board.epTarget.p);
+			fen += " ";
+			fen += board.noCaptCount;
+			fen += " ";
+			fen += Math.floor(moveCount/2)+1;
+			return fen;
+		}
 		
 		return {
 			boardSize: width*height,
@@ -86,6 +153,7 @@
 			GetDistances: GetDistances,
 			distEdge: DistEdges(),
 			corners: Corners(),
+			ExportBoardState: ExportBoardState
 		};
 	}
 
@@ -263,6 +331,4 @@
 		return this.cbShortRangeGraph(geometry,[[-2,-2],[-2,2],[2,2],[2,-2]]);
 	}	
 
-
-	
 })();

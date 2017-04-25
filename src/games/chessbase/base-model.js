@@ -1159,6 +1159,12 @@
 		}
 	}
 
+	Model.Board.ExportBoardState = function(aGame) {
+		if(!aGame.cbVar.geometry.ExportBoardState)
+			return "not supported";
+		return aGame.cbVar.geometry.ExportBoardState(this,aGame.cbVar,aGame.mPlayedMoves.length);
+	}
+
 	Model.Game.Import = function(format,data) {
 		var turn, pieces=[], castle={'1':{},'-1':{}}, enPassant=null, noCaptCount=0;
 
