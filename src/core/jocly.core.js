@@ -462,18 +462,18 @@
 			return ProxiedMethod(this, "getTurn", arguments);
 	}
 
-	GameProxy.prototype.getMoveString = function (move) {
+	GameProxy.prototype.getMoveString = function (move, format) {
 		if (this.game) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
 				if (Array.isArray(move))
 					resolve(
 						move.map((m) => {
-							return self.game.CreateMove(m).ToString();
+							return self.game.CreateMove(m).ToString(format);
 						})
 					)
 				else
-					resolve(self.game.CreateMove(move).ToString());
+					resolve(self.game.CreateMove(move).ToString(format));
 			});
 			return promise;
 		} else
