@@ -971,12 +971,12 @@
 			return ProxiedMethod(this, "getPossibleMoves", arguments);
 	}
 
-	GameProxy.prototype.getBoardState = function () {
+	GameProxy.prototype.getBoardState = function (format) {
 		var self = this;
 		if (this.game) {
 			var self = this;
 			return new Promise(function (resolve, reject) {
-				resolve(self.game.mBoard.ExportBoardState(self.game));
+				resolve(self.game.mBoard.ExportBoardState(self.game,format));
 			});
 		} else
 			return ProxiedMethod(this, "getBoardState", arguments);
