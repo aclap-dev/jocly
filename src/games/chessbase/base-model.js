@@ -327,8 +327,10 @@
 		this.zSign=aGame.zobrist.update(0,"who",-1);
 
 		this.noCaptCount = 0;
+		this.mWho = 1;
 
 		if(aGame.mInitial) {
+			this.mWho = aGame.mInitial.turn || 1;
 			aGame.mInitial.pieces.forEach(function(piece) {
 				var piece1={}
 				for(var f in piece)
@@ -343,6 +345,17 @@
 				}
 			if(aGame.mInitial.noCaptCount!==undefined)
 				this.noCaptCount=aGame.mInitial.noCaptCount;
+			if(aGame.cbVar.castle && aGame.mInitial.castle)
+				this.castled = {
+					'1': {
+						k: !!aGame.mInitial.castle[1] && !!aGame.mInitial.castle[1].k,
+						q: !!aGame.mInitial.castle[1] && !!aGame.mInitial.castle[1].q
+					},
+					'-1': {
+						k: !!aGame.mInitial.castle[-1] && !!aGame.mInitial.castle[-1].k,
+						q: !!aGame.mInitial.castle[-1] && !!aGame.mInitial.castle[-1].q
+					}
+				}
 		} else {
 			for(var typeIndex in aGame.cbVar.pieceTypes) {
 				var pType = aGame.cbVar.pieceTypes[typeIndex];
@@ -1038,33 +1051,57 @@
 		this.Init(move);
 	}
 
-	Model.Move.ToString = function() {
-		if(this.compact)
-			return this.compact;
-		var str;
-		if(this.cg!==undefined) {
-			str=cbVar.castle[this.f+"/"+this.cg].n;
-		} else {
-			str=this.a || '';
-			str+=cbVar.geometry.PosName(this.f);
-			if(this.c==null)
-				str+="-";
-			else
-				str+="x";
-			str+=cbVar.geometry.PosName(this.t);
+	Model.Move.ToString = function(format) {
+
+		var self = this;
+		format = format || "natural";
+
+		// not sure was that was for...
+		//if(this.compact)
+		//	return this.compact;
+		function NaturalFormat() {
+			var str;
+			if(self.cg!==undefined) {
+				str=cbVar.castle[self.f+"/"+self.cg].n;
+			} else {
+				str=self.a || '';
+				str+=cbVar.geometry.PosName(self.f);
+				if(self.c==null)
+					str+="-";
+				else
+					str+="x";
+				str+=cbVar.geometry.PosName(self.t);
+			}
+			if(self.pr!==undefined) {
+				var pType=cbVar.pieceTypes[self.pr];
+				if(pType && pType.abbrev && pType.abbrev.length>0 && !pType.silentPromo)
+					str+="="+pType.abbrev;
+			}
+			if(self.ck)
+				str+="+";
+			return str;
 		}
-		/*
-		if(this.ep)
-			str+="e.p.";
-		*/
-		if(this.pr!==undefined) {
-			var pType=cbVar.pieceTypes[this.pr];
-			if(pType && pType.abbrev && pType.abbrev.length>0 && !pType.silentPromo)
-				str+="="+pType.abbrev;
+
+		function EngineFormat() {
+			var str = cbVar.geometry.PosName(self.f) + cbVar.geometry.PosName(self.t);
+			if(self.pr!=undefined) {
+				var pType=cbVar.pieceTypes[self.pr];
+				if(pType && pType.abbrev && pType.abbrev.length>0 && !pType.silentPromo)
+					str+=pType.abbrev;				
+			}
+			return str;
 		}
-		if(this.ck)
-			str+="+";
-		return str;
+		
+		switch(format) {
+			case "natural":
+				return NaturalFormat();
+			case "engine":
+				return EngineFormat();
+			default:
+				return "??";
+		}
+
+
 	}
 	
 	/* compact the move notation while preventing ambiguities */
