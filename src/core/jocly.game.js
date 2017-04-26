@@ -1006,6 +1006,28 @@ JocGame.prototype.BackTo = function(aIndex,moves) {
 	this.mWho=this.mBoard.mWho;
 }
 
+JocGame.prototype.ExportInitialBoardState = function(format) {
+	if(!this.mInitialString)
+		return null;
+	if(typeof this.Import!="function")
+		return null;
+	try {
+		var importResult=this.Import("pjn",this.mInitialString);
+		if(!importResult.status)
+			return null;
+		var board = new (this.GetBoardClass())(this);
+		if(board.InitialPosition)
+			board.InitialPosition(this);
+		var boardState = board.ExportBoardState(this,format);
+		return {
+			boardState: boardState,
+			turn: board.mWho
+		}
+	} catch(e) {
+		return null;
+	}	
+}
+
 JocGame.prototype.Load = function(gameData) {
 	this.mWho = JocGame.PLAYER_A;
 	this.mBoard = new (this.GetBoardClass())(this);
