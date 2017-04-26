@@ -185,6 +185,13 @@
 			
 			importGame: function(initial,format,data) {
 				initial.pieces.forEach(function(piece) {
+
+					// fix bug reading FEN, wrong pawn side
+					if(piece.s==1 && (piece.t==2 || piece.t==3))
+						piece.t=0;
+					if(piece.s==-1 && (piece.t==0 || piece.t==1))
+						piece.t=2;
+
 					if(piece.s==1 && geometry.R(piece.p)==1 && piece.t==0) {
 						piece.t=1;
 						piece.m=false;
