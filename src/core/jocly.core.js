@@ -971,6 +971,7 @@
 			return ProxiedMethod(this, "getPossibleMoves", arguments);
 	}
 
+	// experimental
 	GameProxy.prototype.getBoardState = function (format) {
 		var self = this;
 		if (this.game) {
@@ -982,7 +983,17 @@
 			return ProxiedMethod(this, "getBoardState", arguments);
 	}
 
-	// experimental
+	GameProxy.prototype.getInitialBoardState = function (format) {
+		var self = this;
+		if (this.game) {
+			var self = this;
+			return new Promise(function (resolve, reject) {
+				resolve(self.game.ExportInitialBoardState(format));
+			});
+		} else
+			return ProxiedMethod(this, "getInitialBoardState", arguments);
+	}
+
 	GameProxy.prototype.resetView = function (force) {
 		if (jsContext == "node")
 			return Promise.reject(new Error("resetView(): not supported in node.js"));
