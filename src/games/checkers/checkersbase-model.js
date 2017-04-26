@@ -137,16 +137,62 @@
 	/* Optional method.
 	 * Returns a string to represent the move for display to human. If not defined JSON is used.
 	 */
-	Model.Move.ToString = function() {
-		var posses=[PosToString(this.pos[0]),PosToString(this.pos[this.pos.length-1])];
-		var sep='-';
-		for(var i=1;i<this.capt.length;i++)
-			if(this.capt[i]!=null) {
-				sep='x';
-				if(this.capt.length>3)
-					posses.push(PosToString(this.capt[i]));
+	Model.Move.ToString = function(format) {
+		format = format || "natural";
+		var self = this;
+
+		function NaturalFormat() {
+			var posses=[PosToString(self.pos[0]),PosToString(self.pos[self.pos.length-1])];
+			var sep='-';
+			for(var i=1;i<self.capt.length;i++)
+				if(self.capt[i]!=null) {
+					sep='x';
+					if(self.capt.length>3)
+						posses.push(PosToString(self.capt[i]));
+				}
+			return posses.join(sep);
+		}
+
+		function HubFormat() {
+			var sep = "-";
+			var parts = [PosToString(self.pos[0]), PosToString(self.pos[self.pos.length - 1])];
+			if (self.capt[1]) {
+				sep = "x";
+				var capts = self.capt.slice(1).map((pos) => {
+					return PosToString(pos);
+				});
+				capts.sort();
+				parts = parts.concat(capts);
 			}
-		return posses.join(sep);
+			return parts.join(sep);
+		}
+
+		function DxpFormat() {
+			var parts = [PosToString(self.pos[0]), PosToString(self.pos[self.pos.length - 1])];
+			if(self.capt[1]) {
+				parts.push(self.capt.length-1);
+				var capts = [];
+				for(var i=1;i<self.capt.length;i++)
+					capts.push(PosToString(self.capt[i]));
+				capts.sort();
+				parts = parts.concat(capts);
+			} else
+				parts.push(0);
+			return parts.map((num)=>{
+				return num<10 ? "0"+num : num;
+			}).join("");
+		}
+
+		switch(format) {
+			case "natural":
+				return NaturalFormat();
+			case "hub":
+				return HubFormat();
+			case "dxp":
+				return DxpFormat();
+			default:
+				return "??";
+		}
 	}
 	
 	/* Board object constructor.
@@ -734,61 +780,105 @@
 		return SuperGetBestMatchingMove.call(this,moveStr,candidateMoves);
 	}
 
-	Model.Board.ExportBoardState = function(aGame) {
-		//debugger;
-		var colors={};
-		var fenParts=[];
-		this.pieces.forEach(function(piece) {
-			if(piece && piece.p!=null) {
-				var color=piece.s==1?'W':'B';
-				if(colors[color]===undefined)
-					colors[color]={};
-				var abbrev=piece.t==1?'K':'';
-				if(colors[color][abbrev]===undefined)
-					colors[color][abbrev]={
-						group: piece.t==0,
-						pos: [],
-					}
-				colors[color][abbrev].pos.push(parseInt(PosToString(piece.p)));
-			}
-		});
-		for(var color in colors) {
-			var fenColorParts=[];
-			for(var abbrev in colors[color]) {
-				var pieceType=colors[color][abbrev];
-				if(pieceType.group) {
-					pieceType.pos.sort(function(pos1,pos2) {
-						return parseInt(pos1)-parseInt(pos2);
-					});
-					var last=-2, end=-1, start=-1;
-					pieceType.pos.forEach(function(pos) {
-						if(parseInt(pos)==last+1) {
-							end=pos;
-						} else {
-							if(end>=0) {
-								fenColorParts.push(abbrev+start+"-"+end);
-								end=-1;
-							} else {
-								if(start>=0)
-									fenColorParts.push(abbrev+start);
-							}
-							start=pos;
+	Model.Board.ExportBoardState = function(aGame,format) {
+		format = format || "natural";
+		var self = this;
+
+		function FenFormat() {
+			var colors={};
+			var fenParts=[];
+			self.pieces.forEach(function(piece) {
+				if(piece && piece.p!=null) {
+					var color=piece.s==1?'W':'B';
+					if(colors[color]===undefined)
+						colors[color]={};
+					var abbrev=piece.t==1?'K':'';
+					if(colors[color][abbrev]===undefined)
+						colors[color][abbrev]={
+							group: piece.t==0,
+							pos: [],
 						}
-						last=parseInt(pos);
-					});
-					if(end>=0)
-						fenColorParts.push(abbrev+start+"-"+end);
-					else if(start>=0)
-						fenColorParts.push(abbrev+start);
-				} else 
-					pieceType.pos.forEach(function(pos) {
-						fenColorParts.push(abbrev+pos);
-					});
+					colors[color][abbrev].pos.push(parseInt(PosToString(piece.p)));
+				}
+			});
+			for(var color in colors) {
+				var fenColorParts=[];
+				for(var abbrev in colors[color]) {
+					var pieceType=colors[color][abbrev];
+					if(pieceType.group) {
+						pieceType.pos.sort(function(pos1,pos2) {
+							return parseInt(pos1)-parseInt(pos2);
+						});
+						var last=-2, end=-1, start=-1;
+						pieceType.pos.forEach(function(pos) {
+							if(parseInt(pos)==last+1) {
+								end=pos;
+							} else {
+								if(end>=0) {
+									fenColorParts.push(abbrev+start+"-"+end);
+									end=-1;
+								} else {
+									if(start>=0)
+										fenColorParts.push(abbrev+start);
+								}
+								start=pos;
+							}
+							last=parseInt(pos);
+						});
+						if(end>=0)
+							fenColorParts.push(abbrev+start+"-"+end);
+						else if(start>=0)
+							fenColorParts.push(abbrev+start);
+					} else 
+						pieceType.pos.forEach(function(pos) {
+							fenColorParts.push(abbrev+pos);
+						});
+				}
+				fenParts.push(color+fenColorParts.join(","));
 			}
-			fenParts.push(color+fenColorParts.join(","));
+			var fen=fenParts.join(":");
+			return fen;
 		}
-		var fen=fenParts.join(":");
-		return fen;
+
+		function DxpHubFormat(black) {
+			var poss = [];
+			for(var pos = 0; pos<self.board.length; pos++) {
+				var col=pos%boardWidth;
+				var row=(pos-col)/boardWidth;
+				var posIndex = (boardHeight - row -1)* boardWidth + col;
+				var pieceIndex = self.board[pos];
+				if(pieceIndex<0)
+					poss[posIndex] = "e";
+				else {
+					var piece = self.pieces[pieceIndex];
+					var t = piece.s == 1 ? 'w' : black;
+					if(piece.t==1)
+						t = t.toUpperCase();
+					poss[posIndex] = t;
+				}
+			}
+			return poss.join("");
+		}
+
+		function DxpFormat() {
+			return DxpHubFormat('z');
+		}
+
+		function HubFormat() {
+			return DxpHubFormat('z');
+		}
+
+		switch(format) {
+			case "natural":
+			case "fen":
+				return FenFormat();
+			case "dxp":
+				return DxpFormat();
+			case "hub":
+				return HubFormat();
+			default:
+				return JSON.stringify(this);
+		}
 	}
 
 })();
