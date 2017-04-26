@@ -983,7 +983,7 @@
 	}
 
 	// experimental
-	GameProxy.prototype.resetView = function () {
+	GameProxy.prototype.resetView = function (force) {
 		if (jsContext == "node")
 			return Promise.reject(new Error("resetView(): not supported in node.js"));
 		if (!this.area && !this.iframe)
@@ -993,8 +993,8 @@
 			var self = this;
 			return self.viewControl("stopAnimations")
 				.then((shouldRedisplayBoard) => {
-					if(shouldRedisplayBoard)
-						self.game.DisplayBoard();			
+					if(shouldRedisplayBoard || force)
+						self.game.DisplayBoard();
 				})
 		} else
 			return ProxiedMethod(this, "resetView");
