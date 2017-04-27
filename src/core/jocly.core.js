@@ -971,7 +971,6 @@
 			return ProxiedMethod(this, "getPossibleMoves", arguments);
 	}
 
-	// experimental
 	GameProxy.prototype.getBoardState = function (format) {
 		var self = this;
 		if (this.game) {
