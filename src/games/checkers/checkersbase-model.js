@@ -158,7 +158,7 @@
 			var parts = [PosToString(self.pos[0]), PosToString(self.pos[self.pos.length - 1])];
 			if (self.capt[1]) {
 				sep = "x";
-				var capts = self.capt.slice(1).map((pos) => {
+				var capts = self.capt.slice(1).map(function(pos) {
 					return PosToString(pos);
 				});
 				capts.sort();
@@ -178,7 +178,7 @@
 				parts = parts.concat(capts);
 			} else
 				parts.push(0);
-			return parts.map((num)=>{
+			return parts.map(function(num) {
 				return num<10 ? "0"+num : num;
 			}).join("");
 		}
