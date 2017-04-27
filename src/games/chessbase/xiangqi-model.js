@@ -267,5 +267,14 @@
 		return moveStr0;
 	}
 
+	Model.Move.ToString = function(format) {
+		var self = this;
+		function PosName(pos) {
+			var col = pos % 9;
+			var row = (pos-col)/9;
+			return String.fromCharCode(("a".charCodeAt(0))+col) + row;
+		}
+		return PosName(self.f) + PosName(self.t);
+	}
 	
 })();
