@@ -162,8 +162,8 @@
 	
 	Model.Move.ToString=function() {
 		if(this.pass)
-			return "PASS";
-		return "ABCDEFGH".charAt(this.col)+(this.row+1);
+			return "-";
+		return String.fromCharCode("a".charCodeAt(0)+this.col)+(this.row+1);
 	}
 	
 	Model.Move.Equals=function(move) {
