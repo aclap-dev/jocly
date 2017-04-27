@@ -113,8 +113,9 @@ function HandleModuleGames(modelOnly) {
                 var stream = gulp.src(scripts)
                     .pipe(gulpif(!argv.prod,sourcemaps.init()))
                     .pipe(add('_',modulifyHeaders[which],true))
-                    .pipe(concat(fileName))
+					.pipe(concat(fileName))
                     .pipe(gulpif(argv.prod,uglify()))
+					.on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
                     .pipe(gulpif(!argv.prod,sourcemaps.write('.')))
                     .pipe(through.obj(function(file,enc,next) {
                         push(file);
@@ -191,15 +192,11 @@ gulp.task("build-node-core",function() {
             "src/core/jocly.game.js"
         ]));
 
-    var joclyExtraStream = gulp.src([
-            "src/node/package.json",
-        ]);
-
     var allGamesStream = source('jocly-allgames.js');
     allGamesStream.end('exports.games = '+JSON.stringify(allGames));
     allGamesStream = ProcessJS(allGamesStream.pipe(buffer()));
 
-    return merge(joclyCoreStream,allGamesStream,joclyBaseStream,joclyExtraStream)
+    return merge(joclyCoreStream,allGamesStream,joclyBaseStream)
         .pipe(gulp.dest("dist/node"));
 
 })

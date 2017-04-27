@@ -1,11 +1,12 @@
 {
   "name": "jocly",
-  "version": "0.0.1",
+  "version": "0.9.0",
   "author": {
     "email": "mig@jocly.com",
     "name": "Michel Gutierrez",
     "url": "https://github.com/mi-g"
   },
+  "main": "dist/node/jocly.core.js",
   "scripts": {
     "build": "gulp dist"
   },

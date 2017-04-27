@@ -1,0 +1,5 @@
+src/
+node_modules/
+tmp/
+update-gh-pages.sh
+gulpfile.js
