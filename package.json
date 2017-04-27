@@ -1,6 +1,6 @@
 {
   "name": "jocly",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Board games 3D/2D UI and AI web library",
   "keywords": [
 	  "board games",
@@ -9,7 +9,6 @@
 	  "variants",
 	  "webgl",
 	  "webvr",
-	  "electron",
 	  "javascript"
   ],
   "homepage": "https://github.com/mi-g/jocly",
