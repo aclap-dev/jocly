@@ -1,14 +1,32 @@
 {
   "name": "jocly",
   "version": "0.9.0",
+  "description": "Board games 3D/2D UI and AI web library",
+  "keywords": [
+	  "board games",
+	  "chess",
+	  "draughts",
+	  "variants",
+	  "webgl",
+	  "webvr",
+	  "electron",
+	  "javascript"
+  ],
+  "homepage": "https://github.com/mi-g/jocly",
+  "bugs": "https://github.com/mi-g/jocly/issues",
+  "license": "AGPL-3.0 OR SEE LICENSE IN COPYING.md",
   "author": {
     "email": "mig@jocly.com",
     "name": "Michel Gutierrez",
     "url": "https://github.com/mi-g"
   },
   "main": "dist/node/jocly.core.js",
+  "repository": {
+	  "type": "git",
+	  "url": "https://github.com/mi-g/jocly.git"
+  },
   "scripts": {
-    "build": "gulp dist"
+    "build": "gulp build --prod"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",
