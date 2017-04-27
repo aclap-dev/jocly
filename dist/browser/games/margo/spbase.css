@@ -1,0 +1,63 @@
+
+.sp-board {
+	position: absolute;
+	z-index: 0;
+}
+
+.sp-board-canvas {
+	position: absolute;
+	z-index: 10;
+}
+	
+.sp-cell {
+	position: absolute;
+	background-position: center center;
+	background-size: 100% 100%;
+}
+
+.sp-notation {
+	position: absolute;
+	color: #808080;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.sp-red {
+	background-image: url(res/images/ball_red.png);
+}
+
+.sp-black {
+	background-image: url(res/images/ball_black.png);
+}
+
+.sp-white {
+	background-image: url(res/images/ball_white.png);
+}
+
+.sp-choice {
+	position: absolute;
+	background-color: transparent;
+	opacity: 0.5;
+	//border: 1px solid Red;
+}
+
+.sp-choice-view {
+	background-color: Lime;
+}
+
+.sp-front {
+	position: absolute;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.sp-disk {
+	border-radius: 50%;	
+}
+
+/*
+.sp-picked {
+	opacity: 0.6;
+}
+*/

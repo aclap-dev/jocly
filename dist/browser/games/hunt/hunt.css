@@ -1,0 +1,95 @@
+.background {
+	position: absolute;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.area {
+	position: absolute;
+	z-index: 10;
+}
+
+.area-canvas {
+	position: absolute;
+	z-index: 11;
+}
+
+.layout {
+	position: absolute;
+	z-index: 20;
+}
+
+.layout {
+	position: absolute;
+	z-index: 20;
+}
+
+.notation {
+	position: absolute;
+	z-index: 40;
+	text-align: center;
+	color: #990000;
+	font-weight: bold;
+}
+
+.piece, .piece-dock {
+	position: absolute;
+	z-index: 30;
+}
+
+.piece-count {
+	position: absolute;
+	z-index: 29;
+	text-align: center;
+	font-weight: bold;
+	font-family: Times New Roman, cursive;
+}
+
+.highlight {
+	background-color: rgba(0,255,0,0.5);
+	border-radius: 50%;
+}
+
+.back {
+	background-color: rgba(255,100,0,0.8);
+	border-radius: 50%;
+}
+
+.confirm {
+	background-color: rgba(0,255,0,0.9);
+	border-radius: 50%;
+}
+
+.front {
+	position: absolute;
+	z-index: 50;
+	cursor: pointer;
+	background-color: rgba(0,0,0,0);
+}
+
+.xd-notation {
+	color: White;
+	text-shadow: 2px 2px #333333;
+}
+
+/*
+.layout-board {
+	background-color: rgba(0,255,0,0.2);	
+}
+
+.layout-header {
+	background-color: rgba(255,0,0,0.2);	
+}
+
+.layout-footer {
+	background-color: rgba(0,0,255,0.2);	
+}
+
+.layout-left {
+	background-color: rgba(255,255,0,0.2);	
+}
+
+.layout-right {
+	background-color: rgba(255,0,255,0.2);	
+}
+*/

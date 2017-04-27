@@ -1,0 +1,58 @@
+.cell {
+	position: absolute;
+	z-index: 0;
+}
+
+.cellcanvas {
+	position: absolute;
+	z-index: 100;
+}
+
+.piece {
+	position:absolute;
+}
+.front {
+	position: absolute;
+	z-index: 200;
+	background-color: rgba(255,255,255,0);
+}
+.cell.chosen {
+	//background-color: rgba(69,139,211,1.0);	
+	background-color: rgba(255,139,211,1.0);	
+}
+
+.notation {
+	position: absolute;
+	z-index: 150;
+	color: White;
+	padding: 2px 0px 0px 2px;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+	/* text-shadow: 0 2px 0 #000; */
+}
+
+.choice-view {
+	background-color: rgba(255,255,255,0.2);
+	border-left: white solid 2px;
+	border-left-color: rgba(255,255,255,0.5);
+	border-right: white solid 2px;
+	cursor: pointer;
+}
+
+.choice-view-capture {
+	background-color: rgba(255,0,0,0.3);
+	cursor: pointer;
+}
+
+.choice-view-cancel {
+	background-color: rgba(255,255,128,0.3);
+	cursor: pointer;
+}
+
+.attack {
+	background-color: rgba(255,165,0,0.4);
+}
+
+.attacker {
+	background-color: rgba(255,255,0,0.4);
+}

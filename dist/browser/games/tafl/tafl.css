@@ -1,0 +1,38 @@
+.cell {
+}
+
+.cell-black {
+	background-color: rgba(0,0,0,0.2);
+}
+
+.cell-white {
+	background-color: rgba(255,255,255,0.2);
+}
+
+.cell-exclude {
+	background-color: rgba(0,0,0,.5);
+}
+
+.cell-home {
+	background-color: rgba(255,255,255,.5);
+}
+
+.cell.cell-select {
+	background-image: url(res/images/selectcell2.png);
+	background-size: contain;
+}
+
+.cell.cell-cancel {
+	background-image: url(res/images/unselectcell.png);
+	background-size: contain;
+}
+
+.notation {
+	background-color: transparent;
+	font-weight: bold;
+}
+
+.clicker {
+}
+
+

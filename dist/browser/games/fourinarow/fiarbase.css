@@ -1,0 +1,13 @@
+.fiar-text{
+	text-align: center;
+	cursor:default;
+}
+.fiar-holes-left{
+	background-image: url(res/images/holeleft.png);
+	background-repeat:repeat-y;
+	background-size: contain;
+}.fiar-holes-right{
+	background-image: url(res/images/holeright.png);
+	background-repeat:repeat-y;
+	background-size: contain;
+}

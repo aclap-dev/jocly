@@ -1,0 +1,102 @@
+
+.pensoc-area {
+	position: absolute;
+	background-color: #F0F0FF;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.pensoc-area-canvas {
+	position: absolute;
+	background-color: Orange;
+	z-index: 0;
+}
+
+.pensoc-buttons-canvas {
+	position: absolute;
+	//background-color: Lime;
+	z-index: 7;
+}
+
+.pensoc-board {
+	position: absolute;
+	Xbackground-color: #99FFFF;
+	z-index: 0;
+}
+
+.pensoc-board-canvas {
+	position: absolute;
+	z-index: 0;
+}
+
+.highlighter,.backlighter {
+	position: absolute;
+	z-index: 5;
+	/*background-color: rgba(255,128,128,0.5);*/
+}
+
+.rotator-circle {
+	position: absolute;
+	z-index: 4;
+}
+
+.arrow {
+	position: absolute;
+	z-index: 4;
+}
+
+.back {
+	background-color: Orange;
+}
+
+.penguin {
+	position: absolute;
+	z-index: 10;
+}
+
+.goal {
+	position: absolute;
+	z-index: 12;
+}
+
+.ghost {
+	opacity: 0.2;
+	z-index: 8;
+}
+
+.ball {
+	position: absolute;
+	z-index: 3;
+}
+
+.cancel {
+	position: absolute;
+	z-index: 3;
+	/*background-color: White;*/
+}
+
+.board-arrow {
+	position: absolute;
+	z-index: 18;
+}
+
+.front {
+	position: absolute;
+	z-index: 20;
+	cursor: pointer;
+	background-color: rgba(0,0,0,0);
+}
+
+.notation {
+	position: absolute;
+	z-index: 15;
+	color: #808080;
+	text-align: center;
+}
+
+.clicker {
+	background-color: #fff;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	filter": alpha(opacity=0);
+	opacity: 0;
+}
