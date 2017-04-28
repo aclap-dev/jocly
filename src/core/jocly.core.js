@@ -1010,6 +1010,29 @@
 			return ProxiedMethod(this, "resetView");
 	}
 
+	// experimental
+	GameProxy.prototype.getAvailableSkins = function () {
+		if (jsContext == "node")
+			return Promise.reject(new Error("resetView(): not supported in node.js"));
+		if (this.game) {
+			var self = this;
+			var supports3D = ( function () { 
+				try { 
+					return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); 
+				} 
+				catch( e ) { 
+					return false; 
+				} 
+			} )();
+			return Promise.resolve(
+				this.game.mViewOptions.skins.filter((skin)=>{
+					return supports3D || !skin["3d"];
+				})
+			)
+		} else
+			return ProxiedMethod(this, "getAvailableSkins");
+	}
+
 	exports._createInternalGame = CreateInternalGame; // do not use this
 
 	exports.PLAYER_A = 1;
