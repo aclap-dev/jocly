@@ -625,7 +625,7 @@
 					var gg=new THREE.CubeGeometry(8,0.08,13);
                     var $this = this;
                     var loader = new THREE.TextureLoader();
-                    loader.load(fullPath+"/res/xd-view/meshes/scrumfield8x12.jpg",
+                    loader.load(fullPath+"/res/xd-view/meshes/scrumfield8x12-3d.jpg",
                         function(diffuseMap) {
                             diffuseMap.wrapS = diffuseMap.wrapT = THREE.RepeatWrapping;
                             diffuseMap.format = THREE.RGBFormat;
