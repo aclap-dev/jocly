@@ -289,7 +289,6 @@ JocGame.prototype.InitView = function() {
 JocGame.prototype.LoadCss = function() {
 	var styles = document.querySelectorAll("head link[class='jocly-css']");
 	styles.forEach(function(style) {
-		console.info("removing style",style.getAttribute("href"));
 		style.parentNode.removeChild(style);
 	});
 	var self = this;
