@@ -190,7 +190,6 @@ if(window.JoclyXdViewCleanup)
 			if(logResourcesLoad)
 				console.log("Loading map",map);
 			IncrementResLoading();
-			console.info("TODO map",map);
 			loader.load(
                 // ressource url
                 map,
