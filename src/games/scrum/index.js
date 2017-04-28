@@ -630,7 +630,8 @@ var mvs = {
                 "sounds": true,
                 "notation": false,
                 "moves": true,
-                "skin-scrum": "rugby"
+                "skin-scrum": "rugby",
+				"viewAs": 1
             },
             "xdView": true,
             "js": [
