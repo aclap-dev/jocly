@@ -2,3 +2,4 @@ node_modules/
 dist/
 update-gh-pages.sh
 tmp/
+npm-debug.log
