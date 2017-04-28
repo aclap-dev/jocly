@@ -260,7 +260,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dsg",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D SG",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -299,7 +299,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dhnk",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D HNK",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -338,7 +338,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dlr",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D LR",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -377,7 +377,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dea",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D EA",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -416,7 +416,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dcc",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D CC",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -455,7 +455,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dtb",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D TB",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -494,7 +494,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3dmc",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D MC",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -533,7 +533,7 @@ var mvs = {
                 },
                 {
                     "name": "scrum3ddhl",
-                    "title": "Scrum 3D",
+                    "title": "Scrum 3D DHL",
                     "3d": true,
                     "camera": {
                         "radius": 12,
@@ -581,42 +581,42 @@ var mvs = {
                 },
                 {
                     "name": "regularsg",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D SG",
                     "brand": "sg"
                 },
                 {
                     "name": "regularhnk",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D HNK",
                     "brand": "hnk"
                 },
                 {
                     "name": "regularlr",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D LR",
                     "brand": "lr"
                 },
                 {
                     "name": "regularea",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D EA",
                     "brand": "ea"
                 },
                 {
                     "name": "regularcc",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D CC",
                     "brand": "cc"
                 },
                 {
                     "name": "regulartb",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D TB",
                     "brand": "tb"
                 },
                 {
                     "name": "regularmc",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D MC",
                     "brand": "mc"
                 },
                 {
                     "name": "regulardhl",
-                    "title": "Classical 2D",
+                    "title": "Classical 2D DHL",
                     "brand": "dhl"
                 }
             ],
