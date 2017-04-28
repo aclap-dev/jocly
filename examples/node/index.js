@@ -1,4 +1,4 @@
-var Jocly = require("../../dist/node");
+var Jocly = require("../..");
 
 var moveCount = 0;
 

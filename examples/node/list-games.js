@@ -1,4 +1,4 @@
-var jocly = require("../../dist/node");
+var jocly = require("../..");
 
 jocly.listGames()
     .then((games)=>{

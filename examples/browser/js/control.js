@@ -225,7 +225,9 @@ $(document).ready(function () {
                                     else if(playerMode=="player-b")
                                         player = Jocly.PLAYER_B;
                                     if(player)
-                                        match.viewAs(player)
+                                        match.setViewOptions({
+												viewAs: player
+											})
                                             .then( () => {
                                                 RunMatch(match,progressBar);                                
                                             });
