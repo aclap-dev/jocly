@@ -28,13 +28,15 @@ Model.Game.InitGame = function() {
 	this.g.TripletsByPos=[];
 	for(var i=0;i<this.g.Coord.length;i++)
 		this.g.TripletsByPos[i]=[];
-	for(var i in this.g.Triplets) {
-		var triplet=this.g.Triplets[i];
-		for(var j in triplet) {
-			var pos1=triplet[j];
-			this.g.TripletsByPos[pos1].push(triplet);
+	for(var i in this.g.Triplets)
+		if(this.g.Triplets.hasOwnProperty(i)) {
+			var triplet=this.g.Triplets[i];
+			for(var j in triplet)
+				if(triplet.hasOwnProperty(j)) {
+					var pos1=triplet[j];
+					this.g.TripletsByPos[pos1].push(triplet);
+				}
 		}
-	}
 	this.InitGameExtra();
 }
 
@@ -182,24 +184,25 @@ Model.Board.GeneratePlacingMoves = function(aGame) {
 				var vDepth=aGame.mLevelInfo.maxDepth-aGame.mCurrentLevel;
 				if(vDepth>=aGame.mLevelInfo.placingRace) { // if deep in calculation, only consider meaningful moves
 					considerPos=false;
-					for(var i in aGame.g.TripletsByPos[p]) { // for each triplet the position belongs to
-						var triplet=aGame.g.TripletsByPos[p][i];
-						var self=0, other=0, empty=0; 
-						for(var j=0;j<3;j++) {
-							if(this.board[triplet[j]]==-1)
-								empty++;
-							else {
-								if(this.pieces[this.board[triplet[j]]].s==this.mWho)
-									self++;
-								else
-									other++;
+					for(var i in aGame.g.TripletsByPos[p]) 
+						if(aGame.g.TripletsByPos[p].hasOwnProperty(i)) { // for each triplet the position belongs to
+							var triplet=aGame.g.TripletsByPos[p][i];
+							var self=0, other=0, empty=0; 
+							for(var j=0;j<3;j++) {
+								if(this.board[triplet[j]]==-1)
+									empty++;
+								else {
+									if(this.pieces[this.board[triplet[j]]].s==this.mWho)
+										self++;
+									else
+										other++;
+								}
+							}
+							if(self==2 || (self==1 && other==0) || other==2) {
+								considerPos=true;
+								break;
 							}
 						}
-						if(self==2 || (self==1 && other==0) || other==2) {
-							considerPos=true;
-							break;
-						}
-					}
 				}
 			}
 			if(considerPos)
@@ -213,7 +216,7 @@ Model.Board.GeneratePlacingMoves = function(aGame) {
 
 Model.Board.GenerateMovingMoves = function(aGame) {
 	$this=this;
-	for(var i in this.pieces) {
+	for(var i=0; i< this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.a && piece.s==this.mWho) {
 			aGame.MillsEachDirection(piece.p,function(pos) {
@@ -233,10 +236,10 @@ Model.Board.GenerateFlyingMoves = function(aGame) {
 	if(this.menCount[this.mWho]!=3)
 		this.GenerateMovingMoves(aGame);
 	else {
-		for(var i in this.pieces) {
+		for(var i=0; i<this.pieces.length; i++) {
 			var piece=this.pieces[i];
 			if(piece.a && piece.s==this.mWho) {
-				for(var pos in this.board) {
+				for(var pos=0; pos<this.board.length; pos++) {
 					if(this.board[pos]==-1) {
 						this.GenerateCapturingMoves(aGame,{
 							f: piece.p,
@@ -251,68 +254,70 @@ Model.Board.GenerateFlyingMoves = function(aGame) {
 }
 
 Model.Board.GenerateCapturingMoves = function(aGame,move) {
-	for(var i in aGame.g.TripletsByPos[move.t]) {
-		var triplet=aGame.g.TripletsByPos[move.t][i];
-		var capture=true;
-		for(var j=0;j<3;j++) {
-			var pos=triplet[j];
-			if(pos!=move.t) {
-				if(this.board[pos]==-1 || move.f==pos) {
-					capture=false;
-					break;
-				}
-				var piece=this.pieces[this.board[pos]];
-				if(piece.a==false || piece.d>-1 || piece.s!=this.mWho) {
-					capture=false;
-					break;
+	for(var i in aGame.g.TripletsByPos[move.t]) 
+		if(aGame.g.TripletsByPos[move.t].hasOwnProperty(i)) {
+			var triplet=aGame.g.TripletsByPos[move.t][i];
+			var capture=true;
+			for(var j=0;j<3;j++) {
+				var pos=triplet[j];
+				if(pos!=move.t) {
+					if(this.board[pos]==-1 || move.f==pos) {
+						capture=false;
+						break;
+					}
+					var piece=this.pieces[this.board[pos]];
+					if(piece.a==false || piece.d>-1 || piece.s!=this.mWho) {
+						capture=false;
+						break;
+					}
 				}
 			}
-		}
-		if(capture) {
-			if(this.menCount[-this.mWho]==3 && this.placing==false) {
-				this.mMoves.push({
-					f: move.f,
-					t: move.t,
-					c: -2,
-				});		
+			if(capture) {
+				if(this.menCount[-this.mWho]==3 && this.placing==false) {
+					this.mMoves.push({
+						f: move.f,
+						t: move.t,
+						c: -2,
+					});		
+					return;
+				}
+				var moves=[]
+				for(var j=0; j<this.pieces.length; j++) {
+					var piece=this.pieces[j];
+					if(piece.a==true && piece.d==-1 && piece.s==-this.mWho) {
+						var cMove={
+								f: move.f,
+								t: move.t,
+								c: piece.p,
+						}
+						moves.push(cMove);
+					}
+				}
+				if(aGame.mOptions.poundInMill==false) {
+					var inMill={};
+					for(var k in aGame.g.Triplets) 
+						if(aGame.g.Triplets.hasOwnProperty(k)) {
+							var t=aGame.g.Triplets[k];
+							if((this.board[t[0]]!=-1 && this.pieces[this.board[t[0]]].s==-this.mWho) &&
+									(this.board[t[1]]!=-1 && this.pieces[this.board[t[1]]].s==-this.mWho) &&
+									(this.board[t[2]]!=-1 && this.pieces[this.board[t[2]]].s==-this.mWho)) {
+								inMill[t[0]]=true;
+								inMill[t[1]]=true;
+								inMill[t[2]]=true;
+							}
+						}
+					var moves0=[];
+					for(var k=0; k<moves.length; k++) {
+						if(!inMill[moves[k].c])
+							moves0.push(moves[k]);
+					}
+					if(moves0.length>0)
+						moves=moves0;
+				}
+				this.mMoves=this.mMoves.concat(moves);
 				return;
 			}
-			var moves=[]
-			for(var j in this.pieces) {
-				var piece=this.pieces[j];
-				if(piece.a==true && piece.d==-1 && piece.s==-this.mWho) {
-					var cMove={
-							f: move.f,
-							t: move.t,
-							c: piece.p,
-					}
-					moves.push(cMove);
-				}
-			}
-			if(aGame.mOptions.poundInMill==false) {
-				var inMill={};
-				for(var k in aGame.g.Triplets) {
-					var t=aGame.g.Triplets[k];
-					if((this.board[t[0]]!=-1 && this.pieces[this.board[t[0]]].s==-this.mWho) &&
-							(this.board[t[1]]!=-1 && this.pieces[this.board[t[1]]].s==-this.mWho) &&
-							(this.board[t[2]]!=-1 && this.pieces[this.board[t[2]]].s==-this.mWho)) {
-						inMill[t[0]]=true;
-						inMill[t[1]]=true;
-						inMill[t[2]]=true;
-					}
-				}
-				var moves0=[];
-				for(var k in moves) {
-					if(!inMill[moves[k].c])
-						moves0.push(moves[k]);
-				}
-				if(moves0.length>0)
-					moves=moves0;
-			}
-			this.mMoves=this.mMoves.concat(moves);
-			return;
 		}
-	}
 	// no capture
 	this.mMoves.push({
 		f: move.f,
@@ -353,30 +358,31 @@ Model.Board.Evaluate = function(aGame,aFinishOnly,aTopLevel) {
 	var menCountDiff=this.menCount[JocGame.PLAYER_A]-this.menCount[JocGame.PLAYER_B];
 	var linesDiff1=0;
 	var linesDiff2=0;
-	for(var i in aGame.g.Triplets) {
-		var count={
-			"-1": 0,
-			"0": 0,
-			"1": 0,
-		}
-		var triplet=aGame.g.Triplets[i];
-		for(var j=0;j<3;j++) {
-			var pos=triplet[j];
-			var index=this.board[pos];
-			if(index>-1) {
-				var piece=this.pieces[index];
-				count[piece.s]++;
+	for(var i in aGame.g.Triplets) 
+		if(aGame.g.Triplets.hasOwnProperty(i)) {
+			var count={
+				"-1": 0,
+				"0": 0,
+				"1": 0,
 			}
+			var triplet=aGame.g.Triplets[i];
+			for(var j=0;j<3;j++) {
+				var pos=triplet[j];
+				var index=this.board[pos];
+				if(index>-1) {
+					var piece=this.pieces[index];
+					count[piece.s]++;
+				}
+			}
+			if(count[1]==1 && count[-1]==0)
+				linesDiff1++;
+			else if(count[1]==2 && count[-1]==0)
+				linesDiff2++;
+			if(count[-1]==1 && count[1]==0)
+				linesDiff1--;
+			else if(count[-1]==2 && count[1]==0)
+				linesDiff2--;
 		}
-		if(count[1]==1 && count[-1]==0)
-			linesDiff1++;
-		else if(count[1]==2 && count[-1]==0)
-			linesDiff2++;
-		if(count[-1]==1 && count[1]==0)
-			linesDiff1--;
-		else if(count[-1]==2 && count[1]==0)
-			linesDiff2--;
-	}
 	this.mEvaluation=menCountDiff*10;
 	this.mEvaluation+=linesDiff1*1;
 	this.mEvaluation+=linesDiff2*3;

@@ -438,14 +438,14 @@
 						function xyPos(position){
 							return [zoom*(-WIDTH/2+coords[position][0]+0.5),zoom*(-HEIGHT/2+coords[position][1]+0.5)];
 						}
-						for (var m in materials){
-							var mat=materials[m];
-							if (mat.name=="mainframe"){
-								mat.specular={r:.05,g:.05,b:.05}
-								mat.shininess=40;
+						for (var m in materials) 
+							if(materials.hasOwnProperty(m)) {
+								var mat=materials[m];
+								if (mat.name=="mainframe"){
+									mat.specular={r:.05,g:.05,b:.05}
+									mat.shininess=40;
+								}
 							}
-								
-						}
 						var board=new THREE.Mesh(geometry,new THREE.MultiMaterial( materials ));
 						
 						var cylGeo=new THREE.SphereGeometry(0.15, 32, 32);		
@@ -936,7 +936,7 @@
 					},
 				});
 			}
-			for( var i in $this.pieces) {
+			for( var i=0;i<$this.pieces.length;i++) {
 				var piece=$this.pieces[i];
 				xdv.updateGadget("piece#"+i, {
 					"base" : {

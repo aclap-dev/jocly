@@ -156,7 +156,7 @@ View.Game.MillsDrawBoard=function() {
 		}
 	
 		var lines=this.MillsGetLines();
-		for(var i in lines) {
+		for(var i=0; i<lines.length; i++) {
 			var segment=lines[i];
 			DrawLine(segment[0],segment[1],segment[2],segment[3]);		
 		}
@@ -175,7 +175,7 @@ View.Game.MillsDrawBoard=function() {
 			aGame.g.ctxField.fill();	
 		}
 	
-		for(var i in this.g.Coord) {
+		for(var i=0;i<this.g.Coord.length; i++) {
 			var coord=this.g.Coord[i];
 			DrawDisk(coord[0],coord[1]);
 		}
@@ -272,7 +272,7 @@ View.Game.InitView=function() {
 	for(var i=0;i<this.mOptions.mencount;i++)
 		CreatePiece(JocGame.PLAYER_B,index++,i);
 	
-	for(var i in this.g.Coord) {
+	for(var i=0; i<this.g.Coord.length; i++) {
 		var cCoord=this.g.Coord[i];
 		var r=cCoord[0];
 		var c=cCoord[1];
@@ -409,7 +409,7 @@ View.Board.HumanTurn=function(aGame) {
 	}
 	
 	function CheckMove() {
-		for(var i in $this.mMoves) {
+		for(var i=0; i<$this.mMoves.length; i++) {
 			var m=$this.mMoves[i];
 			if(m.f==move.f && m.t==move.t && (m.c==move.c || (m.c==-2 && move.c==-1))) {
 				aGame.MakeMove(m);

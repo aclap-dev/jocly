@@ -77,7 +77,7 @@ Model.Board.StaticGenerateMoves = function(aGame) {
 	if(aGame.mFullPlayedMoves.length==0) { // very first move: pick position with 2 triplets
 		var poss=[0,2,3,5,10,12,13,15];
 		var moves=[];
-		for(var i in poss)
+		for(var i=0; i<poss.length; i++)
 			poss.push({f:-1,t:poss[i],c:-1});
 		return moves;
 	}
