@@ -768,7 +768,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 				},
 			} 
 		};
-		for ( var pi in this.mBoard.pieces) {
+		for ( var pi=0; pi<this.mBoard.pieces.length; pi++) {
 			var piece = this.mBoard.pieces[pi];
 			var pieceData = pieces[piece.type];
 			var id = piece.type + ":" + piece.s + ":" + piece.index;
@@ -977,7 +977,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 	}
 
 	View.Board.xdDisplay = function(xdv, aGame) {
-		for ( var i in this.pieces) {
+		for ( var i=0; i<this.pieces.length; i++) {
 			var piece = this.pieces[i];
 			var id = piece.type + ":" + piece.s + ":" + piece.index;
 			if (piece.alive) {
@@ -1090,14 +1090,14 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 		function SelectFirst(args) {
 			//$this.Log("HTSelectFirst");
 			if (amiralCapture.risk) {
-				for ( var i in amiralCapture.capture)
+				for ( var i=0; i<amiralCapture.capture.length; i++)
 					Highlight(amiralCapture.capture[i].at,"attack");
 				if (amiralCapture.escape.length > 0)
 					Highlight(amiralCapture.escape[0].f,"piece");
 			} else {
-				for ( var i in captures)
+				for ( var i=0; i<captures.length; i++)
 					Highlight(captures[i].at,"attack");
-				for ( var i in $this.pieces) {
+				for ( var i=0; i<$this.pieces.length; i++) {
 					var piece = $this.pieces[i];
 					if (piece.alive && piece.s == $this.mWho)
 						Highlight(piece,"piece");
@@ -1122,7 +1122,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 				});
 				xdv.restoreGadgetProps("hex#" + pos, "initial");
 			}
-			for( var i in $this.pieces) {
+			for( var i=0; i<$this.pieces.length; i++) {
 				var piece=$this.pieces[i];
 				xdv.updateGadget(piece.type+":"+piece.s+":"+piece.index, {
 					"3d" : {
@@ -1145,12 +1145,12 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 			var spos = args.piece.pos;
 			var index = $this.board[spos];
 			if (index >= 0 && $this.pieces[index].s == -$this.mWho) {
-				for ( var i in captures)
+				for ( var i=0; i<captures.length; i++)
 					if (captures[i].at == spos) {
 						var cmove = captures[i];
 						if (aGame.g.BattleSounds())
 							aGame.PlaySound('assault');
-						for ( var j in cmove.af)
+						for ( var j=0; j<cmove.af.length; j++)
 							xdv.updateGadget("mask#" + cmove.af[i], {
 								"base" : {
 									visible : true,
@@ -1185,7 +1185,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 			var piece = $this.pieces[$this.board[pos]];
 			var poss = $this.YohohoReachablePositions(aGame, pos, piece.type,
 					null, null);
-			for ( var i in poss) {
+			for ( var i=0; i<poss.length; i++) {
 				var pos1 = poss[i];
 				Highlight(pos1,"position");
 			}
@@ -1234,7 +1234,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 			//$this.Log("HTSelectSecond");
 			var spos=move.m[0].t;
 			Highlight(spos,"cancel");
-			for ( var i in $this.pieces) {
+			for ( var i=0; i<$this.pieces.length; i++) {
 				var piece = $this.pieces[i];
 				if (piece.alive && piece.s == $this.mWho && piece.pos!=move.m[0].f)
 					Highlight(piece,"piece");
@@ -1244,12 +1244,12 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 			var spos = args.piece.pos;
 			var index = $this.board[spos];
 			if (index >= 0 && $this.pieces[index].s == -$this.mWho) {
-				for ( var i in captures)
+				for ( var i=0; i<captures.length; i++)
 					if (captures[i].at == spos) {
 						var cmove = captures[i];
 						if (aGame.g.BattleSounds())
 							aGame.PlaySound('assault');
-						for ( var j in cmove.af)
+						for ( var j=0; j<cmove.af.length; j++)
 							xdv.updateGadget("mask#" + cmove.af[i], {
 								"base" : {
 									visible : true,
@@ -1280,7 +1280,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 			var pos = move.m[1].f;
 			var piece = $this.pieces[$this.board[pos]];
 			var poss=$this.YohohoReachablePositions(aGame,pos,piece.type,move.m[0].f,move.m[0].t);
-			for ( var i in poss) {
+			for ( var i=0; i<poss.length; i++) {
 				var pos1 = poss[i];
 				Highlight(pos1,"position");
 			}
@@ -1326,11 +1326,11 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 		}
 		function AnimateCapture(args) {
 			var spos=args.piece.pos;
-			for(var i in captures)
+			for(var i=0; i<captures.length; i++)
 				if(captures[i].at==spos) {
 					var cmove=captures[i];
 					if (aGame.g.BattleSounds()) aGame.PlaySound('assault');
-					for(var j in cmove.af)
+					for(var j=0; j<cmove.af.length; j++)
 						xdv.updateGadget("mask#"+cmove.af[j],{
 							"base": {
 								visible: true,
@@ -1348,7 +1348,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 						},
 					});
 					setTimeout(function() {
-						for(var j in cmove.af)
+						for(var j=0; j<cmove.af.length; j++)
 							xdv.updateGadget("mask#"+cmove.af[j],{
 								"base": {
 									visible: false,
@@ -1371,7 +1371,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 					
 					var coord=aGame.getVCoord(spos);
 					var attackers=[];
-					for(var j in cmove.af)
+					for(var j=0; j<cmove.af.length; j++)
 						attackers.push($this.pieces[$this.board[cmove.af[j]]]);
 					AnimateAttack(xdv,aGame,args.piece,attackers);
 					return;
@@ -1474,7 +1474,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 		} else if(aMove.t=='a') {
 			if (aGame.g.BattleSounds()) aGame.PlaySound('assault');
 			
-			for(var j in aMove.af)
+			for(var j=0; j<aMove.af.length; j++)
 				xdv.updateGadget("mask#"+aMove.af[j],{
 					base: {
 						visible: true,
@@ -1492,7 +1492,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 				},
 			});
 			setTimeout(function() {
-				for(var j in aMove.af)
+				for(var j=0; j<aMove.af.length; j++)
 					xdv.updateGadget("mask#"+aMove.af[j],{
 						base: {
 							visible: false,
@@ -1512,7 +1512,7 @@ TWEEN= typeof TWEEN=="undefined" ? { Easing: { Cubic: {}, Quartic: {}, } } : TWE
 				aGame.MoveShown();
 			},4000);
 			var attackers=[];
-			for(var j in aMove.af)
+			for(var j=0; j<aMove.af.length; j++)
 				attackers.push(aGame.mOldBoard.pieces[aGame.mOldBoard.board[aMove.af[j]]]);
 			AnimateAttack(xdv,aGame,aGame.mOldBoard.pieces[aGame.mOldBoard.board[aMove.at]],attackers);
 		}

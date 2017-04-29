@@ -256,7 +256,7 @@ View.Game.HexInitView=function() {
 		}
 	}
 	// create pieces
-	for(var i in this.mBoard.pieces) {
+	for(var i=0; i<this.mBoard.pieces.length; i++) {
 		var piece=this.mBoard.pieces[i];
 		var curcell=$("<div/>").addClass("piece").attr("id","jocindex"+i).css({ 
 				width: 2*this.g.R,

@@ -114,7 +114,7 @@ Model.Move.CopyFrom = function(args) {
 		}]
 	} else if(args.t=='a') {
 		this.af=[];
-		for(var i in args.af)
+		for(var i=0; i<args.af.length; i++)
 			this.af.push(args.af[i]);
 		this.at=args.at;
 	}
@@ -141,7 +141,7 @@ Model.Board.InitialPosition = function(aGame) {
 	this.first=true;
 	this.yohoho=false;
 	this.amirals={};
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.type=='C')
 			this.amirals[piece.s]=i;
@@ -186,13 +186,13 @@ Model.Board.GenerateMoves = function(aGame) {
 	if(lastRowRace)
 		pieces=[this.pieces[this.amirals[this.mWho]]];
 	
-	for(var i in pieces) {
+	for(var i=0;i<pieces.length;i++) {
 		var piece=pieces[i];
 		
 		if(piece.s==this.mWho && piece.alive) {
 			var poss=this.YohohoReachablePositionsThrough(aGame,piece.pos,piece.type);
 			//JocLog("Poss",piece.pos,poss);
-			for(var j in poss) {
+			for(var j=0; j<poss.length; j++) {
 				var subMove={ f: piece.pos, t: poss[j].pos, index:i, reqEmpty: poss[j].reqEmpty };
 				//subMove.d2Self=aGame.g.Dist(piece.pos,selfAmiralPos);
 				//subMove.d2Other=aGame.g.Dist(piece.pos,otherAmiralPos);
@@ -250,7 +250,7 @@ Model.Board.GenerateMoves = function(aGame) {
 	}
 	
 	if(subMovesLastRow.length>0) {
-		for(var i in subMovesLastRow) {
+		for(var i=0; i<subMovesLastRow.length; i++) {
 			var subMove=subMovesLastRow[i];
 			this.mMoves.push({ t: 'm', m: [{f:subMove.f, t:subMove.t }, { }] });
 		}
@@ -258,13 +258,14 @@ Model.Board.GenerateMoves = function(aGame) {
 	}
 	
 	var subMovesPool=[];
-	for(var index in subMovesMap) {
-		var subMovesByPiece=subMovesMap[index];
-		subMovesByPiece.sort(function(a,b) {
-			return b.eval-a.eval;
-		});
-		subMovesPool.push(subMovesByPiece);
-	}
+	for(var index in subMovesMap)
+		if(subMovesMap.hasOwnProperty(index)) {
+			var subMovesByPiece=subMovesMap[index];
+			subMovesByPiece.sort(function(a,b) {
+				return b.eval-a.eval;
+			});
+			subMovesPool.push(subMovesByPiece);
+		}
 	subMovesPool.sort(function(a,b) {
 		return b[0].eval-a[0].eval;
 	});
@@ -291,7 +292,7 @@ Model.Board.GenerateMoves = function(aGame) {
 		//JocLog("lastRowRace",subMoves);
 		var keptSubMoves=[];
 		var bestRowGain=-1;
-		for(var i in subMoves) {
+		for(var i=0; i<subMoves.length; i++) {
 			var subMove=subMoves[i];
 			var rowGain=(aGame.g.Coord[subMove.t][0]-aGame.g.Coord[subMove.t][0])*this.mWho;
 			if(rowGain==bestRowGain)
@@ -302,7 +303,7 @@ Model.Board.GenerateMoves = function(aGame) {
 			}
 		}
 		this.mMoves=this.YohohoCaptures(aGame,this.mWho);
-		for(var i in keptSubMoves) {
+		for(var i=0; i<keptSubMoves.length; i++) {
 			var subMove=keptSubMoves[i];
 			if(this.board[subMove.t]==-1)
 				this.mMoves.push({t:'m',m:[{ f: subMove.f, t: subMove.t },{}]})
@@ -321,12 +322,12 @@ Model.Board.GenerateMoves = function(aGame) {
 			return false;
 		//if(sm1.f==sm2.f)
 		//	JocLog("%",sm1,sm2);
-		for(var i in sm1.reqEmpty) {
+		for(var i=0; i<sm1.reqEmpty.length; i++) {
 			var emptyPos=sm1.reqEmpty[i];
 			if($this.board[emptyPos]!=-1)
 				return false;
 		}
-		for(var i in sm2.reqEmpty) {
+		for(var i=0; i<sm2.reqEmpty.length; i++) {
 			var emptyPos=sm2.reqEmpty[i];
 			if(emptyPos==sm1.t)
 				return false;
@@ -343,7 +344,7 @@ Model.Board.GenerateMoves = function(aGame) {
 	var amiralCapture=this.YohohoAmiralCapture(aGame,this.mWho);
 	//JocLog("Amiral capture",amiralCapture);
 	if(amiralCapture.risk) {
-		for(var i in amiralCapture.capture) {
+		for(var i=0; i<amiralCapture.capture.length; i++) {
 			var capture=amiralCapture.capture[i];
 			var af=JSON.parse(JSON.stringify(capture.af));
 			this.mMoves.push({ t:'a', af:af, at:capture.at });
@@ -464,7 +465,7 @@ Model.Board.Evaluate = function(aGame,aFinishOnly,aTopLevel) {
 	this.mEvaluation+=(this.piecesWeight[JocGame.PLAYER_A]-this.piecesWeight[JocGame.PLAYER_B])*aGame.g.weightFactor;
 	var adist=0, bdist=0;
 
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.alive) {
 			var minDist=Math.min(aGame.g.Dist(piece.pos,aAmiralPos),aGame.g.Dist(piece.pos,bAmiralPos));
@@ -625,7 +626,7 @@ Model.Board.YohohoReachablePositionsThrough=function(aGame,pos,type) {
 			reqEmpty.push(pos1);
 			if(valid) {
 				var reqEmpty0=[];
-				for(var i in reqEmpty)
+				for(var i=0; i<reqEmpty.length; i++)
 					reqEmpty0.push(reqEmpty[i]);
 				poss.push({ pos: pos1, reqEmpty: reqEmpty0 });
 			}
@@ -685,7 +686,7 @@ Model.Board.YohohoAmiralCapture=function(aGame,who) {
 	
 	capture.attackers=attackers;
 	capture.capture=[];
-	for(var i in attackers) {
+	for(var i=0; i<attackers.length; i++) {
 		var index=attackers[i];
 		var attackerStrength=aGame.g.GetStrengthByType(this.pieces[index].type);
 		if(strength-attackerStrength<=5) {
@@ -734,7 +735,7 @@ Model.Board.YohohoAmiralCapture=function(aGame,who) {
 Model.Board.YohohoCaptures=function(aGame,who) {
 	var $this=this;
 	var captures=[];
-	for(var i in $this.pieces) {
+	for(var i=0; i<$this.pieces.length; i++) {
 		var piece=$this.pieces[i];
 		if(piece.s==-who && piece.alive) {
 			var attackeeStrength=aGame.g.GetStrengthByType(piece.type);
