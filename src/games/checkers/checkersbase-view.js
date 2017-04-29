@@ -200,11 +200,13 @@ View.Game.InitView=function() {
 	}
 	var index=0;
 	for(var i in INITIAL.a)
-		CreatePiece(JocGame.PLAYER_A,index++);
+		if(INITIAL.a.hasOwnProperty(i))
+			CreatePiece(JocGame.PLAYER_A,index++);
 	for(var i in INITIAL.b)
-		CreatePiece(JocGame.PLAYER_B,index++);
+		if(INITIAL.b.hasOwnProperty(i))
+			CreatePiece(JocGame.PLAYER_B,index++);
 	
-	for(var i in this.g.Coord) {
+	for(var i=0; i<this.g.Coord.length; i++) {
 		var cCoord=this.g.Coord[i];
 		var r=cCoord[0];
 		var c=cCoord[1];
@@ -370,10 +372,10 @@ View.Board.HumanTurn=function(aGame) {
 			});
 		}
 		var matchingMoves=[];
-		for(var i in moves) {
+		for(var i=0; i<moves.length; i++) {
 			var move=moves[i];
 			var keep=true;
-			for(var j in poss) {
+			for(var j=0; j<poss.length; j++) {
 				if(poss[j]!=move.pos[j]) {
 					keep=false;
 					break;
@@ -385,27 +387,28 @@ View.Board.HumanTurn=function(aGame) {
 
 		var nextPoss={};
 		var nextCapts={};
-		for(var i in matchingMoves) {
+		for(var i=0; i<matchingMoves.length; i++) {
 			var move=matchingMoves[i];
 			nextPoss[move.pos[index]]=true;
 			nextCapts[move.pos[index]]=move.capt[index];
 		}
-		for(var npos in nextPoss) {	
-			aGame.mWidget.find(".possible[jocpos="+npos+"]").show();
-			aGame.mWidget.find(".front[jocpos="+npos+"]").addClass("choice")
-				.bind(JocGame.CLICK,function() {
-					var pos=parseInt($(this).attr("jocpos"));
-					poss.push(pos);
-					capts.push(nextCapts[npos]);
-					if(index==0) {
-						pWidget=aGame.mWidget.find(".piece[jocindex="+$this.board[pos]+"]");
-					} else {
-						MovePiece(pos);
-					}
-					index++;
-					UpdateChoice();
-				});
-		}
+		for(var npos in nextPoss) 
+			if(nextPoss.hasOwnProperty(npos)) {	
+				aGame.mWidget.find(".possible[jocpos="+npos+"]").show();
+				aGame.mWidget.find(".front[jocpos="+npos+"]").addClass("choice")
+					.bind(JocGame.CLICK,function() {
+						var pos=parseInt($(this).attr("jocpos"));
+						poss.push(pos);
+						capts.push(nextCapts[npos]);
+						if(index==0) {
+							pWidget=aGame.mWidget.find(".piece[jocindex="+$this.board[pos]+"]");
+						} else {
+							MovePiece(pos);
+						}
+						index++;
+						UpdateChoice();
+					});
+			}
 		if(matchingMoves.length==1 && matchingMoves[0].pos.length==poss.length) {
 			aGame.mWidget.find(".front").removeClass("back");
 			setTimeout(function() {

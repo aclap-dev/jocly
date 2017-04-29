@@ -652,21 +652,23 @@ var mvs = {
 
 var games = {};
 
-for(var name in mvs.models) {
-    games[name] = {
-        name: name,
-        modelScripts: mvs.models[name].js,
-        config: {
-            status: true,
-            model: mvs.models[name]
-        }
-    }
-}
+for(var name in mvs.models) 
+	if(mvs.models.hasOwnProperty(name)) {
+		games[name] = {
+			name: name,
+			modelScripts: mvs.models[name].js,
+			config: {
+				status: true,
+				model: mvs.models[name]
+			}
+		}
+	}
 
-for(var name in mvs.views) {
-    games[name].viewScripts = mvs.views[name].js;
-    games[name].config.view = mvs.views[name];
-}
+for(var name in mvs.views) 
+	if(mvs.views.hasOwnProperty(name)) {
+		games[name].viewScripts = mvs.views[name].js;
+		games[name].config.view = mvs.views[name];
+	}
 
 exports.games = Object.keys(games).map((name)=>{
     return games[name];

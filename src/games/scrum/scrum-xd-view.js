@@ -1180,7 +1180,7 @@
 				});
 		}
 		function EachPiece(fnt) {
-			for(var i in $this.pieces) {
+			for(var i=0; i<$this.pieces.length; i++) {
 				var piece=$this.pieces[i];
 				if(piece.s==$this.mWho)
 					fnt(i,piece.p);
@@ -1208,7 +1208,7 @@
 					}
 				});
 			}
-			for( var i in $this.pieces) {
+			for( var i=0; i<$this.pieces.length; i++) {
 				var piece=$this.pieces[i];
 				xdv.updateGadget("player#"+i, {
 					"base" : {

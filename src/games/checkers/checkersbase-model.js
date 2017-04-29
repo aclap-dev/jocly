@@ -69,7 +69,8 @@
 		
 		if(this.mOptions.variant)
 			for(var k in this.mOptions.variant)
-				this.g[k]=this.mOptions.variant[k];
+				if(this.mOptions.variant.hasOwnProperty(k))
+					this.g[k]=this.mOptions.variant[k];
 		
 		this.BuildGraphCoord();
 	
@@ -107,10 +108,12 @@
 	Model.Move.Init = function(args) {
 		//JocLog("Move.Init",args);
 		this.pos=[];
-		for(var i in args.pos)
+		var argsPos = args.pos ? Object.keys(args.pos).sort() : [];
+		for(var i=0; i<argsPos.length; i++)
 			this.pos.push(args.pos[i]);
 		this.capt=[];
-		for(var i in args.capt)
+		var captPos = args.capt ? Object.keys(args.capt).sort() : [];
+		for(var i=0; i<captPos.length; i++)
 			this.capt.push(args.capt[i]);
 	}
 	
@@ -237,34 +240,36 @@
 					this.kpCount[index01]++;
 			}
 		} else {
-			for(var i in INITIAL.a) {
-				var p=INITIAL.a[i];
-				var pos=p[0]*WIDTH+p[1];
-				var piece={
-					s: JocGame.PLAYER_A, // side
-					p: pos, // position
-					l: -1, // last position for this piece
-					t: 0, // piece type
-					plp: pos, // last position in move (for piece angle calculation) 
-				};
-				this.pieces.push(piece);
-				this.board[pos]=index++;
-				this.zSign=aGame.zobrist.update(this.zSign,"board","1/0",pos);
-			}
-			for(var i in INITIAL.b) {
-				var p=INITIAL.b[i];
-				var pos=p[0]*WIDTH+p[1];
-				var piece={
-					s: JocGame.PLAYER_B, // side
-					p: pos, // position
-					l: -1, // last position for this piece
-					t: 0, // piece type
-					plp: pos, // last position in move (for piece angle calculation) 
-				};
-				this.pieces.push(piece);
-				this.board[pos]=index++;
-				this.zSign=aGame.zobrist.update(this.zSign,"board","-1/0",pos);
-			}
+			for(var i in INITIAL.a) 
+				if(INITIAL.a.hasOwnProperty(i)) {
+					var p=INITIAL.a[i];
+					var pos=p[0]*WIDTH+p[1];
+					var piece={
+						s: JocGame.PLAYER_A, // side
+						p: pos, // position
+						l: -1, // last position for this piece
+						t: 0, // piece type
+						plp: pos, // last position in move (for piece angle calculation) 
+					};
+					this.pieces.push(piece);
+					this.board[pos]=index++;
+					this.zSign=aGame.zobrist.update(this.zSign,"board","1/0",pos);
+				}
+			for(var i in INITIAL.b) 
+				if(INITIAL.b.hasOwnProperty(i)) {
+					var p=INITIAL.b[i];
+					var pos=p[0]*WIDTH+p[1];
+					var piece={
+						s: JocGame.PLAYER_B, // side
+						p: pos, // position
+						l: -1, // last position for this piece
+						t: 0, // piece type
+						plp: pos, // last position in move (for piece angle calculation) 
+					};
+					this.pieces.push(piece);
+					this.board[pos]=index++;
+					this.zSign=aGame.zobrist.update(this.zSign,"board","-1/0",pos);
+				}
 			this.pCount=[INITIAL.a.length,INITIAL.b.length];
 			this.spCount=[INITIAL.a.length,INITIAL.b.length];
 			this.kpCount=[INITIAL.a.length,INITIAL.b.length];
@@ -288,7 +293,7 @@
 		this.mMoves = [];
 
 		function EachPiece(fnt) {
-			for(var i in $this.pieces) {
+			for(var i=0;i<$this.pieces.length;i++) {
 				var piece=$this.pieces[i];
 				if(piece && piece.s==$this.mWho)
 					fnt(i,piece.p);
@@ -505,7 +510,7 @@
 			var moves0=this.mMoves;
 			var moves1=[];
 			var bestLength=0;
-			for(var i in moves0) {
+			for(var i=0; i<moves0.length; i++) {
 				var move=moves0[i];
 				if(move.pos.length==bestLength)
 					moves1.push(move);
@@ -573,7 +578,7 @@
 			var HEIGHT=aGame.mOptions.height;
 			var rowSumA=0;
 			var rowSumB=0;
-			for(var i in this.pieces) {
+			for(var i=0; i<this.pieces.length; i++) {
 				var piece=this.pieces[i];
 				if(piece && piece.t==0) {
 					if(this.mWho==JocGame.PLAYER_A)
@@ -646,17 +651,18 @@
 		this.zSign=aGame.zobrist.update(this.zSign,"board",piece.s+"/"+piece.t,pos);
 		var plp=move.capt[move.capt.length-1]
 		piece.plp=plp?plp:move.pos[move.pos.length-2];
-		for(var index in toBeRemoved) {
-			var piece0=this.pieces[index];
-			var other=(1-piece0.s)/2;
-			this.pCount[other]--;
-			switch(piece0.t) {
-			case 0: this.spCount[other]--; break;
-			case 1: this.kpCount[other]--; break;
+		for(var index in toBeRemoved) 
+			if(toBeRemoved.hasOwnProperty(index)) {
+				var piece0=this.pieces[index];
+				var other=(1-piece0.s)/2;
+				this.pCount[other]--;
+				switch(piece0.t) {
+				case 0: this.spCount[other]--; break;
+				case 1: this.kpCount[other]--; break;
+				}
+				this.zSign=aGame.zobrist.update(this.zSign,"board",piece0.s+"/"+piece0.t,piece0.p);
+				this.pieces[index]=null;
 			}
-			this.zSign=aGame.zobrist.update(this.zSign,"board",piece0.s+"/"+piece0.t,piece0.p);
-			this.pieces[index]=null;
-		}
 		if(aGame.g.lastRowCrown && this.pieces[pIndex].t==0) {
 			var r=aGame.g.Coord[move.pos[move.pos.length-1]][0];
 			if((player==JocGame.PLAYER_A && r==HEIGHT-1) || (player==JocGame.PLAYER_B && r==0)) {
@@ -773,7 +779,8 @@
 			});
 			var bestMatches=[];
 			for(var i in bestMatchesMap)
-				bestMatches.push(bestMatchesMap[i]);
+				if(bestMatchesMap.hasOwnProperty(i))
+					bestMatches.push(bestMatchesMap[i]);
 			if(bestMatches.length>0)
 				candidateMoves=bestMatches;
 		}
@@ -801,41 +808,43 @@
 					colors[color][abbrev].pos.push(parseInt(PosToString(piece.p)));
 				}
 			});
-			for(var color in colors) {
-				var fenColorParts=[];
-				for(var abbrev in colors[color]) {
-					var pieceType=colors[color][abbrev];
-					if(pieceType.group) {
-						pieceType.pos.sort(function(pos1,pos2) {
-							return parseInt(pos1)-parseInt(pos2);
-						});
-						var last=-2, end=-1, start=-1;
-						pieceType.pos.forEach(function(pos) {
-							if(parseInt(pos)==last+1) {
-								end=pos;
-							} else {
-								if(end>=0) {
+			for(var color in colors) 
+				if(colors.hasOwnProperty(color)) {
+					var fenColorParts=[];
+					for(var abbrev in colors[color]) 
+						if(colors[color].hasOwnProperty(abbrev)) {
+							var pieceType=colors[color][abbrev];
+							if(pieceType.group) {
+								pieceType.pos.sort(function(pos1,pos2) {
+									return parseInt(pos1)-parseInt(pos2);
+								});
+								var last=-2, end=-1, start=-1;
+								pieceType.pos.forEach(function(pos) {
+									if(parseInt(pos)==last+1) {
+										end=pos;
+									} else {
+										if(end>=0) {
+											fenColorParts.push(abbrev+start+"-"+end);
+											end=-1;
+										} else {
+											if(start>=0)
+												fenColorParts.push(abbrev+start);
+										}
+										start=pos;
+									}
+									last=parseInt(pos);
+								});
+								if(end>=0)
 									fenColorParts.push(abbrev+start+"-"+end);
-									end=-1;
-								} else {
-									if(start>=0)
-										fenColorParts.push(abbrev+start);
-								}
-								start=pos;
-							}
-							last=parseInt(pos);
-						});
-						if(end>=0)
-							fenColorParts.push(abbrev+start+"-"+end);
-						else if(start>=0)
-							fenColorParts.push(abbrev+start);
-					} else 
-						pieceType.pos.forEach(function(pos) {
-							fenColorParts.push(abbrev+pos);
-						});
+								else if(start>=0)
+									fenColorParts.push(abbrev+start);
+							} else 
+								pieceType.pos.forEach(function(pos) {
+									fenColorParts.push(abbrev+pos);
+								});
+						}
+					fenParts.push(color+fenColorParts.join(","));
 				}
-				fenParts.push(color+fenColorParts.join(","));
-			}
 			var fen=fenParts.join(":");
 			return fen;
 		}

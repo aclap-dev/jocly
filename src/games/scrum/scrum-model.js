@@ -116,30 +116,32 @@ Model.Board.InitialPosition = function(aGame) {
 
 	this.pieces=[]; // access pieces by index
 	var index=0;
-	for(var i in INITIAL.a) {
-		var p=INITIAL.a[i];
-		var pos=p[0]*WIDTH+p[1];
-		this.pieces.push({
-			s: JocGame.PLAYER_A, // side
-			p: pos, // position
-			a: 180,
-			sc: false,
-		});
-		this.board[pos]=index++;
-		this.zSign=aGame.zobrist.update(this.zSign,"board","1",pos);
-	}
-	for(var i in INITIAL.b) {
-		var p=INITIAL.b[i];
-		var pos=p[0]*WIDTH+p[1];
-		this.pieces.push({
-			s: JocGame.PLAYER_B, // side
-			p: pos, // position
-			a: 0,
-			sc: false,
-		});
-		this.board[pos]=index++;
-		this.zSign=aGame.zobrist.update(this.zSign,"board","-1",pos);
-	}
+	for(var i in INITIAL.a) 
+		if(INITIAL.a.hasOwnProperty(i)) {
+			var p=INITIAL.a[i];
+			var pos=p[0]*WIDTH+p[1];
+			this.pieces.push({
+				s: JocGame.PLAYER_A, // side
+				p: pos, // position
+				a: 180,
+				sc: false,
+			});
+			this.board[pos]=index++;
+			this.zSign=aGame.zobrist.update(this.zSign,"board","1",pos);
+		}
+	for(var i in INITIAL.b) 
+		if(INITIAL.b.hasOwnProperty(i)) {
+			var p=INITIAL.b[i];
+			var pos=p[0]*WIDTH+p[1];
+			this.pieces.push({
+				s: JocGame.PLAYER_B, // side
+				p: pos, // position
+				a: 0,
+				sc: false,
+			});
+			this.board[pos]=index++;
+			this.zSign=aGame.zobrist.update(this.zSign,"board","-1",pos);
+		}
 	this.ball=INITIAL.ball[0]*WIDTH+INITIAL.ball[1];
 	this.board[this.ball]=-2;
 	this.zSign=aGame.zobrist.update(this.zSign,"board","-2",this.ball);
@@ -224,7 +226,7 @@ Model.Board._GenerateMoves = function(aGame) {
 				dirs[6]=-1;
 			}
 		}
-		for(var i in dirs) {
+		for(var i=0; i<dirs.length; i++) {
 			if(dirs[i]!=-1) {
 				var npos=aGame.g.Graph[pos][dirs[i]];
 				if(npos)
@@ -235,7 +237,7 @@ Model.Board._GenerateMoves = function(aGame) {
 	
 	// walk through each of own pieces
 	function EachPiece(fnt) {
-		for(var i in $this.pieces) {
+		for(var i=0; i<$this.pieces.length; i++) {
 			var piece=$this.pieces[i];
 			if(piece.s==$this.mWho)
 				fnt(i,piece.p);
@@ -305,7 +307,7 @@ Model.Board._GenerateMoves = function(aGame) {
 			this.mWinner=JocGame.DRAW;
 			return;
 		}
-		for(var i in pieces) {
+		for(var i=0; i<pieces.length; i++) {
 			var index=pieces[i];
 			var enclosed=true;
 			aGame.ScrumEachDirection(scrumExit,function(pos) {
@@ -339,7 +341,7 @@ Model.Board._GenerateMoves = function(aGame) {
 	aGame.ScrumEachDirection(this.ball,function(pos) {
 		var cell=$this.board[pos];
 		if(cell>=0 && $this.pieces[cell].s==$this.mWho) {
-			for(var i in ballMoves1) {
+			for(var i=0; i<ballMoves1.length; i++) {
 				var bm=ballMoves1[i];
 				var segment={
 					i: cell,       // piece index
@@ -400,7 +402,7 @@ Model.Board._GenerateMoves = function(aGame) {
 	});
 	
 	// update segment weights
-	for(var i in segments) {
+	for(var i=0; i<segments.length; i++) {
 		var segment=segments[i];
 		var weight=
 			(8-segment.c.o)*0.125 * 1 +
@@ -558,9 +560,9 @@ Model.Board._GenerateMoves = function(aGame) {
 					pieces.push(cell);
 				}
 			});
-			for(var i in pieces) {
+			for(var i=0; i<pieces.length; i++) {
 				var index=pieces[i];
-				for(var j in avail) {
+				for(var j=0; j<avail.length; j++) {
 					l2segmentsBallCache[ball].push({
 						i: index,
 						f: $this.pieces[index].p,
@@ -605,7 +607,7 @@ Model.Board._GenerateMoves = function(aGame) {
 				seg1.explored=true;
 				// consider ball move at level 2
 				var segments2=GetLevel2BallSegments(seg1.b);
-				for(var i in segments2) {
+				for(var i=0; i<segments2.length; i++) {
 					var segment2=segments2[i];					
 					if(segment2.i!=seg1.i) {
 						AddMove(seg1,segment2);
@@ -613,7 +615,7 @@ Model.Board._GenerateMoves = function(aGame) {
 				}
 				// consider moving piece to where 1st piece was
 				var segments2=GetLevel2PieceSegments(seg1.f);
-				for(var i in segments2) {
+				for(var i=0; i<segments2.length; i++) {
 					var segment2=segments2[i];
 					if(segment2.i!=seg1.i) {
 						AddMove(seg1,segment2);
@@ -632,15 +634,15 @@ Model.Board._GenerateMoves = function(aGame) {
 			piecesAround.push(cell);
 	});
 	var piecesAround1=[];
-	for(var i in piecesAround) { // do not consider moves with ball behind
+	for(var i=0; i<piecesAround.length; i++) { // do not consider moves with ball behind
 		var row=aGame.g.Coord[this.pieces[piecesAround[i]].p][0];
 		if((this.mWho==JocGame.PLAYER_A && row>=ballRow) ||
 				(this.mWho==JocGame.PLAYER_B && row<=ballRow))
 			piecesAround1.push(piecesAround[i]);
 	}
 	var movesLength0=moves.length;
-	for(var i in piecesAround1)
-		for(var j in piecesAround) {
+	for(var i=0; i<piecesAround1.length; i++)
+		for(var j=0; j<piecesAround.length; j++) {
 			if(piecesAround1[i]!=piecesAround[j]) {
 				var piece1=this.pieces[piecesAround1[i]];
 				var piece2=this.pieces[piecesAround[j]];
@@ -684,7 +686,7 @@ Model.Board._GenerateMoves = function(aGame) {
 			piecesDist.sort(function(a,b) {
 				return b.d-a.d;
 			});
-			for(var i in piecesDist) {
+			for(var i=0; i<piecesDist.length; i++) {
 				var piece=piecesDist[i];
 				var pos=$this.pieces[piece.i].p;
 				var d0=Dist(pos,$this.ball);
@@ -826,7 +828,7 @@ Model.Board.Evaluate = function(aGame,aFinishOnly,aTopLevel) {
 	var aBDist=0;
 	var bBDist=0;
 	var bCoord=aGame.g.Coord[this.ball];
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		var coord=aGame.g.Coord[piece.p];
 		var d=Math.max(Math.abs(bCoord[0]-coord[0]),Math.abs(bCoord[1]-coord[1]));

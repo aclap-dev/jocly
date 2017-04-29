@@ -827,15 +827,19 @@
 			}
 			PCOUNT=0;
 			for(var i in INITIAL.a)
-				PCOUNT++;
+				if(INITIAL.a.hasOwnProperty(i))
+					PCOUNT++;
 			for(var i in INITIAL.b)
-				PCOUNT++;
+				if(INITIAL.b.hasOwnProperty(i))
+					PCOUNT++;
 		} else {
 			var index=0;
 			for(var i in INITIAL.a)
-				CreatePiece(JocGame.PLAYER_A,index++);
+				if(INITIAL.a.hasOwnProperty(i))
+					CreatePiece(JocGame.PLAYER_A,index++);
 			for(var i in INITIAL.b)
-				CreatePiece(JocGame.PLAYER_B,index++);
+				if(INITIAL.b.hasOwnProperty(i))
+					CreatePiece(JocGame.PLAYER_B,index++);
 			PCOUNT=INITIAL.a.length+INITIAL.b.length;
 		}
 
@@ -1700,23 +1704,24 @@
 			if(animCount==0)
 				callback();
 		}
-		for(var capt in capts) {
-			animCount++;
-			xdv.updateGadget("piece#"+capt,{
-				"2d": {
-					opacity: 0,
-				},
-				"3d": {
-					z: - SIZE*.24,
-				},
-				"turkish3d": {
-					z: - SIZE,
-				},
-				"kids3d": {
-					z: - SIZE*.5,
-				},
-			},500,EndAnim);
-		}
+		for(var capt in capts) 
+			if(capts.hasOwnProperty(capt)) {
+				animCount++;
+				xdv.updateGadget("piece#"+capt,{
+					"2d": {
+						opacity: 0,
+					},
+					"3d": {
+						z: - SIZE*.24,
+					},
+					"turkish3d": {
+						z: - SIZE,
+					},
+					"kids3d": {
+						z: - SIZE*.5,
+					},
+				},500,EndAnim);
+			}
 		if(animCount==0)
 			callback();
 	}
