@@ -189,7 +189,7 @@
 			},	
 		}];
 		var fullPath=this.mViewOptions.fullPath;
-		for(var i in orients) {
+		for(var i=0; i<orients.length; i++) {
 			var orient=orients[i];
 			(function(orient) {
 				xdv.createGadget("orient#"+orient.text,{
@@ -853,7 +853,7 @@
 					rotate: 45,
 				}
 			});
-			for(var i in orients) {
+			for(var i=0; i<orients.length; i++) {
 				(function(orient) {
 					xdv.updateGadget("orient#"+orient,{
 						base: {
@@ -867,7 +867,7 @@
 			}
 		}
 		function ExitOrient(args) {
-			for(var i in orients) {
+			for(var i=0; i<orients.length; i++) {
 				(function(orient) {
 					xdv.updateGadget("orient#"+orient,{
 						base: {
@@ -1082,24 +1082,26 @@
 			var mana=-1;
 			if($this.mana>=0)
 				mana=aGame.g.CValue[$this.mana];
-			for(var i in movables) {
-				var piece=$this.pieces[i];
-				if(mana<0 || aGame.g.CValue[piece.p]==mana) {
-					validMoves.push({
-						type: 'move',
-						pieceIndex: i,
-						movable: movables[i],
-					});
+			for(var i in movables) 
+				if(movables.hasOwnProperty(i)) {
+					var piece=$this.pieces[i];
+					if(mana<0 || aGame.g.CValue[piece.p]==mana) {
+						validMoves.push({
+							type: 'move',
+							pieceIndex: i,
+							movable: movables[i],
+						});
+					}
 				}
-			}
 			if(validMoves.length==0) {
-				for(var i in movables) {
-					validMoves.push({
-						type: 'move',
-						pieceIndex: i,
-						movable: movables[i],						
-					});
-				}
+				for(var i in movables) 
+					if(movables.hasOwnProperty(i)) {
+						validMoves.push({
+							type: 'move',
+							pieceIndex: i,
+							movable: movables[i],						
+						});
+					}
 				if($this.roninOut[$this.mWho]>0)
 					for(var pos=0;pos<aGame.g.Graph.length;pos++) {
 						if($this.board[pos]<0 && (aGame.mOptions.insertAnywhere || aGame.g.CValue[pos]==mana))
@@ -1133,7 +1135,8 @@
 		function SelectEnd(args) {
 			var movable=movables[args.pieceIndex];
 			for(var pos in movable)
-				HighLight(pos,"dest");
+				if(movable.hasOwnProperty(pos))
+					HighLight(pos,"dest");
 			xdv.updateGadget("cancel",{
 				"2d": {
 					width : VSIZE*1.05,

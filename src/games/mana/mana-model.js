@@ -87,13 +87,14 @@ Model.Game.InitGame = function() {
 			for(var pos2=0;pos2<this.g.Graph.length;pos2++) {
 				if(dist[pos1][pos2]>=0) {
 					var targets=this.g.Targets[pos2];
-					for(var t in targets) {
-						var target=parseInt(t);
-						if(dist[pos1][target]<0) {
-							dist[pos1][target]=dist[pos1][pos2]+1;
-							changes++;
+					for(var t in targets) 
+						if(targets.hasOwnProperty(t)) {
+							var target=parseInt(t);
+							if(dist[pos1][target]<0) {
+								dist[pos1][target]=dist[pos1][pos2]+1;
+								changes++;
+							}
 						}
-					}
 				}
 			}
 		if(changes==0)
@@ -222,23 +223,27 @@ Model.Board.GenerateMoves = function(aGame) {
 		var mana=-1;
 		if(this.mana>=0)
 			mana=aGame.g.CValue[this.mana];
-		for(var i in movables) {
-			var piece=this.pieces[i];
-			if(mana<0 || aGame.g.CValue[piece.p]==mana) {
-				for(var pos in movables[i])
-					validMoves.push({
-						m: [piece.p,parseInt(pos)],
-					});
-			}
-		}
-		if(validMoves.length==0) {
-			for(var i in movables) {
+		for(var i in movables) 
+			if(movables.hasOwnProperty(i)) {
 				var piece=this.pieces[i];
-				for(var pos in movables[i])
-					validMoves.push({
-						m: [piece.p,parseInt(pos)],
-					});
+				if(mana<0 || aGame.g.CValue[piece.p]==mana) {
+					for(var pos in movables[i])
+						if(movables[i].hasOwnProperty(pos))
+							validMoves.push({
+								m: [piece.p,parseInt(pos)],
+							});
+				}
 			}
+		if(validMoves.length==0) {
+			for(var i in movables) 
+				if(movables.hasOwnProperty(i)) {
+					var piece=this.pieces[i];
+					for(var pos in movables[i])
+						if(movables[i].hasOwnProperty(pos))
+							validMoves.push({
+								m: [piece.p,parseInt(pos)],
+							});
+				}
 			if(this.roninOut[this.mWho]>0)
 				for(var pos=0;pos<aGame.g.Graph.length;pos++) {
 					if(this.board[pos]<0 && (aGame.mOptions.insertAnywhere || aGame.g.CValue[pos]==mana))
@@ -432,30 +437,31 @@ Model.Board.manaMovablePieces = function(aGame) {
 		var piece=this.pieces[i];
 		if(piece.s==this.mWho) {
 			var pos=piece.p;
-			for(var pos1 in aGame.g.Targets[pos]) {
-				if(this.board[pos1]>=0 && this.pieces[this.board[pos1]].s==this.mWho)
-					continue;
-				var validPath=null;
-				var pathes=aGame.g.Targets[pos][pos1];
-				for(var j=0;j<pathes.length;j++) {
-					var valid=true;
-					var path=pathes[j];
-					for(var k=1;k<path.length-1;k++)
-						if(this.board[path[k]]>=0) {
-							valid=false;
+			for(var pos1 in aGame.g.Targets[pos]) 
+				if(aGame.g.Targets[pos].hasOwnProperty(pos1)) {
+					if(this.board[pos1]>=0 && this.pieces[this.board[pos1]].s==this.mWho)
+						continue;
+					var validPath=null;
+					var pathes=aGame.g.Targets[pos][pos1];
+					for(var j=0;j<pathes.length;j++) {
+						var valid=true;
+						var path=pathes[j];
+						for(var k=1;k<path.length-1;k++)
+							if(this.board[path[k]]>=0) {
+								valid=false;
+								break;
+							}
+						if(valid) {
+							validPath=path;
 							break;
 						}
-					if(valid) {
-						validPath=path;
-						break;
+					}
+					if(validPath) {
+						if(!pieces[i])
+							pieces[i]={};
+						pieces[i][pos1]=validPath;
 					}
 				}
-				if(validPath) {
-					if(!pieces[i])
-						pieces[i]={};
-					pieces[i][pos1]=validPath;
-				}
-			}
 		}
 	}
 	return pieces;
