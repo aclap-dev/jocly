@@ -25,6 +25,31 @@ Or see and try [all available games](https://mi-g.github.com/jocly/examples/brow
 [JoclyBoard](https://github.com/mi-g/joclyboard) is a multi-platform desktop application based on Jocly 
 and [Electron](https://electron.atom.io/).
 
+Install
+-------
+````
+npm install jocly
+````
+
+Using Jocly in a Web page
+-------------------------
+
+Insert this line to your HTML source code:
+````
+<script src="node_modules/jocly/dist/browser/jocly.js"></script>
+````
+
+You are now ready to use the Jocly API through the `Jocly` global object.
+
+Using Jocly in a node.js application
+------------------------------------
+
+````Javascript
+const Jocly = require("jocly");
+````
+
+You are now ready to use the Jocly API through the `Jocly` entry point.
+
 Building
 --------
 
@@ -36,34 +61,6 @@ Building
 - download required modules: `npm install`
 - build: `gulp build`
 - `dist/browser` contains the javascript library to build web applications, `dist/node` is the module to be used for node.js applications
-
-Using Jocly in a Web page
--------------------------
-
-After building Jocly, copy the `dist/browser/` directory as `jocly/` into your project filesystem.
-
-Insert this line to your HTML source code:
-````
-<script src="jocly/jocly.js"></script>
-````
-
-You are now ready to use the Jocly API through the `Jocly` global object.
-
-Using Jocly in a node.js application
-------------------------------------
-
-After building Jocly, the `dist/node/` directory as the Jocly module:
-
-````Javascript
-const Jocly = require("../jocly/dist/node");
-````
-
-Or, you can figure out how to use [`npm link`](https://docs.npmjs.com/cli/link) and just do:
-````Javascript
-const Jocly = require("jocly");
-````
-
-You are now ready to use the Jocly API through the `Jocly` entry point.
 
 API Documentation
 -----------------
