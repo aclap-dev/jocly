@@ -96,7 +96,9 @@ var mvs = {
         "mana": {
             "title-en": "Mana View",
             "module": "mana",
-            "css": "mana.css",
+            "css": [
+				"mana.css"
+			],
             "js": [
                 "mana-xd-view.js"
             ],
