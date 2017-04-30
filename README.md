@@ -22,6 +22,9 @@ Simple human vs computer: [Classic chess](https://mi-g.github.com/jocly/examples
 
 Or see and try [all available games](https://mi-g.github.com/jocly/examples/browser/multiple.html)
 
+[JoclyBoard](https://github.com/mi-g/joclyboard) is a multi-platform desktop application based on Jocly 
+and [Electron](https://electron.atom.io/).
+
 Building
 --------
 
