@@ -3375,7 +3375,7 @@ for(var name in mvs.models)
 }
 
 for(var name in mvs.views) 
-	if(mvs.views.hasOwnProperty(name) {
+	if(mvs.views.hasOwnProperty(name)) {
 		if(games[name]) {
 			games[name].viewScripts = mvs.views[name].js;
 			games[name].config.view = mvs.views[name];
