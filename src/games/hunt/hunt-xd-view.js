@@ -674,7 +674,7 @@
 					}
 				});
 			}
-			for( var i in $this.pieces) {
+			for( var i=0; i<$this.pieces.length; i++) {
 				var piece=$this.pieces[i];
 				xdv.updateGadget("piece#"+i, {
 					"base" : {
@@ -713,9 +713,10 @@
 				var m=matchingMoves[i];
 				nextPoss[m.p[move.p.length]]=move.p.length<1?null:(m.c!==undefined?m.c[move.p.length-1]:null);
 			}
-			for(var pos in nextPoss) {
-				Highlight(pos,nextPoss[pos],"normal");				
-			}
+			for(var pos in nextPoss)
+				if(nextPoss.hasOwnProperty(pos))
+					Highlight(pos,nextPoss[pos],"normal");				
+			
 		}
 		function Animate(args) {
 			if(move.p.length<=1)
@@ -926,17 +927,18 @@
 				if(--animCount==0)
 					fnt();
 			}
-			for(var pos in capts) {
-				animCount++;
-				xdv.updateGadget("piece#"+this.board[pos].i,{
-					"base": {
-						opacity: 0,
-					},
-					"3d": {
-						z: aGame.g.huntGameData.killPieceZFinal*SSIZE,
-					}
-				},500,AnimEnd);
-			}
+			for(var pos in capts) 
+				if(capts.hasOwnProperty(pos)) {
+					animCount++;
+					xdv.updateGadget("piece#"+this.board[pos].i,{
+						"base": {
+							opacity: 0,
+						},
+						"3d": {
+							z: aGame.g.huntGameData.killPieceZFinal*SSIZE,
+						}
+					},500,AnimEnd);
+				}
 		}
 	}
 

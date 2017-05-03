@@ -96,7 +96,7 @@ Model.Game.InitGame = function() {
 	        [a,d+a*Math.tan(beta)],
 	    ];*/
 	
-	for(var i in points) {
+	for(var i=0; i<points.length; i++) {
 		var point=points[i];
 		this.g.Graph.push([]);
 		this.g.RC.push(point);

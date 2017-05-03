@@ -219,7 +219,7 @@ Model.Move.ToString = function() {
 	function BuildSerie(field) {
 		if(typeof $this[field]!="undefined" && $this[field].length>0) {
 			var pName=[];
-			for(var i in $this[field]) {
+			for(var i=0; i<$this[field].length; i++) {
 				var pos=$this[field][i];
 				if(typeof $this.PosName[pos]!="undefined")
 					pName.push($this.PosName[pos]);
@@ -268,7 +268,7 @@ Model.Board.CopyFrom = function(aBoard) {
 	for(var i=0;i<aBoard.board.length;i++)
 		this.board.push(null);
 	this.pieces=[];
-	for(var i in aBoard.pieces) {
+	for(var i=0;i<aBoard.pieces.length;i++) {
 		var piece0=aBoard.pieces[i];
 		var piece={
 			p: piece0.p,
@@ -384,7 +384,7 @@ Model.Board.HuntGetCatcherMoves = function(aGame) {
 		moves=moves.concat(this.HuntGetCatcheeMoves(aGame));
 	} else if(aGame.g.huntOptions.catchLongestLine) {
 		var longest=0, moves0=[];
-		for(var i in moves) {
+		for(var i=0; i<moves.length; i++) {
 			if(longest<moves[i].c.length) {
 				longest=moves[i].c.length;
 				moves0=[moves[i]];
@@ -467,22 +467,23 @@ Model.Board.HuntEvaluateFreeZone = function(aGame,evalData,evalMap) {
 	var catcherZone={};
 	var smallestZone=null;
 	var smallestCatcherFreeZone=-1;
-	for(var i in evalData.catcherPieces) {
+	for(var i=0; i<evalData.catcherPieces.length; i++) {
 		var catcherPiece=evalData.catcherPieces[i];
 		var freePoss={},freePossCount=0,unexplored={},unexploredCount=1;
 		unexplored[catcherPiece.p]=true;
 		while(unexploredCount>0) {
 			var pos;
-			for(var pos0 in unexplored) {
-				pos=parseInt(pos0);
-				unexploredCount--;
-				break;
-			}
+			for(var pos0 in unexplored) 
+				if(unexplored.hasOwnProperty(pos0)) {
+					pos=parseInt(pos0);
+					unexploredCount--;
+					break;
+				}
 			delete unexplored[pos];
 			freePoss[pos]=true;
 			freePossCount++;
 			catcherZone[pos]=true;
-			for(var d in aGame.g.Graph[pos]) {
+			for(var d=0; d<aGame.g.Graph[pos].length; d++) {
 				var pos1=aGame.g.Graph[pos][d];
 				if(pos1!=null && this.board[pos1]==null && !freePoss[pos1] && !unexplored[pos1]) {
 					unexplored[pos1]=true;
@@ -503,23 +504,27 @@ Model.Board.HuntEvaluateFreeZone = function(aGame,evalData,evalMap) {
 	var dist=0;
 	var dist2=0;
 	var maxDist0=0;
-	for(var i in evalData.catcheePieces) {
+	if(!Array.isArray(evalData.catcheePieces))
+		debugger;
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var piece=evalData.catcheePieces[i];
 		//var minDist=Infinity;
 		var maxDist=0;
-		for(var pos in freePoss) {
-			var d=aGame.HuntDist(pos,piece.p);
-			/*
-			if(d<minDist)
-				minDist=d;
-			if(d==1)
-				break;
-			*/
-			if(d>maxDist)
-				maxDist=d;
-			if(d>maxDist0)
-				maxDist0=d;
-		}
+		// !!!!!!!!! using freePoss ????
+		for(var pos in freePoss) 
+			if(freePoss.hasOwnProperty(pos)) {
+				var d=aGame.HuntDist(pos,piece.p);
+				/*
+				if(d<minDist)
+					minDist=d;
+				if(d==1)
+					break;
+				*/
+				if(d>maxDist)
+					maxDist=d;
+				if(d>maxDist0)
+					maxDist0=d;
+			}
 		//dist+=minDist
 		dist+=maxDist;
 		dist2+=maxDist*maxDist;
@@ -531,7 +536,7 @@ Model.Board.HuntEvaluateFreeZone = function(aGame,evalData,evalMap) {
 
 Model.Board.HuntEvaluateOppositeDistFromCatcher = function(aGame,evalData,evalMap) {
 	var allFarthest=[];
-	for(var i in evalData.catcherPieces) {
+	for(var i=0; i<evalData.catcherPieces.length; i++) {
 		var piece=evalData.catcherPieces[i];
 		var farthest=[];
 		var maxDist=0;
@@ -546,7 +551,7 @@ Model.Board.HuntEvaluateOppositeDistFromCatcher = function(aGame,evalData,evalMa
 		allFarthest=allFarthest.concat(farthest);
 	}
 	var dist=0, dist2=0, dists=0;
-	for(var i in evalData.catcheePieces) {
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var piece=evalData.catcheePieces[i];
 		var d=0,d2=0,ds=0;
 		for(var j=0;j<allFarthest.length;j++) {
@@ -568,10 +573,10 @@ Model.Board.HuntEvaluateDistToCatcher = function(aGame,evalData,evalMap) {
 	var dist=0, dist2=0, dist3=0;
 	var maxDist=0;
 	//var dists=[];
-	for(var i in evalData.catcheePieces) {
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var catcheePiece=evalData.catcheePieces[i];
 		var minDist=-1;
-		for(var j in evalData.catcherPieces) {
+		for(var j=0; j<evalData.catcherPieces.length; j++) {
 			var catcherPiece=evalData.catcherPieces[j];
 			var d=aGame.HuntDist(catcherPiece.p,catcheePiece.p);
 			if(minDist<0 || minDist<d)
@@ -593,7 +598,7 @@ Model.Board.HuntEvaluateDistToCatcher = function(aGame,evalData,evalMap) {
 
 Model.Board.HuntEvaluateCatchable = function(aGame,evalData,evalMap) {
 	var catchablePieces=0, catchableDir=0, catchableDangerPieces=0;
-	for(var i in evalData.catcheePieces) {
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var catcheePiece=evalData.catcheePieces[i];
 		var pos=catcheePiece.p;
 		var catchable=false;
@@ -643,7 +648,7 @@ Model.Board.HuntEvaluateRisk = function(aGame,evalData,evalMap) {
 		} else
 			riskPoss[pos]++;
 	}
-	for(var i in evalData.catcheePieces) {
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var piece=evalData.catcheePieces[i];
 		var pos=piece.p;
 		var graph=aGame.g.Graph[pos];
@@ -667,15 +672,17 @@ Model.Board.HuntEvaluateRisk = function(aGame,evalData,evalMap) {
 		}
 	}
 	var openMetric=0;
-	for(var pos in openPoss) {
-		var metric=openPoss[pos];
-		openMetric+=metric*metric;
-	}
+	for(var pos in openPoss) 
+		if(openPoss.hasOwnProperty(pos)) {
+			var metric=openPoss[pos];
+			openMetric+=metric*metric;
+		}
 	var riskMetric=0;
-	for(var pos in riskPoss) {
-		var metric=riskPoss[pos];
-		riskMetric+=metric*metric;
-	}
+	for(var pos in riskPoss) 
+		if(riskPoss.hasOwnProperty(pos)) {
+			var metric=riskPoss[pos];
+			riskMetric+=metric*metric;
+		}
 	evalMap.openRisk=[openMetric,0];
 	evalMap.forkRisk=[riskMetric,0];
 }
@@ -683,12 +690,12 @@ Model.Board.HuntEvaluateRisk = function(aGame,evalData,evalMap) {
 
 Model.Board.HuntEvaluateAntiBack = function(aGame,evalData,evalMap) {
 	var catcherPrev=0, catcheePrev=0, catcherPiecePrev=0, catcheePiecePrev=0;
-	for(var i in evalData.catcheePieces) {
+	for(var i=0; i<evalData.catcheePieces.length; i++) {
 		var piece=evalData.catcheePieces[i];
 		if(piece.p==piece.pv2)
 			catcheePiecePrev++;
 	}
-	for(var i in evalData.catcherPieces) {
+	for(var i=0; i<evalData.catcherPieces.length; i++) {
 		var piece=evalData.catcherPieces[i];
 		if(piece.p==piece.pv2)
 			catcherPiecePrev++;
@@ -745,7 +752,8 @@ Model.Board.HuntEvaluateCatcheeGroups = function(aGame,evalData,evalMap) {
 	while(pieceCount>0) {
 		groupCount++;
 		for(var i in pieces)
-			break;
+			if(pieces.hasOwnProperty(i))
+				break;
 		var piece=pieces[i];
 			delete pieces[i];
 		var pieces0={};
@@ -753,7 +761,8 @@ Model.Board.HuntEvaluateCatcheeGroups = function(aGame,evalData,evalMap) {
 		var pieceCount0=1;
 		while(pieceCount0>0) {
 			for(var i in pieces0)
-				break;
+				if(pieces0.hasOwnProperty(i))
+					break;
 			var piece0=pieces0[i];
 			delete pieces0[i];
 			pieceCount0--;
@@ -801,7 +810,7 @@ Model.Board.HuntEvaluateGroups = function(aGame,evalData,evalMap) {
 								var group=groups[currentGroup];
 								var group1=groups[groupPos1];
 								group.poss=group.poss.concat(group1.poss);
-								for(var i in group1.poss)
+								for(var i=0; i<group1.poss.length; i++)
 									groupPos[group1.poss[i]]=currentGroup;
 								delete groups[groupPos1];
 							}
@@ -819,7 +828,7 @@ Model.Board.HuntEvaluateGroups = function(aGame,evalData,evalMap) {
 			}
 		}
 	}
-	for(var i in evalData.catcherPieces) {
+	for(var i=0; i<evalData.catcherPieces.length; i++) {
 		var piece=evalData.catcherPieces[i];
 		for(var d=0;d<graph.length;d++) {
 			var pos1=aGame.g.Graph[piece.p][d];
@@ -833,19 +842,20 @@ Model.Board.HuntEvaluateGroups = function(aGame,evalData,evalMap) {
 	var maxEmptyNoCatcherGroup=0;
 	var emptyNoCatcherGroup=0;
 	var minEmptyCatcherGroup=0;
-	for(var g in groups) {
-		var group=groups[g];
-		if(group.type==-aGame.g.catcher)
-			catcheeGroups++;
-		else if(group.type==0) {
-			if(group.touchCatcher==false) {
-				if(group.poss.length>maxEmptyNoCatcherGroup)
-					maxEmptyNoCatcherGroup=group.poss.length;
-				emptyNoCatcherGroup+=group.poss.length;
-			} else if(group.touchCatcher==true)
-				minEmptyCatcherGroup+=group.poss.length;
+	for(var g in groups) 
+		if(groups.hasOwnProperty(g)) {
+			var group=groups[g];
+			if(group.type==-aGame.g.catcher)
+				catcheeGroups++;
+			else if(group.type==0) {
+				if(group.touchCatcher==false) {
+					if(group.poss.length>maxEmptyNoCatcherGroup)
+						maxEmptyNoCatcherGroup=group.poss.length;
+					emptyNoCatcherGroup+=group.poss.length;
+				} else if(group.touchCatcher==true)
+					minEmptyCatcherGroup+=group.poss.length;
+			}
 		}
-	}
 	evalMap.catcheeGroups=[catcheeGroups,0];
 	evalMap.maxEmptyNoCatcherGroup=[0,maxEmptyNoCatcherGroup];
 	evalMap.emptyNoCatcherGroup=[0,emptyNoCatcherGroup];
@@ -893,22 +903,24 @@ Model.Board.Evaluate = function(aGame,aFinishOnly,aTopLevel) {
 	
 	var debugEval=arguments[3]=="debug"; 
 	
-	for(var f in evalFactors) {
-		var factors=evalFactors[f];
-		var values=evalMap[f];
-		if(values===undefined)
-			console.error("Evaluation undefined map value",f);
-		if(debugEval) {
-			console.log(f+":",values[0],"x",factors[0]," - ",values[1],"x",factors[1],"=",values[0]*factors[0]-values[1]*factors[1]);
+	for(var f in evalFactors) 
+		if(evalFactors.hasOwnProperty(f)) {
+			var factors=evalFactors[f];
+			var values=evalMap[f];
+			if(values===undefined)
+				console.error("Evaluation undefined map value",f);
+			if(debugEval) {
+				console.log(f+":",values[0],"x",factors[0]," - ",values[1],"x",factors[1],"=",values[0]*factors[0]-values[1]*factors[1]);
+			}
+			this.mEvaluation+=values[0]*factors[0]-values[1]*factors[1];
 		}
-		this.mEvaluation+=values[0]*factors[0]-values[1]*factors[1];
-	}
 		
 	if(debugEval) {
-		for(var f in evalMap) {
-			if(typeof evalFactors[f]=="undefined")
-				JocLog("Unused",f+": ",evalMap[f][0],evalMap[f][1]);
-		}
+		for(var f in evalMap) 
+			if(evalMap.hasOwnProperty(f)) {
+				if(typeof evalFactors[f]=="undefined")
+					JocLog("Unused",f+": ",evalMap[f][0],evalMap[f][1]);
+			}
 		JocLog("==>",this.mEvaluation,"=>",this.mEvaluation*aGame.g.catcher,"=>",this.mEvaluation*aGame.g.catcher-aGame.g.evaluate0);
 	}
 	this.mEvaluation*=aGame.g.catcher;
@@ -917,7 +929,7 @@ Model.Board.Evaluate = function(aGame,aFinishOnly,aTopLevel) {
 }
 
 Model.Board.HuntCheckBoard=function(aGame) {
-	for(var i in aGame.g.Graph) {
+	for(var i=0; i<aGame.g.Graph.length; i++) {
 		var pos=aGame.g.Graph[i];
 		var piece=this.board[pos];
 		if(piece!=null) {
@@ -925,7 +937,7 @@ Model.Board.HuntCheckBoard=function(aGame) {
 				return "Piece "+piece+i+" has p "+piece.p+" while on board pos "+pos;
 		} 
 	}
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.p!=-1 && this.board[piece.p]!=piece)
 			return "Piece "+i+" not on board "+piece.p;

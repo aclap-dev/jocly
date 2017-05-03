@@ -347,20 +347,21 @@ View.Board.HumanTurn=function(aGame) {
 				aGame.MakeMove(move0);
 			return;
 		}
-		for(var i in posMap) {
-			var pos=posMap[i];
-			aGame.mWidget.find(".highlight[joc-pos="+pos+"]").show();
-			aGame.mWidget.find(".front[joc-pos="+pos+"]").show().bind(JocGame.CLICK,function() {
-				move.p.push(parseInt($(this).attr("joc-pos")));
-				if(move.p.length>1) {
-					$this.HuntClearInput(aGame);
-					$this.HuntAnimatePiece(aGame,$this.board[move.p[0]].i,move.p[move.p.length-1],function() {
-						Input();						
-					});
-				} else
-					Input();
-			});
-		}
+		for(var i in posMap) 
+			if(posMap.hasOwnProperty(i)) {
+				var pos=posMap[i];
+				aGame.mWidget.find(".highlight[joc-pos="+pos+"]").show();
+				aGame.mWidget.find(".front[joc-pos="+pos+"]").show().bind(JocGame.CLICK,function() {
+					move.p.push(parseInt($(this).attr("joc-pos")));
+					if(move.p.length>1) {
+						$this.HuntClearInput(aGame);
+						$this.HuntAnimatePiece(aGame,$this.board[move.p[0]].i,move.p[move.p.length-1],function() {
+							Input();						
+						});
+					} else
+						Input();
+				});
+			}
 		if(move.p.length>0) {
 			var pos=move.p[move.p.length-1];
 			aGame.mWidget.find(".highlight[joc-pos="+pos+"]").show().addClass("back");
@@ -426,12 +427,12 @@ View.Board.PlayedMove=function(aGame,aMove) {
 				if(posIndex==aMove.p.length-1) {
 					if(typeof aMove.c!="undefined" && aMove.c.length>0) {
 						var vPieces=[];
-						for(var i in aMove.c)
+						for(var i=0; i<aMove.c.length)
 							vPieces.push(aGame.g.pieces[aGame.mOldBoard.board[aMove.c[i]].i]);
-						for(var i in vPieces)
+						for(var i=0; i<vPieces.length; i++)
 							vPieces[i].animate({opacity:0});
 						setTimeout(function() {
-							for(var i in vPieces)
+							for(var i=0; i<vPieces.length; i++)
 								vPieces[i].hide().css("opacity",0);
 							aGame.MoveShown();
 						},600);

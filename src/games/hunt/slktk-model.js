@@ -79,7 +79,7 @@ Model.Board.HuntGetAllMoves = function(aGame) {
 
 Model.Board.GenerateSolMoves = function(aGame) {
 	var moves=[];
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.s==-aGame.g.catcher && piece.p>-1) {
 			for(var d=0;d<8;d++) {
@@ -114,7 +114,7 @@ Model.Board.GenerateSolMoves = function(aGame) {
 
 Model.Board.GenerateGenMoves = function(aGame) {
 	var moves=[];
-	for(var i in this.pieces) {
+	for(var i=0; i<this.pieces.length; i++) {
 		var piece=this.pieces[i];
 		if(piece.s==aGame.g.catcher && piece.p>-1) {
 			for(var d=0;d<8;d++) {

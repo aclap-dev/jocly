@@ -65,14 +65,15 @@ Model.Board.HuntGameEvaluate = function(aGame,evalData,evalMap) {
 		freeZone: [500,0],
 		*/
 	};
-	for(var opt in opts) {
-		var m=/^(.*)(0|1)$/.exec(opt);
-		if(!m)
-			continue;
-		if(evalFactors[m[1]]===undefined)
-			evalFactors[m[1]]=[0,0];
-		evalFactors[m[1]][m[2]]=opts[opt];
-	}
+	for(var opt in opts) 
+		if(opts.hasOwnProperty(opt)) {
+			var m=/^(.*)(0|1)$/.exec(opt);
+			if(!m)
+				continue;
+			if(evalFactors[m[1]]===undefined)
+				evalFactors[m[1]]=[0,0];
+			evalFactors[m[1]][m[2]]=opts[opt];
+		}
 	
 	return evalFactors;
 }
