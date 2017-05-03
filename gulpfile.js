@@ -52,15 +52,13 @@ function HandleModuleGames(modelOnly) {
         moduleManifest.games.forEach((game) => {
             // this is executed for every game in the game module
 
-            if(game.config.model.obsolete)
-                return;
-
             // same some game data so we can list all games later
             allGames[game.name] = {
                 title: game.config.model["title-en"],
                 summary: game.config.model.summary,
                 thumbnail: game.config.model.thumbnail,
-                module: moduleName
+                module: moduleName,
+				obsolete: game.config.model.obsolete
             };
 
             // create the game config file
