@@ -116,12 +116,13 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 		var zombies={};
 		var freedoms={};
 		var tbd=[];
-		for(var p in group.p) {
-			tbd.push({
-				p: p,
-				z: aGame.g.Coord[p][2],
-			});
-		}
+		for(var p in group.p) 
+			if(group.p.hasOwnProperty(p)) {
+				tbd.push({
+					p: p,
+					z: aGame.g.Coord[p][2],
+				});
+			}
 		tbd.sort(function(a1,a2) { // higher position first to be deleted to prevent zombification by a position that will be deleted
 			return a2.z-a1.z;
 		});
@@ -184,31 +185,34 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 			}
 		}
 		for(var f in group.f)
-			delete board.posFree[f][gi];
+			if(group.f.hasOwnProperty(f))
+				delete board.posFree[f][gi];
 		delete board.groups[gi];
 
 		// handle generated freedoms
-		for(var f in freedoms) {
-			aGame.g.EachDirectionFlat(f,function(pos1) {
-				var g=board.posGroup[pos1];
-				if(g!==undefined && g>0) {
-					if(board.posFree[f]===undefined)
-						board.posFree[f]={};
-					if(board.posFree[f][g]===undefined) {
-						board.posFree[f][g]=true;
-						var group=board.groups[g];
-						group.f[f]=true;
-						group.fCount++;
+		for(var f in freedoms) 
+			if(freedoms.hasOwnProperty(f)) {
+				aGame.g.EachDirectionFlat(f,function(pos1) {
+					var g=board.posGroup[pos1];
+					if(g!==undefined && g>0) {
+						if(board.posFree[f]===undefined)
+							board.posFree[f]={};
+						if(board.posFree[f][g]===undefined) {
+							board.posFree[f][g]=true;
+							var group=board.groups[g];
+							group.f[f]=true;
+							group.fCount++;
+						}
 					}
-				}
-				return true;
-			});
-		}
+					return true;
+				});
+			}
 		
 		// create groups for zombies
 		for(var p in zombies)
-			if(board.posGroup[p]==-1)
-				AddGroup(BuildGroup(p));
+			if(zombies.hasOwnProperty(p))
+				if(board.posGroup[p]==-1)
+					AddGroup(BuildGroup(p));
 	}
 	
 	/*
@@ -219,11 +223,13 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	function InvalidateGroup(gi) {
 		var group=board.groups[gi];
 		for(var p in group.p)
-			if(board.posGroup[p]!=0) { // do not mark buried positions as invalid
-				board.posGroup[p]=-1;
-			}
+			if(group.p.hasOwnProperty(p))
+				if(board.posGroup[p]!=0) { // do not mark buried positions as invalid
+					board.posGroup[p]=-1;
+				}
 		for(var f in group.f)
-			delete board.posFree[f][gi];
+			if(group.f.hasOwnProperty(f))
+				delete board.posFree[f][gi];
 		delete board.groups[gi];
 	}
 	
@@ -291,28 +297,17 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	function AddGroup(group) {
 		var gid=board.groupMaxId++;
 		board.groups[gid]=group;
-		for(var p in group.p) {
-			var gid0=board.posGroup[p]
-			board.posGroup[p]=gid;
-			/*
-			var freedoms=board.posFree[p];
-			if(freedoms!==undefined) {
-				for(var gi in freedoms) {
-					if(board.groups[gi].f[p]!==undefined) {
-						delete board.groups[gi].f[p];
-						board.groups[gi].fCount--;
-					}
-					delete freedoms[gi];
-				}
-				delete board.posFree[p];				
+		for(var p in group.p) 
+			if(group.p.hasOwnProperty(p)) {
+				var gid0=board.posGroup[p]
+				board.posGroup[p]=gid;
 			}
-			*/
-		}
-		for(var f in group.f) {
-			if(board.posFree[f]===undefined)
-				board.posFree[f]={};
-			board.posFree[f][gid]=true;
-		}
+		for(var f in group.f) 
+			if(group.f.hasOwnProperty(f)) {
+				if(board.posFree[f]===undefined)
+					board.posFree[f]={};
+				board.posFree[f][gid]=true;
+			}
 		return gid;
 	}
 	
@@ -323,37 +318,41 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	function MergeGroups(pos0,groups) {
 		var gids=[];
 		for(var gi in groups)
-			gids.push(gi);
+			if(groups.hasOwnProperty(gi))
+				gids.push(gi);
 		var gi0=gids[0];
 		var group0=board.groups[gi0];
 		for(var i=1;i<gids.length;i++) {
 			var gi=gids[i];
 			var group=board.groups[gi];
-			for(var p in group.p) {
-				group0.p[p]=true;
-				board.posGroup[p]=gi0;
-			}
-			group0.pCount+=group.pCount;
-			for(var f in group.f) {
-				if(!(f in group0.f)) {
-					group0.f[f]=true;
-					group0.fCount++;
+			for(var p in group.p) 
+				if(group.p.hasOwnProperty(p)) {
+					group0.p[p]=true;
+					board.posGroup[p]=gi0;
 				}
-				delete board.posFree[f][gi];
-				board.posFree[f][gi0]=true;
-			}
+			group0.pCount+=group.pCount;
+			for(var f in group.f) 			
+				if(group.f.hasOwnProperty(f)) {
+					if(!(f in group0.f)) {
+						group0.f[f]=true;
+						group0.fCount++;
+					}
+					delete board.posFree[f][gi];
+					board.posFree[f][gi0]=true;
+				}
 			delete board.groups[gi];
 		}
 		if(pos0>=0) {
-			for(var f in touchingFreedoms) {
-				if(!(f in group0.f)) {
-					group0.f[f]=true;
-					group0.fCount++;
+			for(var f in touchingFreedoms) 
+				if(touchingFreedoms.hasOwnProperty(f)) {
+					if(!(f in group0.f)) {
+						group0.f[f]=true;
+						group0.fCount++;
+					}
+					if(board.posFree[f]===undefined)
+						board.posFree[f]={};
+					board.posFree[f][gi0]=true;				
 				}
-				if(board.posFree[f]===undefined)
-					board.posFree[f]={};
-				board.posFree[f][gi0]=true;				
-			}
 			group0.p[pos0]=true;
 			group0.pCount++;
 			board.posGroup[pos0]=gi0;
@@ -366,13 +365,14 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	function AddToGroup(pos0,gi,touchingFreedoms) {
 		var group=board.groups[gi];
 		for(var f in touchingFreedoms)
-			if(!(f in group.f)) {
-				group.f[f]=true;
-				group.fCount++;
-				if(board.posFree[f]===undefined)
-					board.posFree[f]={};
-				board.posFree[f][gi]=true;
-			}
+			if(touchingFreedoms.hasOwnProperty(f))
+				if(!(f in group.f)) {
+					group.f[f]=true;
+					group.fCount++;
+					if(board.posFree[f]===undefined)
+						board.posFree[f]={};
+					board.posFree[f][gi]=true;
+				}
 		group.p[pos0]=true;
 		group.pCount++;
 		board.posGroup[pos0]=gi;		
@@ -429,19 +429,22 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	
 	/* Get groups to be invalidated */
 	var invalidGroups={}
-	for(var p in startingPoints) {
-		var g=board.posGroup[p];
-		invalidGroups[g]=true;
-	}
+	for(var p in startingPoints) 
+		if(startingPoints.hasOwnProperty(p)) {
+			var g=board.posGroup[p];
+			invalidGroups[g]=true;
+		}
 	
 	/* Invalidate groups */
 	for(var g in invalidGroups)
-		InvalidateGroup(g);
+		if(invalidGroups.hasOwnProperty(g))
+			InvalidateGroup(g);
 	
 	/* Get newGroups from startingPoints */
 	for(var p in startingPoints)
-		if(board.posGroup[p]<0)
-			AddGroup(BuildGroup(p));
+		if(startingPoints.hasOwnProperty(p))
+			if(board.posGroup[p]<0)
+				AddGroup(BuildGroup(p));
 
 	/* Update state: replace killedGroups with new Groups */
 
@@ -477,11 +480,12 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	/* Remove from freedoms */
 	var freedoms=board.posFree[pos];
 	if(freedoms!==undefined) {
-		for(var g in freedoms) {
-			var group=board.groups[g];
-			delete group.f[pos];
-			group.fCount--;
-		}
+		for(var g in freedoms) 
+			if(freedoms.hasOwnProperty(g)) {
+				var group=board.groups[g];
+				delete group.f[pos];
+				group.fCount--;
+			}
 		delete board.posFree[pos];
 	}
 	
@@ -498,7 +502,9 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 		AddGroup(group);
 	} else if(touchingSelfGroupsCount==1) {
 		/* if count(touchingSelfGroups)==1: add to group */
-		for(var gi in touchingSelfGroups);
+		for(var gi in touchingSelfGroups)
+			if(touchingSelfGroups.hasOwnProperty(gi))
+				break;
 		AddToGroup(pos,gi,touchingFreedoms);
 	} else {
 		/* if count(touchingSelfGroups)>1: merge groups */
@@ -507,83 +513,88 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	
 	/* Remove all opponent groups with no freedom, get unburied points */
 	var deletedGroups=false;
-	for(var gi in board.groups) {
-		if(gi==0) // special case: buried pos
-			continue;
-		var group=board.groups[gi];
-		if(group.side!=oppSide)
-			continue;
-		if(group.fCount==0) {
-			DeleteGroup(gi);
-			deletedGroups=true;
+	for(var gi in board.groups)
+		if(board.groups.hasOwnProperty(gi)) {
+			if(gi==0) // special case: buried pos
+				continue;
+			var group=board.groups[gi];
+			if(group.side!=oppSide)
+				continue;
+			if(group.fCount==0) {
+				DeleteGroup(gi);
+				deletedGroups=true;
+			}
 		}
-	}
 	
 	/* Reattach unburied points */
-	for(var p in resurrect) {
-		//console.log("Playing",pos,"resurrects",p);
-		if(board.posGroup[p]!=0) // group owning the resurrected point has already been reconstructed
-			continue;
-		var rSide=board.board[p];
-		var rGroups={};
-		var rGroupsCount=0;
-		var rFreedoms={};
-		var rFreedomsCount=0;
-		var rZ=aGame.g.Coord[p][2];
-		aGame.g.EachDirection(p,function(pos1,dir1) {
-			if(board.board[pos1]==0) // empty position
-				return true;
-			var gid=board.posGroup[pos1];
-			if(gid==0) // buried
-				return true;
-			var rZ1=aGame.g.Coord[pos1][2];
-			if(rZ1==rZ) {
-				var cutDirs=cuttingDirs[dir1];
-				var cut0=aGame.g.Graph[p][cutDirs[0]];
-				var cut1=aGame.g.Graph[p][cutDirs[1]];
-				if(cut0!=null && board.board[cut0]==3-rSide && cut1!=null && board.board[cut1]==3-rSide)
+	for(var p in resurrect) 
+		if(resurrect.hasOwnProperty(p)) {
+			//console.log("Playing",pos,"resurrects",p);
+			if(board.posGroup[p]!=0) // group owning the resurrected point has already been reconstructed
+				continue;
+			var rSide=board.board[p];
+			var rGroups={};
+			var rGroupsCount=0;
+			var rFreedoms={};
+			var rFreedomsCount=0;
+			var rZ=aGame.g.Coord[p][2];
+			aGame.g.EachDirection(p,function(pos1,dir1) {
+				if(board.board[pos1]==0) // empty position
 					return true;
-			}
-			if(board.board[pos1]==rSide) {
-				if(rGroups[gid]===undefined) {
-					rGroups[gid]=true;
-					rGroupsCount++;
+				var gid=board.posGroup[pos1];
+				if(gid==0) // buried
+					return true;
+				var rZ1=aGame.g.Coord[pos1][2];
+				if(rZ1==rZ) {
+					var cutDirs=cuttingDirs[dir1];
+					var cut0=aGame.g.Graph[p][cutDirs[0]];
+					var cut1=aGame.g.Graph[p][cutDirs[1]];
+					if(cut0!=null && board.board[cut0]==3-rSide && cut1!=null && board.board[cut1]==3-rSide)
+						return true;
 				}
-			} else if(board.board[pos1]==0 && aGame.g.Coord[pos1][2]==0) {
-				rFreedoms[pos1]=true;
-				rFreedomsCount++;
+				if(board.board[pos1]==rSide) {
+					if(rGroups[gid]===undefined) {
+						rGroups[gid]=true;
+						rGroupsCount++;
+					}
+				} else if(board.board[pos1]==0 && aGame.g.Coord[pos1][2]==0) {
+					rFreedoms[pos1]=true;
+					rFreedomsCount++;
+				}
+				return true;
+			});
+			//console.log("rGroupsCount",rGroupsCount,rGroups);
+			if(rGroupsCount==0) {
+				var group={
+					side: rSide,
+					p: {},
+					pCount: 1,
+					f: rFreedoms,
+					fCount: rFreedomsCount,			
+				}
+				group.p[p]=true;
+				var gi=AddGroup(group);
+			} else if(rGroupsCount==1) {
+				for(var gi in rGroups)
+					if(rGroups.hasOwnProperty(gi))
+						break;
+				AddToGroup(p,gi,{});
+			} else {
+				MergeGroups(p,rGroups);
 			}
-			return true;
-		});
-		//console.log("rGroupsCount",rGroupsCount,rGroups);
-		if(rGroupsCount==0) {
-			var group={
-				side: rSide,
-				p: {},
-				pCount: 1,
-				f: rFreedoms,
-				fCount: rFreedomsCount,			
-			}
-			group.p[p]=true;
-			var gi=AddGroup(group);
-		} else if(rGroupsCount==1) {
-			for(var gi in rGroups);
-			AddToGroup(p,gi,{});
-		} else {
-			MergeGroups(p,rGroups);
 		}
-	}
 	
 	/* Reconnect self groups as opponent deletion may have removed some cuts */
 	if(deletedGroups) {
 		var selfGroups=[];
-		for(var gi in board.groups) {
-			if(gi==0) // special case: buried pos
-				continue;
-			var group=board.groups[gi];
-			if(group.side==side)
-				selfGroups.push(gi);
-		}
+		for(var gi in board.groups) 
+			if(board.groups.hasOwnProperty(gi)) {
+				if(gi==0) // special case: buried pos
+					continue;
+				var group=board.groups[gi];
+				if(group.side==side)
+					selfGroups.push(gi);
+			}
 		selfGroups.sort(function(a,b) {
 			return parseInt(a)-parseInt(b);
 		});
@@ -591,74 +602,78 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 		for(var i=0;i<selfGroups.length;i++) {
 			var gi=selfGroups[i];
 			var group=board.groups[gi];
-			for(var p in group.p) {
-				var groups={};
-				aGame.g.EachDirectionFlat(p,function(pos1,dir1) {
-					if(board.board[pos1]!=side)
-						return true;
-					var gi1=board.posGroup[pos1];
-					if(gi1!=gi && gi1!=0) {
-						var cutDirs=cuttingDirs[dir1];
-						var cut0=aGame.g.Graph[p][cutDirs[0]];
-						var cut1=aGame.g.Graph[p][cutDirs[1]];
-						if(cut0==null || board.board[cut0]!=oppSide || cut1==null || board.board[cut1]!=oppSide) {
-							var merge0=null;
-							var obsoleteMergeIdx=[];
-							for(var j=0;j<merges.length;j++) {
-								var merge=merges[j];
-								if((gi in merge) || (gi1 in merge)) {
-									if(merge0) {
-										for(var gi2 in merge)
-											merge0[gi2]=true;
-										obsoleteMergeIdx.push(j);
-									} else {
-										merge[gi]=true;
-										merge[gi1]=true;
-										merge0=merge;
+			for(var p in group.p) 
+				if(group.p.hasOwnProperty(p)) {
+					var groups={};
+					aGame.g.EachDirectionFlat(p,function(pos1,dir1) {
+						if(board.board[pos1]!=side)
+							return true;
+						var gi1=board.posGroup[pos1];
+						if(gi1!=gi && gi1!=0) {
+							var cutDirs=cuttingDirs[dir1];
+							var cut0=aGame.g.Graph[p][cutDirs[0]];
+							var cut1=aGame.g.Graph[p][cutDirs[1]];
+							if(cut0==null || board.board[cut0]!=oppSide || cut1==null || board.board[cut1]!=oppSide) {
+								var merge0=null;
+								var obsoleteMergeIdx=[];
+								for(var j=0;j<merges.length;j++) {
+									var merge=merges[j];
+									if((gi in merge) || (gi1 in merge)) {
+										if(merge0) {
+											for(var gi2 in merge)
+												if(merge.hasOwnProperty(gi2))
+													merge0[gi2]=true;
+											obsoleteMergeIdx.push(j);
+										} else {
+											merge[gi]=true;
+											merge[gi1]=true;
+											merge0=merge;
+										}
 									}
 								}
-							}
-							for(var j=obsoleteMergeIdx.length-1;j>=0;j--)
-								merges.splice(obsoleteMergeIdx[j],1);
-							if(merge0==null) {
-								var merge={};
-								merge[gi]=true;
-								merge[gi1]=true;
-								merges.push(merge);
+								for(var j=obsoleteMergeIdx.length-1;j>=0;j--)
+									merges.splice(obsoleteMergeIdx[j],1);
+								if(merge0==null) {
+									var merge={};
+									merge[gi]=true;
+									merge[gi1]=true;
+									merges.push(merge);
+								}
 							}
 						}
-					}
-					return true;
-				});
-			}
+						return true;
+					});
+				}
 		}
 		for(var i=0;i<merges.length;i++)
 			MergeGroups(-1,merges[i]);
 	}
 	
 	/* if self move with no freedom, return null */
-	for(var gi in board.groups) {
-		if(gi==0) // special case: buried pos
-			continue;
-		var group=board.groups[gi];
-		if(group.side!=side)
-			continue;
-		if(group.fCount==0) {
-			// group has no freedom but if all points in group are pinned, the move is valid
-			for(var p in group.p) {
-				var pinned=false;
-				aGame.g.EachDirectionUp(p,function(pos1) {
-					if(board.board[pos1]>0) {
-						pinned=true;
-						return false;
+	for(var gi in board.groups) 
+		if(board.groups.hasOwnProperty(gi)) {
+			if(gi==0) // special case: buried pos
+				continue;
+			var group=board.groups[gi];
+			if(group.side!=side)
+				continue;
+			if(group.fCount==0) {
+				// group has no freedom but if all points in group are pinned, the move is valid
+				for(var p in group.p) 
+					if(group.p.hasOwnProperty(p)) {
+						var pinned=false;
+						aGame.g.EachDirectionUp(p,function(pos1) {
+							if(board.board[pos1]>0) {
+								pinned=true;
+								return false;
+							}
+							return true;
+						});
+						if(pinned==false)
+							return null;
 					}
-					return true;
-				});
-				if(pinned==false)
-					return null;
 			}
 		}
-	}
 
 	/* Debug: check consistency here */
 	/*
@@ -682,18 +697,20 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	/*--- Get move quality -------------------------------------------------------------*/
 	
 	var active=[];
-	for(var gi in board.groups) {
-		var group=board.groups[gi];
-		group.eyes=0;
-		for(var p in group.p) {
-			active.push({
-				p: p,
-				z: aGame.g.Coord[p][2],
-				group: group,
-				gid: gi,
-			});
+	for(var gi in board.groups) 
+		if(board.groups.hasOwnProperty(gi)) {
+			var group=board.groups[gi];
+			group.eyes=0;
+			for(var p in group.p) 
+				if(group.p.hasOwnProperty(p)) {
+					active.push({
+						p: p,
+						z: aGame.g.Coord[p][2],
+						group: group,
+						gid: gi,
+					});
+				}
 		}
-	}
 	active.sort(function(a1,a2) { // higher position first
 		return a2.z-a1.z;
 	});
@@ -716,28 +733,29 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	}
 	
 	var eyes={}
-	for(var f in board.posFree) {
-		var fgi=0;
-		var isEye=true;
-		aGame.g.EachDirectionFlat(f,function(pos1) {
-			var side1=board.board[pos1];
-			if(side1==0) {
+	for(var f in board.posFree) 
+		if(board.posFree.hasOwnProperty(f)) {
+			var fgi=0;
+			var isEye=true;
+			aGame.g.EachDirectionFlat(f,function(pos1) {
+				var side1=board.board[pos1];
+				if(side1==0) {
+					isEye=false;
+					return false;
+				}
+				var gid=board.posGroup[pos1];
+				if(fgi!=0 && gid!=fgi) {
+					isEye=false;
+					return false;
+				}
+				fgi=gid;
+				return true;
+			});
+			if(fgi==0)
 				isEye=false;
-				return false;
-			}
-			var gid=board.posGroup[pos1];
-			if(fgi!=0 && gid!=fgi) {
-				isEye=false;
-				return false;
-			}
-			fgi=gid;
-			return true;
-		});
-		if(fgi==0)
-			isEye=false;
-		if(isEye)
-			board.groups[fgi].eye++;
-	}
+			if(isEye)
+				board.groups[fgi].eye++;
+		}
 	
 	board.relativeSecured=0;  // relative measure of number of balls and safety of balls 
 	board.relativeHeight=0;   // relative measure of ball height
@@ -745,29 +763,31 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 
 	var evParam=aGame.mOptions.levelOptions;
 	
-	for(var gi in board.groups) {
-		var group=board.groups[gi];
-		var who=group.side==1?1:-1;
-		var safety=evParam.evalSafety;
-		if(group.eyes>=2)
-			safety=evParam.evalSafety2eyes+Math.log(group.eyes-1)*evParam.evalSafetyXEyesBonus;
-		else if(group.fCount==1)
-			safety=evParam.evalSafety1f;
-		else if(group.fCount==3)
-			safety=evParam.evalSafety3f;
-		else if(group.fCount>3)
-			safety=evParam.evalSafety3fMore+Math.log(group.fCount-3)*evParam.evalSafety3fMoreBonus;
-		if(group.eyes==1)
-			safety+=evParam.evalSafety1eyeBonus;
-		for(var p in group.p) {
-			var ball=balls[p];
-			var pSafe=safety;
-			if(ball.pinned)
-				pSafe+=evParam.evalSafetyPinnedBonus; // ball is pinned, increase its safety
-			board.relativeSecured+=pSafe*who;
-			board.relativeHeight+=ball.z*who;
+	for(var gi in board.groups) 
+		if(board.groups.hasOwnProperty(gi)) {
+			var group=board.groups[gi];
+			var who=group.side==1?1:-1;
+			var safety=evParam.evalSafety;
+			if(group.eyes>=2)
+				safety=evParam.evalSafety2eyes+Math.log(group.eyes-1)*evParam.evalSafetyXEyesBonus;
+			else if(group.fCount==1)
+				safety=evParam.evalSafety1f;
+			else if(group.fCount==3)
+				safety=evParam.evalSafety3f;
+			else if(group.fCount>3)
+				safety=evParam.evalSafety3fMore+Math.log(group.fCount-3)*evParam.evalSafety3fMoreBonus;
+			if(group.eyes==1)
+				safety+=evParam.evalSafety1eyeBonus;
+			for(var p in group.p) 
+				if(group.p.hasOwnProperty(p)) {
+					var ball=balls[p];
+					var pSafe=safety;
+					if(ball.pinned)
+						pSafe+=evParam.evalSafetyPinnedBonus; // ball is pinned, increase its safety
+					board.relativeSecured+=pSafe*who;
+					board.relativeHeight+=ball.z*who;
+				}
 		}
-	}
 
 	if(z==0) { // give a little advantage to center for ground balls
 		var who=side==1?1:-1;
@@ -779,7 +799,8 @@ Model.Board.ExtendMove = function(aGame,pos,side,boardBase) {
 	
 	var remove=[];
 	for(var d in del)
-		remove.push(d);
+		if(del.hasOwnProperty(d))
+			remove.push(d);
 	
 	board.zSign=aGame.spUpdateZobrist(board.zSign,[pos],side-1,remove,2-side);
 	
@@ -807,7 +828,9 @@ Model.Board.CheckConsistency = function(aGame) {
 			}
 			if(this.posFree[pos]) {
 				var g=null;
-				for(g in this.posFree[pos]);
+				for(g in this.posFree[pos])
+					if(this.posFree[pos].hasOwnProperty(g))
+						break;
 				if(g!=null) {
 					console.error("pos",pos,"side",side,"set as free for group",g);
 					return false;					
@@ -830,87 +853,93 @@ Model.Board.CheckConsistency = function(aGame) {
 		console.error("ball count mismatch, got",ballCount[1],ballCount[2],"expecting",this.ballCount[1],this.ballCount[2]);
 		return false;												
 	}
-	for(var pos in this.posGroup) {
-		if(this.board[pos]==0) {
-			console.error("posGroup pos",pos,"is empty");
-			return false;								
-		}
-		if(this.posGroup[pos]!=0) {
-			if(this.groups[this.posGroup[pos]]===undefined) {
-				console.error("posGroup",pos,"in unknown group",this.posGroup[pos]);
+	for(var pos in this.posGroup) 
+		if(this.posGroup.hasOwnProperty(pos)) {
+			if(this.board[pos]==0) {
+				console.error("posGroup pos",pos,"is empty");
 				return false;								
 			}
-			if(!(pos in this.groups[this.posGroup[pos]].p)) {
-				console.error("posGroup",pos,"does not match group");
-				return false;					
+			if(this.posGroup[pos]!=0) {
+				if(this.groups[this.posGroup[pos]]===undefined) {
+					console.error("posGroup",pos,"in unknown group",this.posGroup[pos]);
+					return false;								
+				}
+				if(!(pos in this.groups[this.posGroup[pos]].p)) {
+					console.error("posGroup",pos,"does not match group");
+					return false;					
+				}
 			}
 		}
+	for(var pos in this.posFree) 
+		if(this.posFree.hasOwnProperty(pos)) {
+			if(this.board[pos]!=0) {
+				console.error("posFree pos",pos,"is not empty");
+				return false;								
+			}
+		for(var gi in this.posFree[pos]) 
+			if(this.posFree[pos].hasOwnProperty(gi)) {
+				var group=this.groups[gi];
+				if(group===undefined) {
+					console.error("posFree pos",pos,"group",gi,"does not exist");
+					return false;								
+				}
+				if(!(pos in group.f)) {
+					console.error("posFree pos",pos,"group",gi,"not in group freedoms");
+					return false;								
+				}
+			}
 	}
-	for(var pos in this.posFree) {
-		if(this.board[pos]!=0) {
-			console.error("posFree pos",pos,"is not empty");
-			return false;								
-		}
-		for(var gi in this.posFree[pos]) {
+	for(var gi in this.groups) 
+		if(this.groups.hasOwnProperty(gi)) {
 			var group=this.groups[gi];
-			if(group===undefined) {
-				console.error("posFree pos",pos,"group",gi,"does not exist");
-				return false;								
-			}
-			if(!(pos in group.f)) {
-				console.error("posFree pos",pos,"group",gi,"not in group freedoms");
-				return false;								
-			}
-		}
-	}
-	for(var gi in this.groups) {
-		var group=this.groups[gi];
-		var count=0;
-		for(var pos1 in group.p) {
-			if(this.board[pos1]==0) {
-				console.error("pos",pos1,"in group",gi,"marked as empty");
-				return false;				
-			}
-			if(this.board[pos1]!=group.side) {
-				console.error("pos",pos1,"in group",gi,"has wrong side");
-				return false;								
-			}
-			if(this.posGroup[pos1]!=gi) {
-				console.error("pos",pos1,"in group",gi,"has wrong group",this.posGroup[pos1]);
+			var count=0;
+			for(var pos1 in group.p) 
+				if(this.group.p.hasOwnProperty(pos1)) {
+					if(this.board[pos1]==0) {
+						console.error("pos",pos1,"in group",gi,"marked as empty");
+						return false;				
+					}
+					if(this.board[pos1]!=group.side) {
+						console.error("pos",pos1,"in group",gi,"has wrong side");
+						return false;								
+					}
+					if(this.posGroup[pos1]!=gi) {
+						console.error("pos",pos1,"in group",gi,"has wrong group",this.posGroup[pos1]);
+						return false;												
+					}
+					count++;
+				}
+			if(count!=group.pCount) {
+				console.error("group",gi,"count mismatch");
 				return false;												
 			}
-			count++;
-		}
-		if(count!=group.pCount) {
-			console.error("group",gi,"count mismatch");
-			return false;												
-		}
-		count=0;
-		for(var pos1 in group.f) {
-			if(this.board[pos1]!=0) {
-				console.error("freedom pos",pos1,"in group",gi,"is not empty");
+			count=0;
+			for(var pos1 in group.f) 
+				if(group.f.hasOwnProperty(pos1)) {
+					if(this.board[pos1]!=0) {
+						console.error("freedom pos",pos1,"in group",gi,"is not empty");
+						return false;												
+					}
+					var coord1=aGame.g.Coord[pos1];
+					if(coord1[2]!=0) {
+						console.error("freedom pos",pos1,"in group",gi,"not at ground level");
+						return false;																
+					}
+					if(this.posFree[pos1]===undefined) {
+						console.error("freedom pos",pos1,"in group",gi,"not in freedoms");
+						return false;												
+					}
+					if(!this.posFree[pos1][gi]) {
+						console.error("freedom pos",pos1,"in group",gi,"is not empty for group");
+						return false;												
+					}
+					count++;
+				}
+			if(count!=group.fCount) {
+				console.error("group",gi,"freedom count mismatch");
 				return false;												
 			}
-			var coord1=aGame.g.Coord[pos1];
-			if(coord1[2]!=0) {
-				console.error("freedom pos",pos1,"in group",gi,"not at ground level");
-				return false;																
-			}
-			if(this.posFree[pos1]===undefined) {
-				console.error("freedom pos",pos1,"in group",gi,"not in freedoms");
-				return false;												
-			}
-			if(!this.posFree[pos1][gi]) {
-				console.error("freedom pos",pos1,"in group",gi,"is not empty for group");
-				return false;												
-			}
-			count++;
 		}
-		if(count!=group.fCount) {
-			console.error("group",gi,"freedom count mismatch");
-			return false;												
-		}
-	}
 	return true;
 }
 
@@ -947,33 +976,40 @@ Model.Board.CopyFrom = function(aBoard) {
 		this.board.push(aBoard.board[pos]);
 	this.playables={};
 	for(var pos in aBoard.playables)
-		this.playables[pos]=true;
+		if(aBoard.playables.hasOwnProperty(pos))
+			this.playables[pos]=true;
 	this.groups={};
-	for(var gi in aBoard.groups) {
-		var group0=aBoard.groups[gi];
-		var group={
-			side: group0.side,
-			p: {},
-			pCount: group0.pCount,
-			f: {},
-			fCount: group0.fCount,
+	for(var gi in aBoard.groups) 
+		if(aBoard.groups.hasOwnProperty(gi)) {
+			var group0=aBoard.groups[gi];
+			var group={
+				side: group0.side,
+				p: {},
+				pCount: group0.pCount,
+				f: {},
+				fCount: group0.fCount,
+			}
+			for(var pos in group0.p)
+				if(group0.p.hasOwnProperty(pos))
+					group.p[pos]=true;
+			for(var pos in group0.f)
+				if(group0.f.hasOwnProperty(pos))
+					group.f[pos]=true;
+			this.groups[gi]=group;
 		}
-		for(var pos in group0.p)
-			group.p[pos]=true;
-		for(var pos in group0.f)
-			group.f[pos]=true;
-		this.groups[gi]=group;
-	}
 	this.posFree={};
-	for(var pos in aBoard.posFree) {
-		var posFree={};
-		for(var g in aBoard.posFree[pos])
-			posFree[g]=true;
-		this.posFree[pos]=posFree;
-	}
+	for(var pos in aBoard.posFree) 
+		if(aBoard.posFree.hasOwnProperty(pos)) {
+			var posFree={};
+			for(var g in aBoard.posFree[pos])
+				if(aBoard.posFree[pos].hasOwnProperty(g))
+					posFree[g]=true;
+			this.posFree[pos]=posFree;
+		}
 	this.posGroup={};
 	for(var pos in aBoard.posGroup)
-		this.posGroup[pos]=aBoard.posGroup[pos];
+		if(aBoard.posGroup.hasOwnProperty(pos))
+			this.posGroup[pos]=aBoard.posGroup[pos];
 	if(aBoard.height)
 		this.height=[0,aBoard.height[1],aBoard.height[2]];
 	else

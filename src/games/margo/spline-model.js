@@ -54,7 +54,7 @@ Model.Board.splineEvaluate = function(aGame,aFinishOnly,aTopLevel) {
 		var empty=0;
 		var playera=0;
 		var playerb=0;
-		for(var j in line) {
+		for(var j=0; j<line.length; j++) {
 			var pos=line[j];
 			if(this.board[pos]==1)
 				playera++;

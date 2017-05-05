@@ -34,7 +34,7 @@ Model.Game.InitGame = function() {
 					}
 				/* same level */
 				var dirs=[[0,-1],[0,1],[-1,0],[1,0]];
-				for(var i in dirs) {
+				for(var i=0; i<dirs.length; i++) {
 					var dir=dirs[i];
 					var h0=h;
 					var r0=r+dir[0];
@@ -230,7 +230,8 @@ Model.Board.spInitialPosition = function(aGame) {
 Model.Board.MakeFreeMoves = function(aGame) {
 	var moves=[];
 	for(var pos in this.playables)
-		moves.push({ act: '+', pos: pos, clr: this.mWho==JocGame.PLAYER_A?1:2 });
+		if(this.playables.hasOwnProperty(pos))
+			moves.push({ act: '+', pos: pos, clr: this.mWho==JocGame.PLAYER_A?1:2 });
 	return moves;
 }
 
@@ -307,7 +308,7 @@ Model.Board.spApplyMove = function(aGame,move) {
 		else
 			this.playables[move.from]=true;
 		var from=move.from;
-		for(var i in move.down) {
+		for(var i=0; i<move.down.length; i++) {
 			var down=move.down[i];
 			this.height[this.board[down]]--;
 			this.board[from]=this.board[down];

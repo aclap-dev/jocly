@@ -675,9 +675,11 @@
 					typeMoveFrom[move.from]=true;
 			}
 			for(var pos in typeNormal)
-				Highlight(pos,"normal");
+				if(typeNormal.hasOwnProperty(pos))
+					Highlight(pos,"normal");
 			for(var pos in typeMoveFrom)
-				Highlight(pos,"movefrom");
+				if(typeMoveFrom.hasOwnProperty(pos))
+					Highlight(pos,"movefrom");
 		}
 		function SelectTo(args) {
 			Highlight(moveFrom,"cancel");

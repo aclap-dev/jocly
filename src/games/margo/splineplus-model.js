@@ -46,14 +46,14 @@ Model.Board.MakeSelfSinglePinMoves = function(aGame) {
 	var $this=this;
 	var selfColor=this.mWho==JocGame.PLAYER_A?1:2;
 		
-	for(var pos in aGame.g.Coord) { // go through every position
+	for(var pos=0; pos<aGame.g.Coord.length; pos++) { // go through every position
 		if(aGame.g.Coord[pos][2]>this.maxLayer)
 			break;
 		if(this.board[pos]==selfColor) { // self balls
 			var topFree={ };
 			var upLine=this.GetSingleUpBalls(aGame,pos,topFree);
 			if(upLine!=null) {
-				for(var i in this.mMoves) {
+				for(var i=0; i<this.mMoves.length; i++) {
 					var move=this.mMoves[i];
 					if(move.act=='+' && typeof topFree[move.pos]=="undefined")
 						moves.push({ act: '>', from: pos, to: move.pos, down: upLine, clr: selfColor });
