@@ -88,8 +88,15 @@ Model.Game.InitGame = function() {
 	});
 	this.HuntMakeGrid({});
 	function Connect(pos0,pos1,dir0,dir1) {
+		var i;
 		$this.g.Graph[pos0][dir0]=pos1;
-		$this.g.Graph[pos1][dir1]=pos0;		
+		$this.g.Graph[pos1][dir1]=pos0;
+		for(i=0;i<dir0;i++)
+			if(typeof $this.g.Graph[pos0][i]=="undefined")
+				$this.g.Graph[pos0][i] = null;
+		for(i=0;i<dir1;i++)
+			if(typeof $this.g.Graph[pos1][i]=="undefined")
+				$this.g.Graph[pos1][i] = null;
 	}
 	Connect(10,6,4,5);
 	Connect(6,2,4,5);
