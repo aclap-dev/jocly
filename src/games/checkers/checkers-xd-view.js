@@ -1681,8 +1681,10 @@
 			xdv.updateGadget("piece#"+captPiece,{
 				"2d": {
 					opacity : 0.3,
+					visible: !aGame.g.captureInstantRemove
 				},
 				"3d" : {
+					visible: !aGame.g.captureInstantRemove,
 					materials: { 
 						"base" : {
 							opacity: .3,

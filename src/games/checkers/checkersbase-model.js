@@ -322,7 +322,7 @@
 							}
 							if(aGame.g.canCaptureBackward || forward==true) {
 								var pos1=aGame.g.Graph[pos0][dir];
-								if(pos1!=null && ($this.board[pos1]==-1 || pos1==poss[0])) {
+								if(pos1!=null && ($this.board[pos1]==-1 || pos1==poss[0] || (pos1!==null && aGame.g.captureInstantRemove && capts.indexOf(pos1)>=0))) {
 									var keep=true;
 									for(var i=0;i<dirs.length;i++)
 										if((aGame.g.captureInstantRemove && capts[i]==pos0) ||
@@ -370,7 +370,7 @@
 										pos0=aGame.g.Graph[pos0][dir];
 									}
 								} else {
-									while($this.board[pos0]==-1 || pos0==poss[0]) {
+									while($this.board[pos0]==-1 || pos0==poss[0] || (pos0!==null && aGame.g.captureInstantRemove && capts.indexOf(pos0)>=0)) {
 										var keep=true;
 										for(var i=0;i<dirs.length;i++)
 											if((aGame.g.captureInstantRemove && capts[i]==caught) ||
