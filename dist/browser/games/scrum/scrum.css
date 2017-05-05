@@ -1,0 +1,180 @@
+.cell {
+	position: absolute;
+	z-index: 0;
+}
+
+.cell-black {
+	background-color: #707070;
+}
+
+.cell-white {
+	background-color: #909090;
+}
+
+.cell-black.choice-view {
+	background-color: rgba(255,255,255,0.5);
+}
+.cell-black.choice-view.default {
+	background-color: #709070;
+}
+
+.cell-white.choice-view {
+	background-color: rgba(255,255,255,0.3);
+}
+.cell-white.choice-view.default {
+	background-color: #90B090;
+}
+/* same color */
+.cell-white.choice-view,.cell-black.choice-view {
+	background-color: rgba(255,255,255,0.5);
+}
+
+/*
+.cell-black.scrum {
+	background-color: #707090;
+}
+
+.cell-white.scrum {
+	background-color: #9090B0;
+}
+*/
+
+.piece-white.choice-view:hover {
+	border: 2px solid Black;
+}
+
+.piece-black.choice-view:hover {
+	border: 2px solid White;
+}
+
+.piece-ball.choice-view:hover {
+	border: 2px solid Green;
+}
+
+.cell.choice-view:hover {
+	border: 2px solid Green;
+}
+
+.cell.chosen {
+	background-color: rgba(69,139,211,1.0);
+	
+}
+
+.front {
+	position: absolute;
+	z-index: 200;
+	background: rgba(255,255,255,0);
+}
+
+.front.choice:hover {
+	border: 1px solid #d3ff00;
+}
+
+.piece,
+.anim {
+	position: absolute;
+	z-index: 100;
+	font-family: Arial, sans-serif;
+}
+
+.piece-white {
+	background-color: White;
+}
+
+.piece-black {
+	background-color: Black;
+}
+
+.piece-ball {
+	background-color: Yellow;
+}
+
+.notation {
+	position: absolute;
+	font-family: Arial, sans-serif;
+	color: White;
+	top: 2px;
+	left: 2px;
+	z-index: 10;
+}
+
+.cancel-panel {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+/* // JCFROGCODE  /////////////////////// */
+.cell-white-rugby {
+    background-color: rgba(255, 255, 255, 0.0);
+    border-radius:50%;    
+}
+.cell-black-rugby {
+    background-color: rgba(255, 255, 255, 0.0);
+    border-radius:50%;
+}
+.piece-rugby {
+    background: none;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;	
+}
+.piece-ball-rugby {
+    background-image: url(res/images/ballffr.png);
+
+}
+
+.piece-white-rugby {
+    background-image: url(res/images/playerf.png);
+}
+.piece-black-rugby {
+	background-image: url(res/images/playerf-b.png);
+}
+.piece-white-crab {
+    background-image: url(res/images/playerd.png);
+}
+.piece-black-crab {
+	background-image: url(res/images/playerd-b.png);
+}
+
+.piece-rugby-toulouse{
+	background-image: url(res/images/stade_toulousain_logo_125.png);
+}
+.piece-rugby-stadefr{
+	background-image: url(res/images/logo-stade-francais-paris.png);
+}
+.piece-ball-rugby-ffr {
+    background-image: url(res/images/ballffr.png);
+}
+.piece-rugby-tshirthtml5{
+	background-image: url(res/images/playere.png);
+}
+.piece-rugby-tshirtjocly{
+	background-image: url(res/images/playere-b.png);
+}
+.scrumarrow {
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+    background-image: url(res/images/scrumarrow.png);
+}
+.undo{
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+    background-image: url(res/images/undo.png);	
+}
+
+.choice-cancel {
+	background-color: rgba(255,125,0,1.0);
+	border-radius:50%;
+}
+
+.xd-notation {
+	font-family: Arial, sans-serif;
+	color: White;
+}
+
+
+
+/* //  /////////////////////// JCFROGCODE */
