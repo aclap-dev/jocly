@@ -46,6 +46,4 @@ Model.Game.BuildGraphCoord = function() {
 	}
 	this.g.Graph=g;
 	this.g.Coord=coord;
-	
-	this.g.compulsoryCatch=false;
 }

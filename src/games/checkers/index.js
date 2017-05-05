@@ -249,7 +249,7 @@ exports.games = (function() {
 	}
 	var modelScripts_2 = [
 		"checkersbase-model.js",
-		"alquerque-avds-model.js"
+		"alquerque-arabic-model.js"
 	]
 	var config_view_js_2 = [
 		"checkers-xd-view.js",
@@ -525,20 +525,20 @@ exports.games = (function() {
 	]
 	return [
 		{
-			"name": "alquerque-bell",
+			"name": "alquerque-roman",
 			"modelScripts": modelScripts,
 			"config": {
 				"status": true,
 				"model": {
-					"title-en": "Alquerque",
-					"summary": "A 10th century checkers game from Middle-East.",
-					"rules": "rules-alquerque-bell.html",
+					"title-en": "Roman Alquerque",
+					"summary": "Alquerque as played in the 10th century in France and England.",
+					"rules": "rules-alquerque-roman.html",
 					"maxLevel": 20,
 					"plazza": "true",
-					"thumbnail": "alquerque-thumb3d.png",
+					"thumbnail": "alquerque-roman-thumb3d.png",
 					"module": "checkers",
 					"description": "description.html",
-					"credits": "credits.html",
+					"credits": "credits-alquerque-roman.html",
 					"js": modelScripts,
 					"gameOptions": {
 						"preventRepeat": true,
@@ -546,16 +546,21 @@ exports.games = (function() {
 						"height": 5,
 						"initial": config_model_gameOptions_initial,
 						"variant": {
-							"canStepBack": false,
+							"canStepBack": true,
 							"mustMoveForward": true,
-							"lastRowFreeze": true,
-							"noMove": "lose"
+							"lastRowFreeze": false,
+							"noMove": "lose",
+							"longRangeKing": false,
+							"kingCaptureShort": false,
+							"lastRowCrown": true,
+							"captureInstantRemove": true,
+							"canCaptureBackward": false
 						}
 					},
 					"levels": config_model_levels_7
 				},
 				"view": {
-					"title-en": "Alquerque Bell View",
+					"title-en": "Roman Alquerque",
 					"preferredRatio": 1,
 					"css": config_view_css,
 					"js": config_view_js,
@@ -586,8 +591,8 @@ exports.games = (function() {
 					],
 					"visuals": {
 						"600x600": [
-							"res/visuals/alquerque-600x600-3d.jpg",
-							"res/visuals/alquerque-600x600-2d.jpg"
+							"res/visuals/alquerque-roman-600x600-3d.jpg",
+							"res/visuals/alquerque-roman-600x600-2d.jpg"
 						]
 					},
 					"module": "checkers",
@@ -603,20 +608,20 @@ exports.games = (function() {
 			"viewScripts": config_view_js
 		},
 		{
-			"name": "alquerque-avds",
+			"name": "alquerque-arabic",
 			"modelScripts": modelScripts_2,
 			"config": {
 				"status": true,
 				"model": {
-					"title-en": "Alquerque AvdS",
-					"summary": "Alquerque rules proposal from a Draughts historian.",
-					"rules": "rules-alquerque-avds.html",
+					"title-en": "Arabic Alquerque",
+					"summary": "Alquerque as played in Middle-East and Spain.",
+					"rules": "rules-alquerque-arabic.html",
 					"maxLevel": 20,
 					"plazza": "true",
-					"thumbnail": "alquerque-avds3-thumb.png",
+					"thumbnail": "alquerque-arabic-thumb.png",
 					"module": "checkers",
 					"description": "description.html",
-					"credits": "credits-avds.html",
+					"credits": "credits-arabic.html",
 					"js": modelScripts_2,
 					"gameOptions": {
 						"preventRepeat": true,
@@ -631,13 +636,15 @@ exports.games = (function() {
 							"longRangeKing": true,
 							"kingCaptureShort": false,
 							"lastRowCrown": true,
-							"canCaptureBackward": false
+							"canCaptureBackward": false,
+							"captureInstantRemove": true,
+							"compulsoryCatch": false
 						}
 					},
 					"levels": config_model_levels_7
 				},
 				"view": {
-					"title-en": "Alquerque Bell View",
+					"title-en": "Arabic Alquerque View",
 					"preferredRatio": 1,
 					"css": config_view_css,
 					"js": config_view_js_2,
@@ -670,8 +677,8 @@ exports.games = (function() {
 					],
 					"visuals": {
 						"600x600": [
-							"res/visuals/alquerque-avds3-600x600-3d.jpg",
-							"res/visuals/alquerque-avds3-600x600-2d.jpg"
+							"res/visuals/alquerque-arabic-600x600-3d.jpg",
+							"res/visuals/alquerque-arabic-600x600-2d.jpg"
 						]
 					},
 					"module": "checkers",
