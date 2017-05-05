@@ -26,6 +26,17 @@ View.Game.xdInitExtra = function(xdv) {
 			file : this.mViewOptions.fullPath + "/res/images/damier8x8green.jpg",
 		},
 	});
+	var $this = this;
+	var skins = this.mViewOptions.skins.filter(function(skin) {
+		return skin.name === $this.mSkin;
+	});
+	if(skins.length>0 && skins[0].preload) {
+		var resources = skins[0].preload.map(function(res) {
+			var m = /^(.*?\|)([^\|]*)$/.exec(res);
+			return m[1] + $this.mViewOptions.fullPath + m[2];
+		});
+		this.xdLoadResources(resources,function() {});
+	}
 }
 
 View.Board.CheckersAngle = function(aGame,piece,from,to) {
