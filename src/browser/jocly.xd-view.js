@@ -121,10 +121,13 @@ if(window.JoclyXdViewCleanup)
 	HTStateMachine.prototype=new JHStateMachine();
 	
 	HTStateMachine.prototype.smError=function() { 
+		//console.info("=>",arguments);
 	}
 	HTStateMachine.prototype.smWarning=function() { 
+		//console.info("=>",arguments);
 	};
 	HTStateMachine.prototype.smDebug=function() { 
+		//console.info("=>",arguments);
 	}
 	
 	function Diff(oOld,oNew) {
@@ -2940,7 +2943,7 @@ if(window.JoclyXdViewCleanup)
 		htsm.smLeaving("S_WAIT_ACTION",[ Clean ]);
 		htsm.smTransition("S_WAIT_ACTION", "E_ACTION", "S_ACTION", [ PushAction, Validate, Action ]);
 		htsm.smTransition("S_WAIT_ACTION", "E_CANCEL", null, [ Cancel, Clean, PrepareAction, SetCancel]);
-		htsm.smTransition("S_WAIT_ACTION", "E_MOVE_DONE", "S_DONE", [ SendMove ]);
+		htsm.smTransition("S_WAIT_ACTION", "E_MOVE_DONE", "S_DONE", [ SendMove, HideFurnitures ]);
 		htsm.smTransition(["S_WAIT_ACTION","S_ACTION"], "E_END", "S_DONE", [ ]);
 		htsm.smTransition("S_ACTION", "E_DONE", "S_WAIT_ACTION", [ PostAction ]);
 		htsm.smTransition("S_DONE", "E_END", null, [ HideFurnitures ]);

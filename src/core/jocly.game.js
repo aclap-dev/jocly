@@ -161,14 +161,15 @@ JocGame.prototype.PlayMove = function(move) {
 		self.mOldBoard=new (self.GetBoardClass())(self);
 		self.mOldBoard.CopyFrom(self.mBoard);
 		self.ApplyMove(move);
-		var moveShown = self.mBoard.PlayedMove(self,move);
-		if(moveShown)
+		self.MoveShown = function() {
+			delete self.MoveShown;
 			resolve();
-		else
-			self.MoveShown = function() {
-				delete self.MoveShown;
-				resolve();
-			}
+		}
+		var moveShown = self.mBoard.PlayedMove(self,move);
+		if(moveShown) {
+			delete self.MoveShown;
+			resolve();
+		}
 	});
 	return promise;
 }
