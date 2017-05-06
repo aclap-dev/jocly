@@ -92,23 +92,18 @@
 					return [7];
 				return [];
 			},
-
 			
 			evaluate: function(aGame,evalValues,material) {
 				// check lack of material to checkmate
 				var white=material[1].count;
 				var black=material[-1].count;
-				if(!white[0] && !white[1] && !white[4] && !white[5] && !white[6] && !white[7]) { // white king single
-					if(!black[2] && !black[3] && !black[6] && !black[7] && (black[4]+black[5]<2 || black[5]<2)) {
-						this.mFinished=true;
-						this.mWinner=JocGame.PLAYER_B;
-					}
+				if(!white[0] && !white[4] && !white[5] && !white[6] && !white[7]) { // white king single
+					this.mFinished=true;
+					this.mWinner=JocGame.PLAYER_B;
 				}
-				if(!black[2] && !black[3] && !black[4] && !black[5] && !black[6] && !black[7]) { // black king single
-					if(!white[0] && !white[1] && !white[6] && !white[7] && (white[4]+white[5]<2 || white[5]<2)) {
-						this.mFinished=true;
-						this.mWinner=JocGame.PLAYER_A;
-					}
+				if(!black[2] && !black[4] && !black[5] && !black[6] && !black[7]) { // black king single
+					this.mFinished=true;
+					this.mWinner=JocGame.PLAYER_A;
 				}
 				
 				// check 50 moves without capture
