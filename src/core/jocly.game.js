@@ -92,6 +92,8 @@ JocGame.prototype.Init = function(aOptions) {
 		this.mVisitedBoards = {};
 		if(typeof(this.mOptions.viewAs)!="undefined")
 			this.mViewAs = this.mOptions.viewAs;
+		else
+			this.mOptions.viewAs = this.mViewAs;
 	}
 	this.mNextSchedule = null;
 	this.mPlayedMoves = [];
