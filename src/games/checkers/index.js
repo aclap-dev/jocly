@@ -531,7 +531,7 @@ exports.games = (function() {
 				"status": true,
 				"model": {
 					"title-en": "Roman Alquerque",
-					"summary": "Alquerque as played in the 10th century in France and England.",
+					"summary": "Alquerque as played in France and England.",
 					"rules": "rules-alquerque-roman.html",
 					"maxLevel": 20,
 					"plazza": "true",
