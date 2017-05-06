@@ -1038,7 +1038,7 @@ exports.games = (function() {
 							"lastRowFactor": 0.001,
 							"kingValue": 4,
 							"kingCaptureShort": false,
-							"captureInstantRemove": true
+							"captureInstantRemove": false
 						},
 						"uctTransposition": "state"
 					},
