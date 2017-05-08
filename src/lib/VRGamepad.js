@@ -351,6 +351,12 @@ function VRGamepads(opts) {
                 reset: 1
             }
         }
+
+		if(/left/i.test(gamepad.id))
+			this.whichHand = "left";
+		if(/right/i.test(gamepad.id))
+			this.whichHand = "right";
+		
     };
 
     VRGamepad.prototype = Object.create( THREE.Object3D.prototype );
@@ -412,6 +418,11 @@ function VRGamepads(opts) {
             }
         }
         if(harborpad) {
+			if(harborpad.whichHand=="right" && firstVRPad.whichHand=="left") {
+				var tmpPad = harborpad;
+				harborpad = firstVRPad;
+				firstVRPad = tmpPad;
+			}
             firstVRPad.pointerObject.scale.setX(.1);
             firstVRPad.pointerObject.scale.setZ(.1);
         } else if(firstVRPad) {
