@@ -312,10 +312,66 @@ function VRGamepads(opts) {
             options.camera.parent.add(this);
         }
 
+        this.createOculusTouchMesh = function() {
+            var $this = this;
+            // create clicking ray
+            var line = cache["touch-controller-ray"];
+            if(line===undefined) {
+                var geometry = new THREE.CylinderGeometry(.008,.008,1,8);
+                geometry.translate(0,-.5,0);
+                var material = new THREE.MeshBasicMaterial( {color: 0x80ff80} );
+                line = new THREE.Mesh( geometry, material );
+                line.scale.set(1,100,1);
+                line.rotateX(Math.PI/6);
+                line.visible = false;
+                cache["touch-controller-ray"] = line;
+            }
+            this.pointerObject = line.clone();
+            this.add(this.pointerObject);
+            this.pointerRescale = true;
+
+            // create controller
+            function AddController(object) {
+                $this.add(object);
+            }
+			var cacheName = "touch-controller-"+this.whichHand;
+            var controllerObject = cache[cacheName];
+            if(controllerObject===undefined) {
+                cache[cacheName] = [AddController];
+				var loader = new THREE.MTLLoader();
+				loader.setPath(options.resBase + 'touch-controller/');
+				loader.load("oculus-touch-controller-"+this.whichHand+".mtl",function(materials) {
+					materials.preload();
+					var objLoader = new THREE.OBJLoader();
+					objLoader.setMaterials( materials );
+					objLoader.setPath(options.resBase + 'touch-controller/');
+					objLoader.load( "oculus-touch-controller-"+$this.whichHand+".obj" , function ( controller ) {
+                        var object = new THREE.Object3D();
+						controller.position.add(new THREE.Vector3(.008,0.03,-.03));
+                        object.add(controller);
+                        cache[cacheName].forEach(function(callback) {
+                            callback(object.clone());
+                        });
+                        cache[cacheName] = object;				
+					});
+
+				});
+            } else if(Array.isArray(controllerObject)) {
+                cache[cacheName].push(AddController);
+            } else
+                AddController(controllerObject.clone());
+            options.camera.parent.add(this);
+		}
+
         this.getAxes = function() {
             return axes;
         }
 
+		if(/left/i.test(gamepad.id))
+			this.whichHand = "left";
+		if(/right/i.test(gamepad.id))
+			this.whichHand = "right";
+		
         if(/openvr/i.test(gamepad.id)) {
             this.createViveControllerMesh();
             buttonsIndexes = {
@@ -325,7 +381,7 @@ function VRGamepads(opts) {
             }
             this.isVRPad = true;
         } else if(/touch/i.test(gamepad.id)) {
-            this.createViveControllerMesh();
+            this.createOculusTouchMesh();
             buttonsIndexes = {
                 move: -1,
                 click: 1,
@@ -352,11 +408,6 @@ function VRGamepads(opts) {
             }
         }
 
-		if(/left/i.test(gamepad.id))
-			this.whichHand = "left";
-		if(/right/i.test(gamepad.id))
-			this.whichHand = "right";
-		
     };
 
     VRGamepad.prototype = Object.create( THREE.Object3D.prototype );

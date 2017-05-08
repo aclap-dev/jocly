@@ -295,6 +295,8 @@ gulp.task("build-browser-xdview",function() {
             srcLib+"VRGamepad.js",
             lib+"VRControls.js",
             lib+"VREffect.js",
+			lib+"OBJLoader.js",
+			lib+"MTLLoader.js",
             src+"browser/jocly.ar.js",
             src+"browser/jocly.state-machine.js",
             src+"browser/jocly.xd-view.js"
