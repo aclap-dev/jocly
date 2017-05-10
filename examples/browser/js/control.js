@@ -296,6 +296,27 @@ $(document).ready(function () {
                     fileElem[0].click();
                 });
 
+                // reading file locally
+                var file360Elem = $("#file360Elem").on("change",function() {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file360Elem[0].files[0]);
+                    fileReader.onload = function(event) {
+						match.viewControl("setPanorama",{
+							pictureData: fileReader.result
+						})
+                    }
+                })
+                $("#panorama-button").on("click",function() {
+                    file360Elem[0].click();
+                });
+                $("#panorama-select").on("change",function() {
+					var options = {};
+					var which = $(this).val();
+					if(which)
+						options.pictureUrl = "/panorama/"+which+".jpg";
+					match.viewControl("setPanorama",options);
+                });
+
                 $("#takeback").on("click",function() {
                     match.getPlayedMoves()
                         .then( (playedMoves) => {
