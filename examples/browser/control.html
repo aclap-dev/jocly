@@ -70,6 +70,17 @@
 	       		<label id="anaglyph" for="anaglyph-input">
 	       			<input id="anaglyph-input" type="checkbox"/> Anaglyph view<br/>
 	       		</label>
+	       		<label id="panorama" for="panorama-select">
+					Panorama 360
+					<input type="file" id="file360Elem" accept="application/json" style="display:none"/>
+		       		<button id="panorama-button">Local</button>
+					<select id="panorama-select">
+						<option value="">--</option>
+						<option value="cabin">Cabin</option>
+						<option value="factory">Factory</option>
+						<option value="earth">Earth</option>
+					</select>
+	       		</label>
 
 	       	</div>
             <div id="links">

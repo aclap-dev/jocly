@@ -2725,7 +2725,54 @@ if(window.JoclyXdViewCleanup)
 					var animCount = TWEEN.getAll().length;
 					TWEEN.removeAll();
 					resolve(animCount>0);
-					break;				
+					break;
+				case "setPanorama":
+					if(options.pictureUrl || options.pictureData) {
+						xdv.removeGadget("panorama");
+						xdv.createGadget("panorama",{
+							"3d": {
+								type: "custommesh3d",
+								harbor: false,
+								rotate: options.rotate || 0,
+								create: function(callback) {
+									var geometry = new THREE.SphereGeometry( 500, 60, 40 );
+									geometry.scale( - 1, 1, 1 );
+									new Promise(function(resolve, reject) {
+										if(options.pictureData) {
+											var image = new Image;
+											image.src = options.pictureData;
+											var texture = new THREE.Texture( image );
+											image.onload = function() {
+												texture.needsUpdate = true;
+												resolve(texture);
+											}
+										} else
+											resolve(new THREE.TextureLoader().load( options.pictureUrl ))
+									}).then(function(texture) {
+										var material = new THREE.MeshBasicMaterial( {
+											map: texture
+										} );
+										mesh = new THREE.Mesh( geometry, material );
+										callback(mesh);
+									})
+								},
+							}
+						});
+						xdv.updateGadget("panorama",{
+							"3d": {
+								visible: true
+							},
+						});					
+					} else {
+						xdv.updateGadget("panorama",{
+							"3d": {
+								visible: false
+							},
+						});					
+						xdv.removeGadget("panorama");
+					}
+					break;
+		
 				default:
 					reject(new Error("ViewControl: unsupported command "+cmd));
 			}
