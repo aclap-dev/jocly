@@ -313,7 +313,7 @@ $(document).ready(function () {
 					var options = {};
 					var which = $(this).val();
 					if(which)
-						options.pictureUrl = "/panorama/"+which+".jpg";
+						options.pictureUrl = "../../panorama/"+which+".jpg";
 					match.viewControl("setPanorama",options);
                 });
 
