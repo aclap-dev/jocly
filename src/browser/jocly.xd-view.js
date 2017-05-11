@@ -2771,6 +2771,15 @@ if(window.JoclyXdViewCleanup)
 						});					
 						xdv.removeGadget("panorama");
 					}
+					resolve();
+					break;
+				case "takeSnapshot":
+					if(threeCtx) {
+						var canvas = threeCtx.renderer.domElement;
+						threeCtx.renderer.render( threeCtx.scene, threeCtx.camera );
+						resolve(canvas.toDataURL("image/png"));
+					} else
+						reject(new Error("Snapshot only available on 3D views"));
 					break;
 		
 				default:
