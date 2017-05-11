@@ -43,6 +43,7 @@ const allGames = {};
 
 var moduleDirs = [];
 var modulesMap = {};
+var exclusiveGames = null;
 
 if (typeof argv.defaultGames == "undefined" || argv.defaultGames)
 	moduleDirs = fs.readdirSync("src/games").map((dir) => {
@@ -54,6 +55,13 @@ moduleDirs.forEach((dir) => {
 	modulesMap[path.basename(dir)] = dir;
 });
 
+if (argv.games) {
+	exclusiveGames = {};
+	argv.games.split(":").forEach((game) => {
+		exclusiveGames[game] = true;
+	});
+}
+
 function HandleModuleGames(modelOnly) {
 
 	return through.obj(function (file, enc, next) {
@@ -64,6 +72,9 @@ function HandleModuleGames(modelOnly) {
 		var streams = [];
 		moduleManifest.games.forEach((game) => {
 			// this is executed for every game in the game module
+
+			if (exclusiveGames && !exclusiveGames[game.name])
+				return;
 
 			// same some game data so we can list all games later
 			allGames[game.name] = {
@@ -352,7 +363,8 @@ commands:
 options:
     --prod: generate for production
     --no-default-games: do not process game module from default src/games directory
-    --modules: process additional game modules from specified directories (colon separated)
+    --modules <modules>: process additional game modules from specified directories (colon separated)
+    --games <games>: process exclusively the specified games (colon separated)
 `;
 	console.log(help);
 	process.exit(0);
