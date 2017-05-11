@@ -279,11 +279,13 @@ $(document).ready(function () {
                 });
 
 				$("#snapshot").on("click",function() {
-					match.viewControl("takeSnapshot")
+					match.viewControl("takeSnapshot",{
+						format: "jpeg"
+					})
 						.then((snapshot)=>{
 							var a = document.createElement("a");
 							a.href = snapshot;
-							a.setAttribute("download",gameName+".png");
+							a.setAttribute("download",gameName+".jpg");
 							a.click();
 						})
 						.catch((error)=>{
