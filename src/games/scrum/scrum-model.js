@@ -151,6 +151,7 @@ Model.Board.InitialPosition = function(aGame) {
 /* Push into the mMoves array, every possible move
  */
 Model.Board.GenerateMoves = function(aGame) {
+	this.mMoves = [];
 	try {
 		this._GenerateMoves(aGame);
 	} catch(e) {
