@@ -75,6 +75,8 @@ function HandleModuleGames(modelOnly) {
 
 			if (exclusiveGames && !exclusiveGames[game.name])
 				return;
+			if (typeof argv.obsolete != "undefined" && !argv.obsolete && game.config.model.obsolete)
+				return;
 
 			// same some game data so we can list all games later
 			allGames[game.name] = {
@@ -365,6 +367,7 @@ options:
     --no-default-games: do not process game module from default src/games directory
     --modules <modules>: process additional game modules from specified directories (colon separated)
     --games <games>: process exclusively the specified games (colon separated)
+    --no-obsolete: do not include games marked as obsolete
 `;
 	console.log(help);
 	process.exit(0);

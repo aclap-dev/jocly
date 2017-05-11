@@ -66,6 +66,7 @@ Notes:
 - using `gulp build watch` instead of `gulp build` makes *gulp* start watching files after the build. Whenever a file is changed, a build is automatically generated
 - you can use `--no-default-games` to prevent including the game modules from directory, and `--modules <colon-separated-directories>` to specify additional game modules to include. For instance, `gulp --no-default-games --modules src/games/chessbase:src/games/checkers build` will only generate distribution for Chess and checkers games
 - you can specify the games to be built in the distribution with the `--games` option. For instance, `gulp --no-default-games --modules src/games --games xiangqi:classic-chess build` only generates Jocly for Classic Chess and XiangQi
+- using the `no-obsolete` option filters out the games marked as obsolete
 
 API Documentation
 -----------------
