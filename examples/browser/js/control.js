@@ -278,6 +278,21 @@ $(document).ready(function () {
                         });
                 });
 
+				$("#snapshot").on("click",function() {
+					match.viewControl("takeSnapshot",{
+						format: "jpeg"
+					})
+						.then((snapshot)=>{
+							var a = document.createElement("a");
+							a.href = snapshot;
+							a.setAttribute("download",gameName+".jpg");
+							a.click();
+						})
+						.catch((error)=>{
+							console.warn("failed:",error);
+						})
+				});
+
                 // reading file locally
                 var fileElem = $("#fileElem").on("change",function() {
                     var fileReader = new FileReader();
