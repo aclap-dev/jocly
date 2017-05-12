@@ -200,6 +200,7 @@ Model.Board.manaCreatePlacement = function(aGame,orient) {
 }
 
 Model.Board.GenerateMoves = function(aGame) {
+	this.mMoves = [];
 	if(this.stage==1) {
 		var orients=["NE","SE","SW","NW"];
 		for(var i=0;i<aGame.mOptions.stage1start;i++) {
