@@ -2777,7 +2777,7 @@ if(window.JoclyXdViewCleanup)
 					if(threeCtx) {
 						var canvas = threeCtx.renderer.domElement;
 						threeCtx.renderer.render( threeCtx.scene, threeCtx.camera );
-						resolve(canvas.toDataURL("image/"+(options.format || "png")));
+						resolve(canvas.toDataURL("image/"+(options.format || "png"), options.quality || undefined));
 					} else
 						reject(new Error("Snapshot only available on 3D views"));
 					break;
