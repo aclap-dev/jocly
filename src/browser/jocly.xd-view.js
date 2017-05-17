@@ -2712,6 +2712,7 @@ if (window.JoclyXdViewCleanup)
 					};
 					resolve();
 					break;
+
 				case "exitAnaglyph":
 					if (threeCtx) {
 						threeCtx.anaglyph = false;
@@ -2721,11 +2722,13 @@ if (window.JoclyXdViewCleanup)
 					};
 					resolve();
 					break;
+
 				case "stopAnimations":
 					var animCount = TWEEN.getAll().length;
 					TWEEN.removeAll();
 					resolve(animCount > 0);
 					break;
+
 				case "setPanorama":
 					if (options.pictureUrl || options.pictureData) {
 						xdv.removeGadget("panorama");
@@ -2773,6 +2776,7 @@ if (window.JoclyXdViewCleanup)
 					}
 					resolve();
 					break;
+
 				case "takeSnapshot":
 					if (threeCtx) {
 						var canvas = threeCtx.renderer.domElement;
@@ -2782,11 +2786,151 @@ if (window.JoclyXdViewCleanup)
 						reject(new Error("Snapshot only available on 3D views"));
 					break;
 
+				case "getCamera":
+					if (threeCtx)
+						resolve({
+							x: threeCtx.body.position.x / SCALE3D,
+							y: threeCtx.body.position.z / SCALE3D,
+							z: threeCtx.body.position.y / SCALE3D,
+							targetX: threeCtx.cameraControls.camTarget.x / SCALE3D,
+							targetY: threeCtx.cameraControls.camTarget.z / SCALE3D,
+							targetZ: threeCtx.cameraControls.camTarget.y / SCALE3D
+						});
+					else 
+						reject(new Error("Camera only available on 3D views"));
+					break;
+
+				case 'setCamera':
+					if(!threeCtx)
+						return reject(new Error("Camera only available on 3D views"));
+
+					switch(options.type) {
+						case "spin":
+							resolve(SpinCamera(options));
+							break;
+						case "stop":
+							if(threeCtx.dolly) {
+								delete threeCtx.animateCallbacks["dolly"];
+								TWEEN.remove(threeCtx.dolly);
+								delete threeCtx.dolly;
+							}
+							break;
+						case "move":
+						default:
+							resolve(MoveCamera(options));
+					}
+
+					break;
+
+
 				default:
 					reject(new Error("ViewControl: unsupported command " + cmd));
 			}
 		});
 		return promise;
+	}
+
+	function SpinCamera(options) {
+		var x0 = threeCtx.cameraControls.camTarget.x;
+		var y0 = threeCtx.cameraControls.camTarget.z;
+		var x1 = threeCtx.body.position.x;
+		var y1 = threeCtx.body.position.z;
+		var angle0 = Math.atan2(y1-y0,x1-x0);
+		var angle1 = angle0 - 2 * Math.PI;
+		if(options.direction=="ccw")
+			angle1 = angle0 + 2 * Math.PI;
+		var radius = Math.sqrt((x1-x0)*(x1-x0)+(y1-y0)*(y1-y0));
+		if(threeCtx.dolly)
+			TWEEN.remove(threeCtx.dolly);
+		var state = {};
+		function StartSpinning() {
+			state.angle = angle0;
+			threeCtx.dolly = new TWEEN.Tween(state).to({ angle: angle1 }, (options.speed || 30) * 1000)
+					.onComplete( function() {
+						StartSpinning();
+					})
+					.onUpdate( function() {
+						threeCtx.animControl.trigger();
+					}).start();
+		}
+		threeCtx.animateCallbacks["dolly"] = {
+			_this: null,
+			callback: function() {
+				threeCtx.body.position.x = x0 + radius * Math.cos(state.angle);
+				threeCtx.body.position.z = y0 + radius * Math.sin(state.angle);
+			}
+		};
+		StartSpinning();
+		threeCtx.animControl.trigger();
+
+	}
+
+	function MoveCamera(options) {
+		function GetKalman() {
+			var R = .2;
+			if(typeof options.smooth!="undefined")
+				R = options.smooth;
+			return new KalmanFilter({R: R});
+		}
+		var kalman = {
+			x: GetKalman(),
+			y: GetKalman(),
+			z: GetKalman(),
+			targetX: GetKalman(),
+			targetY: GetKalman(),
+			targetZ: GetKalman()
+		}
+		var state = {
+			x: threeCtx.body.position.x,
+			y: threeCtx.body.position.y,
+			z: threeCtx.body.position.z,
+			targetX: threeCtx.cameraControls.camTarget.x,
+			targetY: threeCtx.cameraControls.camTarget.y,
+			targetZ: threeCtx.cameraControls.camTarget.z
+		}
+		var state1 = {
+			x: options.camera.x * SCALE3D,
+			z: options.camera.y * SCALE3D,
+			y: options.camera.z * SCALE3D,
+			targetX: options.camera.targetX * SCALE3D,
+			targetZ: options.camera.targetY * SCALE3D,
+			targetY: options.camera.targetZ * SCALE3D
+		}
+		var finalCamera = new THREE.Vector3(state1.x, state1.y, state1.z);
+		var finalTarget = new THREE.Vector3(state1.targetX, state1.targetY, state1.targetZ);
+		if(threeCtx.dolly)
+			TWEEN.remove(threeCtx.dolly);
+		threeCtx.dolly = new TWEEN.Tween(state).to(state1, options.speed * 1000)
+				.onUpdate( function() {
+					threeCtx.animControl.trigger();
+				}).start();
+		threeCtx.animateCallbacks["dolly"] = {
+			_this: null,
+			callback: function() {
+				threeCtx.body.position.x = kalman.x.filter(state.x);
+				threeCtx.body.position.y = kalman.y.filter(state.y);
+				threeCtx.body.position.z = kalman.z.filter(state.z);
+				threeCtx.cameraControls.camTarget.x = kalman.targetX.filter(state.targetX);
+				threeCtx.cameraControls.camTarget.y = kalman.targetY.filter(state.targetY);
+				threeCtx.cameraControls.camTarget.z = kalman.targetZ.filter(state.targetZ);
+				var cameraVec = new THREE.Vector3(
+					threeCtx.body.position.x,
+					threeCtx.body.position.y,
+					threeCtx.body.position.z);
+				if(cameraVec.distanceTo(finalCamera)<.1) {
+					var targetVec = new THREE.Vector3(
+						threeCtx.cameraControls.camTarget.x,
+						threeCtx.cameraControls.camTarget.y,
+						threeCtx.cameraControls.camTarget.z);
+					if(targetVec.distanceTo(finalTarget)<.1) {
+						delete threeCtx.animateCallbacks["dolly"];
+						TWEEN.remove(threeCtx.dolly);
+						delete threeCtx.dolly;
+					}
+				}
+			}
+		}
+		threeCtx.animControl.trigger();
 	}
 
 	View.Board.Display = function (aGame) {

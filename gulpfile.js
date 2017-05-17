@@ -323,6 +323,7 @@ gulp.task("build-browser-xdview", function () {
 		lib + "VREffect.js",
 		lib + "OBJLoader.js",
 		lib + "MTLLoader.js",
+		lib + "kalman.js",
 		src + "browser/jocly.ar.js",
 		src + "browser/jocly.state-machine.js",
 		src + "browser/jocly.xd-view.js"
