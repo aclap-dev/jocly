@@ -1,0 +1,49 @@
+<style>
+	table.psymbs {
+		text-align: center;
+	}
+	.psymb {
+		background-image: url({GAME}/res/images/wikipedia.png);
+		width: 100px;
+		height: 200px;
+	}
+	.psymbs td {
+		padding: 0 10px 0 10px;
+	}
+	.psymb-bold {
+		font-weight: bold;
+	}
+	.side {
+		float: right;
+		max-width: 100%;
+	}
+	@media screen and (max-width: 520px) {
+		.side {
+			float: none;
+			display: block;
+			max-width: 100%;
+			margin-right: auto;
+			margin-left: auto;
+		}		
+	}
+	
+	h1,h2,h3,h4 {
+		clear: both;
+	}
+</style>
+
+<p>Losing Chess is a game played by two people on a chessboard, with sixteen pieces (of six types) for each player. Each type of piece moves in a distinct way. 
+The goal of the game is be unable to make a move, either by not having any piece left on the board, or
+by having all remaining pieces blocked.</p>
+
+<p>Losing Chess follows the normal <a href="http://en.wikipedia.org/wiki/Rules_of_chess" target="_blank">Chess rules</a>,
+with the following changes:</p>
+
+<ul>
+	<li>capturing is compulsary: if there is a possible move that captures an opponent's piece, then
+		any move that does not result in a capture is invalid</li>
+	<li>the king has no special status: it can be captured and checks are not considered</li>
+	<li>castling is not possible</li>
+	<li>a pawn reaching the last row can promote to a king (in addition to Knight, Bishop, Rook and Queen)</li>
+	<li>stalemate is a win for the player that cannot make a move</li>
+</ul>
