@@ -2724,8 +2724,16 @@ if (window.JoclyXdViewCleanup)
 					break;
 
 				case "stopAnimations":
-					var animCount = TWEEN.getAll().length;
-					TWEEN.removeAll();
+					var animCount = 0;
+					var toBeDeleted = [];
+					TWEEN.getAll().forEach(function(tween) {
+						animCount++;
+						if(tween !== threeCtx.dolly)
+							toBeDeleted.push(tween);
+					});
+					toBeDeleted.forEach(function(tween) {
+						TWEEN.remove(tween);
+					});
 					resolve(animCount > 0);
 					break;
 
@@ -2813,6 +2821,7 @@ if (window.JoclyXdViewCleanup)
 								delete threeCtx.animateCallbacks["dolly"];
 								TWEEN.remove(threeCtx.dolly);
 								delete threeCtx.dolly;
+								threeCtx.animControl.stop(0);
 							}
 							break;
 						case "move":
@@ -2840,7 +2849,7 @@ if (window.JoclyXdViewCleanup)
 		if(options.direction=="ccw")
 			angle1 = angle0 + 2 * Math.PI;
 		var radius = Math.sqrt((x1-x0)*(x1-x0)+(y1-y0)*(y1-y0));
-		if(threeCtx.dolly)
+		if(threeCtx.dolly) 
 			TWEEN.remove(threeCtx.dolly);
 		var state = {};
 		function StartSpinning() {
