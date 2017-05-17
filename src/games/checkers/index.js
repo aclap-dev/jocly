@@ -902,6 +902,69 @@ exports.games = (function() {
 			"viewScripts": config_view_js_4
 		},
 		{
+			"name": "suicide-checkers",
+			"modelScripts": modelScripts_3,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Suicide checkers",
+					"summary": "A.k.a Giveaway checkers or Anti-checkers",
+					"rules": "rules-suicide-checkers.html",
+					"maxLevel": 20,
+					"plazza": "true",
+					"thumbnail": "draughts8-suicide-thumb3d.png",
+					"module": "checkers",
+					"description": "description.html",
+					"credits": "credits.html",
+					"js": modelScripts_3,
+					"gameOptions": {
+						"preventRepeat": true,
+						"width": 4,
+						"height": 8,
+						"initial": config_model_gameOptions_initial_2,
+						"variant": {
+							"mustMoveForwardStrict": true,
+							"lastRowCrown": true,
+							"captureLongestLine": true,
+							"longRangeKing": false,
+							"kingCaptureShort": true,
+							"lastRowFactor": 0.001,
+							"kingValue": 2,
+							"whiteStarts": false,
+							"canCaptureBackward": false,
+							"suicide": true,
+							"noMove": "win"
+						},
+						"invertNotation": true,
+						"uctTransposition": "state"
+					},
+					"levels": config_model_levels_7
+				},
+				"view": {
+					"title-en": "Draughts View",
+					"preferredRatio": 1,
+					"js": config_view_js_4,
+					"skins": config_view_skins_8,
+					"visuals": {
+						"600x600": [
+							"res/visuals/english-draughts-600x600-3d.jpg",
+							"res/visuals/english-draughts-600x600-2d.jpg"
+						]
+					},
+					"sounds": config_view_sounds_2,
+					"module": "checkers",
+					"css": config_view_css_2,
+					"switchable": true,
+					"animateSelfMoves": false,
+					"useNotation": true,
+					"useShowMoves": true,
+					"defaultOptions": config_view_defaultOptions,
+					"xdView": true
+				}
+			},
+			"viewScripts": config_view_js_4
+		},
+		{
 			"name": "brazilian-draughts",
 			"modelScripts": modelScripts_3,
 			"config": {

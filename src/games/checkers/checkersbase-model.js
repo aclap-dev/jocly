@@ -66,6 +66,7 @@
 		this.g.drawKvs2K=true;
 		this.g.whiteStarts=true;
 		this.g.king180deg=false;
+		this.g.suicide=false;
 		
 		if(this.mOptions.variant)
 			for(var k in this.mOptions.variant)
@@ -499,6 +500,10 @@
 				this.mFinished=true;
 				this.mWinner=-this.mWho;
 				break;
+			case "win":
+				this.mFinished=true;
+				this.mWinner=this.mWho;
+				break;
 			default:
 				this.mFinished=true;
 				this.mWinner=JocGame.DRAW;
@@ -562,12 +567,12 @@
 	
 		if(this.pCount[1]==0) {
 			this.mFinished=true;
-			this.mWinner=JocGame.PLAYER_A;
+			this.mWinner=aGame.g.suicide ? JocGame.PLAYER_B : JocGame.PLAYER_A;
 			return;
 		}
 		if(this.pCount[0]==0) {
 			this.mFinished=true;
-			this.mWinner=JocGame.PLAYER_B;
+			this.mWinner=aGame.g.suicide ? JocGame.PLAYER_A : JocGame.PLAYER_B;
 			return;
 		}
 		
@@ -588,6 +593,9 @@
 				}
 			}
 			this.mEvaluation += (rowSumA-rowSumB) * aGame.g.lastRowFactor;
+
+			if(aGame.g.suicide)
+				this.mEvaluation = -this.mEvaluation;
 		}
 	
 		//JocLog("Evaluation",this.mEvaluation,this.pCount);
