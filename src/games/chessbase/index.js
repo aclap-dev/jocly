@@ -1,4 +1,4 @@
-exports.games = (function() {
+exports.games = (function () {
 	var modelScripts = [
 		"base-model.js",
 		"grid-geo-model.js",
@@ -2868,7 +2868,9 @@ exports.games = (function() {
 				"model": {
 					"title-en": "360 Chess Authoring",
 					"summary": "Inventing the 360 Chess variant on a cube",
-					"rules": config_model_rules,
+					"rules": {
+						"en": "cubic-rules.html"
+					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "cubic-chess-thumb.png",
