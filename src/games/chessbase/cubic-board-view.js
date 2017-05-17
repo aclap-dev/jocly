@@ -542,7 +542,7 @@
 							canvas[channel]=canvas0;
 						});
 						spec.createMaterial.call($this,spec,canvas,function(material) {
-							material.emissive={r:.5,g:.5,b:.5};
+							material.emissive={r:0,g:0,b:0};
 							if($this.cbView.fences && $this.cbView.fences[fence])
 								material.color.set($this.cbView.fences[fence]);
 							var mesh=new THREE.Mesh(meshGeometry,material);
@@ -707,9 +707,9 @@
 			var texBoardDiffuse = new THREE.Texture(canvas.diffuse);
 			texBoardDiffuse.needsUpdate = true;
 			var matSpec={
-				specular: '#111111',
-				emissive: '#ffffff',
-				shininess: 500,
+				specular: '#010101',
+				//emissive: '#ffffff',
+				shininess: 200,
 				map: texBoardDiffuse,
 			}
 			if(canvas.bump) {
@@ -859,7 +859,7 @@
 	}
 	
 	var lightPos = 14;
-	var lightInt = 1.2;
+	var lightInt = 1;
 
 	View.Game.cbExtraLights = [{
 		color: 0xffffff,
