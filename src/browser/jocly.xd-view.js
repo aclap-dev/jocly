@@ -2840,6 +2840,16 @@ if (window.JoclyXdViewCleanup)
 	}
 
 	function SpinCamera(options) {
+		function GetKalman() {
+			var R = .001;
+			if(typeof options.smooth!="undefined")
+				R = options.smooth;
+			return new KalmanFilter({R: R});
+		}
+		var kalman = {
+			x: GetKalman(),
+			y: GetKalman(),
+		}
 		var x0 = threeCtx.cameraControls.camTarget.x;
 		var y0 = threeCtx.cameraControls.camTarget.z;
 		var x1 = threeCtx.body.position.x;
@@ -2865,8 +2875,8 @@ if (window.JoclyXdViewCleanup)
 		threeCtx.animateCallbacks["dolly"] = {
 			_this: null,
 			callback: function() {
-				threeCtx.body.position.x = x0 + radius * Math.cos(state.angle);
-				threeCtx.body.position.z = y0 + radius * Math.sin(state.angle);
+				threeCtx.body.position.x = kalman.x.filter(x0 + radius * Math.cos(state.angle));
+				threeCtx.body.position.z = kalman.y.filter(y0 + radius * Math.sin(state.angle));
 			}
 		};
 		StartSpinning();
@@ -2876,7 +2886,7 @@ if (window.JoclyXdViewCleanup)
 
 	function MoveCamera(options) {
 		function GetKalman() {
-			var R = .2;
+			var R = .001;
 			if(typeof options.smooth!="undefined")
 				R = options.smooth;
 			return new KalmanFilter({R: R});
