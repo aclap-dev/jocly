@@ -1024,56 +1024,6 @@ exports.games = (function() {
 			"viewScripts": config_view_js_4
 		},
 		{
-			"name": "brazilian-draughts-hlwn",
-			"modelScripts": modelScripts_3,
-			"config": {
-				"status": true,
-				"model": {
-					"title-en": "Halloween Draughts",
-					"summary": "Same as international checkers on a 8x8 board.",
-					"thumbnail": "halloweenthumb.png",
-					"module": "checkers",
-					"maxLevel": 20,
-					"obsolete": true,
-					"plazza": "broken",
-					"rules": "rules-brazilian-draughts.html",
-					"description": "description.html",
-					"credits": "credits.html",
-					"js": modelScripts_3,
-					"gameOptions": config_model_gameOptions,
-					"levels": config_model_levels_7
-				},
-				"view": {
-					"title-en": "Draughts View",
-					"preferredRatio": 1,
-					"js": config_view_js_5,
-					"skins": [
-						{
-							"name": "halloween",
-							"title": "Halloween"
-						}
-					],
-					"visuals": {
-						"600x600": [
-							"res/visuals/halloween-draughts-600x600-2d.jpg",
-							"res/visuals/halloween-draughts-b-600x600-2d.jpg"
-						]
-					},
-					"module": "checkers",
-					"css": config_view_css_2,
-					"switchable": true,
-					"animateSelfMoves": false,
-					"useNotation": true,
-					"useShowMoves": true,
-					"defaultOptions": config_view_defaultOptions,
-					"preloadImages": {
-						"pieces": "res/images/pieces.png"
-					}
-				}
-			},
-			"viewScripts": config_view_js_5
-		},
-		{
 			"name": "german-draughts",
 			"modelScripts": modelScripts_3,
 			"config": {
