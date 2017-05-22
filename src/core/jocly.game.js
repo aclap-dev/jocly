@@ -748,6 +748,8 @@ JocGame.prototype.Engine = function(aBoard, aLevel, aBAlpha, aAlpha, aPotential)
 	context.mBoard.mFinished = false;
 	context.mBoard.mWinner = JocGame.DRAW;
 	this.mCurrentLevel=aLevel; 
+	if(typeof context.mBoard.mMoves == "undefined")
+		context.mBoard.mMoves = [];
 	if(context.mBoard.mMoves.length==0)
 		context.mBoard.GenerateMoves(this);
 
@@ -995,6 +997,7 @@ JocGame.prototype.BackTo = function(aIndex,moves) {
 		this.mBoard.InitialPosition(this);
 	if(this.mInitial && this.mInitial.turn)
 		this.mWho = this.mInitial.turn;
+	this.mBoard.mMoves=[];
 	this.mBoard.mWho = this.mWho;
 	this.mBestMoves = [];
 	this.mVisitedBoards={};
@@ -1033,6 +1036,7 @@ JocGame.prototype.ExportInitialBoardState = function(format) {
 JocGame.prototype.Load = function(gameData) {
 	this.mWho = JocGame.PLAYER_A;
 	this.mBoard = new (this.GetBoardClass())(this);
+	this.mBoard.mMoves=[];
 
 	if(gameData.initialBoard) {
 		if(typeof this.Import!="function")
