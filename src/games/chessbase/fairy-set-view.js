@@ -702,12 +702,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/star/star-diffusemap.jpg",
+								diffImg : "/res/fairy/star/star-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/star/star-normalmap.jpg",
+								normalImg: "/res/fairy/star/star-normalmap.jpg",
 							}
 						}
 					}
@@ -724,12 +724,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/bow/bow-diffusemap.jpg",
+								diffImg : "/res/fairy/bow/bow-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/bow/bow-normalmap.jpg",
+								normalImg: "/res/fairy/bow/bow-normalmap.jpg",
 							}
 						}
 					}
@@ -746,12 +746,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/prince/prince-diffusemap.jpg",
+								diffImg : "/res/fairy/prince/prince-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/prince/prince-normalmap.jpg",
+								normalImg: "/res/fairy/prince/prince-normalmap.jpg",
 							}
 						}
 					}
@@ -768,12 +768,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/rhino/rhino-diffusemap.jpg",
+								diffImg : "/res/fairy/rhino/rhino-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/rhino/rhino-normalmap.jpg",
+								normalImg: "/res/fairy/rhino/rhino-normalmap.jpg",
 							}
 						}
 					}
@@ -790,12 +790,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/bull/bull-diffusemap.jpg",
+								diffImg : "/res/fairy/bull/bull-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/bull/bull-normalmap.jpg",
+								normalImg: "/res/fairy/bull/bull-normalmap.jpg",
 							}
 						}
 					}
@@ -812,12 +812,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/corporal/corporal-diffusemap.jpg",
+								diffImg : "/res/fairy/corporal/corporal-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/corporal/corporal-normalmap.jpg",
+								normalImg: "/res/fairy/corporal/corporal-normalmap.jpg",
 							}
 						}
 					}
@@ -834,12 +834,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/antelope/antelope-diffusemap.jpg",
+								diffImg : "/res/fairy/antelope/antelope-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/antelope/antelope-normalmap.jpg",
+								normalImg: "/res/fairy/antelope/antelope-normalmap.jpg",
 							}
 						}
 					}
@@ -856,12 +856,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/machine/machine-diffusemap.jpg",
+								diffImg : "/res/fairy/machine/machine-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/machine/machine-normalmap.jpg",
+								normalImg: "/res/fairy/machine/machine-normalmap.jpg",
 							}
 						}
 					}
@@ -878,12 +878,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/buffalo/buffalo-diffusemap.jpg",
+								diffImg : "/res/fairy/buffalo/buffalo-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/buffalo/buffalo-normalmap.jpg",
+								normalImg: "/res/fairy/buffalo/buffalo-normalmap.jpg",
 							}
 						}
 					}
@@ -900,12 +900,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "res/fairy/ship/ship-diffusemap.jpg",
+								diffImg : "/res/fairy/ship/ship-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "res/fairy/ship/ship-normalmap.jpg",
+								normalImg: "/res/fairy/ship/ship-normalmap.jpg",
 							}
 						}
 					}
