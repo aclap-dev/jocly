@@ -220,10 +220,16 @@
 		};
 	}
 
-	/* Make the knight jump when moving */
+	/* Make the jumps */
 	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
-
-		if(("_N_Q_E_D_L_H_X_Z_W_J_T_M_C_A_F_G_U_S_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
+		var geo=aGame.cbVar.geometry;
+		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
+		var dy=Math.abs(geo.R(aMove.t)-geo.R(aMove.f));
+		if(("_N_E_D_L_J_T_F_G_S_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
+			return Math.max(zFrom,zTo)+2000;
+		else if(("_A_C_M_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
+			return Math.max(zFrom,zTo)+2000;
+		else if(("_Z_W_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
 			return Math.max(zFrom,zTo)+2000;
 		else
 			return (zFrom+zTo)/2;
