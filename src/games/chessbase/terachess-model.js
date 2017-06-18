@@ -197,7 +197,8 @@
 
       0: {
       name : 'ipawnw',
-      abbrev : 'P',
+      abbrev : '',
+      fenAbbrev: 'P',
       aspect : 'fr-pawn',
       graph : this.cbInitialPawnGraph(geometry,1,confine),
       value : 0.5,
@@ -208,7 +209,8 @@
 
       1: {
       name : 'ipawnb',
-      abbrev : 'P',
+      abbrev : '',
+      fenAbbrev: 'P',
       aspect : 'fr-pawn',
       graph : this.cbInitialPawnGraph(geometry,-1,confine),
       value : 0.5,
