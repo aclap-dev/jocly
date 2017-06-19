@@ -46,16 +46,16 @@
 	View.Game.cbPromoSize = 1100;
 
 	// extending fairy pieces with some musketeer new pieces
-	View.Game.cbFairyTerachessPieceStyle3D = $.extend(true,{},View.Game.cbFairyPieceStyle3D,{
+	View.Game.cbFairyGigachessPieceStyle3D = $.extend(true,{},View.Game.cbFairyPieceStyle3D,{
 	});
 
 	View.Game.cbDefineView = function() {
 
-		var terachessBoardDelta = {
+		var gigachessBoardDelta = {
 			notationMode: "in",
 			notationDebug: true,
 		}
-		terachessBoardDelta3d = $.extend(true,{},terachessBoardDelta,
+		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
 			{
 				/*'colorFill' : {
 					".": "#575b36", // "rgba(180,213,80,.3)",
@@ -129,7 +129,7 @@
 			}
 		);
 
-		terachessBoardDelta2d = $.extend(true,{},terachessBoardDelta,
+		gigachessBoardDelta2d = $.extend(true,{},gigachessBoardDelta,
 			{
 				'colorFill' : {
 					".": "#ffffc0", // "white" cells
@@ -145,76 +145,62 @@
 			}
 		);
 
-		var terachessBoard3d = $.extend(true,{},this.cbGridBoardClassic3DMargin,terachessBoardDelta3d);
-		var terachessBoard2d = $.extend(true,{},this.cbGridBoardClassic2DMargin,terachessBoardDelta2d);
+		var gigachessBoard3d = $.extend(true,{},this.cbGridBoardClassic3DMargin,gigachessBoardDelta3d);
+		var gigachessBoard2d = $.extend(true,{},this.cbGridBoardClassic2DMargin,gigachessBoardDelta2d);
 
 		return {
 			coords: {
-				"2d": this.cbGridBoard.coordsFn.call(this,terachessBoard2d),
-				"3d": this.cbGridBoard.coordsFn.call(this,terachessBoard3d),
+				"2d": this.cbGridBoard.coordsFn.call(this,gigachessBoard2d),
+				"3d": this.cbGridBoard.coordsFn.call(this,gigachessBoard3d),
 			},
 			boardLayout: [
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
+	      		".#.#.#.#.#.#.#",
+	      		"#.#.#.#.#.#.#.",
 			],
 			board: {
 				"2d": {
-					draw: this.cbDrawBoardFn(terachessBoard2d),
+					draw: this.cbDrawBoardFn(gigachessBoard2d),
 				},
 				"3d": {
-					display: this.cbDisplayBoardFn(terachessBoard3d),
+					display: this.cbDisplayBoardFn(gigachessBoard3d),
 				},
 			},
 			clicker: {
 				"2d": {
-					width: 700,
-					height: 700,
+					width: 800,
+					height: 800,
 				},
 				"3d": {
-					scale: [0.45,0.45,0.45],
+					scale: [0.51428571428571,0.51428571428571,0.51428571428571],
 				},
 			},
 			pieces: this.cbFairyPieceStyle({
 				"default": {
 					"2d": {
-						width: 650,
-						height: 650,
-					},
+						width: 742.85714285714,
+						height: 742.85714285714,	
+					},			
 					"3d": {
-						scale: [0.3,0.3,0.3],
-						display: this.cbDisplayPieceFn(this.cbFairyTerachessPieceStyle3D)
+						scale: [0.34285714285714,0.34285714285714,0.34285714285714],
+						display: this.cbDisplayPieceFn(this.cbFairyGigachessPieceStyle3D)
 					},
 				},
 				"fr-amazon" :{
 					"3d": {
-												scale: [0.36,0.36,0.36],
+						scale: [0.41142857142857,0.41142857142857,0.41142857142857],
 					}
-				},
-				"fr-star" :{
-						"3d":{scale:[0.36,0.36,0.36]},
-					},
-				"fr-rhino" :{
-						"3d":{scale:[0.24,0.24,0.24]},
-				},
-				"fr-bull" :{
-						"3d":{scale:[0.21,0.21,0.21]},
-				},
-				"fr-antelope" :{
-						"3d":{scale:[0.24,0.24,0.24]},
 				},
 			}),
 		};
@@ -233,25 +219,5 @@
 			return Math.max(zFrom,zTo)+2000;
 		else
 			return (zFrom+zTo)/2;
-	}
-	/*
-	 * View.Board.xdDisplay overriding to prevent displaying black xtra pieces before setup
-	 */
-	var SuperViewBoardxdDisplay = View.Board.xdDisplay;
-	View.Board.xdDisplay = function(xdv, aGame) {
-		var size = 1060;
-		SuperViewBoardxdDisplay.apply(this,arguments);
-
-	}
-
-
-	/*
-	 * View.Game.xdInit overriding to create initial setup gadgets
-	 */
-	var SuperViewGameXdInit = View.Game.xdInit;
-	View.Game.xdInit = function(xdv) {
-		var size = 1060;
-		var $this=this;
-		SuperViewGameXdInit.apply(this,arguments);
 	}
 })();
