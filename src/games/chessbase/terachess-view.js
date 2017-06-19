@@ -51,10 +51,11 @@
 
 	View.Game.cbDefineView = function() {
 
-		var terachessBoardDelta = {
-			notationMode: "in",
-			notationDebug: true,
+        var terachessBoardDelta = {
+			notationMode: "out",
+			//notationDebug: true,
 		}
+		
 		terachessBoardDelta3d = $.extend(true,{},terachessBoardDelta,
 			{
 				/*'colorFill' : {

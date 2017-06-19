@@ -50,11 +50,12 @@
 	});
 
 	View.Game.cbDefineView = function() {
-
+		
 		var gigachessBoardDelta = {
-			notationMode: "in",
-			notationDebug: true,
+			notationMode: "out",
+			//notationDebug: true,
 		}
+
 		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
 			{
 				/*'colorFill' : {
