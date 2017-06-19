@@ -1097,6 +1097,28 @@ exports.games = (function () {
 		"staunton-set-view.js",
 		"sweet16-view.js"
 	]
+	var modelScripts_tera = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"terachess-model.js"
+	]
+	var config_view_js_tera = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"terachess-view.js"
+	]
+	var modelScripts_giga = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"gigachess-model.js"
+	]
+	var config_view_js_giga = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"gigachess-view.js"
+	]
 	return [
 		{
 			"name": "classic-chess",
@@ -4749,6 +4771,268 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_44
+		},
+		{
+			"name": "tera-chess",
+			"modelScripts": modelScripts_tera,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Terachess",
+					"summary": "Chess on 16x16 with fairy pieces",
+					"rules": {
+						"en": "terachess-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "terachess-thumb.png",
+					"released": 1497442763,
+					"credits": {
+						"en": "terachess-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+					"obsolete": false,
+					"js": modelScripts_tera,
+					"description": {
+						"en": "terachess-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/terachess-600x600-3d.jpg",
+							"res/visuals/terachess-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png",
+								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/corporal/corporal.js",
+								"image|/res/fairy/corporal/corporal-diffusemap.jpg",
+								"image|/res/fairy/corporal/corporal-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
+								"image|/res/fairy/prince/prince-diffusemap.jpg",
+								"image|/res/fairy/prince/prince-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
+								"image|/res/fairy/rook/rook-diffusemap.jpg",
+								"image|/res/fairy/rook/rook-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bishop/bishop.js",
+								"image|/res/fairy/bishop/bishop-diffusemap.jpg",
+								"image|/res/fairy/bishop/bishop-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/knight/knight.js",
+								"image|/res/fairy/knight/knight-diffusemap.jpg",
+								"image|/res/fairy/knight/knight-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/queen/queen.js",
+								"image|/res/fairy/queen/queen-diffusemap.jpg",
+								"image|/res/fairy/queen/queen-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/king/king.js",
+								"image|/res/fairy/king/king-diffusemap.jpg",
+								"image|/res/fairy/king/king-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/star/star.js",
+								"image|/res/fairy/star/star-diffusemap.jpg",
+								"image|/res/fairy/star/star-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"image|/res/fairy/bow/bow-diffusemap.jpg",
+								"image|/res/fairy/bow/bow-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rhino/rhino.js",
+								"image|/res/fairy/rhino/rhino-diffusemap.jpg",
+								"image|/res/fairy/rhino/rhino-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bull/bull.js",
+								"image|/res/fairy/bull/bull-diffusemap.jpg",
+								"image|/res/fairy/bull/bull-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/antelope/antelope.js",
+								"image|/res/fairy/antelope/antelope-diffusemap.jpg",
+								"image|/res/fairy/antelope/antelope-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
+								"image|/res/fairy/lion/lion-diffusemap.jpg",
+								"image|/res/fairy/lion/lion-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/elephant/elephant.js",
+								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
+								"image|/res/fairy/elephant/elephant-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
+								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
+								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/machine/machine.js",
+								"image|/res/fairy/machine/machine-diffusemap.jpg",
+								"image|/res/fairy/machine/machine-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/buffalo/buffalo.js",
+								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
+								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/ship/ship.js",
+								"image|/res/fairy/ship/ship-diffusemap.jpg",
+								"image|/res/fairy/ship/ship-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
+								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
+								"image|/res/fairy/eagle/eagle-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
+								"image|/res/fairy/camel/camel-diffusemap.jpg",
+								"image|/res/fairy/camel/camel-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/amazon/amazon.js",
+								"image|/res/fairy/amazon/amazon-diffusemap.jpg",
+								"image|/res/fairy/amazon/amazon-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/marshall/marshall.js",
+								"image|/res/fairy/marshall/marshall-diffusemap.jpg",
+								"image|/res/fairy/marshall/marshall-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/cardinal/cardinal.js",
+								"image|/res/fairy/cardinal/cardinal-diffusemap.jpg",
+								"image|/res/fairy/cardinal/cardinal-normalmap.jpg"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_9
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_tera,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_tera
+		},
+		{
+			"name": "giga-chess",
+			"modelScripts": modelScripts_giga,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Gigachess",
+					"summary": "Chess on 14x14 with fairy pieces",
+					"rules": {
+						"en": "gigachess-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "gigachess-thumb.png",
+					"released": 1497771910,
+					"credits": {
+						"en": "gigachess-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+					"obsolete": false,
+					"js": modelScripts_giga,
+					"description": {
+						"en": "gigachess-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/gigachess-600x600-3d.jpg",
+							"res/visuals/gigachess-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png",
+								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/corporal/corporal.js",
+								"image|/res/fairy/corporal/corporal-diffusemap.jpg",
+								"image|/res/fairy/corporal/corporal-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
+								"image|/res/fairy/prince/prince-diffusemap.jpg",
+								"image|/res/fairy/prince/prince-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
+								"image|/res/fairy/rook/rook-diffusemap.jpg",
+								"image|/res/fairy/rook/rook-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bishop/bishop.js",
+								"image|/res/fairy/bishop/bishop-diffusemap.jpg",
+								"image|/res/fairy/bishop/bishop-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/knight/knight.js",
+								"image|/res/fairy/knight/knight-diffusemap.jpg",
+								"image|/res/fairy/knight/knight-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/queen/queen.js",
+								"image|/res/fairy/queen/queen-diffusemap.jpg",
+								"image|/res/fairy/queen/queen-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/king/king.js",
+								"image|/res/fairy/king/king-diffusemap.jpg",
+								"image|/res/fairy/king/king-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"image|/res/fairy/bow/bow-diffusemap.jpg",
+								"image|/res/fairy/bow/bow-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
+								"image|/res/fairy/lion/lion-diffusemap.jpg",
+								"image|/res/fairy/lion/lion-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/elephant/elephant.js",
+								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
+								"image|/res/fairy/elephant/elephant-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
+								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
+								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/machine/machine.js",
+								"image|/res/fairy/machine/machine-diffusemap.jpg",
+								"image|/res/fairy/machine/machine-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/buffalo/buffalo.js",
+								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
+								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/ship/ship.js",
+								"image|/res/fairy/ship/ship-diffusemap.jpg",
+								"image|/res/fairy/ship/ship-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
+								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
+								"image|/res/fairy/eagle/eagle-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
+								"image|/res/fairy/camel/camel-diffusemap.jpg",
+								"image|/res/fairy/camel/camel-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/amazon/amazon.js",
+								"image|/res/fairy/amazon/amazon-diffusemap.jpg",
+								"image|/res/fairy/amazon/amazon-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/marshall/marshall.js",
+								"image|/res/fairy/marshall/marshall-diffusemap.jpg",
+								"image|/res/fairy/marshall/marshall-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/cardinal/cardinal.js",
+								"image|/res/fairy/cardinal/cardinal-diffusemap.jpg",
+								"image|/res/fairy/cardinal/cardinal-normalmap.jpg"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_9
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_giga,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_giga
 		}
 	]
 })()
