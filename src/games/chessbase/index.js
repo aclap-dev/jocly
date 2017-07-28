@@ -5152,8 +5152,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/leychessalpha-600x600-3d.jpg",
+							"res/visuals/leychessalpha-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
@@ -5274,8 +5274,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/knightetchess-600x600-3d.jpg",
+							"res/visuals/knightetchess-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
@@ -5396,8 +5396,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/armychess-600x600-3d.jpg",
+							"res/visuals/armychess-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
@@ -5518,8 +5518,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/4board-600x600-3d.jpg",
+							"res/visuals/4board-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
@@ -5640,8 +5640,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/cavalierchess-600x600-3d.jpg",
+							"res/visuals/cavalierchess-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
@@ -5762,8 +5762,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/metamachy-600x600-3d.jpg",
-							"res/visuals/metamachy-600x600-2d.jpg"
+							"res/visuals/grandcavalierchess-600x600-3d.jpg",
+							"res/visuals/grandcavalierchess-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
