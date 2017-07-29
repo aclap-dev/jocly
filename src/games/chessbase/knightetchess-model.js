@@ -73,12 +73,9 @@
 				},
 				
 				4: {
-					name: 'unicorn',
+					name: 'knightrider',
 					aspect: 'fr-unicorn',
-					graph: this.cbMergeGraphs(geometry,
-							this.cbLongRangeGraph(geometry,[[2,-1],[2,1],[-2,-1],[-2,1],[-1,2],[-1,-2],[1,2],[1,-2]]),
-							 this.cbKingGraph(geometry),
-							 ),
+					graph: this.cbLongRangeGraph(geometry,[[2,-1],[2,1],[-2,-1],[-2,1],[-1,2],[-1,-2],[1,2],[1,-2]]),
 					value: 2.9,
 					abbrev: 'N',
 					initial: [{s:1,p:1},{s:1,p:6},{s:-1,p:57},{s:-1,p:62}],
