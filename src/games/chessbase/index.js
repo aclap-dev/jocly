@@ -5619,20 +5619,20 @@ exports.games = (function () {
 					"title-en": "Cavalier Chess",
 					"summary": "Chess with Knightet Pieces",
 					"rules": {
-						"en": "cavalier-rules.html"
+						"en": "cavalierchess-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "knight-thumbnail.png",
 					"released": 1402412178,
 					"credits": {
-						"en": "cavalier-credits.html"
+						"en": "cavalierchess-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_cc,
 					"description": {
-						"en": "cavalier-description.html"
+						"en": "cavalierchess-description.html"
 					},
 					"levels": config_model_levels_10
 				},
@@ -5741,20 +5741,20 @@ exports.games = (function () {
 					"title-en": "Grand Cavalier Chess",
 					"summary": "Chess with Knightet Pieces",
 					"rules": {
-						"en": "grandcavalier-rules.html"
+						"en": "grandcavalierchess-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "knight-thumbnail.png",
 					"released": 1402412178,
 					"credits": {
-						"en": "grandcavalier-credits.html"
+						"en": "grandcavalierchess-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_gc,
 					"description": {
-						"en": "grandcavalier-description.html"
+						"en": "grandcavalierchess-description.html"
 					},
 					"levels": config_model_levels_10
 				},
