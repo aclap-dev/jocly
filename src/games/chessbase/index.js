@@ -1163,17 +1163,6 @@ exports.games = (function () {
  		"fairy-set-view.js",
  		"4board-view.js"
 	]
-	var modelScripts_lcb = [
- 		"base-model.js",
- 		"grid-geo-model.js",
- 		"leychessbeta-model.js"
- 	]
- 	var config_view_js_lcb = [
- 		"base-view.js",
- 		"grid-board-view.js",
- 		"fairy-set-view.js",
- 		"leychessbeta-view.js"
-	]
 	var modelScripts_cc = [
  		"base-model.js",
  		"grid-geo-model.js",
