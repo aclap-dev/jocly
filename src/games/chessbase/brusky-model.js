@@ -144,9 +144,9 @@
 					return [0];
 				else if(piece.t==3)
 					return [2];
-				else if(piece.t==0 && geometry.R(move.t)==7)
+				else if(piece.t==0 && (move.t in promo[1]))
 					return [4,5,6,7];
-				else if(piece.t==2 && geometry.R(move.t)==0)
+				else if(piece.t==2 && (move.t in promo[-1]))
 					return [4,5,6,7];
 				return [];
 			},
