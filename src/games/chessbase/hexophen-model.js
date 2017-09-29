@@ -31,9 +31,8 @@
 
 
 
-	var promo = {
-		"1": { 30:1, 42:1 53:1, 65:1, 75:1, 86:1, 96:1 },
-		"-1": { 23:1, 34:1, 44:1, 55:1, 66:1, 78:1, 89:1 }
+	var promo = {	"1": { 30:1, 42:1, 52:1, 64:1, 74:1, 86:1, 96:1 },
+   		       "-1": { 23:1, 34:1, 45:1, 56:1, 67:1, 78:1, 89:1 }
 	};
 
 	// for each side and position, calculate distance to promotion line
@@ -67,7 +66,7 @@
 					value: 1,
 					abbrev: '',
 					fenAbbrev: 'P',
-					epCatch: true,
+					epCatch: true
 				},
 
 				1: {
@@ -77,8 +76,8 @@
 					value: 1,
 					abbrev: '',
 					fenAbbrev: 'P',
-					initial: [{s:1,p:23},{s:1,p:35},{s:1,p:46},{s:1,p:68},{s:1,p:79},{s:1,p:89}],
-					epTarget: true,
+					initial: [{s:1,p:2},{s:1,p:13},{s:1,p:24},{s:1,p:35},{s:1,p:46},{s:1,p:57},{s:1,p:68},{s:1,p:79},{s:1,p:90},{s:1,p:101},{s:1,p:112}],
+					epTarget: true
 				},
 
 				2: {
@@ -88,7 +87,7 @@
 					value: 1,
 					abbrev: '',
 					fenAbbrev: 'P',
-					epCatch: true,
+					epCatch: true
 				},
 
 				3: {
@@ -98,8 +97,8 @@
 					value: 1,
 					abbrev: '',
 					fenAbbrev: 'P',
-					initial: [{s:-1,p:30},{s:-1,p:41},{s:-1,p:51},{s:-1,p:73},{s:-1,p:85},{s:-1,p:96}],
-					epTarget: true,
+					initial: [{s:-1,p:7},{s:-1,p:19},{s:-1,p:29},{s:-1,p:41},{s:-1,p:51},{s:-1,p:63},{s:-1,p:73},{s:-1,p:85},{s:-1,p:95},{s:-1,p:107},{s:-1,p:117}],
+					epTarget: true
 				},
 
 				4: {
@@ -107,7 +106,7 @@
 					graph: this.cbGLKnightGraph(geometry),
 					value: 2.9,
 					abbrev: 'N',
-					initial: [{s:1,p:45},{s:1,p:67},{s:-1,p:52},{s:-1,p:74}],
+					initial: [{s:1,p:23},{s:1,p:45},{s:1,p:67},{s:-1,p:52},{s:-1,p:74},{s:-1,p:96}]
 				},
 
 				5: {
@@ -115,7 +114,7 @@
 					graph: this.cbGLBishopGraph(geometry),
 					value: 3.1,
 					abbrev: 'B',
-					initial: [{s:1,p:55},{s:1,p:56},{s:1,p:57},{s:-1,p:65},{s:-1,p:64},{s:-1,p:63}],
+					initial: [{s:1,p:44},{s:1,p:56},{s:1,p:89},{s:-1,p:30},{s:-1,p:64},{s:-1,p:75}]
 				},
 
 				6: {
@@ -124,7 +123,7 @@
 					value: 5,
 					abbrev: 'R',
 					initial: [{s:1,p:34},{s:1,p:78},{s:-1,p:42},{s:-1,p:86}],
-					castle: true,
+					castle: true
 				},
 
 				7: {
@@ -132,7 +131,7 @@
 					graph: this.cbGLQueenGraph(geometry),
 					value: 9,
 					abbrev: 'Q',
-					initial: [{s:1,p:44},{s:-1,p:53}],
+					initial: [{s:1,p:66},{s:-1,p:53}]
 				},
 
 				8: {
@@ -140,8 +139,8 @@
 					isKing: true,
 					graph: this.cbGLKingGraph(geometry),
 					abbrev: 'K',
-					initial: [{s:1,p:66},{s:-1,p:75}],
-				},
+					initial: [{s:1,p:55},{s:-1,p:65}]
+				}
 
 			},
 
@@ -221,9 +220,9 @@
 				if(minorPiecesMoved!=0) {
 					evalValues['minorPiecesMoved']=minorPiecesMoved;
 				}
-			},
+			}
 
 		};
-	}
+	};
 
 })();
