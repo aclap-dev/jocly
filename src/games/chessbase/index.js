@@ -677,6 +677,7 @@ exports.games = (function () {
 		"staunton-set-view.js",
 		"mccooey-view.js"
 	]
+        
 	var modelScripts_21 = [
 		"base-model.js",
 		"hex-geo-model.js",
@@ -1141,6 +1142,17 @@ exports.games = (function () {
  		"fairy-set-view.js",
  		"wild-tamerlane-view.js"
  	]
+        var modelScripts_50 = [
+		"base-model.js",
+		"hex-geo-model.js",
+		"hexophen-model.js"
+	];
+	var config_view_js_50 = [
+		"base-view.js",
+		"hex-board-view.js",
+		"staunton-set-view.js",
+		"hexophen-view.js"
+	];
 	return [
 		{
 			"name": "classic-chess",
@@ -2617,6 +2629,57 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_20
+		},
+                {
+			"name": "hexophen-chess",
+			"modelScripts": modelScripts_50,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Hexophen Chess",
+					"summary": "Hexagonal Chess",
+					"rules": {
+						"en": "hexophen-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "hexophen-thumb.png",
+					"released": 1507402942,
+					"credits": {
+						"en": "hexophen-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+					"obsolete": false,
+					"js": modelScripts_50,
+					"description": {
+						"en": "hexophen-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/hexophen-600x600-3d.jpg",
+							"res/visuals/hexophen-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css_2,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": config_view_skins_8,
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_50,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_50
 		},
 		{
 			"name": "shafran-chess",
