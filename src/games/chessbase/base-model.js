@@ -239,6 +239,7 @@
 		this.g.distGraph = this.cbVar.geometry.GetDistances();
 		
 		this.cbPiecesCount = 0;
+    if(this.cbMaxRepeats === undefined) this.cbMaxRepeats = 3;
 		
 		this.g.castleablePiecesCount = { '1': 0, '-1': 0 };
 		for(var i in cbVar.pieceTypes) {
@@ -326,7 +327,7 @@
 			}
 		this.zSign=aGame.zobrist.update(0,"who",-1);
 
-		this.noCaptCount = 0;
+		this.noCaptCount = this.check = this.oppoCheck = 0;
 		this.mWho = 1;
 
 		if(aGame.mInitial) {
@@ -442,6 +443,7 @@
 			'-1': aBoard.kings[-1],
 		}
 		this.check=aBoard.check;
+		this.oppoCheck=aBoard.oppoCheck;
 		if(aBoard.lastMove)
 			this.lastMove={
 				f: aBoard.lastMove.f,
@@ -607,7 +609,9 @@
 			if(aGame.g.pTypes[piece.t].isKing)
 				this.kings[piece.s]=move.t;
 		}
-		this.check=!!move.ck;
+		var h=this.oppoCheck;
+		this.oppoCheck=this.check;
+		this.check=(move.ck ? h+1 : 0);
 		this.lastMove={
 			f: move.f,
 			t: move.t,
@@ -660,9 +664,13 @@
 				material["1"].count[i]=material["-1"].count[i]=0;
 		}
 		
-		if(aGame.mOptions.preventRepeat && aGame.GetRepeatOccurence(this)>2) {
-			this.mFinished=true;
-			this.mWinner=aGame.cbOnPerpetual?who*aGame.cbOnPerpetual:JocGame.DRAW;
+		if(aGame.mOptions.preventRepeat &&
+			 aGame.GetRepeatOccurence(this)>=aGame.cbMaxRepeats) {
+			if(typeof aGame.cbPerpEval == 'function')
+				this.mWinner=aGame.cbPerpEval(this, aGame);
+			else
+				this.mWinner=aGame.cbOnPerpetual?who*aGame.cbOnPerpetual:JocGame.DRAW;
+			this.mFinished=(this.mWinner !== undefined);
 			return;
 		}
 		
@@ -676,7 +684,7 @@
 		var posValue={ '1': 0, '-1': 0 };
 		
 		var castlePiecesCount={ '1': 0, '-1': 0 };
-		var kingMoved={ '1': false, '-1': false };
+		var kingMoved={ '1': 0, '-1': 0 }; // kludge: should become false or true
 		
 		var pieces=this.pieces;
 		var piecesLength=pieces.length;
@@ -702,6 +710,11 @@
 				else
 					byType[piece.t].push(piece);					
 			}
+		}
+
+		if(kingMoved[who]===0 && this.kings[who]!==undefined) { // no King found, but had one before
+			this.mWinner=-who; this.mFinished=true; // opponent wins
+			return;
 		}
 		
 		if(this.lastMove && this.lastMove.c!=null) {
@@ -1019,7 +1032,7 @@
 			this.mFinished=true;
 			this.mWinner=aGame.cbOnStaleMate?aGame.cbOnStaleMate*this.mWho:JocGame.DRAW;
 			if(this.check)
-				this.mWinner=-this.mWho;
+				this.mWinner=(aGame.cbMateEval ? aGame.cbMateEval(this) : -this.mWho);
 		} else if(this.ending[this.mWho]) {
 			if(!kingOnly) {
 				for(var i=0;i<this.mMoves.length;i++)
