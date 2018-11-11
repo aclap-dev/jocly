@@ -10,6 +10,10 @@
 	var FLAG_SCREEN_CAPTURE = 0x80000; // capture if occupied by and a piece has been jumped in the path (like cannon in xiangqi) 
 	var FLAG_CAPTURE_KING = 0x100000; // capture if occupied by enemy king
 	var FLAG_CAPTURE_NO_KING = 0x200000; // capture if not occupied by enemy king
+	var FLAG_SPECIAL = 0x400000; // non-captures to go on special move stack
+	var FLAG_CAPTURE_SELF = 0x800000; // special move to square occupied by friend
+	var FLAG_SPECIAL_CAPTURE = 0x2000000; // special move to square occupied by foe
+	var FLAG_THREAT = 0x1000000; // forces inclusion in threat graph
 	Model.Game.cbConstants = {
 		MASK: MASK,
 		FLAG_MOVE: FLAG_MOVE,
@@ -18,6 +22,10 @@
 		FLAG_SCREEN_CAPTURE: FLAG_SCREEN_CAPTURE,
 		FLAG_CAPTURE_KING: FLAG_CAPTURE_KING,
 		FLAG_CAPTURE_NO_KING: FLAG_CAPTURE_NO_KING,
+		FLAG_SPECIAL: FLAG_SPECIAL,
+		FLAG_CAPTURE_SELF: FLAG_CAPTURE_SELF,
+		FLAG_SPECIAL_CAPTURE: FLAG_SPECIAL_CAPTURE,
+		FLAG_THREAT: FLAG_THREAT,
 	}
 	var USE_TYPED_ARRAYS = typeof Int32Array != "undefined";
 	
@@ -139,7 +147,7 @@
 						} else if(tg1 & FLAG_CAPTURE_NO_KING) {
 							$this.cbUseCaptureNoKing=true;
 							line.unshift({d:tg1 & MASK,a:pos,tnk:typeName});
-						} else if(tg1 & FLAG_CAPTURE)
+						} else if(tg1 & (FLAG_CAPTURE | FLAG_THREAT))
 							line.unshift({d:tg1 & MASK,a:pos,t:typeName});
 						else if(tg1 & FLAG_STOP)
 							line.unshift({d:tg1 & MASK,a:pos});
@@ -859,7 +867,7 @@
 				var line=graph[j];
 				var screen=false;
 				var lineLength=line.length;
-				var lastPos=null;
+				var lastPos=piece.p;
 				for(var k=0;k<lineLength;k++) {
 					var tg1=line[k];
 					var pos1=tg1 & MASK;
@@ -879,7 +887,15 @@
 								t: pos1,
 								c: null,
 								a: pType.abbrev,
-								ept: lastPos==null || !pType.epTarget?undefined:lastPos,
+								ept: lastPos==piece.p || !pType.epTarget?undefined:lastPos,
+							});
+						else if(tg1 & FLAG_SPECIAL)
+							this.specials.push({
+								f: piece.p,
+								t: pos1,
+								c: null,
+								a: pType.abbrev,
+								x: tg1 ^ lastPos
 							});
 					} else if(tg1 & FLAG_SCREEN_CAPTURE) {
 						var piece1=this.pieces[index1];
@@ -901,15 +917,25 @@
 							piece1=this.pieces[this.epTarget.i];
 						else
 							piece1=this.pieces[index1];
-						if(piece1.s!=piece.s && (tg1 & FLAG_CAPTURE) && (!(tg1 & FLAG_CAPTURE_KING) || aGame.g.pTypes[piece1.t].isKing) &&
-								(!(tg1 & FLAG_CAPTURE_NO_KING) || !aGame.g.pTypes[piece1.t].isKing))
-							PromotedMoves(piece,{
+						if(tg1 & FLAG_CAPTURE) {
+							if(piece1.s!=piece.s && !(tg1 & (aGame.g.pTypes[piece1.t].isKing ? FLAG_CAPTURE_NO_KING : FLAG_CAPTURE_KING)))
+								PromotedMoves(piece,{
+									f: piece.p,
+									t: pos1,
+									c: piece1.i,
+									a: pType.abbrev,
+									ep: index1<0,
+								});
+						} else if(tg1 & (FLAG_CAPTURE_SELF | FLAG_SPECIAL_CAPTURE)) {
+							if(tg1 & (piece1.s==piece.s ? FLAG_CAPTURE_SELF : FLAG_SPECIAL_CAPTURE))
+							this.specials.push({
 								f: piece.p,
 								t: pos1,
 								c: piece1.i,
 								a: pType.abbrev,
-								ep: index1<0,
+								x: tg1 ^ lastPos
 							});
+						}
 						break;
 					}
 					lastPos=pos1;
