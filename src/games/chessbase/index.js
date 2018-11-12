@@ -431,6 +431,11 @@ exports.games = (function () {
 		"grid-geo-model.js",
 		"shako-model.js"
 	]
+	var modelScripts_100 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"team-mate-model.js"
+	]
 	var config_model_levels_11 = {
 		"name": "easy",
 		"label": "Easy",
@@ -489,6 +494,12 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"fairy-set-view.js",
 		"shako-view.js"
+	]
+	var config_view_js_100 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"team-mate-view.js"
 	]
 	var modelScripts_14 = [
 		"base-model.js",
@@ -5318,7 +5329,7 @@ exports.games = (function () {
 			},
 			"viewScripts": config_view_js_lca
 		},
-		{
+		{	  		
 			"name": "fantasticXIII-chess",
 			"modelScripts": modelScripts_fantasticXIII,
 			"config": {
@@ -5417,7 +5428,6 @@ exports.games = (function () {
 			"viewScripts": config_view_js_fantasticXIII
 		},
 		{
-
 			"name": "bigorra-chess",
 			"modelScripts": modelScripts_bigorra,
 			"config": {
@@ -5569,7 +5579,7 @@ exports.games = (function () {
 
 			"viewScripts": config_view_js_bigorra
 		},
-{
+		{
  			"name": "wild-tamerlane-chess",
  			"modelScripts": modelScripts_wtamerlane,
  			"config": {
@@ -6517,7 +6527,71 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_zanzibars
-		}
+		},
+		{
+			"name": "team-mate-chess",
+			"modelScripts": modelScripts_100,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Team-Mate Chess",
+					"summary": "8x8 variant with many different pieces",
+					"rules": {
+						"en": "res/rules/team-mate/team-mate-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/team-mate/team-mate-thumb.png",
+					"released": 1396536978,
+					"credits": {
+						"en": "res/rules/team-mate/team-mate-credits.html"
+					},
+					"gameOptions": config_model_gameOptions_2,
+					"js": modelScripts_100,
+					"description": {
+						"en": "res/rules/team-mate/team-mate-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/team-mate-600x600-3d.jpg",
+							"res/visuals/team-mate-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_2
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_100,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_100
+		},
 
 	]
 })()
