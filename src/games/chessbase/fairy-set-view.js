@@ -72,9 +72,9 @@
 					clipx: 3400,
 				},
 			},
-			"fr-crowned-bishop": {
+			"fr-saint": {
 				"2d": {
-					clipx: 3300,
+					clipx: 3200,
 				},
 			},
 			"fr-rook": {
@@ -162,6 +162,11 @@
 					clipx: 1100,
 				},
 			},
+			"fr-birdie": {
+				"2d": {
+					clipx: 1100,
+				},
+			},
 			"fr-lion": {
 				"2d": {
 					clipx: 1200,
@@ -175,11 +180,6 @@
 			"fr-amazon": {
 				"2d": {
 					clipx: 1400,
-				},
-			},
-			"fr-crowned-rook": {
-				"2d": {
-					clipx: 1500,
 				},
 			},
 			"fr-proper-crowned-rook": {
@@ -212,7 +212,7 @@
 					clipx: 1800,
 				},
 			},
-            "fr-rhino": {
+			"fr-rhino": {
 				"2d": {
 					clipx: 1900,
 				},
@@ -232,7 +232,7 @@
 					clipx: 2200,
 				},
 			},
-            "fr-buffalo": {
+			"fr-buffalo": {
 				"2d": {
 					clipx: 2300,
 				},
@@ -263,6 +263,61 @@
 					clipx: 2800,
 				},
 			},
+			"fr-wazir-knight": {
+				"2d": {
+					clipx: 2900,
+				},
+			},
+			"fr-ferz-knight": {
+				"2d": {
+					clipx: 3000,
+				},
+			},
+			"fr-nightrider": {
+				"2d": {
+					clipx: 3100,
+				},
+			},
+			"fr-saint": {
+				"2d": {
+					clipx: 3200,
+				},
+			},
+			"fr-small-rook": {
+				"2d": {
+					clipx: 3300,
+				},
+			},
+			"fr-gate": {
+				"2d": {
+					clipx: 3400,
+				},
+			},
+			"fr-zebra": {
+				"2d": {
+					clipx: 3500,
+				},
+			},
+			"fr-small-bishop": {
+				"2d": {
+					clipx: 3600,
+				},
+			},
+			"fr-wazir": {
+				"2d": {
+					clipx: 3700,
+				},
+			},
+			"fr-ferz": {
+				"2d": {
+					clipx: 3800,
+				},
+			},
+			"fr-man": {
+				"2d": {
+					clipx: 3900,
+				},
+			},
 			"fr-giraffe": {
 				"2d": {
 					clipx: 4000,
@@ -283,42 +338,42 @@
 					clipx: 4300,
 				},
 			},
-            "fr-crowned-knight": {
+			"fr-crowned-knight": {
 				"2d": {
 					clipx: 4400,
 				},
 			},
-            "fr-crowned-bishop": {
+			"fr-crowned-bishop": {
 				"2d": {
 					clipx: 4500,
 				},
 			},
-            "fr-leopard": {
+			"fr-leopard": {
 				"2d": {
 					clipx: 4600,
 				},
 			},
-            "fr-huscarl": {
+			"fr-huscarl": {
 				"2d": {
 					clipx: 4700,
 					},
 			},
-            "fr-griffin": {
+			"fr-griffin": {
 				"2d": {
 					clipx: 4800,
 					},
 			},
-            "fr-mammoth": {
+			"fr-mammoth": {
 				"2d": {
 					clipx: 4900,
 					},
 			},
-            "fr-duchess": {
+			"fr-duchess": {
 				"2d": {
 					clipx: 5000,
 					},
 			},
-            "fr-hawk": {
+			"fr-hawk": {
 				"2d": {
 					clipx: 5100,
 					},
@@ -421,6 +476,50 @@
 						diffuse: {
 							texturesImg: {
 								diffImg : "/res/fairy/pawn/hoplit-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/pawn-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-ferz": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/ferz.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/pawn-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/pawn-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-wazir": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/wazir.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/pawn-diffusemap.jpg",
 							}
 						},
 						normal: {
@@ -609,9 +708,97 @@
 			},
 		},
 
+		"fr-small-bishop": {
+			mesh: {
+				jsFile:"/res/fairy/bishop/small-bishop.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/bishop/bishop-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/bishop/bishop-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-saint": {
+			mesh: {
+				jsFile:"/res/fairy/bishop/tiara.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/bishop/bishop-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/bishop/bishop-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-rook": {
 			mesh: {
 				jsFile:"/res/fairy/rook/rook.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/rook/rook-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/rook/rook-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-small-rook": {
+			mesh: {
+				jsFile:"/res/fairy/rook/small-rook.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/rook/rook-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/rook/rook-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-gate": {
+			mesh: {
+				jsFile:"/res/fairy/rook/gate.js"
 			},
 			materials: {
 				mat0: {
@@ -653,9 +840,75 @@
 			},
 		},
 
+		"fr-proper-queen": {
+			mesh: {
+				jsFile:"/res/fairy/queen/proper-queen.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/queen/queen-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/queen/queen-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-king": {
 			mesh: {
 				jsFile:"/res/fairy/king/king.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/king/king-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/king/king-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-emperor": {
+			mesh: {
+				jsFile:"/res/fairy/king/emperor.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/king/king-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/king/king-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-man": {
+			mesh: {
+				jsFile:"/res/fairy/king/man.js"
 			},
 			materials: {
 				mat0: {
@@ -785,6 +1038,28 @@
 			},
 		},
 
+		"fr-proper-elephant": {
+			mesh: {
+				jsFile:"/res/fairy/elephant/proper-elephant.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/elephant/elephant-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/elephant/elephant-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-admiral": {
 			mesh: {
 				jsFile:"/res/fairy/admiral/admiral.js"
@@ -810,6 +1085,28 @@
 		"fr-eagle": {
 			mesh: {
 				jsFile:"/res/fairy/eagle/eagle.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/eagle/eagle-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/eagle/eagle-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-birdie": {
+			mesh: {
+				jsFile:"/res/fairy/eagle/birdie.js"
 			},
 			materials: {
 				mat0: {
@@ -895,6 +1192,28 @@
 			},
 		},
 
+		"fr-proper-marshall": {
+			mesh: {
+				jsFile:"/res/fairy/marshall/proper-marshall.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/marshall/marshall-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/marshall/marshall-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-crowned-rook": {
 			mesh: {
 				jsFile:"/res/fairy/crowned-rook/crowned-rook.js"
@@ -910,6 +1229,28 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/crowned-rook/crowned-rook-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-proper-crowned-rook": {
+			mesh: {
+				jsFile:"/res/fairy/crowned-rook/proper-crowned-rook.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffuse-map.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
 							}
 						}
 					}
@@ -942,6 +1283,28 @@
 		"fr-cardinal": {
 			mesh: {
 				jsFile:"/res/fairy/cardinal/cardinal.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/cardinal/cardinal-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/cardinal/cardinal-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-proper-cardinal": {
+			mesh: {
+				jsFile:"/res/fairy/cardinal/proper-cardinal.js"
 			},
 			materials: {
 				mat0: {
@@ -1266,7 +1629,7 @@
 				}
 			}
 		},
-        "fr-crowned-bishop": {
+		"fr-crowned-bishop": {
 			mesh: {
 				jsFile:"/res/fairy/crowned-bishop/crowned-bishop.js"
 			},
@@ -1287,7 +1650,7 @@
 				}
 			}
 		},
-        "fr-crowned-knight": {
+		"fr-crowned-knight": {
 			mesh: {
 				jsFile:"/res/fairy/crowned-knight/crowned-knight.js"
 			},
@@ -1308,7 +1671,7 @@
 				}
 			}
 		},
-        "fr-crowned-rook": {
+		"fr-crowned-rook": {
 			mesh: {
 				jsFile:"/res/fairy/crowned-rook/crowned-rook.js"
 			},
@@ -1329,7 +1692,7 @@
 				}
 			}
 		},
-        "fr-leopard": {
+		"fr-leopard": {
 			mesh: {
 				jsFile:"/res/fairy/leopard/leopard.js"
 			},
@@ -1350,7 +1713,7 @@
 				}
 			}
 		},
-        "fr-huscarl": {
+		"fr-huscarl": {
 			mesh: {
 				jsFile:"/res/fairy/huscarl/huscarl.js"
 			},
@@ -1371,7 +1734,7 @@
 				}
 			}
 		},
-        "fr-griffin": {
+		"fr-griffin": {
 			mesh: {
 				jsFile:"/res/fairy/griffin/griffin.js"
 			},
@@ -1392,7 +1755,7 @@
 				}
 			}
 		},
-        "fr-mammoth": {
+		"fr-mammoth": {
 			mesh: {
 				jsFile:"/res/fairy/mammoth/mammoth.js"
 			},
@@ -1413,7 +1776,7 @@
 				}
 			}
 		},
-        "fr-duchess": {
+		"fr-duchess": {
 			mesh: {
 				jsFile:"/res/fairy/lighthouse/lighthouse.js"
 			},
@@ -1434,7 +1797,7 @@
 				}
 			},
 		},
-        "fr-hawk": {
+		"fr-hawk": {
 			mesh: {
 				jsFile:"/res/fairy/hawk/hawk.js"
 			},
