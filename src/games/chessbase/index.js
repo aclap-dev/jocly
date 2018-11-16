@@ -448,6 +448,11 @@ exports.games = (function () {
 		"fairy-move-model.js",
 		"decimal/elven-model.js"
 	]
+	var modelScripts_103 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"spartan-model.js"
+	]
 	var config_model_levels_11 = {
 		"name": "easy",
 		"label": "Easy",
@@ -526,6 +531,12 @@ exports.games = (function () {
 		"fairy-set-view.js",
 		"multi-leg-view.js",
 		"decimal/elven-view.js"
+	]
+	var config_view_js_103 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"spartan-view.js"
 	]
 	var modelScripts_14 = [
 		"base-model.js",
@@ -6744,6 +6755,70 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_102
+		},
+		{
+			"name": "spartan-chess",
+			"modelScripts": modelScripts_103,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Spartan Chess",
+					"summary": "An unorthodox Spartan army combats FIDE",
+					"rules": {
+						"en": "spartan-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "spartan-thumb.png",
+					"released": 1396536978,
+					"credits": {
+						"en": "spartan-credits.html"
+					},
+					"gameOptions": config_model_gameOptions_2,
+					"js": modelScripts_103,
+					"description": {
+						"en": "spartan-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/spartan-600x600-3d.jpg",
+							"res/visuals/spartan-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_2
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_103,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_103
 		}
 	  		
 
