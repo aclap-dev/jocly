@@ -290,8 +290,8 @@
 			pTypes[typeIndex] = {
 				graph: pType.graph || nullGraph,
 				abbrev: pType.abbrev || '',
-				value: pType.isKing?100:(pType.value || 1),
-				isKing: !!pType.isKing,
+				value: pType.value || (pType.isKing ? 100 : 1),
+				isKing: pType.isKing || false,
 				castle: !!pType.castle,
 				epTarget: !!pType.epTarget,
 				epCatch: !!pType.epCatch,
@@ -389,7 +389,7 @@
 			$this.board[piece.p]=index;
 			var pType=aGame.g.pTypes[piece.t];
 			if(pType.isKing)
-				$this.kings[piece.s]=piece.p;
+				$this.kings[piece.s*pType.isKing]=piece.p;
 			$this.zSign=aGame.zobrist.update($this.zSign,"board",index,piece.p);
 			$this.zSign=aGame.zobrist.update($this.zSign,"type",piece.t,index);
 		});
@@ -438,10 +438,9 @@
 				m: piece.m,
 			});
 		}
-		this.kings={
-			'1': aBoard.kings[1],
-			'-1': aBoard.kings[-1],
-		}
+		this.kings={};
+		for(var i in aBoard.kings)
+			this.kings[i] = aBoard.kings[i];
 		this.check=aBoard.check;
 		this.oppoCheck=aBoard.oppoCheck;
 		if(aBoard.lastMove)
@@ -538,20 +537,22 @@
 			this.board[piece1.p]=-1;
 			piece1.p=-1;
 		}
-		var kp=this.kings[piece.s];
-		if(aGame.g.pTypes[piece.t].isKing)
-			this.kings[piece.s]=move.t;
 		undo.unshift({
 			i: index,
 			f: move.t,
 			t: move.f,
-			kp: kp,
-			who: piece.s,
 			ty: piece.t,
 		});
 		piece.p=move.t;
 		if(move.pr!==undefined)
 			piece.t=move.pr;
+		var royal = aGame.g.pTypes[piece.t].isKing;
+		if(royal) {
+			royal *= piece.s;
+			undo[0].who=royal; // only add these fields when needed
+			undo[0].kp=this.kings[royal];
+			this.kings[royal]=move.t;
+		}
 		this.board[move.f]=-1;
 		this.board[move.t]=index;
 
@@ -606,8 +607,9 @@
 			piece.m=true;
 			this.board[move.t]=piece.i;
 			this.zSign=aGame.zobrist.update(this.zSign,"board",piece.i,move.t);
-			if(aGame.g.pTypes[piece.t].isKing)
-				this.kings[piece.s]=move.t;
+			var royal = aGame.g.pTypes[piece.t].isKing;
+			if(royal)
+				this.kings[piece.s*royal]=move.t;
 		}
 		var h=this.oppoCheck;
 		this.oppoCheck=this.check;
@@ -629,6 +631,7 @@
 		this.zSign=aGame.zobrist.update(this.zSign,"who",-this.mWho);
 		this.zSign=aGame.zobrist.update(this.zSign,"who",this.mWho);	
 		//this.cbIntegrity(aGame);
+//alert('spartan kings = '+this.kings[-1]+','+this.kings[-2]);
 	}
 
 	Model.Board.Evaluate = function(aGame) {
@@ -1026,9 +1029,9 @@
 		for(var i=0;i<movesLength;i++) {
 			var move=moves[i];
 			var undo=this.cbQuickApply(aGame,move);
-			var inCheck=this.cbGetAttackers(aGame,this.kings[this.mWho],this.mWho,true).length>0;
+			var inCheck=this.cbGetAttackers(aGame,this.kings[this.mWho],this.mWho,100).length>0;
 			if(!inCheck) {
-				var oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
+				var oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,100).length>0;
 				move.ck = oppInCheck; 
 				this.mMoves.push(move);
 				if(move.f!=selfKingPos)
