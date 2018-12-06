@@ -182,7 +182,7 @@ gulp.task("build-node-games", function () {
 });
 
 function ProcessJS(stream, concatName, skipBabel) {
-	if (!argv.prod)
+	if (!argv.prod && concatName)
 		stream = stream.pipe(sourcemaps.init());
 	if (!skipBabel)
 		stream = stream.pipe(babel({
@@ -197,7 +197,7 @@ function ProcessJS(stream, concatName, skipBabel) {
 			});
 	if (concatName)
 		stream = stream.pipe(concat(concatName));
-	if (!argv.prod)
+	if (!argv.prod && concatName)
 		stream = stream.pipe(sourcemaps.write("."));
 	return stream;
 }
