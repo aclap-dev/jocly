@@ -13,7 +13,7 @@
 	};
 	// TODO move params below into variant definition
 	Model.Game.cbOnPerpetual = 1; // 3 times state repeat = repeater loses
-	Model.Game.cbOnStaleMate = 1; // stalemate = last player loses
+	Model.Game.cbOnStaleMate = -1; // stalemate = last player loses
 
 	
 	Model.Game.cbDefine = function() {
