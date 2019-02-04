@@ -12,10 +12,18 @@
 		84:1,85:1,86:1,75:1,76:1,77:1,66:1,67:1,68:1
 	};
 	// TODO move params below into variant definition
-	Model.Game.cbOnPerpetual = 1; // 3 times state repeat = repeater loses
 	Model.Game.cbOnStaleMate = -1; // stalemate = last player loses
 
-	
+	Model.Game.cbPerpEval = function(board, aGame) {
+		var result, loop = aGame.GetRepeatOccurence(board, 1) >> 1;
+		// handle perperual checking
+		if(board.oppoCheck >= loop)
+			result = (board.check >= loop ? JocGame.DRAW : -board.mWho);
+		else
+			result = (board.check >= loop ? board.mWho : JocGame.DRAW);
+		return result;
+	}
+
 	Model.Game.cbDefine = function() {
 		
 		return {
