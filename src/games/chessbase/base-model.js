@@ -239,8 +239,16 @@
 		this.g.distGraph = this.cbVar.geometry.GetDistances();
 		
 		this.cbPiecesCount = 0;
-    if(this.cbMaxRepeats === undefined) this.cbMaxRepeats = 3;
-		
+		if(this.cbMaxRepeats === undefined) this.cbMaxRepeats = 3;
+		if(this.cbPawnTypes === undefined) {
+			var k, first; // assume Pawns are defined first
+			for(k in this.g.pTypes) {
+				var a = this.g.pTypes[k].abbrev;
+				if(first === undefined) first = a;
+				if(a != first) break;
+			}
+			this.cbPawnTypes=k;
+		}
 		this.g.castleablePiecesCount = { '1': 0, '-1': 0 };
 		for(var i in cbVar.pieceTypes) {
 			var pType=cbVar.pieceTypes[i];
@@ -601,7 +609,9 @@
 				piece1.p=-1;
 				piece1.m=true;
 				this.noCaptCount=0;
-			} else 
+			} else if(piece.t < aGame.cbPawnTypes)
+				this.noCaptCount = 0;
+			else
 				this.noCaptCount++;
 			piece.p=move.t;
 			piece.m=true;
@@ -631,7 +641,6 @@
 		this.zSign=aGame.zobrist.update(this.zSign,"who",-this.mWho);
 		this.zSign=aGame.zobrist.update(this.zSign,"who",this.mWho);	
 		//this.cbIntegrity(aGame);
-//alert('spartan kings = '+this.kings[-1]+','+this.kings[-2]);
 	}
 
 	Model.Board.Evaluate = function(aGame) {
