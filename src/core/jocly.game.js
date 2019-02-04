@@ -946,18 +946,18 @@ JocGame.prototype.AddBest = function(aMove, aBoard) {
 	this.mBestMoves.push(move);
 }
 
-JocGame.prototype.GetRepeatOccurence = function(board) {
+JocGame.prototype.GetRepeatOccurence = function(board, len) {
 	if(!this.mOptions.preventRepeat)
 		return -1;
 	var repOcc=this.mVisitedBoards[board.GetSignature()];
-	return repOcc;
+	return (len ? this.mPlayedMoves.length - (repOcc >>> 4) : repOcc&15);
 }
 
 JocGame.prototype.HandleRepeat = function(board) {
 	if(this.mOptions.preventRepeat) {
 		var sign=board.GetSignature(true);
 		if(this.mVisitedBoards[sign]===undefined)
-			this.mVisitedBoards[sign]=1;
+			this.mVisitedBoards[sign]=1 + 16*this.mPlayedMoves.length;
 		else
 			this.mVisitedBoards[sign]++;
 	}
@@ -966,9 +966,10 @@ JocGame.prototype.HandleRepeat = function(board) {
 JocGame.prototype.UnhandleRepeat = function(board) {
 	if(this.mOptions.preventRepeat) {
 		var sign=board.GetSignature(true);
-		if(this.mVisitedBoards[sign]==1)
+		var n=this.mVisitedBoards[sign]&15;
+		if(n==1)
 			delete this.mVisitedBoards[sign];
-		else if(this.mVisitedBoards[sign]>1)
+		else if(n>1)
 			this.mVisitedBoards[sign]--;
 	}
 }
