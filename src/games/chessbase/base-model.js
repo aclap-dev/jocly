@@ -1,7 +1,7 @@
 
 (function() {
 
-	var cbVar;
+	var cbVar, gameState;
 
 	var MASK = 0xffff;   // unreachable position
 	var FLAG_MOVE = 0x10000; // move to if target pos empty
@@ -380,7 +380,7 @@
 	}
 
 	Model.Board.InitialPosition = function(aGame) {
-		var $this=this;
+		var $this=gameState=this;
 		if(USE_TYPED_ARRAYS)
 			this.board=new Int16Array(aGame.g.boardSize);
 		else

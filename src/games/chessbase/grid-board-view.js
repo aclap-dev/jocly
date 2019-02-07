@@ -2,13 +2,15 @@
 	
 	var JOCLY_FIELD_SIZE=12000; // physical space
 
-	var NBCOLS=0, NBROWS=0, CSIZES={};
+	var NBCOLS=0, NBROWS=0, NBHAND=0, NBVHND=0, CSIZES={};
 	
 	View.Game.cbEnsureConstants =function() {
 		if(NBROWS)
 			return;
 		NBROWS=this.cbVar.geometry.height;
 		NBCOLS=this.cbVar.geometry.width;
+		NBHAND=this.cbVar.geometry.handWidth || 0;
+		NBVHND=this.cbVar.geometry.handHeight || 0;
 	}
 	
 	// 'this' is a Game object
@@ -252,21 +254,21 @@
 		
 		paintOutNotation: function(spec,ctx,channel) {
 			var cSize = this.cbCSize(spec);
-			for (var row = 0; row < NBROWS; row++) {
+			for (var row = NBVHND; row < NBROWS-NBVHND; row++) {
 				var displayedRow = NBROWS - row;
 				if(this.mViewAs<0)
 					displayedRow=row+1;
 				var x = -(NBCOLS/2 + spec.margins.x/2) * cSize.cx;
 				var y = (row-NBROWS/2+.5) * cSize.cy;
-				ctx.fillText(displayedRow, x, y);	
+				ctx.fillText(displayedRow - NBVHND, x, y);	
 			}
-			for (var col = 0; col < NBCOLS; col++) {
+			for (var col = NBHAND; col < NBCOLS-NBHAND; col++) {
 				var displayedCol=col;
 				if(this.mViewAs<0)
 					displayedCol = NBCOLS - col -1;
 				var x = (col-NBCOLS/2+.5) * cSize.cx;
 				var y = (NBROWS/2 + spec.margins.y/2) * cSize.cy;
-				ctx.fillText(String.fromCharCode(97 + displayedCol), x , y);
+				ctx.fillText(String.fromCharCode(97 + displayedCol - NBHAND), x , y);
 			}
 		},
 		
@@ -275,8 +277,8 @@
 			var getCoords=spec.coordsFn(spec);
 			var fills=spec.colorFill;
 			ctx.font = Math.ceil(cSize.cx / 5) + 'px Monospace';
-			for (var row = 0; row < NBROWS; row++) {
-				for (var col = 0; col < NBCOLS; col++) {
+			for (var row = NBVHND; row < NBROWS-NBVHND; row++) {
+				for (var col = NBHAND; col < NBCOLS-NBHAND; col++) {
 					var displayedRow=NBROWS - row;
 					var displayedCol=col;
 					if(this.mViewAs<0)
@@ -303,7 +305,7 @@
 					if(spec.notationDebug)
 						ctx.fillText(pos,x,y);
 					else
-						ctx.fillText(String.fromCharCode(97 + displayedCol) + displayedRow,x,y);
+						ctx.fillText(String.fromCharCode(97 + displayedCol - NBHAND) + (displayedRow-NBVHND),x,y);
 				}
 			}
 		},
