@@ -1308,8 +1308,16 @@ JocBoard.prototype.CompactMoveString = function(aGame,aMove) {
 
 /*-- Zobrist implementation --*/
 
+JocGame.Twister = 0;
+
+JocGame.LetsTwist=function(seed) {
+	if(!JocGame.Twister) JocGame.Twister=new MersenneTwister(seed);
+	return JocGame.Twister;
+}
+
 JocGame.Zobrist=function(params) {
 	var mt=new MersenneTwister(12345);
+
 	var paramNames=[];
 	for(var f in params)
 		paramNames.push(f);
