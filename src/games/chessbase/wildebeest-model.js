@@ -19,6 +19,7 @@
 			);
 	}
 
+	Model.Game.cbOnStaleMate = -1; // stalemate = last player wins
 	
 	Model.Game.cbDefine = function() {
 		
@@ -294,7 +295,7 @@
 		1:{r0:0,r:2},2:{r0:0,r:3},3:{r0:0,r:4},
 		7:{r0:10,r:6},8:{r0:10,r:7},9:{r0:10,r:8},
 		100:{r0:99,r:101},101:{r0:99,r:102},102:{r0:99,r:103},
-		105:{r0:109,r:104},106:{r0:109,r:105},107:{r0:109,r:106}
+		106:{r0:109,r:105},107:{r0:109,r:106},108:{r0:109,r:107}
 	}
 	
 	var SuperModelBoardApplyMove=Model.Board.ApplyMove;
