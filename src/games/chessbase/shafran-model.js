@@ -313,19 +313,19 @@
 			var dc=aGame.g.distGraph[move.t][move.f];
 			if(dc==3) {
 				var kPiece=this.pieces[this.board[move.f]];
+				this.zSign^=aGame.bKey(kPiece);
 				this.board[move.f]=-1;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,move.f);
 				this.board[move.t]=kPiece.i;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,move.t);
 				kPiece.p=move.t;
+				this.zSign^=aGame.bKey(kPiece);
 				this.kings[this.mWho]=kPiece.p;
 				var extra=aGame.wbExtraCastleRook[move.t];
 				var rPiece=this.pieces[this.board[extra.r0]];
+				this.zSign^=aGame.bKey(rPiece);
 				this.board[extra.r0]=-1;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,extra.r0);
 				this.board[extra.r]=rPiece.i;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,extra.r);
-				rPiece.p=extra.r;				
+				rPiece.p=extra.r;
+				this.zSign^=aGame.bKey(rPiece);
 				this.check=!!move.ck;
 				this.castled[this.mWho]=true;
 				return;

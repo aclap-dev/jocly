@@ -129,6 +129,8 @@
 			(function(setup) {
 				var x=((setup%4)-1.5)*3*size;
 				var y=(Math.floor(setup/4)-1)*3*size;
+
+
 				xdv.createGadget("setup#"+setup,{
 					base: {
 						type: "canvas",
@@ -153,6 +155,7 @@
 					},
 				});				
 			})(setup);
+
 		}
 	}
 	
@@ -161,6 +164,7 @@
 	 */
 	var SuperViewBoardxdInput = View.Board.xdInput;
 	View.Board.xdInput = function(xdv, aGame) {
+
 		if(this.setupState===undefined) {
 			return {
 				initial: {},
@@ -196,9 +200,10 @@
 	 */
 	var SuperViewBoardcbAnimate = View.Board.cbAnimate;
 	View.Board.cbAnimate = function(xdv,aGame,aMove,callback) {
-		if(this.setupState===undefined || this.setupState=="setup")
+		if(this.setupState===undefined || this.setupState=="setup"){
+
 			callback();
-		else
+        }else
 			SuperViewBoardcbAnimate.apply(this,arguments);
 	}
 	
@@ -207,6 +212,7 @@
 	 */
 	var SuperViewBoardxdDisplay = View.Board.xdDisplay;
 	View.Board.xdDisplay = function(xdv, aGame) {
+
 		if(this.setupState===undefined || this.setupState=="setup") {
 			var $this=this;
 			var hidden={};

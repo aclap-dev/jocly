@@ -80,6 +80,8 @@
 		return {
 			
 			geometry: geometry,
+
+//			zobrist: "old",
 			
 			pieceTypes: {
 
@@ -459,8 +461,9 @@
 				var pIndex=$this.board[pos];
 				$this.board[pos]=-1;
 				piece = $this.pieces[pIndex];
+				$this.zSign^=aGame.bKey(piece);
 				piece.p=-1;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,pos);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,pos);
 			});
 			// setup KQLE positions according to the setup
 			var setup=move.setup;
@@ -469,26 +472,30 @@
 				this.board[17]=indexes[1].K;
 				piece = this.pieces[indexes[1].K];
 				piece.p=17;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,17);
+				this.zSign^=aGame.bKey(piece);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,17);
 				this.kings[1]=17;
 				remaining[1]=[18,5,6];
 				this.board[125]=indexes[-1].K;
 				piece = this.pieces[indexes[-1].K];
 				piece.p=125;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,125);
+				this.zSign^=aGame.bKey(piece);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,125);
 				this.kings[-1]=125;
 				remaining[-1]=[126,137,138];
 			} else {
 				this.board[5]=indexes[1].K;
 				piece = this.pieces[indexes[1].K];
 				piece.p=5;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,5);
+				this.zSign^=aGame.bKey(piece);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,5);
 				this.kings[1]=5;
 				remaining[1]=[17,18,6];
 				this.board[137]=indexes[-1].K;
 				piece = this.pieces[indexes[-1].K];
 				piece.p=137;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,137);
+				this.zSign^=aGame.bKey(piece);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,137);
 				this.kings[-1]=137;
 				remaining[-1]=[125,126,138];
 			}
@@ -497,12 +504,14 @@
 			this.board[remaining[1][queen]]=indexes[1].Q;
 			piece = this.pieces[indexes[1].Q];
 			piece.p=remaining[1][queen];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][queen]);
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][queen]);
 			remaining[1].splice(queen,1);
 			this.board[remaining[-1][queen]]=indexes[-1].Q;
 			piece = this.pieces[indexes[-1].Q];
 			piece.p=remaining[-1][queen];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[-1][queen]);				
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[-1][queen]);				
 			remaining[-1].splice(queen,1);
 			var eagle,lion;
 			setup%=2;
@@ -516,20 +525,24 @@
 			this.board[remaining[1][eagle]]=indexes[1].E;
 			piece = this.pieces[indexes[1].E];
 			piece.p=remaining[1][eagle];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][eagle]);
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][eagle]);
 			this.board[remaining[1][lion]]=indexes[1].L;
 			piece = this.pieces[indexes[1].L];
 			piece.p=remaining[1][lion];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][lion]);
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][lion]);
 
 			this.board[remaining[-1][eagle]]=indexes[-1].E;
 			piece = this.pieces[indexes[-1].E];
 			piece.p=remaining[-1][eagle];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[-1][eagle]);
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[-1][eagle]);
 			this.board[remaining[-1][lion]]=indexes[-1].L;
 			piece = this.pieces[indexes[-1].L];
 			piece.p=remaining[-1][lion];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][lion]);		
+			this.zSign^=aGame.bKey(piece);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",piece.t,remaining[1][lion]);	// this was wrong anyway!?	
 			
 			this.setupState="done";
 		} else

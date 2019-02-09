@@ -202,14 +202,14 @@
 				if(pieceIndex1>=0) {
 					var piece1=this.pieces[pieceIndex1];
 					if(piece1.s==this.mWho && piece1.m==false) { // this is a bishop swap: special apply handler
-						this.zSign=aGame.zobrist.update(this.zSign,"board",piece.i,piece.p);
-						this.zSign=aGame.zobrist.update(this.zSign,"board",pieceIndex1,piece1.p);
-						this.zSign=aGame.zobrist.update(this.zSign,"board",piece.i,piece1.p);
-						this.zSign=aGame.zobrist.update(this.zSign,"board",pieceIndex1,piece.p);
+						this.zSign^=aGame.bKey(piece);
+						this.zSign^=aGame.bKey(piece1);
 						this.board[move.f]=pieceIndex1;
 						piece1.p=move.f;
 						this.board[move.t]=piece.i;
 						piece.p=move.t;
+						this.zSign^=aGame.bKey(piece);
+						this.zSign^=aGame.bKey(piece1);
 						this.check=!!move.ck;
 						if(!this.bishopSwap)
 							this.bishopSwap={};

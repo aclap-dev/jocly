@@ -210,7 +210,9 @@
 					}
 				});
 				return true;
-			}
+			},
+
+			zobrist: "old" // force use of (flawed) keys to not break opening book
 		};
 	}
 	

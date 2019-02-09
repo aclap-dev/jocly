@@ -159,7 +159,7 @@
 		return {
 			
 			geometry: geometry,
-			
+//			zobrist: "old",
 			pieceTypes: {
 
 				0: {
@@ -460,6 +460,7 @@
 	Model.Board.CopyFrom = function(aBoard) {
 		SuperModelBoardCopyFrom.apply(this,arguments);
 		this.setupState = aBoard.setupState;
+
 	}
 	
 	/*
@@ -494,33 +495,39 @@
 			// remove KQLEFU from the board
 			[4,5,6,7,17,18,125,126,136,137,138,139].forEach(function(pos) {
 				var pIndex=$this.board[pos];
+				$this.zSign^=aGame.bKey($this.pieces[pIndex]);
 				$this.board[pos]=-1;
 				$this.pieces[pIndex].p=-1;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",pIndex,pos);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",pIndex,pos);
 			});
 			// setup KQLEFU positions according to the setup
 			var setup=move.setup;
+
 			var remaining={};
 			if(setup/6<1) {
 				this.board[17]=indexes[1].K;
 				this.pieces[indexes[1].K].p=17;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].K,17);
+				$this.zSign^=aGame.bKey(this.pieces[indexes[1].K]);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].K,17);
 				this.kings[1]=17;
 				remaining[1]=[18,5,6];
 				this.board[125]=indexes[-1].K;
 				this.pieces[indexes[-1].K].p=125;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].K,125);
+				$this.zSign^=aGame.bKey(this.pieces[indexes[-1].K]);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].K,125);
 				this.kings[-1]=125;
 				remaining[-1]=[126,137,138];
 			} else {
 				this.board[5]=indexes[1].K;
 				this.pieces[indexes[1].K].p=5;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].K,5);
+				$this.zSign^=aGame.bKey(this.pieces[indexes[1].K]);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].K,5);
 				this.kings[1]=5;
 				remaining[1]=[17,18,6];
 				this.board[137]=indexes[-1].K;
 				this.pieces[indexes[-1].K].p=137;
-				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].K,137);
+				$this.zSign^=aGame.bKey(this.pieces[indexes[-1].K]);
+//				$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].K,137);
 				this.kings[-1]=137;
 				remaining[-1]=[125,126,138];
 			}
@@ -528,11 +535,13 @@
 			var queen=Math.floor(setup/2);
 			this.board[remaining[1][queen]]=indexes[1].Q;
 			this.pieces[indexes[1].Q].p=remaining[1][queen];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].Q,remaining[1][queen]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[1].Q]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].Q,remaining[1][queen]);
 			remaining[1].splice(queen,1);
 			this.board[remaining[-1][queen]]=indexes[-1].Q;
 			this.pieces[indexes[-1].Q].p=remaining[-1][queen];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].Q,remaining[-1][queen]);				
+			$this.zSign^=aGame.bKey(this.pieces[indexes[-1].Q]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].Q,remaining[-1][queen]);				
 			remaining[-1].splice(queen,1);
 			var eagle,lion;
 
@@ -548,17 +557,21 @@
 
 			this.board[remaining[1][eagle]]=indexes[1].E;
 			this.pieces[indexes[1].E].p=remaining[1][eagle];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].E,remaining[1][eagle]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[1].E]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].E,remaining[1][eagle]);
 			this.board[remaining[1][lion]]=indexes[1].L;
 			this.pieces[indexes[1].L].p=remaining[1][lion];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].L,remaining[1][lion]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[1].L]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].L,remaining[1][lion]);
 
 			this.board[remaining[-1][eagle]]=indexes[-1].E;
 			this.pieces[indexes[-1].E].p=remaining[-1][eagle];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].E,remaining[-1][eagle]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[-1].E]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].E,remaining[-1][eagle]);
 			this.board[remaining[-1][lion]]=indexes[-1].L;
 			this.pieces[indexes[-1].L].p=remaining[-1][lion];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].L,remaining[1][lion]);		
+			$this.zSign^=aGame.bKey(this.pieces[indexes[-1].L]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].L,remaining[1][lion]);		
 			
             remaining[1]=[4,7]
             remaining[-1]=[136,139]
@@ -574,20 +587,24 @@
 
 			this.board[remaining[1][buffalo]]=indexes[1].F;
 			this.pieces[indexes[1].F].p=remaining[1][buffalo];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].F,remaining[1][buffalo]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[1].F]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].F,remaining[1][buffalo]);
 
 
 			this.board[remaining[1][rhino]]=indexes[1].U;
 			this.pieces[indexes[1].U].p=remaining[1][rhino];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].U,remaining[1][rhino]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[1].U]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[1].U,remaining[1][rhino]);
 
 			this.board[remaining[-1][buffalo]]=indexes[-1].F;
 			this.pieces[indexes[-1].F].p=remaining[-1][buffalo];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].F,remaining[-1][buffalo]);
+			$this.zSign^=aGame.bKey(this.pieces[indexes[-1].F]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].F,remaining[-1][buffalo]);
 
 			this.board[remaining[-1][rhino]]=indexes[-1].U;
 			this.pieces[indexes[-1].U].p=remaining[-1][rhino];
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].U,remaining[1][rhino]);	
+			$this.zSign^=aGame.bKey(this.pieces[indexes[-1].U]);
+//			$this.zSign=aGame.zobrist.update($this.zSign,"board",indexes[-1].U,remaining[1][rhino]);	
 
 
 			this.setupState="done";
