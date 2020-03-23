@@ -9,13 +9,13 @@ Demos
 [Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
 Click _**Other Jocly games**_ to switch to other games.
 
-Simple human vs computer: [Classic chess](https://mi-g.github.com/jocly/examples/browser/simple.html?classic-chess),
-[Circular chess](https://mi-g.github.com/jocly/examples/browser/simple.html?circular-chess),
-[Multi layers chess](https://mi-g.github.com/jocly/examples/browser/simple.html?raumschach),
-[Hexagonal chess](https://mi-g.github.com/jocly/examples/browser/simple.html?glinski-chess),
-[Chinese chess](https://mi-g.github.com/jocly/examples/browser/simple.html?xiangqi),
-[Middle-age chess](https://mi-g.github.com/jocly/examples/browser/simple.html?courier-chess),
-[Scrum](https://mi-g.github.com/jocly/examples/browser/simple.html?scrum)
+Simple human vs computer: [Classic chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=classic-chess),
+[Circular chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=circular-chess),
+[Multi layers chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=raumschach),
+[Hexagonal chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=glinski-chess),
+[Chinese chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=xiangqi),
+[Middle-age chess](https://mi-g.github.com/jocly/examples/browser/simple.html?game=courier-chess),
+[Scrum](https://mi-g.github.com/jocly/examples/browser/simple.html?game=scrum)
 
 Or see and try [all available games](https://mi-g.github.com/jocly/examples/browser/multiple.html)
 
@@ -62,7 +62,7 @@ Building
 Notes:
 - using `gulp build watch` instead of `gulp build` makes *gulp* start watching files after the build. Whenever a file is changed, a build is automatically generated
 - you can use `--no-default-games` to prevent including the game modules from directory, and `--modules <colon-separated-directories>` to specify additional game modules to include. For instance, `gulp --no-default-games --modules src/games/chessbase:src/games/checkers build` will only generate distribution for Chess and checkers games
-- you can specify the games to be built in the distribution with the `--games` option. For instance, `gulp --no-default-games --modules src/games --games xiangqi:classic-chess build` only generates Jocly for Classic Chess and XiangQi
+- you can specify the games to be built in the distribution with the `--games` option. For instance, `gulp --no-default-games --modules src/games/chessbase --games xiangqi:classic-chess build` only generates Jocly for Classic Chess and XiangQi
 - using the `no-obsolete` option filters out the games marked as obsolete
 
 API Documentation
