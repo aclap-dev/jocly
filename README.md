@@ -9,15 +9,15 @@ Demos
 [Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
 Click _**Other Jocly games**_ to switch to other games.
 
-Simple human vs computer: [Classic chess](https://mi-g.github.com/jocly/examples/browser/simple.html?classic-chess),
-[Circular chess](https://mi-g.github.com/jocly/examples/browser/simple.html?circular-chess),
-[Multi layers chess](https://mi-g.github.com/jocly/examples/browser/simple.html?raumschach),
-[Hexagonal chess](https://mi-g.github.com/jocly/examples/browser/simple.html?glinski-chess),
-[Chinese chess](https://mi-g.github.com/jocly/examples/browser/simple.html?xiangqi),
-[Middle-age chess](https://mi-g.github.com/jocly/examples/browser/simple.html?courier-chess),
-[Scrum](https://mi-g.github.com/jocly/examples/browser/simple.html?scrum)
+Simple human vs computer: [Classic chess](https://mi-g.github.io/jocly/examples/browser/simple.html?classic-chess),
+[Circular chess](https://mi-g.github.io/jocly/examples/browser/simple.html?circular-chess),
+[Multi layers chess](https://mi-g.github.io/jocly/examples/browser/simple.html?raumschach),
+[Hexagonal chess](https://mi-g.github.io/jocly/examples/browser/simple.html?glinski-chess),
+[Chinese chess](https://mi-g.github.io/jocly/examples/browser/simple.html?xiangqi),
+[Middle-age chess](https://mi-g.github.io/jocly/examples/browser/simple.html?courier-chess),
+[Scrum](https://mi-g.github.io/jocly/examples/browser/simple.html?scrum)
 
-Or see and try [all available games](https://mi-g.github.com/jocly/examples/browser/multiple.html)
+Or see and try [all available games](https://mi-g.github.io/jocly/examples/browser/multiple.html)
 
 [JoclyBoard](https://github.com/mi-g/joclyboard) is a multi-platform desktop application based on Jocly 
 and [Electron](https://electron.atom.io/).
