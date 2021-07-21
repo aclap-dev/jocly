@@ -9,7 +9,6 @@ Demos
 [Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
 Click _**Other Jocly games**_ to switch to other games.
 
-<<<<<<< HEAD
 Simple human vs computer: [Classic chess](https://mi-g.github.io/jocly/examples/browser/simple.html?classic-chess),
 [Circular chess](https://mi-g.github.io/jocly/examples/browser/simple.html?circular-chess),
 [Multi layers chess](https://mi-g.github.io/jocly/examples/browser/simple.html?raumschach),
