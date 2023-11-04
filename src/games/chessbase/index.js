@@ -1141,6 +1141,17 @@ exports.games = (function () {
  		"fairy-set-view.js",
  		"wild-tamerlane-view.js"
  	]
+	var modelScripts_pemba = [
+ 		"base-model.js",
+ 		"grid-geo-model.js",
+ 		"pemba-model.js"
+ 	]
+ 	var config_view_js_pemba = [
+ 		"base-view.js",
+ 		"grid-board-view.js",
+ 		"fairy-set-view.js",
+ 		"pemba-view.js"
+ 	]
 	return [
 		{
 			"name": "classic-chess",
@@ -5272,6 +5283,107 @@ exports.games = (function () {
  				}
  			},
  			"viewScripts": config_view_js_wtamerlane
+  		},
+,
+		{
+ 			"name": "pemba-chess",
+ 			"modelScripts": modelScripts_pemba,
+ 			"config": {
+ 				"status": true,
+ 				"model": {
+ 					"title-en": "Pemba",
+ 					"summary": "Extended Shako on 10x10 with fairy pieces",
+ 					"rules": {
+ 						"en": "pemba-rules.html",
+						"fr": "pemba-rules-fr.html"
+ 					},
+ 					"module": "chessbase",
+ 					"plazza": "true",
+ 					"thumbnail": "pemba-thumb.png",
+ 					"released": 1497874349,
+ 					"credits": {
+ 						"en": "pemba-credits.html"
+ 					},
+ 					"gameOptions": config_model_gameOptions,
+ 					"obsolete": false,
+ 					"js": modelScripts_pemba,
+ 					"description": {
+ 						"en": "pemba-description.html",
+						"fr": "pemba-rules-fr.html"
+ 					},
+ 					"levels": config_model_levels_15
+ 				},
+ 				"view": {
+ 					"title-en": "pemba view",
+ 					"visuals": {
+ 						"600x600": [
+ 							"res/visuals/pemba-600x600-3d.jpg",
+ 							"res/visuals/pemba-600x600-2d.jpg"
+ 						]
+ 					},
+ 					"xdView": true,
+ 					"css": config_view_css,
+ 					"preferredRatio": 1,
+ 					"useShowMoves": true,
+ 					"useNotation": true,
+ 					"module": "chessbase",
+ 					"defaultOptions": config_view_defaultOptions,
+ 					"skins": [
+ 						{
+ 							"name": "skin3d",
+ 							"title": "3D Classic",
+ 							"3d": true,
+ 							"preload": [
+ 								"smoothedfilegeo|0|/res/ring-target.js",
+ 								"image|/res/images/cancel.png",
+ 								"image|/res/images/wikipedia.png",
+ 								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+ 								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+ 								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
+ 								"image|/res/fairy/rook/rook-diffusemap.jpg",
+ 								"image|/res/fairy/rook/rook-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/bishop/bishop.js",
+ 								"image|/res/fairy/bishop/bishop-diffusemap.jpg",
+ 								"image|/res/fairy/bishop/bishop-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/knight/knight.js",
+ 								"image|/res/fairy/knight/knight-diffusemap.jpg",
+ 								"image|/res/fairy/knight/knight-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/queen/queen.js",
+ 								"image|/res/fairy/queen/queen-diffusemap.jpg",
+ 								"image|/res/fairy/queen/queen-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/king/king.js",
+ 								"image|/res/fairy/king/king-diffusemap.jpg",
+ 								"image|/res/fairy/king/king-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/elephant/elephant.js",
+ 								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
+ 								"image|/res/fairy/elephant/elephant-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
+ 								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
+ 								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"image|/res/fairy/bow/bow-diffusemap.jpg",
+								"image|/res/fairy/bow/bow-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
+ 								"image|/res/fairy/camel/camel-diffusemap.jpg",
+ 								"image|/res/fairy/camel/camel-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
+ 								"image|/res/fairy/camel/giraffe-diffusemap.jpg",
+ 								"image|/res/fairy/camel/giraffe-normalmap.jpg"							      
+ 							],
+ 							"world": config_view_skins_world,
+ 							"camera": config_view_skins_camera
+ 						},
+ 						config_view_skins_9
+ 					],
+ 					"animateSelfMoves": false,
+ 					"switchable": true,
+ 					"sounds": config_view_sounds,
+ 					"js": config_view_js_pemba,
+ 					"useAutoComplete": true
+ 				}
+ 			},
+ 			"viewScripts": config_view_js_pemba
   		}		  		
 
 
