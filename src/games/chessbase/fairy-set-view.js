@@ -187,6 +187,26 @@
 					clipx: 2200,
 				},
 			},
+			"fr-giraffe": {
+				"2d": {
+					clipx: 2900,
+				},
+			},
+			"fr-wolf": {
+				"2d": {
+					clipx: 3000,
+				},
+			},
+			"fr-squirle": {
+				"2d": {
+					clipx: 3100,
+				},
+			},
+			"fr-duchess": {
+				"2d": {
+					clipx: 3200,
+				},
+			},
 		},modifier);
 	}
 
@@ -906,6 +926,70 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/ship/ship-normalmap.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
+		"fr-giraffe": {
+			mesh: {
+				jsFile:"/res/fairy/giraffe/giraffe.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
+
+							}
+						}
+					}
+				}
+			}
+		},
+		"fr-wolf": {
+			mesh: {
+				jsFile:"/res/fairy/wolf/wolf.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/wolf/wolf-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/wolf/wolf-normalmap.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
+		"fr-squirle": {
+			mesh: {
+				jsFile:"/res/fairy/squirle/squirle.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/squirle/squirle-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/squirle/squirle-normalmap.jpg",
 							}
 						}
 					}

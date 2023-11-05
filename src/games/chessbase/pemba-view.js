@@ -64,8 +64,8 @@
 					" ": "rgba(0,0,0,0)",
 				},*/
 				'colorFill' : {
-					"#": "rgba(204,40,0,1)",
-					".": "rgba(180,180,0,1)",
+					"#": "rgba(51,102,102,1)",
+					".": "rgba(153,255,255,1)",
 				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
@@ -134,7 +134,7 @@
 			{
 				'colorFill' : {
 					".": "#ffffc0", // "white" cells
-					"#": "#333399", // "black" cells
+					"#": "#336666", // "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
 				'texturesImg' : {}, // to avoid default wood texture

@@ -27,70 +27,36 @@
     }
 </style>
 
-<h1>Initial setup</h1>
-
 
 <p>The board has 12 x 12 squares. </p>
 
-<p>
-<img class='piece-graph' src='{GAME}/res/visuals/wild-timurid-600x600-2d.jpg'>
-</p>
+<p>Pemba est une variantes des échecs joué sur un plateau de 10x10 cases.</p>
 
-2
+<p>Chaque joueur commande 22 pièces qui correspondent aux pièces des Échecs orthodoxes auquelles s'ajoutent quelques nouvelles: le canon, l'éléphant, l‘arc, la machine et la girafe</p>
+
+<h2>Le canon</h2>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shako/shako-cannon-move.png"/></p>
+
+<p>En dehors des captures, le canon se déplace comme une tour. Pour capturer, le canon doit sauter par dessus une et une seule pièce avant d'atteindre la pièce visée. Cette pièce survolée peut être blanche ou noire.</p>
+
+<h2>L'éléphant</h2>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shako/shako-elephant-move.png"/></p>
+
+<p>L'éléphant se déplace d'une ou deux cases en diagonale, avec possibilité de survoler une pièce sur son chemin.</p>
+
+<p>Toutes les autres pièces reprises des Échecs orthodoxes conservent ici leurs mouvements et leurs captures.</p>
+
+<p>Les autres règles des Échecs orthodoxes s'appliquent. Blanc commence.</p>
 
 
-<h1>Pieces</h1>
 
-<h2>King</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-king.png'>
-</p>
-<p class='piece-details'>Moves as in usual Chess, except there is no castling.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
-</p>
-<h2>Queen</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-queen.png'>
-</p>
-<p class='piece-details'>Exactly as in usual Chess.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/queen.png'>
-</p>
-<h2>Bishop</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-bishop.png'>
-</p>
-<p class='piece-details'>Exactly as in usual Chess.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/bishop.png'>
-</p>
-<h2>Knight</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-knight.png'>
-</p>
-<p class='piece-details'>Exactly as in usual Chess.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/knight.png'>
-</p>
-<h2>Rook</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-rook.png'>
-</p>
-<p class='piece-details'>Exactly as in usual Chess.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/rook.png'>
-</p>
-<h2>Elephant</h2>
+<h2>Éléphant</h2>
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-elephant.png'>
 </p>
-<p class='piece-details'>Moves one or two squares diagonally. When an Elephant moves two squares, it is allowed to jump, i.e., the intervening square does not have to be empty. The Elephant moves as the combined Alfil and Firzan (Ferz) from Shatranj, two pieces which were also present in mediaeval Chess and have disappeared with the birth of modern moves for Queen and Bishop.</p>
+<p class='piece-details'>se déplace au choix d'une ou de deux cases en diagonale, en avant comme en arrière. Il peut sauter par-dessus la première case si celle-ci est occupée pour atteindre la deuxième case en diagonale. La prise se fait de façon identique au déplacement. Le mouvement de l'Éléphant est inspiré du mouvement de cette pièce au Xiangqi en élargissant ses possibilités de la même façon que le mouvement du Cavalier aux Échecs orthodoxes est plus étendu qu'au Xiangqi (les Échecs chinois). L'Éléphant réunit donc les mouvements de l'Alfil et du Firzan du Shatranj, les ancêtres respectifs du Fou et de la Dame dans le jeu originel arabe.</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/elephant.png'>
@@ -99,7 +65,7 @@
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-camel.png'>
 </p>
-<p class='piece-details'>As in Metamachy, a well known piece from medieval Muslim great Chess like Tamerlane's Chess. It jumps to the opposite case of a 2x4 rectangle, like an extended Knight. No matter what intermediate cases contain. Note that it always stays on the same color of square.</p>
+<p class='piece-details'>Saute à la case opposée d’un rectangle 2x4, comme un super cavalier. Il reste toujours sur la même couleur.</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/camel.png'>
@@ -108,21 +74,39 @@
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-cannon.png'>
 </p>
-<p class='piece-details'>moves without taking like a Rook, but it takes by going in a straight horizontal and vertical line and jumping over exactly one piece. When a Cannon takes a piece, there must be exactly one piece between the original and final square of the Cannon's move - this piece may be of either color. (This is identical to the move of the Cannon in Xiangqi.)</p>
+<p class='piece-details'>Se déplace comme une tour, mais prend en sautant orthogonalement par dessus exactement une pièce (identique au Canon du Xiangqi.)</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/cannon.png'>
 </p>
-<h2>Gryphon</h2>
+<h2>Giraffe</h2>
 <p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-eagle.png'>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-giraffe.png'>
 </p>
-<p class='piece-details'>Moves one square diagonally and then, goes away of an indefinite number of cases vertically or horizontally. It is authorized to go only one square diagonal. It can not jump and the unobstructed path must start with the diagonal movement. This piece is almost as powerful as the Queen and is inspired by the Giraffe from Tamerlane's Chess and the Aanca from Alfonso X's Grande Acedrex. In my other more recent chess variants, this piece is called an Eagle.</p>
+<p class='piece-details'>Saute à la case opposée d’un rectangle 3x4 rectangle, comme un super cavalier. Elle change toujours de couleur. Cette pièce vient du Grant Acedrex de Alphonse X. Elle exite sous le nom de Zèbre, pour les problèmes avec des pièces féériques.</p>
 <div style='clear:both'></div>
 <p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/eagle.png'>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/giraffe.png'>
 </p>
-<p><div class="meta-icon mi-admiral"></div>Prince: a non-royal King who moves and captures one square in any direction, but without being hindered by check. Like the Pawn, he can also move without capturing to the second square straight ahead. When he reaches the last row it can promote to one of the three major pieces: Queen, Lion or Eagle.</p>
+<p>
+<h2>Machine</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-machine.png'>
+</p>
+<p class='piece-details'>C’est l’équivalent orthogonal de l’Éléphant, il peut sauter la première case.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/machine.png'>
+</p>
+<h2>Bow</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-bow.png'>
+</p>
+<p class='piece-details'>Crocodile ou archer : C’est l’équivalent diagonal du canon du Xiangqi. Il se déplace comme un fou et a besoin d’une pièce intermédiaire pour capturer.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/bow.png'>
+</p>
 <br clear="all">
 
 
