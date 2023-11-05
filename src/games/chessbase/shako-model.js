@@ -86,8 +86,8 @@
 				},
 
 				7: {
-					name: 'giraffe',
-					aspect: 'fr-giraffe',
+					name: 'queen',
+					aspect: 'fr-queen',
 					graph: this.cbQueenGraph(geometry),
 					value: 8,
 					abbrev: 'Q',
