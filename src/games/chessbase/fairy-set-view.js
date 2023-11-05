@@ -996,6 +996,27 @@
 				}
 			}
 		},
+        "fr-duchess": {
+			mesh: {
+				jsFile:"/res/courierchess/cc-queen/cc-queen.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/courierchess/cc-queen/cc-queen-diffuse.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/courierchess/cc-queen/cc-queen-normal.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
 
 	});
 
