@@ -62,10 +62,14 @@
 					".": "#575b36", // "rgba(180,213,80,.3)",
 					"#": "#474b36", // "black" cells
 					" ": "rgba(0,0,0,0)",
-				},*/
+				},
 				'colorFill' : {
 					"#": "rgba(51,102,102,1)",
 					".": "rgba(153,255,255,1)",
+				},*/
+				'colorFill' : {
+					"#": "rgba(204,40,0,1)", 
+					".": "rgba(180,180,0,1)", 
 				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
@@ -132,17 +136,22 @@
 
 		pembachessBoardDelta2d = $.extend(true,{},pembachessBoardDelta,
 			{
-				'colorFill' : {
+				/*'colorFill' : {
 					".": "#ffffc0", // "white" cells
 					"#": "#336666", // "black" cells
 					" ": "rgba(0,0,0,0)",
-				},
+				},*/
 				'texturesImg' : {}, // to avoid default wood texture
 				'margins' : {x:.47,y:.47},
 				/*'colorFill' : {
 					".": "rgba(224,50,0,1)",
 					"#": "rgba(220,220,0,1)",
 				},*/
+				'colorFill' : {		 
+					".": "#ffffc0", // "white" cells
+					"#": "#8F976D", // "black" cells
+					" ": "rgba(0,0,0,0)",
+				},
 			}
 		);
 

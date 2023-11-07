@@ -202,9 +202,19 @@
 					clipx: 3100,
 				},
 			},
-			"fr-duchess": {
+			"fr-crowned-rook": {
 				"2d": {
 					clipx: 3200,
+				},
+			},
+            "fr-crowned-knight": {
+				"2d": {
+					clipx: 3300,
+				},
+			},
+            "crowned-bishop": {
+				"2d": {
+					clipx: 3400,
 				},
 			},
 		},modifier);
@@ -996,28 +1006,69 @@
 				}
 			}
 		},
-        "fr-duchess": {
+        "fr-crowned-bishop": {
 			mesh: {
-				jsFile:"/res/courierchess/cc-queen/cc-queen.js"
+				jsFile:"/res/fairy/crowned-bishop/crowned-bishop.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/courierchess/cc-queen/cc-queen-diffuse.jpg",
+								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffuse-map.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/courierchess/cc-queen/cc-queen-normal.jpg",
+								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normal-map.jpg",
 							}
 						}
 					}
 				}
 			}
 		},
-
+        "fr-crowned-knight": {
+			mesh: {
+				jsFile:"/res/fairy/crowned-knight/crowned-knight.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffuse-map.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/crowned-knight/crowned-knight-normal-map.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
+        "fr-crowned-rook": {
+			mesh: {
+				jsFile:"/res/fairy/crowned-rook/crowned-rook.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffuse-map.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
 	});
 
 })();
