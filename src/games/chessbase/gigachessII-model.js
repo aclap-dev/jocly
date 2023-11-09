@@ -368,7 +368,7 @@
       23: {
       name : 'Buffalo',
       abbrev : 'F',
-      aspect : 'fr-bull',
+      aspect : 'fr-buffalo',
       /*graph : this.cbShortRangeGraph(geometry,[
       					[2,3],[3,2],[2,-3],[3,-2],[-2,3],[-3,2],[-2,-3],[-3,-2]
       					],confine),*/
@@ -408,7 +408,11 @@
       aspect : 'fr-lighthouse',
       graph : this.cbMergeGraphs(geometry,
                   this.cbKingGraph(geometry,confine),
-                  this.cbRookGraph(geometry,confine)),
+this.cbShortRangeGraph(geometry,[
+    [+2,0],[+3,0],[-2,0],[-3,0],[-2,0],[0,2],[0,3],[0,-2],[0,-3],[-3,-3],[-2,-2],[-3,-3],
+    [2,2],[3,3],[+2,-2],[+3,-3],[-2,+2],[-3,+3],
+],confine)),
+
       value : 8.75,
       initial: [{s:1,p:22},{s:-1,p:176}],
       },
