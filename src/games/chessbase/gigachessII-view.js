@@ -59,7 +59,7 @@
 		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
 			{
 				'colorFill' : {
-					".": "#575b36", // "rgba(180,213,80,.3)",
+					".": "#9ca364", // "575b36",
 					"#": "#474b36", // "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
