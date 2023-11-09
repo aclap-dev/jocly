@@ -207,12 +207,12 @@
 					clipx: 3200,
 				},
 			},
-            "fr-crowned-knight": {
+			"fr-crowned-knight": {
 				"2d": {
 					clipx: 3300,
 				},
 			},
-            "crowned-bishop": {
+			"fr-crowned-bishop": {
 				"2d": {
 					clipx: 3400,
 				},
