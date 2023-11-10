@@ -53,7 +53,7 @@
 		
 		var gigachessBoardDelta = {
 			notationMode: "out",
-			//notationDebug: true,
+			notationDebug: true,
 		}
 
 		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
@@ -206,8 +206,21 @@
 			}),
 		};
 	}
-
-	/* Make the jumps */
+/* Make the jumps */
+	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
+		var geo=aGame.cbVar.geometry;
+		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
+		var dy=Math.abs(geo.R(aMove.t)-geo.R(aMove.f));
+		if(("_N_E_W_L_M_T_F_G_S_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
+			return Math.max(zFrom,zTo)+2000;
+		else if(("_A_X_H_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
+			return Math.max(zFrom,zTo)+2000;
+		else if(("_C_V_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
+			return Math.max(zFrom,zTo)+2000;
+		else
+			return (zFrom+zTo)/2;
+	}
+	/* Make the jumps 
 	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
 		var geo=aGame.cbVar.geometry;
 		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
@@ -220,5 +233,6 @@
 			return Math.max(zFrom,zTo)+2000;
 		else
 			return (zFrom+zTo)/2;
-	}
+	}*/
 })();
+
