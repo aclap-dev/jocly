@@ -471,4 +471,95 @@ this.cbShortRangeGraph(geometry,[
 		};
 	}
 
+	/*
+	 * Model.Board.GenerateMoves:
+	 *   - handle king special move: a kind of castle involving only the king
+	 *   -When jumping like a Knight, at least one of the two intermediate squares must be free of threat (e.g., if jumping from h2 to j3, either i2 or i3 must not be under attack).
+	 */
+	var kingLongMoves={
+		"1": {
+			21: [ [47],[19],[51],[23],[19,20],[23,22],[36,49],[47,34],[36,51],[7,8],[20,34,33],[34,20,33],[34,35,48],[35,24,48],[35,36,50],[36,35,50],[22,23,37],[36,37],[22,8,9],[22,23,9],[20,6,5],[6,20,5],[20,19,5] ,[20,19,33],[35,49,48],[35,49,50]]
+		},
+		"-1": {
+			175: [ [147],[151],[193],[177],[173,174],[177,176],[109,161],[147,163],[145,162],[149,164],[190,176,191],[162,176,163],[161,162,150],[160,1601,148],[194,160,159],[188,194,187],[176,177,191],[176,177,163],[194,193,187] ,[194,193,159] ,[161,149,148] ,[161,149,150]  ]
+		},
+	}
+
+var SuperModelBoardGenerateMoves=Model.Board.GenerateMoves;
+	Model.Board.GenerateMoves = function(aGame) {
+
+		SuperModelBoardGenerateMoves.apply(this,arguments); // call regular GenerateMoves method
+		// now consider special 2 cases king moves
+		var kPiece=this.pieces[this.board[this.kings[this.mWho]]];
+		if(!kPiece.m && !this.check) {
+			var lMoves=kingLongMoves[this.mWho][kPiece.p];
+			for(var i=0;i<lMoves.length;i++) {
+				var lMove=lMoves[i];
+				if(this.board[lMove[0]]>=0)
+					continue;
+				var canMove=true;
+				var oppInCheck=false;
+				for(var j=0;j<lMove.length;j++) {
+					var pos=lMove[j];
+					var tmpOut=this.board[pos];
+					this.board[pos]=-1; // remove possible piece to prevent problems when quick-applying/unapplying
+					var undo=this.cbQuickApply(aGame,{
+						f: kPiece.p,
+						t: pos,
+					});
+					var inCheck=this.cbGetAttackers(aGame,pos,this.mWho,true).length>0;
+					if(!inCheck && j==0)
+						oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
+					this.cbQuickUnapply(aGame,undo);
+					this.board[pos]=tmpOut;
+					this.cbIntegrity(aGame);
+					if(inCheck) {
+						canMove=false;
+						break;
+					}
+				}
+				if(canMove)
+
+					this.mMoves.push({
+						f: kPiece.p,
+						//t: lMove[0],
+                        t: pos,
+						c: null,
+						ck: oppInCheck,
+						a: 'K',
+					});
+			}
+		}
+	}
+
+	
+	/*
+	 * Model.Board.ApplyMove overriding: setup phase and king special move
+	 */
+	var SuperModelBoardApplyMove=Model.Board.ApplyMove;
+	Model.Board.ApplyMove = function(aGame,move) {
+	
+			SuperModelBoardApplyMove.apply(this,arguments);
+	}
+
+	/*
+	 * Model.Move.ToString overriding for setup notation
+	 */
+	var SuperModelMoveToString = Model.Move.ToString;
+	Model.Move.ToString = function() {
+
+		return SuperModelMoveToString.apply(this,arguments);
+	}
+	
+	/*
+	 * Model.Board.CompactMoveString overriding to help reading PJN game transcripts
+	 */
+	var SuperModelBoardCompactMoveString = Model.Board.CompactMoveString; 
+	Model.Board.CompactMoveString = function(aGame,aMove,allMoves) {
+		if(typeof aMove.ToString!="function") // ensure proper move object, if necessary
+			aMove=aGame.CreateMove(aMove);
+
+		return SuperModelBoardCompactMoveString.apply(this,arguments);
+	}
+
 })();
