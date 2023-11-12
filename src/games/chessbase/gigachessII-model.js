@@ -14,73 +14,6 @@
 	var lastCol=13;
 
 	var geometry = Model.Game.cbBoardGeometryGrid(14,14);
-
-	Model.Game.cbRhinoGraph = function(geometry,confine){
-		var $this=this;
-
-		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
-		var graph={};
-		for(var pos=0;pos<geometry.boardSize;pos++) {
-			if(confine && !(pos in confine)){
-				graph[pos]=[];
-				continue;
-			}
-			var directions=[];
-			[[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]].forEach(function(delta) { // loop on all 8 diagonals
-				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
-				var pos1=geometry.Graph(pos,delta);
-				if(pos1!=null && (!confine || (pos1 in confine))) {
-					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
-					//directions.push($this.cbTypedArray(direction));
-					var nbMax = Math.max(lastRow , lastCol) - 1;
-					var away=[] // hold the sliding line
-					for(var n=1;n<nbMax;n++) {
-						var delta2=[movedir[0]*n,movedir[1]*n];
-						var pos2=geometry.Graph(pos1,delta2);
-						if(pos2!=null && (!confine || (pos2 in confine))) {
-							if(n==1) // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-								away.push(pos1 | $this.cbConstants.FLAG_STOP);
-							away.push(pos2 | flags | $this.cbConstants.FLAG_STOP);
-						}
-					}
-					if(away.length>0)
-						directions.push($this.cbTypedArray(away));
-				}
-			});
-			graph[pos]=directions;
-		}
-
-		return $this.cbMergeGraphs(geometry,
-		   $this.cbShortRangeGraph(geometry,[[0,1],[1,0],[-1,0],[0,-1],[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]]),
-		   graph
-		);
-	}
-
-	Model.Game.cbPrinceGraph = function(geometry,side,confine) {
-		var $this=this;
-		var graph={};
-		for(var pos=0;pos<geometry.boardSize;pos++) {
-			if(confine && !(pos in confine)){
-				graph[pos]=[];
-				continue;
-			}
-			graph[pos]=[];
-			var forward=[]; // hold the pos line in front of the piece
-			var pos1=geometry.Graph(pos,[0,side]);
-			if(pos1!=null && (!confine || (pos1 in confine))) {
-				forward.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE); // capture and move allowed at first forward position
-				pos1=geometry.Graph(pos1,[0,side]);
-				if(pos1!=null && (!confine || (pos1 in confine)))
-					forward.push(pos1 | $this.cbConstants.FLAG_MOVE); // move to second forward only, no capture
-				graph[pos].push($this.cbTypedArray(forward));
-			}
-		}
-		return $this.cbMergeGraphs(geometry,
-			$this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[-1,0],[1,0],[1,-1],[1,1],[0,-side]]), // direction other than forward
-			graph // forward direction
-		);
-	}
-
 	Model.Game.cbEagleGraph = function(geometry){
 		var $this=this;
 
@@ -117,6 +50,105 @@
 		);
 	}
 
+	Model.Game.cbRhinoGraph = function(geometry,confine){
+		var $this=this;
+
+		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
+		var graph={};
+		for(var pos=0;pos<geometry.boardSize;pos++) {
+
+			
+			var directions=[];
+			[[0,1],[1,0],[-1,0],[0,-1],[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]].forEach(function(delta) { // loop on all 8 diagonals
+				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
+				var pos1=geometry.Graph(pos,delta);
+
+                    if(movedir[0]==0){
+                     xleft=-1;
+                     xright=1;
+                    }else{
+                     xleft=movedir[0];
+                     xright=movedir[0];
+                    }
+                    if(movedir[1]==0){
+                     yleft=-1;
+                     yright=1;
+                    }else{
+                     yleft=movedir[1];
+                     yright=movedir[1];
+                    }
+
+				if(pos1!=null /*&& (!confine || (pos1 in confine))*/) {
+					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
+					//directions.push($this.cbTypedArray(direction));
+					var nbMax = Math.max(lastRow , lastCol) - 1;
+					var away=[] // hold the sliding line
+
+					for(var n=1;n<nbMax;n++) {
+
+						var delta2=[xleft*n,yleft*n];
+                        var delta3=[xright*n,yright*n];
+						var pos2=geometry.Graph(pos1,delta2);
+                        var pos3=geometry.Graph(pos1,delta3);
+
+						if(pos2!=null ) {
+                        // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							if(n==1) 
+								away.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+							away.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+                            
+						}
+                        if(pos3!=null ) {
+                            // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							if(n==1) 
+								away.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+							
+                            away.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+						}
+
+					}
+					if(away.length>0)
+						directions.push($this.cbTypedArray(away));
+
+				}
+			});
+			graph[pos]=directions;
+
+		}
+
+		return $this.cbMergeGraphs(geometry,
+		   $this.cbShortRangeGraph(geometry,[[0,1],[1,0],[-1,0],[0,-1]]),
+		   graph
+		);
+	}
+
+	Model.Game.cbPrinceGraph = function(geometry,side,confine) {
+		var $this=this;
+		var graph={};
+		for(var pos=0;pos<geometry.boardSize;pos++) {
+			if(confine && !(pos in confine)){
+				graph[pos]=[];
+				continue;
+			}
+			graph[pos]=[];
+			var forward=[]; // hold the pos line in front of the piece
+			var pos1=geometry.Graph(pos,[0,side]);
+			if(pos1!=null && (!confine || (pos1 in confine))) {
+				forward.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE); // capture and move allowed at first forward position
+				pos1=geometry.Graph(pos1,[0,side]);
+				if(pos1!=null && (!confine || (pos1 in confine)))
+					forward.push(pos1 | $this.cbConstants.FLAG_MOVE); // move to second forward only, no capture
+				graph[pos].push($this.cbTypedArray(forward));
+			}
+		}
+		return $this.cbMergeGraphs(geometry,
+			$this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[-1,0],[1,0],[1,-1],[1,1],[0,-side]]), // direction other than forward
+			graph // forward direction
+		);
+	}
+
+
+
 
 	var confine = {};
 
@@ -129,8 +161,6 @@
 		// classic chess pieces
 
 		var piecesTypes = {
-
-
 		
       0: {
       name : 'ipawnw',
@@ -170,10 +200,10 @@
       name : 'rhino',
       abbrev : 'U',
       aspect : 'fr-rhino',
-      graph : this.cbRhinoGraph(geometry,confine),
+      graph : this.cbRhinoGraph(geometry),
       value : 7.5,
-      epCatch : true,
-      epTarget : true,
+     // epCatch : true,
+     // epTarget : true,
       initial: [{s:1,p:4},{s:-1,p:186}],
       },
       4: {
@@ -368,9 +398,6 @@
       name : 'Buffalo',
       abbrev : 'F',
       aspect : 'fr-buffalo',
-      /*graph : this.cbShortRangeGraph(geometry,[
-      					[2,3],[3,2],[2,-3],[3,-2],[-2,3],[-3,2],[-2,-3],[-3,-2]
-      					],confine),*/
       graph : this.cbShortRangeGraph(geometry,[
                   [1,2],[1,3],[2,1],[2,3],[3,1],[3,2],
                   [1,-2],[1,-3],[2,-1],[2,-3],[3,-1],[3,-2],
@@ -419,29 +446,29 @@ this.cbShortRangeGraph(geometry,[
 
 		// defining types for readable promo cases
 		var T_ipawnw=0
-    var T_ipawnb=1
-    var T_giraffe=2
-    var T_rhino=3
-    var T_princew=4
-    var T_princeb=5
-    var T_rook=6
-    var T_bishop=7
-    var T_knight=8
-    var T_queen=9
-    var T_king=10
-    var T_bow=11
-    var T_lion=12
-    var T_elephant=13
-    var T_cannon=14
-    var T_machine=15
-    var T_centaur=16
-    var T_buffalo=23
-    var T_sorcerer=17
-    var T_eagle=18
-    var T_camel=19
-    var T_amazon=20
-    var T_marshall=21
-    var T_cardinal=22
+        var T_ipawnb=1
+        var T_giraffe=2
+        var T_rhino=3
+        var T_princew=4
+        var T_princeb=5
+        var T_rook=6
+        var T_bishop=7
+        var T_knight=8
+        var T_queen=9
+        var T_king=10
+        var T_bow=11
+        var T_lion=12
+        var T_elephant=13
+        var T_cannon=14
+        var T_machine=15
+        var T_centaur=16
+        var T_buffalo=23
+        var T_sorcerer=17
+        var T_eagle=18
+        var T_camel=19
+        var T_amazon=20
+        var T_marshall=21
+        var T_cardinal=22
 
 		return {
 			
@@ -478,12 +505,9 @@ this.cbShortRangeGraph(geometry,[
 	var kingLongMoves={
 		"1": {
 21: [ [48,34],[50,36],[48,35],[50,35],[49,35],[49,34],[49,36],[37,22],[23,22],[9,22],[37,36],[9,8],[5,6],[5,20],[33,20],[19,20],[33,34],[19,34],[19,6],[47,34],[23,8],[23,36],[51,36]]
-/*21: [ [47],[19],[51],[23],[19],[20],[23],[22],[35],[49],[47],[34],[36],[51],[6],[7],[8],[48,34],[48,35],[50,35],[50,36],[37,22],[37,36],[9,22],[9,8],[5,6],[5,20] ,[20,33],[34,33]]
-			21: [ [47],[19],[51],[23],[19,20],[23,22],[36,49],[47,34],[36,51],[7,8],[33,20,34],[33,34,20],[34,35,48],[48,35,24],[50,35,36],[50,36,35],[37,22],[37,36],[9,22,8],[9,22,23],[5,20,6],[5,6,20],[20,19,5] ,[20,19,33],[48,35,49],[35,49,50]]*/
 		},
 		"-1": {
 			175: [ [145,160],[149,162],[163,162],[163,176],[177,176],[191,176],[187,174],[159,174],[159,160],[173,174],[147,162],[147,160],[146,160],[146,161],[148,161],[148,162],[147,161],[177,162],[149,162],[177,190],[173,188],[173,160]]
-/*175: [ [145,160],[149,162],[193],[177],[173,174],[177,176],[109,161],[147,163],[145,162],[149,164],[190,176,191],[162,176,163],[161,162,150],[160,1601,148],[194,160,159],[188,194,187],[176,177,191],[176,177,163],[194,193,187] ,[194,193,159] ,[161,149,148] ,[161,149,150]  ]*/
 		},
 	}
 
@@ -515,24 +539,14 @@ var SuperModelBoardGenerateMoves=Model.Board.GenerateMoves;
 					this.cbQuickUnapply(aGame,undo);
 					this.board[pos]=tmpOut;
 					this.cbIntegrity(aGame);
-					if(inCheck || tmpOut>-1) {
+					if(inCheck 
+/* // king move but doesn‘t jump
+|| tmpOut>-1
+*/                  ) {
 						canMove=false;
 						break;
 					}
-
-if(kPiece.p==21 && lMove[0]==37){
-console.log("lMove[0]----", lMove[0]);
-console.log("pos", pos);
-console.log("canMove", canMove);
-console.log("lMove", lMove);
-console.log("j", j);
-console.log("tmpOut----", tmpOut);
-}
-
-
 				}
-
-
 
 				if(canMove)
 					this.mMoves.push({
