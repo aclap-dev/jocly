@@ -132,17 +132,25 @@
 
 		gigachessBoardDelta2d = $.extend(true,{},gigachessBoardDelta,
 			{
-				'colorFill' : {
+				 //olive
+                    'colorFill' : {
 					".": "#ffffc0", // #ffffc0 "white" cells
 					"#": "#8F976D", // #8F976D "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
+                /*//green
+                'colorFill' : {
+					".": "#ffffdd",
+					"#": "#86a666",
+                    " ": "rgba(0,0,0,0)",
+				},*/
 				'texturesImg' : {}, // to avoid default wood texture
 				'margins' : {x:.47,y:.47},
 				/*'colorFill' : {
 					".": "rgba(224,50,0,1)",
 					"#": "rgba(220,220,0,1)",
 				},*/
+
 			}
 		);
 
