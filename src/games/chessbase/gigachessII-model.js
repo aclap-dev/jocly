@@ -61,6 +61,7 @@
 			var directions=[];
 			[[0,1],[1,0],[-1,0],[0,-1],[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]].forEach(function(delta) { // loop on all 8 diagonals
 				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
+                
 				var pos1=geometry.Graph(pos,delta);
 
                     if(movedir[0]==0){
@@ -82,8 +83,8 @@
 					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
 					//directions.push($this.cbTypedArray(direction));
 					var nbMax = Math.max(lastRow , lastCol) - 1;
-					var away=[] // hold the sliding line
-
+					var awayl=[] // hold the sliding line
+                   var awayr=[] // hold the sliding line
 					for(var n=1;n<nbMax;n++) {
 
 						var delta2=[xleft*n,yleft*n];
@@ -94,22 +95,23 @@
 						if(pos2!=null ) {
                         // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
 							if(n==1) 
-								away.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
-							away.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
+							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
                             
 						}
                         if(pos3!=null ) {
                             // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
 							if(n==1) 
-								away.push(pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
 							
-                            away.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE);
+                            awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
 						}
 
 					}
-					if(away.length>0)
-						directions.push($this.cbTypedArray(away));
-
+					if(awayl.length>0)
+						directions.push($this.cbTypedArray(awayl));
+                    if(awayr.length>0)
+						directions.push($this.cbTypedArray(awayr));
 				}
 			});
 			graph[pos]=directions;
