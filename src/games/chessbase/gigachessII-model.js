@@ -59,7 +59,7 @@
 
 			
 			var directions=[];
-			[[0,1],[1,0],[-1,0],[0,-1],[1,2],[2,1],[1,-2],[2,-1],[-1,2],[-2,1],[-1,-2],[-2,-1]].forEach(function(delta) { // loop on all 8 diagonals
+			[[0,1],[1,0],[-1,0],[0,-1]].forEach(function(delta) { // loop on all 8 diagonals
 				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
                 
 				var pos1=geometry.Graph(pos,delta);
@@ -85,6 +85,7 @@
 					var nbMax = Math.max(lastRow , lastCol) - 1;
 					var awayl=[] // hold the sliding line
                    var awayr=[] // hold the sliding line
+
 					for(var n=1;n<nbMax;n++) {
 
 						var delta2=[xleft*n,yleft*n];
@@ -92,16 +93,17 @@
 						var pos2=geometry.Graph(pos1,delta2);
                         var pos3=geometry.Graph(pos1,delta3);
 
+
 						if(pos2!=null ) {
                         // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							if(n==1) 
+							//if(n==1) 
 								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
 							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
                             
 						}
                         if(pos3!=null ) {
                             // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							if(n==1) 
+							//if(n==1) 
 								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
 							
                             awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
