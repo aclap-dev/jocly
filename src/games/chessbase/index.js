@@ -5449,13 +5449,11 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
 								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
 								"image|/res/fairy/pawn/pawn-normalmap.jpg",
-								"smoothedfilegeo|0|/res/fairy/corporal/corporal.js",
 								"image|/res/fairy/corporal/corporal-diffusemap.jpg",
 								"image|/res/fairy/corporal/corporal-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
 								"image|/res/fairy/prince/prince-diffusemap.jpg",
 								"image|/res/fairy/prince/prince-normalmap.jpg",
-
 								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
 								"image|/res/fairy/rook/rook-diffusemap.jpg",
 								"image|/res/fairy/rook/rook-normalmap.jpg",
@@ -5490,7 +5488,6 @@ exports.games = (function () {
 								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
 								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/ship/ship.js",
-
 								"image|/res/fairy/ship/ship-diffusemap.jpg",
 								"image|/res/fairy/ship/ship-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
