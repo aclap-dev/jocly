@@ -5521,8 +5521,6 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
 								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
 								"image|/res/fairy/pawn/pawn-normalmap.jpg",
-								"image|/res/fairy/corporal/corporal-diffusemap.jpg",
-								"image|/res/fairy/corporal/corporal-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
 								"image|/res/fairy/prince/prince-diffusemap.jpg",
 								"image|/res/fairy/prince/prince-normalmap.jpg",
@@ -5559,15 +5557,21 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/buffalo/buffalo.js",
 								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
 								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
-								"smoothedfilegeo|0|/res/fairy/ship/ship.js",
-								"image|/res/fairy/ship/ship-diffusemap.jpg",
-								"image|/res/fairy/ship/ship-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
 								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
 								"image|/res/fairy/eagle/eagle-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
 								"image|/res/fairy/camel/camel-diffusemap.jpg",
 								"image|/res/fairy/camel/camel-normalmap.jpg",
+	                            "smoothedfilegeo|0|/res/fairy/star/star.js",
+								"image|/res/fairy/star/star-diffusemap.jpg",
+								"image|/res/fairy/star/star-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rhino/rhino.js",
+								"image|/res/fairy/rhino/rhino-diffusemap.jpg",
+								"image|/res/fairy/rhino/rhino-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
+								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								"image|/res/fairy/giraffe/giraffe-normal-map.jpg",
 								"smoothedfilegeo|0|/res/fairy/amazon/amazon.js",
 								"image|/res/fairy/amazon/amazon-diffusemap.jpg",
 								"image|/res/fairy/amazon/amazon-normalmap.jpg",
@@ -5689,8 +5693,7 @@ exports.games = (function () {
  				}
  			},
  			"viewScripts": config_view_js_wtimurid
-  		}			  		
-,
+  		},
 		{
  			"name": "timurid-chess",
  			"modelScripts": modelScripts_timurid,
@@ -5768,13 +5771,10 @@ exports.games = (function () {
  								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
  								"image|/res/fairy/elephant/elephant-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
-
  								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
-
  								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
  								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
-
  								"image|/res/fairy/eagle/eagle-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
  								"image|/res/fairy/camel/camel-diffusemap.jpg",
@@ -6081,13 +6081,10 @@ exports.games = (function () {
  								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
  								"image|/res/fairy/elephant/elephant-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
-
  								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
-
  								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
  								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
-
  								"image|/res/fairy/eagle/eagle-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
  								"image|/res/fairy/camel/camel-diffusemap.jpg",
@@ -6113,10 +6110,10 @@ exports.games = (function () {
 			"config": {
 				"status": true,
 				"model": {
-					"title-en": "Zanzibar",
+					"title-en": "Zanzibar S",
 					"summary": "Chess on 12x12 with fairy pieces",
 					"rules": {
-						"en": "zanzibar-rules.html"
+						"en": "zanzibar-s-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -6182,14 +6179,29 @@ exports.games = (function () {
 								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
 								"image|/res/fairy/elephant/elephant-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/admiral/admiral.js",
-								"image|/res/fairy/admiral/admiral-diffusemap.jpg",
-								"image|/res/fairy/admiral/admiral-normalmap.jpg",
+								"image|/res/fairy/prince/prince-diffusemap.jpg",
+								"image|/res/fairy/prince/prince-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
 								"image|/res/fairy/camel/camel-diffusemap.jpg",
 								"image|/res/fairy/camel/camel-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
 								"image|/res/fairy/lion/lion-diffusemap.jpg",
 								"image|/res/fairy/lion/lion-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"image|/res/fairy/bow/bow-diffusemap.jpg",
+								"image|/res/fairy/bow/bow-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/machine/machine.js",
+								"image|/res/fairy/machine/machine-diffusemap.jpg",
+								"image|/res/fairy/machine/machine-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/buffalo/buffalo.js",
+								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
+								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rhino/rhino.js",
+								"image|/res/fairy/rhino/rhino-diffusemap.jpg",
+								"image|/res/fairy/rhino/rhino-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
+								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								"image|/res/fairy/giraffe/giraffe-normal-map.jpg",
 								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
 								"image|/res/fairy/eagle/eagle-diffusemap.jpg",
 								"image|/res/fairy/eagle/eagle-normalmap.jpg"

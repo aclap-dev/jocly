@@ -20,29 +20,26 @@
 	margin: 0 auto;
 }
 </style>
+<h1>Presentation</h1>
 
-<h1>Initial setup</h1>
-
-<p>The board is a 14 x 14 checkered squares with a white one at the right end of each player.</p>
+<p>The games of Zanzibar have been invented in the process of creating and optimizing Zanzibar-XXL (Maasai Chess). However, two versions, called Zanzibar-S and Zanzibar-XL, present their own interest and they met a certain success. With the Pawns on the 3rd row and no Soldiers, those games have "rapid" Pawns and Princes playing like in Metamachy. </p>
+<p>
+<a href="https://www.chessvariants.com/invention/zanzibar-s" target="_blank">Zanzibar-S</a> is the moderate version. It is still close to Metamachy, its parent game.  </p>
 
 <p>
-<img class='piece-graph' src='{GAME}/res/visuals/gigachessII-600x600-2d.jpg'>
-</p>
-The pieces are:
-
-The white King is placed on the center of the second row on a black square, the black King being on a white square. The Queen is also placed on the center, beside the King. 
-<p>There are 48 pieces per side:
-<ul>
-    <li>1 Amazon, 1 Sorceress, 1 Marshal, 1 Cardinal, 1 Rhinoceros, 1 Buffalo, 2 Crocodiles, 2 Giraffes, 2 Camels and 2 Cannons on 1st row, </li>
-    <li>1 King, 1 Queen, 1 Duchess, 1 Centaur, 2 Machines, 2 Bishops, 2 Knights, 2 Rooks and 2 Elephants on 2nd row,</li>
-    <li>1 Lion, 1 Eagle 1 Missionary, 1 Admiral, and 2 Princes on 3rd row,</li>
-    <li>14 Pawns on 3rd and 4th rows.</li>
-</ul>
+<img class='piece-graph' src='{GAME}/res/visuals/zanzibar-600x600-2d.jpg'>
 </p>
 
-<p>The white King is placed on the center of the second row on a black square, the black King being on a white square. The Queen is also placed on the center, beside the King. The Amazon is just behind the King. On the 1st row there is the "animal side" with Eagle, Lion, Buffalo from inside to outside, and the "knighted side" with Amazon, Marshall and Cardinal in this order. On 3rd row, Corporals occupy the six central columns. </p>
+<p>There are 36 for each player:</p>
+<p> King, 1 Queen, 1 Eagle, 1 Lion, 1 Rhinoceros, 1 Buffalo, 2 Princes, 2 Bishops, 2 Knights, 2 Camels, 2 Rooks, 2 Cannons, 2 Elephants, 2 Giraffes, 2 bows, 2 Machines and 10 Pawns. </p>
+<p>In Zanzibar-S there is no Duchess and no Sorceress.</p>
+<p>Goal is checkmate the opposing King.</p>
 
-<p>All short-range pieces (and the Ship as well) promote.</p>
+
+<h1>Moves</h1>
+<p><div class="meta-icon mi-king"></div>King: moves 1 step in every (8) directions on a not attacked square. The King is in check if it is attacked by one or several ennemy pieces. It is forbidden to play a move letting his King in check. At his first move, the King can make a 2-steps jump, horizontally, vertically, diagonally or like a Knight, providing that he is not in check and that the overpassed and the arrival squares are not under attack. The overpassed square may be free or occupied.</p>
+<br clear="all">
+
 
 
 <h1>Pieces</h1>
@@ -51,7 +48,9 @@ The white King is placed on the center of the second row on a black square, the 
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-king.png'>
 </p>
-<p class='piece-details'>Exactly as in usual Chess.</p>
+<p class='piece-details'>moves 1 step in every (8) directions on a not attacked square. The King is in check if it is attacked by one or several enemy pieces. It is forbidden to play a move letting his King in check.
+
+There is no castling in Zanzibar. At his first move, the King may jump to a free square at two squares' distance. For instance, from f2, it can jump to d1, d2, d3, d4, e4, f4, g4, h4, h3, h2 or h1). It does not matter if the square jumped over is occupied or not; however, the jump is forbidden if that intermediate square is threatened by an enemy piece. When jumping like a Knight, at least one of the two intermediate squares must be free of threat (e.g., if jumping from f2 to h3, either g2 or g3 must not be under attack). The King's jump is not permitted if the King is in check. This rule, which was once prevalent in medieval European chess, replaces castling. Identical to Metamachy. </p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
@@ -146,6 +145,15 @@ The white King is placed on the center of the second row on a black square, the 
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/camel.png'>
 </p>
+<h2>Prince</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-prince.png'>
+</p>
+<p class='piece-details'>a non-royal King who moves and captures one square in any direction, but without being hindered by check. Like the Pawn, he can also move without capturing to the second square straight ahead.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/prince2.png'>
+</p>
 <h2>Cannon</h2>
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-cannon.png'>
@@ -182,104 +190,44 @@ The white King is placed on the center of the second row on a black square, the 
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/rhinoceros.png'>
 </p>
-<h2>Marshall</h2>
+
+<h1>Setup rules</h1>
+
+<p>At the beginning all pieces but the Kings, Queens, Eagles, Lions, Rhinoceros and buffalo are placed.</p>
+
+
+<p>Then, Black freely decides where to place his King, Queen, Eagle and Lion on squares f1, g1, f2 and g2.</p>
+
+<p>Then, White put his pieces symetrically in mirror (if Black King is on f1, White King goes on f12) and makes the first move.</p>
+
+<p>This agreement balances the advantage of White starting to play with Black choosing the setup.</p>
+
+<p>As pieces are placed in mirror symetry, positions of Kings on f squares are exactly equivalent of positions of King on g squares. Then, it can be demonstrated that it exists 12 different starting positions:</p>
+
 <p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-marshall.png'>
-</p>
-<p class='piece-details'>It combines the move of Rook and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca and many others like Grand Chess or Gothic Chess. (under many other names: Champion, Guard, Empress, Concubine, Chancellor, etc. The later is sometimes preferred, however it is confusing since Capablanca used it once for R+N and once for B+N. It is an Elephant in Seirawan Chess).</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/marshall.png'>
-</p>
-<h2>Cardinal</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-cardinal.png'>
-</p>
-<p class='piece-details'>It combines the move of Bishop and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca, Modern and many others like Grand Chess or Gothic Chess. (under many other names: Centaur, Minister, Equerry, Janus, Archbishop, Princess, Chancellor, etc. It is a Hawk in Seirawan Chess). </p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/cardinal.png'>
-</p>
-<h2>Amazon</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-amazon.png'>
-</p>
-<p class='piece-details'>Strongest piece on the board, it combines the move of Queen and Knight. It was used in the Turkish-Indian Grand Chess (as a Giraffe). </p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/amazon.png'>
-</p>
-<h2>Centaur</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-crowned-knight.png'>
-</p>
-<p class='piece-details'> it is another compound piece that moves as a Knight or a non-royal King.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/centaur.png'>
-</p>
-<h2>Admiral</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-crowned-rook.png'>
-</p>
-<p class='piece-details'>it is another compound piece that moves as a Rook or a non-royal King. That means that it is a Rook that can also step one space diagonally.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/admiral.png'>
-</p>
-<h2>Prince</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-prince.png'>
-</p>
-<p class='piece-details'>a non-royal King who moves and captures one square in any direction, but without being hindered by check. Like the Pawn, he can also move without capturing to the second square straight ahead.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/prince2.png'>
-</p>
-<h2>Missionary</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-crowned-bishop.png'>
-</p>
-<p class='piece-details'>it is another compound piece that moves as a Bishop or a non-royal King. That means that it is a Bishop that can also step one space orthogonally.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/missionary.png'>
-</p>
-<h2>duchess</h2>
-<p>
-<img class='piece-icon' src='{GAME}/res/fairy/icons/w-duchess.png'>
-</p>
-<p class='piece-details'>it is another compound piece that moves as a Bishop or a non-royal King. That means that it is a Bishop that can also step one space orthogonally.</p>
-<div style='clear:both'></div>
-<p>
-<img class='piece-graph' src='{GAME}/res/rules/graphs/duchess.png'>
+	<ul>
+		<li>The King can be on f1 or f2: 2 choices</li>
+		<li>Then, the Queen has a choice of 3 positions: beside the King, beneath the King or diagonal to the King.</li>
+		<li>Then, the Eagle has a choice of 2 remaining positions.</li>
+		<li>Then, the left place is for the Lion.</li>
+		<li>Then, the Rhinoceros has a choice of 2 remaining positions.</li>
+		<li>Then, the left place is for the Buffalo. 2x3x2x2 = 24.</li>
+	</ul>
 </p>
 <h1>Promotions table</h1>
 <div id="promo">
-<table><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-pawn.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-queen.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-prince.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-amazon.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-knight.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-camel.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
+<table>
 
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-giraffe.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-crowned-knight.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-elephant.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-lion.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-machine.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-eagle.png'>
-</td></tr></table>
-</div>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-pawn.png'></td>
+<td>promotes to</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-queen.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'> 
+<img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-lion.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-eagle.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-rhino.png'></td>
+</tr>
+
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-prince.png'></td>
+<td>promotes to</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-queen.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'> 
+<img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-lion.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-eagle.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-rhino.png'></td></tr>
+
+</table>
+
+
+ 

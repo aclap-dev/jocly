@@ -70,14 +70,32 @@
 	}
 
 	/* 
-	 * Make the knight & the camel jump when moving, the elephant & the lion when moving 2 squares, the cannon when capturing 
+	 * Make the knight & the camel jump when moving, the elephant & the lion when moving 2 squares, the cannon/bow when capturing 
 	 */
-	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
+	/*View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
 		if(aMove.a=='N' || aMove.a=='M' || (aMove.a=='E' && aGame.g.distGraph[aMove.f][aMove.t]==2) || (aMove.a=='L' && aGame.g.distGraph[aMove.f][aMove.t]==2) || (aMove.a=='K' && aGame.g.distGraph[aMove.f][aMove.t]==2) || (aMove.a=='C' && aMove.c!=null))
 			return Math.max(zFrom,zTo)+1500;
 		else
 			return (zFrom+zTo)/2;
+	}*/
+
+/* Make the jumps */
+	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
+		var geo=aGame.cbVar.geometry;
+		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
+		var dy=Math.abs(geo.R(aMove.t)-geo.R(aMove.f));
+// jump to move
+		if(("_N_E_L_M_F_Z_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
+			return Math.max(zFrom,zTo)+2000;
+		else if(("_X_H_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
+			return Math.max(zFrom,zTo)+2000;
+// jump to attack
+		else if(("_C_V_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
+			return Math.max(zFrom,zTo)+2000;
+		else
+			return (zFrom+zTo)/2;
 	}
+
 
 	/*
 	 * View.Game.xdInit overriding to create initial setup gadgets 
@@ -204,22 +222,7 @@
 			SuperViewBoardxdDisplay.apply(this,arguments);
 	}
 	
-/* Make the jumps */
-	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
-		var geo=aGame.cbVar.geometry;
-		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
-		var dy=Math.abs(geo.R(aMove.t)-geo.R(aMove.f));
-// jump to move
-		if(("_N_E_L_M_F_Z_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
-			return Math.max(zFrom,zTo)+2000;
-		else if(("_X_H_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
-			return Math.max(zFrom,zTo)+2000;
-// jump to attack
-		else if(("_C_V_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
-			return Math.max(zFrom,zTo)+2000;
-		else
-			return (zFrom+zTo)/2;
-	}
+
 
 })();
 
