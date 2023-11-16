@@ -19,8 +19,10 @@
 		/*
 		 * Movement/capture graph for the rhino
 		 */
-	Model.Game.cbRhinoGraph = function(geometry,confine){
-		var $this=this;
+	function RhinoGraph(side) {
+		
+	    var lastCol=11;	
+        var lastRow=11;
 
 		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
 		var graph={};
@@ -335,7 +337,7 @@
 			17: {
 	            	name: 'Rhino',
 	            	aspect: 'fr-rhino',
-	            	graph: EagleGraph(),
+	            	graph: RhinoGraph(),
 	            	value: 6,
 	            	abbrev: 'U',
 	            	initial: [{s:1,p:7},{s:-1,p:139}],

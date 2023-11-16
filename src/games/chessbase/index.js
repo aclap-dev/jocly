@@ -6111,7 +6111,7 @@ exports.games = (function () {
 				"status": true,
 				"model": {
 					"title-en": "Zanzibar S",
-					"summary": "Chess on 12x12 with fairy pieces",
+					"summary": "Extended Metamachy - 12x12",
 					"rules": {
 						"en": "zanzibar-s-rules.html"
 					},
