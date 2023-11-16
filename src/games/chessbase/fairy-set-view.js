@@ -189,32 +189,32 @@
 			},
 			"fr-giraffe": {
 				"2d": {
-					clipx: 2900,
+					clipx: 4000,
 				},
 			},
 			"fr-wolf": {
 				"2d": {
-					clipx: 3000,
+					clipx: 4100,
 				},
 			},
 			"fr-squirle": {
 				"2d": {
-					clipx: 3100,
+					clipx: 4200,
 				},
 			},
 			"fr-crowned-rook": {
 				"2d": {
-					clipx: 3200,
+					clipx: 4300,
 				},
 			},
             "fr-crowned-knight": {
 				"2d": {
-					clipx: 3300,
+					clipx: 4400,
 				},
 			},
             "fr-crowned-bishop": {
 				"2d": {
-					clipx: 3400,
+					clipx: 4500,
 				},
 			},
 		},modifier);
