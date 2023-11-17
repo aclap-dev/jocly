@@ -1172,7 +1172,7 @@ exports.games = (function () {
  		"base-view.js",
  		"grid-board-view.js",
  		"fairy-set-view.js",
- 		"wild-timurid-view.js"
+ 		"timurid-view.js"
  	]
 	var modelScripts_timurid = [
  		"base-model.js",
@@ -1232,7 +1232,7 @@ exports.games = (function () {
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"zanzibar-s-view.js"
+		"zanzibar-view.js"
 	]
 
 	return [
