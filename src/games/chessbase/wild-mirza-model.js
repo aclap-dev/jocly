@@ -17,6 +17,158 @@
 
 	// graphs
 
+	Model.Game.cbSnakeGraph = function(geometry,confine){
+		var $this=this;
+
+		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
+		var graph={};
+		for(var pos=0;pos<geometry.boardSize;pos++) {
+
+			
+			var directions=[];
+			[[0,1],[0,-1]].forEach(function(delta) { // loop on all 8 diagonals
+				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
+                
+				var pos1=geometry.Graph(pos,delta);
+
+                    if(movedir[0]==0){
+                     xleft=-1;
+                     xright=1;
+                    }else{
+                     xleft=movedir[0];
+                     xright=movedir[0];
+                    }
+                    if(movedir[1]==0){
+                     yleft=-1;
+                     yright=1;
+                    }else{
+                     yleft=movedir[1];
+                     yright=movedir[1];
+                    }
+
+				if(pos1!=null ) {
+					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
+					
+					var nbMax = Math.max(lastRow , lastCol) - 1;
+					var awayl=[] // hold the sliding line
+                   var awayr=[] // hold the sliding line
+
+					for(var n=1;n<nbMax;n++) {
+
+						var delta2=[xleft*n,yleft*n];
+                        var delta3=[xright*n,yright*n];
+						var pos2=geometry.Graph(pos1,delta2);
+                        var pos3=geometry.Graph(pos1,delta3);
+
+
+						if(pos2!=null ) {
+                        // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							//if(n==1) 
+								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
+							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
+                            
+						}
+                        if(pos3!=null ) {
+                            // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							//if(n==1) 
+								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
+							
+                            awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
+						}
+
+					}
+					if(awayl.length>0)
+						directions.push($this.cbTypedArray(awayl));
+                    if(awayr.length>0)
+						directions.push($this.cbTypedArray(awayr));
+				}
+			});
+			graph[pos]=directions;
+
+		}
+
+		return $this.cbMergeGraphs(geometry,
+		   $this.cbShortRangeGraph(geometry,[[0,1],[0,-1]]),
+		   graph
+		);
+	}
+
+	Model.Game.cbRhinoGraph = function(geometry,confine){
+		var $this=this;
+
+		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
+		var graph={};
+		for(var pos=0;pos<geometry.boardSize;pos++) {
+
+			
+			var directions=[];
+			[[0,1],[1,0],[-1,0],[0,-1]].forEach(function(delta) { // loop on all 8 diagonals
+				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
+                
+				var pos1=geometry.Graph(pos,delta);
+
+                    if(movedir[0]==0){
+                     xleft=-1;
+                     xright=1;
+                    }else{
+                     xleft=movedir[0];
+                     xright=movedir[0];
+                    }
+                    if(movedir[1]==0){
+                     yleft=-1;
+                     yright=1;
+                    }else{
+                     yleft=movedir[1];
+                     yright=movedir[1];
+                    }
+
+				if(pos1!=null /*&& (!confine || (pos1 in confine))*/) {
+					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
+					//directions.push($this.cbTypedArray(direction));
+					var nbMax = Math.max(lastRow , lastCol) - 1;
+					var awayl=[] // hold the sliding line
+                   var awayr=[] // hold the sliding line
+
+					for(var n=1;n<nbMax;n++) {
+
+						var delta2=[xleft*n,yleft*n];
+                        var delta3=[xright*n,yright*n];
+						var pos2=geometry.Graph(pos1,delta2);
+                        var pos3=geometry.Graph(pos1,delta3);
+
+
+						if(pos2!=null ) {
+                        // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							//if(n==1) 
+								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
+							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
+                            
+						}
+                        if(pos3!=null ) {
+                            // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
+							//if(n==1) 
+								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
+							
+                            awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
+						}
+
+					}
+					if(awayl.length>0)
+						directions.push($this.cbTypedArray(awayl));
+                    if(awayr.length>0)
+						directions.push($this.cbTypedArray(awayr));
+				}
+			});
+			graph[pos]=directions;
+
+		}
+
+		return $this.cbMergeGraphs(geometry,
+		   $this.cbShortRangeGraph(geometry,[[0,1],[1,0],[-1,0],[0,-1]]),
+		   graph
+		);
+	}
+
 	Model.Game.cbPrinceGraph = function(geometry,side,confine) {
 		var $this=this;
 		var graph={};
@@ -250,19 +402,20 @@
       initial: [],
       },
       14: {
-      name : 'wolf',
-      abbrev : 'L',
-      aspect : 'fr-wolf',
-      graph : this.cbShortRangeGraph(geometry,[
-                  [-3,-3],[-3,3],[3,-3],[3,3],[3,0],[0,3],[-3,0],[0,-3],
-                  [-3,2],[-3,1],[3,-1],[3,-2],[3,1],[3,2],[1,3],[2,3],
-                  [1,-3],[2,-3],[-3,-1],[-3,-2],[-1,3],[-2,3],[-1,-3],[-2,-3],
-                  [-2,0],[-2,-1],[-2,-2],[-1,-2],[0,-2],
-                  [1,-2],[2,-2],[2,-1],[2,0],[2,1],
-                  [2,2],[1,2],[0,2],[-1,2],[-2,2],[-2,1]
-                  ], confine),
-      value : 6.7,
+      name : 'snake',
+      abbrev : 'SN',
+      aspect : 'fr-dragon',
+      graph : this.cbSnakeGraph(geometry),
+      value : 3.5,
       initial: [{s:1,p:18},{s:-1,p:126}],
+      },
+      15: {
+      name : 'rhino',
+      abbrev : 'U',
+      aspect : 'fr-rhino',
+      graph : this.cbRhinoGraph(geometry),
+      value : 7.5,
+      initial: [],
       },
 		}
 
@@ -276,12 +429,13 @@
         var T_knight=6
         var T_queen=7
         var T_king=10
-        var T_wolf=12
         var T_elephant=9
         var T_cannon=10
-        var T_ship=13
         var T_eagle=11
         var T_camel=12
+        var T_ship=13
+        var T_snake=14
+        var T_rhino=15
 
 		return {
 			
@@ -295,7 +449,8 @@
 					return [T_queen];
 				if (piece.t==T_princew && geometry.R(move.t)==lastRow)
 					return [T_queen];
-
+                if (piece.t==T_snake && ((geometry.R(move.t)==lastRow && piece.s > 0) || (geometry.R(move.t)==firstRow && piece.s < 0)) ) 
+					return [T_rhino];
 				if (piece.t==T_ship && ((geometry.R(move.t)==lastRow && piece.s > 0) || (geometry.R(move.t)==firstRow && piece.s < 0)) ) 
 					return [T_eagle];
 				return [];

@@ -5908,7 +5908,7 @@ exports.games = (function () {
  				"model": {
  					"title-en": "Wild Mirza",
 
- 					"summary": "Wild Timurid on 12x12 with wolf",
+ 					"summary": "Wild Timurid on 12x12 with snake",
  					"rules": {
  						"en": "wild-mirza-rules.html"
  					},
@@ -5978,9 +5978,9 @@ exports.games = (function () {
  								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
  								"image|/res/fairy/elephant/elephant-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
- 								"image|/res/fairy/wolf/wolf-diffuse-map.jpg",
- 								"image|/res/fairy/wolf/wolf-normal-map.jpg",
-                                "smoothedfilegeo|0|/res/fairy/wolf/wolf.js.js",
+ 								"image|/res/fairy/dragon/dragon-diffuse-map.jpg",
+ 								"image|/res/fairy/dragon/dragon-normal-map.jpg",
+                                "smoothedfilegeo|0|/res/fairy/dragon/dragon.js",
  								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
  								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/eagle/eagle.js",
