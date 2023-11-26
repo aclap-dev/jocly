@@ -5450,8 +5450,8 @@ exports.games = (function () {
  								"image|/res/fairy/camel/camel-diffusemap.jpg",
  								"image|/res/fairy/camel/camel-normalmap.jpg",
                                 "smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
- 								"image|/res/fairy/camel/giraffe-diffusemap.jpg",
- 								"image|/res/fairy/camel/giraffe-normalmap.jpg"							      
+ 								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+ 								"image|/res/fairy/giraffe/giraffe-normal-map.jpg"							      
  							],
  							"world": config_view_skins_world,
  							"camera": config_view_skins_camera
