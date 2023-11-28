@@ -62,10 +62,15 @@
 					".": "#575b36", // "rgba(180,213,80,.3)",
 					"#": "#474b36", // "black" cells
 					" ": "rgba(0,0,0,0)",
-				},75cedb*/
+				},
+//bleu
 				'colorFill' : {
 					"#": "#3b55a3",
 					".": "#73cbea",
+				},*/
+				'colorFill' : {
+					"#": "#a97b50",
+					".": "rgba(221,177,85,1)",
 				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
