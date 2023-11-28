@@ -68,8 +68,8 @@
 					".": "rgba(153,255,255,1)",
 				},*/
 				'colorFill' : {
-					"#": "rgba(204,40,0,1)", 
-					".": "rgba(180,180,0,1)", 
+					"#": "#336667", 
+					".": "#ffffbf", 
 				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
@@ -148,8 +148,8 @@
 					"#": "rgba(220,220,0,1)",
 				},*/
 				'colorFill' : {		 
-					".": "#ffffc0", // "white" cells
-					"#": "#8F976D", // "black" cells
+					".": "#c8e4bd", // "white" cells
+					"#": "#126936", // "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
 			}
