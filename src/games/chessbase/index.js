@@ -650,7 +650,7 @@ exports.games = (function () {
 	var modelScripts_16 = [
 		"base-model.js",
 		"multiplan-geo-model.js",
-		"raumschach-model.js"
+		"3d/raumschach-model.js"
 	]
 	var config_view_skins_camera_targetBounds = [
 		3000,
@@ -672,7 +672,7 @@ exports.games = (function () {
 		"base-view.js",
 		"multiplan-board-view.js",
 		"fairy-set-view.js",
-		"raumschach-view.js"
+		"3d/raumschach-view.js"
 	]
 	var modelScripts_17 = [
 		"base-model.js",
@@ -847,13 +847,13 @@ exports.games = (function () {
 	var modelScripts_24 = [
 		"base-model.js",
 		"multiplan-geo-model.js",
-		"3dchess-model.js"
+		"3d/3dchess-model.js"
 	]
 	var config_view_js_24 = [
 		"base-view.js",
 		"multiplan-board-view.js",
 		"staunton-set-view.js",
-		"3dchess-view.js"
+		"3d/3dchess-view.js"
 	]
 	var modelScripts_25 = [
 		"base-model.js",
@@ -2525,20 +2525,20 @@ exports.games = (function () {
 					"title-en": "Raumschach",
 					"summary": "5x5x5 Chess",
 					"rules": {
-						"en": "raumschach-rules.html"
+						"en": "3d/raumschach-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "raumschach-thumb.png",
+					"thumbnail": "res/rules/raumschach/raumschach-thumb.png",
 					"released": 1402066578,
 					"credits": {
-						"en": "raumschach-credits.html"
+						"en": "3d/raumschach-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_16,
 					"description": {
-						"en": "raumschach-description.html"
+						"en": "3d/raumschach-description.html"
 					},
 					"levels": config_model_levels_10
 				},
@@ -3081,20 +3081,20 @@ exports.games = (function () {
 					"title-en": "3D Chess",
 					"summary": "6x8x3 Chess",
 					"rules": {
-						"en": "3dchess-rules.html"
+						"en": "3d/3dchess-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "3dchess-thumb.png",
+					"thumbnail": "res/rules/3dchess/3dchess-thumb.png",
 					"released": 1402584978,
 					"credits": {
-						"en": "3dchess-credits.html"
+						"en": "3d/3dchess-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_24,
 					"description": {
-						"en": "3dchess-description.html"
+						"en": "3d/3dchess-description.html"
 					},
 					"levels": config_model_levels_15
 				},
