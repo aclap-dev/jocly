@@ -462,7 +462,7 @@ exports.games = (function () {
 		"base-model.js",
 		"grid-geo-model.js",
 		"drop-model.js",
-		"shogi-model.js"
+		"shogi/shogi-model.js"
 	]
 	var modelScripts_106 = [
 		"base-model.js",
@@ -565,9 +565,9 @@ exports.games = (function () {
 	var config_view_js_105 = [
 		"base-view.js",
 		"grid-board-view.js",
-		"shogi-set-view.js",
+		"shogi/shogi-set-view.js",
 		"drop-view.js",
-		"shogi-view.js"
+		"shogi/shogi-view.js"
 	]
 	var config_view_js_106 = [
 		"base-view.js",
@@ -6938,12 +6938,12 @@ exports.games = (function () {
 					"thumbnail": "res/rules/shogi/shogi-thumb.png",
 					"released": 1396536978,
 					"credits": {
-						"en": "shogi-credits.html"
+						"en": "shogi/shogi-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_105,
 					"description": {
-						"en": "shogi-description.html"
+						"en": "shogi/shogi-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -7002,7 +7002,7 @@ exports.games = (function () {
 					"thumbnail": "res/rules/shogi/tori-shogi-thumb.png",
 					"released": 1396536978,
 					"credits": {
-						"en": "shogi-credits.html"
+						"en": "shogi/shogi-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_106,
