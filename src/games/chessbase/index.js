@@ -677,7 +677,7 @@ exports.games = (function () {
 	var modelScripts_17 = [
 		"base-model.js",
 		"hex-geo-model.js",
-		"glinski-model.js"
+		"hex/glinski-model.js"
 	]
 	var config_view_css_2 = [
 		"chessbase.css",
@@ -741,45 +741,45 @@ exports.games = (function () {
 		"base-view.js",
 		"hex-board-view.js",
 		"staunton-set-view.js",
-		"glinski-view.js"
+		"hex/glinski-view.js"
 	]
 	var modelScripts_18 = [
 		"base-model.js",
 		"hex-geo-model.js",
-		"brusky-model.js"
+		"hex/brusky-model.js"
 	]
 	var config_view_js_18 = [
 		"base-view.js",
 		"hex-board-view.js",
 		"staunton-set-view.js",
-		"brusky-view.js"
+		"hex/brusky-view.js"
 	]
 	var modelScripts_19 = [
 		"base-model.js",
 		"hex-geo-model.js",
-		"devasa-model.js"
+		"hex/devasa-model.js"
 	]
 	var config_view_js_19 = [
 		"base-view.js",
 		"hex-board-view.js",
 		"staunton-set-view.js",
-		"devasa-view.js"
+		"hex/devasa-view.js"
 	]
 	var modelScripts_20 = [
 		"base-model.js",
 		"hex-geo-model.js",
-		"mccooey-model.js"
+		"hex/mccooey-model.js"
 	]
 	var config_view_js_20 = [
 		"base-view.js",
 		"hex-board-view.js",
 		"staunton-set-view.js",
-		"mccooey-view.js"
+		"hex/mccooey-view.js"
 	]
 	var modelScripts_21 = [
 		"base-model.js",
 		"hex-geo-model.js",
-		"shafran-model.js"
+		"hex/shafran-model.js"
 	]
 	var config_view_skins_preload_8 = [
 		"smoothedfilegeo|0|/res/ring-target-cylinder-v3.js",
@@ -808,7 +808,7 @@ exports.games = (function () {
 		"base-view.js",
 		"hex-board-view.js",
 		"staunton-set-view.js",
-		"shafran-view.js"
+		"hex/shafran-view.js"
 	]
 	var modelScripts_22 = [
 		"base-model.js",
@@ -2634,20 +2634,20 @@ exports.games = (function () {
 					"title-en": "Glinski Chess",
 					"summary": "Hexagonal Chess",
 					"rules": {
-						"en": "glinski-rules.html"
+						"en": "hex/glinski-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "glinski-thumb.png",
+					"thumbnail": "res/rules/glinski/glinski-thumb.png",
 					"released": 1396882578,
 					"credits": {
-						"en": "glinski-credits.html"
+						"en": "hex/glinski-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_17,
 					"description": {
-						"en": "glinski-description.html"
+						"en": "hex/glinski-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -2685,20 +2685,20 @@ exports.games = (function () {
 					"title-en": "Brusky Chess",
 					"summary": "Hexagonal Chess",
 					"rules": {
-						"en": "brusky-rules.html"
+						"en": "hex/brusky-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "brusky-thumb.png",
+					"thumbnail": "res/rules/brusky/brusky-thumb.png",
 					"released": 1398790818,
 					"credits": {
-						"en": "brusky-credits.html"
+						"en": "hex/brusky-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_18,
 					"description": {
-						"en": "brusky-description.html"
+						"en": "hex/brusky-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -2746,20 +2746,20 @@ exports.games = (function () {
 					"title-en": "De Vasa Chess",
 					"summary": "Hexagonal Chess",
 					"rules": {
-						"en": "devasa-rules.html"
+						"en": "hex/devasa-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "devasa-thumb.png",
+					"thumbnail": "res/rules/devasa/devasa-thumb.png",
 					"released": 1403189777,
 					"credits": {
-						"en": "devasa-credits.html"
+						"en": "hex/devasa-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_19,
 					"description": {
-						"en": "devasa-description.html"
+						"en": "hex/devasa-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -2815,20 +2815,20 @@ exports.games = (function () {
 					"title-en": "McCooey Chess",
 					"summary": "Hexagonal Chess",
 					"rules": {
-						"en": "mccooey-rules.html"
+						"en": "hex/mccooey-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "mccooey-thumb.png",
+					"thumbnail": "res/rules/mccooey/mccooey-thumb.png",
 					"released": 1402671378,
 					"credits": {
-						"en": "mccooey-credits.html"
+						"en": "hex/mccooey-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_20,
 					"description": {
-						"en": "mccooey-description.html"
+						"en": "hex/mccooey-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -2866,20 +2866,20 @@ exports.games = (function () {
 					"title-en": "Shafran Chess",
 					"summary": "Hexagonal Chess",
 					"rules": {
-						"en": "shafran-rules.html"
+						"en": "hex/shafran-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "shafran-thumb.png",
+					"thumbnail": "res/rules/shafran/shafran-thumb.png",
 					"released": 1403535378,
 					"credits": {
-						"en": "shafran-credits.html"
+						"en": "hex/shafran-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_21,
 					"description": {
-						"en": "shafran-description.html"
+						"en": "hex/shafran-description.html"
 					},
 					"levels": config_model_levels_15
 				},
