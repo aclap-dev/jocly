@@ -813,7 +813,7 @@ exports.games = (function () {
 	var modelScripts_22 = [
 		"base-model.js",
 		"cylinder-geo-model.js",
-		"circular-model.js"
+		"circular/circular-model.js"
 	]
 	var config_view_css_3 = [
 		"chessbase.css",
@@ -831,18 +831,18 @@ exports.games = (function () {
 		"base-view.js",
 		"circular-board-view.js",
 		"staunton-set-view.js",
-		"circular-view.js"
+		"circular/circular-view.js"
 	]
 	var modelScripts_23 = [
 		"base-model.js",
 		"cylinder-geo-model.js",
-		"byzantine-model.js"
+		"circular/byzantine-model.js"
 	]
 	var config_view_js_23 = [
 		"base-view.js",
 		"circular-board-view.js",
 		"nishapur-set-view.js",
-		"byzantine-view.js"
+		"circular/byzantine-view.js"
 	]
 	var modelScripts_24 = [
 		"base-model.js",
@@ -858,7 +858,7 @@ exports.games = (function () {
 	var modelScripts_25 = [
 		"base-model.js",
 		"cylinder-geo-model.js",
-		"cylinder-model.js"
+		"circular/cylinder-model.js"
 	]
 	var config_view_skins_camera_target = [
 		0,
@@ -870,7 +870,7 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"cylinder-board-view.js",
 		"staunton-set-view.js",
-		"cylinder-view.js"
+		"circular/cylinder-view.js"
 	]
 	var modelScripts_26 = [
 		"base-model.js",
@@ -2927,20 +2927,20 @@ exports.games = (function () {
 					"title-en": "Modern Circular Chess",
 					"summary": "Chess on a ring",
 					"rules": {
-						"en": "circular-rules.html"
+						"en": "circular/circular-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "circular-thumb.png",
+					"thumbnail": "res/rules/circular/circular-thumb.png",
 					"released": 1397055378,
 					"credits": {
-						"en": "circular-credits.html"
+						"en": "circular/circular-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_22,
 					"description": {
-						"en": "circular-description.html"
+						"en": "circular/circular-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -2988,20 +2988,20 @@ exports.games = (function () {
 					"title-en": "Byzantine Chess",
 					"summary": "10th century circular Chess",
 					"rules": {
-						"en": "byzantine-rules.html"
+						"en": "circular/byzantine-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "byzantine-thumb.png",
+					"thumbnail": "res/rules/byzantine/byzantine-thumb.png",
 					"released": 1401461778,
 					"credits": {
-						"en": "byzantine-credits.html"
+						"en": "circular/byzantine-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_3,
 					"obsolete": false,
 					"js": modelScripts_23,
 					"description": {
-						"en": "byzantine-description.html"
+						"en": "circular/byzantine-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -3165,20 +3165,20 @@ exports.games = (function () {
 					"title-en": "Cylinder Chess",
 					"summary": "Cylinder Chess",
 					"rules": {
-						"en": "cylinder-rules.html"
+						"en": "circular/cylinder-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "cylinder-thumb.png",
+					"thumbnail": "res/rules/cylinder/cylinder-thumb.png",
 					"released": 1401720978,
 					"credits": {
-						"en": "cylinder-credits.html"
+						"en": "circular/cylinder-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_25,
 					"description": {
-						"en": "cylinder-description.html"
+						"en": "circular/cylinder-description.html"
 					},
 					"levels": config_model_levels_5
 				},
