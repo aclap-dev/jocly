@@ -470,6 +470,12 @@ exports.games = (function () {
 		"drop-model.js",
 		"shogi/tori-shogi-model.js"
 	]
+	var modelScripts_107 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"drop-model.js",
+		"shogi/mini-shogi-model.js"
+	]
 	var config_model_levels_11 = {
 		"name": "easy",
 		"label": "Easy",
@@ -575,6 +581,13 @@ exports.games = (function () {
 		"shogi/tori-set-view.js",
 		"drop-view.js",
 		"shogi/tori-shogi-view.js"
+	]
+	var config_view_js_107 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"shogi/shogi-set-view.js",
+		"drop-view.js",
+		"shogi/mini-shogi-view.js"
 	]
 	var modelScripts_14 = [
 		"base-model.js",
@@ -6985,6 +6998,70 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_105
+		},
+		{
+			"name": "mini-shogi",
+			"modelScripts": modelScripts_107,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Mini-Shogi",
+					"summary": "Shogi on 5x5 with 6 pieces",
+					"rules": {
+						"en": "mini-shogi-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/shogi/shogi-thumb.png",
+					"released": 1396536978,
+					"credits": {
+						"en": "shogi/shogi-credits.html"
+					},
+					"gameOptions": config_model_gameOptions_2,
+					"js": modelScripts_107,
+					"description": {
+						"en": "shogi/mini-shogi-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/mini-shogi-600x600-3d.jpg",
+							"res/visuals/mini-shogi-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_2
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_107,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_107
 		},
 		{
 			"name": "tori-shogi",
