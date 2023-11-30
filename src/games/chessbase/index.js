@@ -1046,18 +1046,18 @@ exports.games = (function () {
 	var modelScripts_35 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"modern-model.js"
+		"knighted/modern-model.js"
 	]
 	var config_view_js_32 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"modern-view.js"
+		"knighted/modern-view.js"
 	]
 	var modelScripts_36 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"chancellor-model.js"
+		"knighted/chancellor-model.js"
 	]
 	var modelScripts_37 = [
 		"base-model.js",
@@ -3836,20 +3836,20 @@ exports.games = (function () {
 					"title-en": "Modern Chess",
 					"summary": "Chess on 9x9 (1968)",
 					"rules": {
-						"en": "modern-rules.html"
+						"en": "knighted/modern-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "modern-thumb.png",
+					"thumbnail": "res/rules/knighted/modern-thumb.png",
 					"released": 1404999946,
 					"credits": {
-						"en": "modern-credits.html"
+						"en": "knighted/modern-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_35,
 					"description": {
-						"en": "modern-description.html"
+						"en": "knighted/modern-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -3887,20 +3887,20 @@ exports.games = (function () {
 					"title-en": "Chancellor Chess",
 					"summary": "Chess on 9x9 (1887)",
 					"rules": {
-						"en": "chancellor-rules.html"
+						"en": "knighted/chancellor-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "chancellor-thumb.png",
+					"thumbnail": "res/rules/knighted/chancellor-thumb.png",
 					"released": 1404918051,
 					"credits": {
-						"en": "chancellor-credits.html"
+						"en": "knighted/chancellor-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_36,
 					"description": {
-						"en": "chancellor-description.html"
+						"en": "knighted/chancellor-description.html"
 					},
 					"levels": config_model_levels_5
 				},
