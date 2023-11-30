@@ -2,8 +2,8 @@ exports.games = (function () {
 	var modelScripts = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"classic-model.js",
-		"classic-db.min.js"
+		"famous/classic-model.js",
+		"famous/classic-db.min.js"
 	]
 	var config_model_gameOptions_levelOptions = {
 		"checkFactor": 0.2,
@@ -175,13 +175,13 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"staunton-set-view.js",
 		"extruded-set-view.js",
-		"classic-view.js"
+		"famous/classic-view.js"
 	]
 	var modelScripts_2 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"xiangqi-model.js",
-		"xiangqi-db.min.js"
+		"famous/xiangqi-model.js",
+		"famous/xiangqi-db.min.js"
 	]
 	var config_model_gameOptions_levelOptions_2 = {
 		"pieceValueFactor": 1,
@@ -233,7 +233,7 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"xiangqi-board-view.js",
 		"xiangqi-set-view.js",
-		"xiangqi-view.js"
+		"famous/xiangqi-view.js"
 	]
 	var modelScripts_3 = [
 		"base-model.js",
@@ -401,7 +401,7 @@ exports.games = (function () {
 	var modelScripts_12 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"makruk-model.js"
+		"famous/makruk-model.js"
 	]
 	var config_view_skins_world_lightPosition_3 = {
 		"x": -10,
@@ -424,7 +424,7 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"makruk-board-view.js",
 		"makruk-set-view.js",
-		"makruk-view.js"
+		"famous/makruk-view.js"
 	]
 	var modelScripts_13 = [
 		"base-model.js",
@@ -592,7 +592,7 @@ exports.games = (function () {
 	var modelScripts_14 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"shatranj-model.js"
+		"famous/shatranj-model.js"
 	]
 	var config_model_gameOptions_levelOptions_3 = {
 		"checkFactor": 0.2,
@@ -620,24 +620,24 @@ exports.games = (function () {
 		"grid-board-view.js",
 		"shatranj-board-view.js",
 		"nishapur-set-view.js",
-		"shatranj-view.js"
+		"famous/shatranj-view.js"
 	]
 	var modelScripts_15 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"basic-model.js"
+		"famous/basic-model.js"
 	]
 	var config_model_rules = {
-		"en": "rules.html"
+		"en": "famous/rules.html"
 	}
 	var config_model_credits = {
-		"en": "credits.html"
+		"en": "famous/credits.html"
 	}
 	var config_view_js_15 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"staunton-set-view.js",
-		"basic-view.js"
+		"famous/basic-view.js"
 	]
 	var config_view_skins_preload_4 = [
 	]
@@ -897,13 +897,13 @@ exports.games = (function () {
 	var modelScripts_28 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"chess960-model.js"
+		"famous/chess960-model.js"
 	]
 	var config_view_js_28 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"staunton-set-view.js",
-		"chess960-view.js"
+		"famous/chess960-view.js"
 	]
 	var modelScripts_29 = [
 		"base-model.js",
@@ -1389,17 +1389,17 @@ exports.games = (function () {
 				"model": {
 					"title-en": "Chess",
 					"summary": "Regular Orthodox Classic Western Chess",
-					"thumbnail": "knight-thumbnail.png",
+					"thumbnail": "res/rules/famous/knight-thumbnail.png",
 					"module": "chessbase",
 					"plazza": "true",
 					"released": 1389887778,
 					"rules": {
-						"en": "rules.html",
-						"fr": "rules-fr.html"
+						"en": "famous/rules.html",
+						"fr": "famous/rules-fr.html"
 					},
 					"credits": {
-						"en": "credits.html",
-						"fr": "credits-fr.html"
+						"en": "famous/credits.html",
+						"fr": "famous/credits-fr.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"js": modelScripts,
@@ -1577,19 +1577,19 @@ exports.games = (function () {
 					"title-en": "Xiangqi",
 					"summary": "Chinese Chess",
 					"rules": {
-						"en": "xiangqi-rules.html"
+						"en": "famous/xiangqi-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "xiangqi-thumb.png",
+					"thumbnail": "res/rules/xiangqi/xiangqi-thumb.png",
 					"released": 1394466978,
 					"credits": {
-						"en": "xiangqi-credits.html"
+						"en": "famous/xiangqi-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_2,
 					"description": {
-						"en": "xiangqi-description.html"
+						"en": "famous/xiangqi-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -2222,19 +2222,19 @@ exports.games = (function () {
 					"title-en": "Makruk",
 					"summary": "Thai Chess",
 					"rules": {
-						"en": "mk-rules.html"
+						"en": "res/rules/makruk/famous/mk-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "mk-thumb.png",
+					"thumbnail": "res/rules/makruk/mk-thumb.png",
 					"released": 1393948578,
 					"credits": {
-						"en": "mk-credits.html"
+						"en": "famous/mk-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_12,
 					"description": {
-						"en": "mk-description.html"
+						"en": "famous/mk-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -2382,20 +2382,20 @@ exports.games = (function () {
 					"title-en": "Shatranj",
 					"summary": "Ancient Chess",
 					"rules": {
-						"en": "shatranj-rules.html"
+						"en": "famous/shatranj-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "shatranj-thumb.png",
+					"thumbnail": "res/rules/shatranj/shatranj-thumb.png",
 					"released": 1401461778,
 					"credits": {
-						"en": "shatranj-credits.html"
+						"en": "famous/shatranj-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_3,
 					"obsolete": false,
 					"js": modelScripts_14,
 					"description": {
-						"en": "shatranj-description.html"
+						"en": "famous/shatranj-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -2479,7 +2479,7 @@ exports.games = (function () {
 					"rules": config_model_rules,
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "knight-thumbnail.png",
+					"thumbnail": "res/rules/famous/knight-thumbnail.png",
 					"released": 1389887778,
 					"credits": config_model_credits,
 					"gameOptions": config_model_gameOptions,
@@ -3429,20 +3429,20 @@ exports.games = (function () {
 					"title-en": "Chess 960",
 					"summary": "Chess from randomized positions",
 					"rules": {
-						"en": "chess960-rules.html"
+						"en": "famous/chess960-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "chess960-thumb.png",
+					"thumbnail": "res/rules/famous/chess960-thumb.png",
 					"released": 1401720878,
 					"credits": {
-						"en": "chess960-credits.html"
+						"en": "famous/chess960-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_28,
 					"description": {
-						"en": "chess960-description.html"
+						"en": "famous/chess960-description.html"
 					},
 					"levels": config_model_levels_5
 				},
