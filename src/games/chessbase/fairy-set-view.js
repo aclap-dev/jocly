@@ -217,6 +217,11 @@
 					clipx: 4500,
 				},
 			},
+            "fr-leopard": {
+				"2d": {
+					clipx: 4600,
+				},
+			},
 		},modifier);
 	}
 
@@ -1063,6 +1068,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
+							}
+						}
+					}
+				}
+			}
+		},
+        "fr-leopard": {
+			mesh: {
+				jsFile:"/res/fairy/leopard/leopard.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/leopard/leopard-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/leopard/leopard-normalmap.jpg",
 							}
 						}
 					}
