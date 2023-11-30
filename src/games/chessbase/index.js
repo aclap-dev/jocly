@@ -1084,24 +1084,24 @@ exports.games = (function () {
 	var modelScripts_39 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"demi-model.js"
+		"standard/demi-model.js"
 	]
 	var config_view_js_35 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"staunton-set-view.js",
-		"demi-view.js"
+		"standard/demi-view.js"
 	]
 	var modelScripts_40 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"romanchenko-model.js"
+		"standard/romanchenko-model.js"
 	]
 	var config_view_js_36 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"staunton-set-view.js",
-		"romanchenko-view.js"
+		"standard/romanchenko-view.js"
 	]
 	var modelScripts_41 = [
 		"base-model.js",
@@ -1188,13 +1188,13 @@ exports.games = (function () {
 	var modelScripts_49 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"sweet16-model.js"
+		"standard/sweet16-model.js"
 	]
 	var config_view_js_44 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"staunton-set-view.js",
-		"sweet16-view.js"
+		"standard/sweet16-view.js"
 	]
 	var modelScripts_tera = [
 		"base-model.js",
@@ -1476,29 +1476,29 @@ exports.games = (function () {
 			"modelScripts": [
 				"base-model.js",
 				"grid-geo-model.js",
-				"losing-model.js"
+				"standard/losing-model.js"
 			],
 			"config": {
 				"status": true,
 				"model": {
 					"title-en": "Losing Chess",
 					"summary": "Also known as Antichess, Suicide Chess, Giveaway Chess, ...",
-					"thumbnail": "knight-inv-thumbnail.png",
+					"thumbnail": "res/rules/standard/knight-inv-thumbnail.png",
 					"module": "chessbase",
 					"plazza": "true",
 					"released": 1495039002,
 					"rules": {
-						"en": "losing-rules.html",
+						"en": "standard/losing-rules.html",
 					},
 					"credits": {
-						"en": "credits.html",
-						"fr": "credits-fr.html"
+						"en": "standard/credits.html",
+						"fr": "standard/credits-fr.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"js": [
 						"base-model.js",
 						"grid-geo-model.js",
-						"losing-model.js"
+						"standard/losing-model.js"
 					],
 					"levels": config_model_levels_5
 				},
@@ -4169,21 +4169,21 @@ exports.games = (function () {
 					"title-en": "Demi-Chess",
 					"summary": "4x8 chess variant by Peter Krystufek (1986)",
 					"rules": {
-						"en": "demi-rules.html"
+						"en": "standard/demi-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "demi-thumb.png",
+					"thumbnail": "res/rules/demi/demi-thumb.png",
 					"released": 1403189778,
 					"credits": {
-						"en": "demi-credits.html"
+						"en": "standard/demi-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"obsolete": false,
 					"js": modelScripts_39,
 					"levels": config_model_levels_5,
 					"description": {
-						"en": "demi-description.html"
+						"en": "standard/demi-description.html"
 					}
 				},
 				"view": {
@@ -4220,21 +4220,21 @@ exports.games = (function () {
 					"title-en": "Romanchenko's Chess",
 					"summary": "Shifted 8x8 chess variant by V. Romanchenko",
 					"rules": {
-						"en": "romanchenko-rules.html"
+						"en": "standard/romanchenko-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "romanchenko-thumb.png",
+					"thumbnail": "res/rules/standard/romanchenko-thumb.png",
 					"released": 1403535377,
 					"credits": {
-						"en": "romanchenko-credits.html"
+						"en": "standard/romanchenko-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"obsolete": false,
 					"js": modelScripts_40,
 					"levels": config_model_levels_5,
 					"description": {
-						"en": "romanchenko-description.html"
+						"en": "standard/romanchenko-description.html"
 					}
 				},
 				"view": {
@@ -4986,14 +4986,14 @@ exports.games = (function () {
 					"title-en": "Sweet 16 Chess",
 					"summary": "A huge 16x16 Chess Variant",
 					"rules": {
-						"en": "sweet16-rules.html"
+						"en": "standard/sweet16-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "sweet16-thumb.png",
+					"thumbnail": "res/rules/standard/sweet16-thumb.png",
 					"released": 1482940591,
 					"credits": {
-						"en": "sweet16-credits.html"
+						"en": "standard/sweet16-credits.html"
 					},
 					"gameOptions": {
 						"preventRepeat": true,
@@ -5004,7 +5004,7 @@ exports.games = (function () {
 					"obsolete": false,
 					"js": modelScripts_49,
 					"description": {
-						"en": "sweet16-description.html"
+						"en": "sstandard/weet16-description.html"
 					},
 					"levels": config_model_levels_5
 				},
