@@ -1106,13 +1106,13 @@ exports.games = (function () {
 	var modelScripts_41 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"amazon-model.js"
+		"amazon/amazon-model.js"
 	]
 	var config_view_js_37 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"amazon-view.js"
+		"amazon/amazon-view.js"
 	]
 	var modelScripts_42 = [
 		"base-model.js",
@@ -1128,13 +1128,13 @@ exports.games = (function () {
 	var modelScripts_43 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"gustav3-model.js"
+		"amazon/gustav3-model.js"
 	]
 	var config_view_js_39 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"gustav3-view.js"
+		"amazon/gustav3-view.js"
 	]
 	var modelScripts_44 = [
 		"base-model.js",
@@ -1177,13 +1177,13 @@ exports.games = (function () {
 	var modelScripts_48 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"tutti-frutti-model.js"
+		"amazon/tutti-frutti-model.js"
 	]
 	var config_view_js_43 = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"tutti-frutti-view.js"
+		"amazon/tutti-frutti-view.js"
 	]
 	var modelScripts_49 = [
 		"base-model.js",
@@ -4271,21 +4271,21 @@ exports.games = (function () {
 					"title-en": "Amazon Chess",
 					"summary": "18th century, Russia",
 					"rules": {
-						"en": "amazon-rules.html"
+						"en": "amazon/amazon-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "amazon-thumb.png",
+					"thumbnail": "res/rules/amazon/amazon-thumb.png",
 					"released": 1405068607,
 					"credits": {
-						"en": "amazon-credits.html"
+						"en": "amazon/amazon-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_41,
 					"levels": config_model_levels_5,
 					"description": {
-						"en": "amazon-description.html"
+						"en": "amazon/amazon-description.html"
 					}
 				},
 				"view": {
@@ -4443,20 +4443,20 @@ exports.games = (function () {
 					"title-en": "Gustav III Chess",
 					"summary": "Gustav Johan Billberg, 1839",
 					"rules": {
-						"en": "gustav3-rules.html"
+						"en": "amazon/gustav3-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "gustav3-thumb.png",
+					"thumbnail": "res/rules/amazon/gustav3-thumb.png",
 					"released": 1405068609,
 					"credits": {
-						"en": "gustav3-credits.html"
+						"en": "amazon/gustav3-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_43,
 					"description": {
-						"en": "gustav3-description.html"
+						"en": "amazon/gustav3-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -4894,20 +4894,20 @@ exports.games = (function () {
 					"title-en": "Tutti-Frutti Chess",
 					"summary": "Ralph Betza et Philip Cohen, 1978-79",
 					"rules": {
-						"en": "tutti-frutti-rules.html"
+						"en": "amazon/tutti-frutti-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "tutti-frutti-thumb.png",
+					"thumbnail": "res/rules/amazon/tutti-frutti-thumb.png",
 					"released": 1405068614,
 					"credits": {
-						"en": "tutti-frutti-credits.html"
+						"en": "amazon/tutti-frutti-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_48,
 					"description": {
-						"en": "tutti-frutti-description.html"
+						"en": "amazon/tutti-frutti-description.html"
 					},
 					"levels": config_model_levels_5
 				},
