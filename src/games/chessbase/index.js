@@ -6104,6 +6104,7 @@ exports.games = (function () {
  			},
  			"viewScripts": config_view_js_babur
   		},
+	
 		{
 			"name": "zanzibar-s-chess",
 			"modelScripts": modelScripts_zanzibars,

@@ -956,12 +956,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								diffImg : "/res/fairy/giraffe/giraffe-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
+								normalImg: "/res/fairy/giraffe/giraffe-normalmap.jpg",
 
 							}
 						}
@@ -978,12 +978,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/wolf/wolf-diffuse-map.jpg",
+								diffImg : "/res/fairy/wolf/wolf-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/wolf/wolf-normal-map.jpg",
+								normalImg: "/res/fairy/wolf/wolf-normalmap.jpg",
 							}
 						}
 					}
@@ -999,12 +999,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/squirle/squirle-diffuse-map.jpg",
+								diffImg : "/res/fairy/squirle/squirle-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/squirle/squirle-normal-map.jpg",
+								normalImg: "/res/fairy/squirle/squirle-normalmap.jpg",
 							}
 						}
 					}
@@ -1020,12 +1020,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normalmap.jpg",
 							}
 						}
 					}
@@ -1041,12 +1041,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-knight/crowned-knight-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-knight/crowned-knight-normalmap.jpg",
 							}
 						}
 					}
@@ -1062,12 +1062,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-rook/crowned-rook-normalmap.jpg",
 							}
 						}
 					}
