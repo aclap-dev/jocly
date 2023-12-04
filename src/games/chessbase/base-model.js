@@ -286,6 +286,8 @@
 				this.cbPiecesCount += pType.initial.length; 
 		}
 
+		if(typeof(this.extraInit) == 'function') this.extraInit(this.cbVar.geometry);
+
 		var typeValues = Object.keys(cbVar.pieceTypes);
 
 	    if(cbVar.zobrist == "old") {
@@ -339,6 +341,7 @@
 
 		ZobristInit(this, typeValues, this.cbVar.geometry.boardSize);
 	    }
+
 	}
 	
 	Model.Game.cbGetPieceTypes = function() {
@@ -365,6 +368,7 @@
 				epTarget: !!pType.epTarget,
 				epCatch: !!pType.epCatch,
 				ranking: r,
+				antiTrade: pType.antiTrade || 0,
 			}
 		}
 		
@@ -597,7 +601,6 @@
 	Model.Board.cbQuickApply = function(aGame,move) {
 		if(move.cg!==undefined)
 			return this.cbApplyCastle(aGame,move,false);
-
 		var undo=[];
 		var index=this.board[move.f];
 		var piece=this.pieces[index];
