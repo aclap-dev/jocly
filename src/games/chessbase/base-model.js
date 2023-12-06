@@ -1000,21 +1000,21 @@
 		}
 	}
 
-	Model.Board.cbCollectAttackersScreen=function(who,graph,attackers,isKing,screen) {
+	Model.Board.cbCollectAttackersScreen=function(who,graph,attackers,isKing,direct) {
 		for(var pos1 in graph) {
 			var branch=graph[pos1];
 			var index1=this.board[pos1];
 			if(index1<0)
-				this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,screen);
+				this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,direct);
 			else {
 				var piece1=this.pieces[index1];
-				if(!screen && piece1.s==-who && (
+				if(direct) {
+					if(piece1.s==-who && (
 						(branch.t && (piece1.t in branch.t)) ||
 						(isKing && branch.tk && (piece1.t in branch.tk))))
-					attackers.push(piece1);
-				else if(!screen)
-					this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,true);
-				else if(screen && piece1.s==-who && branch.ts && (piece1.t in branch.ts))
+						attackers.push(piece1);
+				 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,direct-1);
+				} else if(piece1.s==-who && branch.ts && (piece1.t in branch.ts))
 					attackers.push(piece1);
 			}
 		}
@@ -1023,7 +1023,7 @@
 	Model.Board.cbGetAttackers = function(aGame,pos,who,isKing) {
 		var attackers=[];
 		if(aGame.cbUseScreenCapture)
-			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,false);
+			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,1);
 		else
 			this.cbCollectAttackers(who,aGame.g.threatGraph[who][pos],attackers,isKing);
 		return attackers;
