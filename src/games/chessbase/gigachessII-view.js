@@ -58,15 +58,22 @@
 
 		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
 			{
-				'colorFill' : {
+				
+/* //vert moisi
+'colorFill' : {
 					".": "#9ca364", // "575b36",
 					"#": "#474b36", // "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
-				/*'colorFill' : {
-					"#": "rgba(204,40,0,1)",
-					".": "rgba(180,180,0,1)",
+//bleu clair
+				'colorFill' : {
+					"#": "#0090c2",
+					".": "#7dc2d9",
 				},*/
+'colorFill' : {
+					"#": "#006794",
+					".": "#7dc2d9",
+				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
 					'tiler': '/res/images/tileralpha.png',

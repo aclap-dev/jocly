@@ -334,7 +334,7 @@
       abbrev : 'B',
       aspect : 'fr-bishop',
       graph : this.cbBishopGraph(geometry,confine),
-      value : 3.4,
+      value : 4,
       initial: [{s:1,p:14},{s:1,p:21},{s:-1,p:122},{s:-1,p:129}],
       },
       6: {
@@ -342,7 +342,7 @@
       abbrev : 'N',
       aspect : 'fr-knight',
       graph : this.cbKnightGraph(geometry,confine),
-      value : 2.5,
+      value : 3,
       initial: [{s:1,p:13},{s:1,p:22},{s:-1,p:121},{s:-1,p:130}],
       },
       7: {
@@ -350,7 +350,7 @@
       abbrev : 'Q',
       aspect : 'fr-queen',
       graph : this.cbQueenGraph(geometry,confine),
-      value : 8.2,
+      value : 10,
       initial: [],
       },
       8: {
@@ -366,7 +366,7 @@
       abbrev : 'E',
       aspect : 'fr-elephant',
       graph : this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[1,-1],[1,1],[-2,-2],[-2,2],[2,-2],[2,2]],confine),
-      value : 2.5,
+      value : 2.9,
       initial: [{s:1,p:0},{s:1,p:11},{s:-1,p:132},{s:-1,p:143}],
       },
       10: {
@@ -374,7 +374,7 @@
       abbrev : 'Z',
       aspect : 'fr-cannon2',
       graph : this.cbXQCannonGraph(geometry),
-      value : 4.9,
+      value : 3.5,
       initial: [{s:1,p:4},{s:1,p:7},{s:-1,p:136},{s:-1,p:139}],
       },
       11: {
@@ -390,7 +390,7 @@
       abbrev : 'J',
       aspect : 'fr-camel',
       graph : this.cbShortRangeGraph(geometry,[[-3,-1],[-3,1],[3,-1],[3,1],[1,3],[1,-3],[-1,3],[-1,-3]]),
-      value : 2,
+      value : 2.7,
       initial: [{s:1,p:2},{s:1,p:9},{s:-1,p:134},{s:-1,p:141}],
       },
        13: {
@@ -398,7 +398,7 @@
       abbrev : 'X',
       aspect : 'fr-ship',
       graph : this.cbShipGraph(geometry),
-      value : 4.5,
+      value : 4.8,
       initial: [],
       },
       14: {

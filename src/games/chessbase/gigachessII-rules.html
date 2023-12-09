@@ -1,7 +1,7 @@
 <style>
 .piece-graph {
 	height: auto;
-	max-width: 100%;
+	max-width: 300px;
 	margin: 0 auto;
 	display: block;
 }
@@ -155,20 +155,20 @@ The white King is placed on the center of the second row on a black square, the 
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/cannon.png'>
 </p>
-<h2>Bow</h2>
+<h2>Archer</h2>
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-bow.png'>
 </p>
-<p class='piece-details'>It is the diagonal counterpart of the Chinese Cannon. It moves like a Bishop and needs an intermediate piece between itself and its victim to capture it. The Bow jumps the intermediate and takes the victim on its square. The intermediate is left unaffected. (Also known as Vao by problemists).</p>
+<p class='piece-details'>It is the diagonal counterpart of the Chinese Cannon. It moves like a Bishop and needs an intermediate piece between itself and its victim to capture it. The Archer jumps the intermediate and takes the victim on its square. The intermediate is left unaffected. (Also known as Vao by problemists).</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/bow.png'>
 </p>
-<h2>Bull</h2>
+<h2>Buffalo</h2>
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-buffalo.png'>
 </p>
-<p class='piece-details'>Jumps to the opposite case of a 3x4 rectangle, like an extended Knight. No matter what intermediate cases contain. Note that it always changes the same color of its square. The same move is found in Janggi, Korean Chess, for the Elephant. Under the name of Zebra, it is also a fairy piece used by problemists for compositions. When a Bull reaches the last row it promotes to a Buffalo.</p>
+<p class='piece-details'>Jumps to the opposite case of a 3x4 rectangle, like an extended Knight. No matter what intermediate cases contain.</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/buffalo.png'>
@@ -245,15 +245,25 @@ The white King is placed on the center of the second row on a black square, the 
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/missionary.png'>
 </p>
-<h2>duchess</h2>
+<h2>Duchess</h2>
 <p>
 <img class='piece-icon' src='{GAME}/res/fairy/icons/w-duchess.png'>
 </p>
-<p class='piece-details'>it is another compound piece that moves as a Bishop or a non-royal King. That means that it is a Bishop that can also step one space orthogonally.</p>
+<p class='piece-details'>it moves as a limited Queen, one, two or three squares in any straight directions. When moving two or three squares, it may jump and it does not matter what any intermediate squares contain.</p>
 <div style='clear:both'></div>
 <p>
 <img class='piece-graph' src='{GAME}/res/rules/graphs/duchess.png'>
 </p>
+<h2>Sorceress</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-star.png'>
+</p>
+<p class='piece-details'>it moves like a Queen and needs an intermediate piece between itself and its victim to capture it. The Sorceress jumps the intermediate and takes the victim on its square. The intermediate is left unaffected. Like the Queen is Bishop + Rook, the Sorceress is Cannon + Archer.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/star.png'>
+</p>
+
 <h1>Promotions table</h1>
 <div id="promo">
 <table><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-pawn.png'>
@@ -272,14 +282,8 @@ The white King is placed on the center of the second row on a black square, the 
 </td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-giraffe.png'>
 </td><td>promotes to
 </td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-crowned-knight.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-buffalo.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-elephant.png'>
+</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-crowned-knight.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-elephant.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-machine.png'>
 </td><td>promotes to
 </td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-lion.png'>
-</td></tr><tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-machine.png'>
-</td><td>promotes to
-</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-eagle.png'>
 </td></tr></table>
 </div>

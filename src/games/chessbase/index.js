@@ -5391,7 +5391,7 @@ exports.games = (function () {
  					"js": modelScripts_pemba,
  					"description": {
  						"en": "pemba-description.html",
-						"fr": "pemba-rules-fr.html"
+						"fr": "pemba-description-fr.html"
  					},
  					"levels": config_model_levels_15
  				},
@@ -6179,7 +6179,7 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/elephant/elephant.js",
 								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
 								"image|/res/fairy/elephant/elephant-normalmap.jpg",
-								"smoothedfilegeo|0|/res/fairy/admiral/admiral.js",
+								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
 								"image|/res/fairy/prince/prince-diffusemap.jpg",
 								"image|/res/fairy/prince/prince-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
