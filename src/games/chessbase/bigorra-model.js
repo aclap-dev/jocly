@@ -278,7 +278,7 @@
 					name: 'ipawn-w',
 					aspect: 'fr-pawn',
 					graph: this.cbInitialPawnGraph(geometry,1),
-					value: .9,
+					value: .8,
 					abbrev: '',
 					fenAbbrev: 'P',
 					initial: [{s:1,p:64},{s:1,p:65},{s:1,p:66},{s:1,p:67},{s:1,p:68},{s:1,p:69},{s:1,p:70},{s:1,p:71},{s:1,p:72},{s:1,p:73},{s:1,p:74},{s:1,p:75},{s:1,p:76},{s:1,p:77},{s:1,p:78},{s:1,p:79}],
@@ -289,7 +289,7 @@
 					name: 'ipawn-b',
 					aspect: 'fr-pawn',
 					graph: this.cbInitialPawnGraph(geometry,-1),
-					value: .9,
+					value: .8,
 					abbrev: '',
 					fenAbbrev: 'P',
 					initial: [{s:-1,p:176},{s:-1,p:177},{s:-1,p:178},{s:-1,p:179},{s:-1,p:180},{s:-1,p:181},{s:-1,p:182},{s:-1,p:183},{s:-1,p:184},{s:-1,p:185},{s:-1,p:186},{s:-1,p:187},{s:-1,p:188},{s:-1,p:189},{s:-1,p:190},{s:-1,p:191}],
@@ -315,7 +315,7 @@
                   this.cbShortRangeGraph(geometry,[
 						[-2,-2],[0,-2],[-2,2],[0,2],[2,2],[2,0],
 						[-2,2],[-2,0],[0,-2],[2,-2]])),
-					value: 6.5,
+					value: 6.2,
 					abbrev: 'M',
 					initial: [{s:1,p:1},{s:1,p:14},{s:-1,p:241},{s:-1,p:254}],
 				},
@@ -340,7 +340,7 @@
                         [-2,3],[-1,3],[0,3],[1,3],[2,3],
 						[-2,-3],[-1,-3],[0,-3],[1,-3],[2,-3]
                     ]),
-					value: 8,
+					value: 8.5,
 					abbrev: 'C',
 					initial: [{s:1,p:3},{s:1,p:12},{s:-1,p:243},{s:-1,p:252}],
 				},
@@ -349,7 +349,7 @@
 					name: 'ship',
 					aspect: 'fr-ship',
 					graph : this.cbShipGraph(geometry),
-					value: 4.5,
+					value: 5,
 					abbrev: 'S',
 					initial: [{s:1,p:36},{s:1,p:43},{s:-1,p:212},{s:-1,p:219}],
 				},
@@ -357,7 +357,7 @@
 					name: 'snake',
 					aspect: 'fr-dragon',
 					graph: this.cbSnakeGraph(geometry),
-					value: 3.5,
+					value: 3.7,
 					abbrev: 'N',
 					initial: [{s:1,p:37},{s:1,p:42},{s:-1,p:213},{s:-1,p:218}],
 				},
@@ -379,7 +379,7 @@
                   this.cbShortRangeGraph(geometry,[
 						[-3,3],[0,3],[3,3],[-3,0],[3,0],[-3,-3],
 						[0,-3],[-3,3]])),
-                    value : 3.25,
+                    value : 3.2,
                     initial: [{s:1,p:48},{s:1,p:50},{s:1,p:52},{s:1,p:54},{s:1,p:56},{s:1,p:58},{s:1,p:60},{s:1,p:62}],
                 },
                 10: {
@@ -391,7 +391,7 @@
                   this.cbShortRangeGraph(geometry,[
 						[-3,3],[0,3],[3,3],[-3,0],[3,0],[-3,-3],
 						[0,-3],[-3,3]])),
-                    value : 3.25,
+                    value : 3.2,
                     initial: [{s:-1,p:192},{s:-1,p:194},{s:-1,p:196},{s:-1,p:198},{s:-1,p:200},{s:-1,p:202},{s:-1,p:204},{s:-1,p:206}],
                 },
                 11: {
@@ -399,7 +399,7 @@
                   abbrev : 'P',
                   aspect : 'fr-prince',
                   graph : this.cbPrinceGraph(geometry,1,confine),
-                  value : 3.25,
+                  value : 3.1,
                   initial: [{s:1,p:38},{s:1,p:41}],
                   epTarget : true,
                 },
@@ -408,7 +408,7 @@
                   abbrev : 'P',
                   aspect : 'fr-prince',
                   graph : this.cbPrinceGraph(geometry,-1,confine),
-                  value : 3.25,
+                  value : 3.1,
                   initial: [{s:-1,p:214},{s:-1,p:217}],
                   epTarget : true,
                 },
@@ -418,7 +418,7 @@
                   abbrev : 'G',
                   aspect : 'fr-griffin',
                   graph : this.cbGriffonGraph(geometry),
-                  value : 8.5,
+                  value : 9,
                   initial: [{s:1,p:25},{s:-1,p:233}],
                  },
       			14: {
@@ -426,7 +426,7 @@
                   abbrev : 'U',
                   aspect : 'fr-rhino',
                   graph : this.cbRhinoGraph(geometry),
-                  value : 7.5,
+                  value : 8.1,
                   initial: [{s:1,p:10},{s:-1,p:250}],
                 },
                 15: {
@@ -441,7 +441,7 @@
                   [1,-2],[2,-2],[2,-1],[2,0],[2,1],
                   [2,2],[1,2],[0,2],[-1,2],[-2,2],[-2,1]
                   ]),
-                  value : 17.5,
+                  value : 17.4,
                   initial: [{s:1,p:8},{s:-1,p:248}],
                 },
                 16: {
@@ -475,7 +475,7 @@
                   abbrev : 'W',
                   aspect : 'fr-machine',
                   graph : this.cbShortRangeGraph(geometry,[[-1,0],[-2,0],[1,0],[2,0],[0,1],[0,2],[0,-1],[0,-2]],confine),
-                  value : 2.4,
+                  value : 3,
                   initial: [{s:1,p:39},{s:1,p:40},{s:-1,p:215},{s:-1,p:216}],
                   },
                 19: {
@@ -499,7 +499,7 @@
                   abbrev : 'B',
                   aspect : 'fr-bishop',
                   graph : this.cbBishopGraph(geometry,confine),
-                  value : 3.5,
+                  value : 4.1,
                   initial: [{s:1,p:35},{s:1,p:44},{s:-1,p:211},{s:-1,p:220}],
                   },
                 22: {
@@ -507,7 +507,7 @@
                   abbrev : 'E',
                   aspect : 'fr-elephant',
                   graph : this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[1,-1],[1,1],[-2,-2],[-2,2],[2,-2],[2,2]],confine),
-                  value : 2.5,
+                  value : 2.8,
                   initial: [{s:1,p:32},{s:1,p:47},{s:-1,p:208},{s:-1,p:223}],
                   },
                 23: {
@@ -519,7 +519,7 @@
                   this.cbKnightGraph(geometry,confine),
                   this.cbKingGraph(geometry,confine)),
 
-                  value : 5.75,
+                  value : 6.1,
                   initial: [{s:1,p:4},{s:1,p:11},{s:-1,p:244},{s:-1,p:251}],
                   },
                   24: {
@@ -532,7 +532,7 @@
                               [-1,-2],[-1,-3],[-2,-1],[-2,-3],[-3,-1],[-3,-2],
                               [-1,2],[-1,3],[-2,1],[-2,3],[-3,1],[-3,2]
                               ],confine),
-                  value : 8,
+                  value : 8.9,
                   initial: [{s:1,p:5},{s:-1,p:245}],
                   },
                   25: {
@@ -540,7 +540,7 @@
                   abbrev : 'O',
                   aspect : 'fr-star',
                   graph : this.cbLongRangeGraph(geometry,[[0,-1],[0,1],[-1,0],[1,0],[1,1],[1,-1],[-1,-1],[-1,1]],null,this.cbConstants.FLAG_MOVE | this.cbConstants.FLAG_SCREEN_CAPTURE),
-                  value : 6.5,
+                  value : 7,
                   initial: [{s:1,p:6},{s:-1,p:246}],
                   },
                   26: {
@@ -550,7 +550,7 @@
                   graph : this.cbMergeGraphs(geometry,
                               this.cbKnightGraph(geometry,confine),
                               this.cbQueenGraph(geometry,confine)),
-                  value : 14,
+                  value : 15,
                   initial: [{s:1,p:7},{s:-1,p:247}],
                   },
                   27: {
@@ -558,7 +558,7 @@
                   abbrev : 'C',
                   aspect : 'fr-cannon2',
                   graph : this.cbXQCannonGraph(geometry),
-                  value : 3.5,
+                  value : 3.6,
                   initial: [{s:1,p:16},{s:1,p:31},{s:-1,p:224},{s:-1,p:239}],
                   },
                   28: {
@@ -566,7 +566,7 @@
                   abbrev : 'M',
                   aspect : 'fr-camel',
                   graph : this.cbShortRangeGraph(geometry,[[-3,-1],[-3,1],[3,-1],[3,1],[1,3],[1,-3],[-1,3],[-1,-3]]),
-                  value : 2.25,
+                  value : 2.6,
                   initial: [{s:1,p:17},{s:1,p:30},{s:-1,p:225},{s:-1,p:238}],
                   },
                   29: {
@@ -574,7 +574,7 @@
                   abbrev : 'Z',
                   aspect : 'fr-giraffe',
                   graph : this.cbShortRangeGraph(geometry,[[-3,-2],[-3,2],[3,-2],[3,2],[2,3],[2,-3],[-2,3],[-2,-3]]),
-                  value : 2,
+                  value : 2.4,
                   initial: [{s:1,p:18},{s:1,p:29},{s:-1,p:226},{s:-1,p:237}],
                   epCatch : true,
                   epTarget : true,
@@ -584,7 +584,7 @@
                   abbrev : 'V',
                   aspect : 'fr-bow',
                   graph : this.cbLongRangeGraph(geometry,[[-1,-1],[1,1],[-1,1],[1,-1]],null,this.cbConstants.FLAG_MOVE | this.cbConstants.FLAG_SCREEN_CAPTURE),
-                  value : 2.5,
+                  value : 2.6,
                   initial: [{s:1,p:19},{s:1,p:28},{s:-1,p:227},{s:-1,p:236}],
                   },
                   31: {
@@ -594,7 +594,7 @@
                   graph : this.cbMergeGraphs(geometry,
                               this.cbKingGraph(geometry,confine),
                               this.cbRookGraph(geometry,confine)),
-                  value : 6.75,
+                  value : 6.8,
                   initial: [{s:1,p:20},{s:-1,p:228}],
                   },
                   32: {
@@ -604,7 +604,7 @@
                   graph : this.cbMergeGraphs(geometry,
                               this.cbKingGraph(geometry,confine),
                               this.cbBishopGraph(geometry,confine)),
-                  value : 5.5,
+                  value : 6,
                   initial: [{s:1,p:27},{s:-1,p:235}],
                   },
                   33: {
@@ -624,7 +624,7 @@
                   graph : this.cbMergeGraphs(geometry,
                               this.cbKnightGraph(geometry,confine),
                               this.cbRookGraph(geometry,confine)),
-                  value : 8.25,
+                  value : 8.5,
                   initial: [{s:1,p:26},{s:-1,p:234}],
                   },
                   35: {
@@ -637,7 +637,7 @@
                               [1,-2],[2,-2],[2,-1],[2,0],[2,1],
                               [2,2],[1,2],[0,2],[-1,2],[-2,2],[-2,1]
                               ], confine),
-                  value : 9,
+                  value : 10,
                   initial: [{s:1,p:22},{s:-1,p:230}],
                   },
                   36: {
@@ -645,7 +645,7 @@
                   abbrev : 'Q',
                   aspect : 'fr-queen',
                   graph : this.cbQueenGraph(geometry,confine),
-                  value : 9.75,
+                  value : 10.5,
                   initial: [{s:1,p:24},{s:-1,p:232}],
                   },
                   37: {
@@ -659,7 +659,7 @@
                       [2,2],[3,3],[+2,-2],[+3,-3],[-2,+2],[-3,+3],
                         ],confine)),
 
-                    value : 8.75,
+                    value : 9.5,
                     initial: [{s:1,p:9},{s:-1,p:249}],
                   },
 			},
