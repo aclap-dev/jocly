@@ -1207,19 +1207,19 @@
 		},
         "fr-hawk": {
 			mesh: {
-				jsFile:"/res/fairy/eagle/eagle.js"
+				jsFile:"/res/fairy/hawk/hawk.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/eagle/eagle-diffusemap.jpg",
+								diffImg : "/res/fairy/hawk/hawk-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/eagle/eagle-normalmap.jpg",
+								normalImg: "/res/fairy/hawk/hawk-normalmap.jpg",
 							}
 						}
 					}
