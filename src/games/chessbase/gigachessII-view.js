@@ -140,6 +140,11 @@
 					"#": "#8F976D", // #8F976D "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
+                    'colorFill' : {
+					".": "#91a4b6", // #ffffc0 "white" cells
+					"#": "#617a8e", // #8F976D "black" cells
+					" ": "rgba(0,0,0,0)",
+				},
                 /*//green
                 'colorFill' : {
 					".": "#ffffdd",
