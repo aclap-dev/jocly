@@ -140,7 +140,7 @@
 							line.unshift({d:tg1 & MASK,a:pos,t:typeName});
 						else if(tg1 & FLAG_STOP)
 							line.unshift({d:tg1 & MASK,a:pos});
-						else if(tg1 & FLAG_SCREEN_CAPTURE) {
+						if(tg1 & FLAG_SCREEN_CAPTURE) {
 							$this.cbUseScreenCapture=true;
 							line.unshift({d:tg1 & MASK,a:pos,ts:typeName});
 						}
@@ -292,9 +292,13 @@
 		var nullGraph = {};
 		for(var pos=0;pos<this.cbVar.geometry.boardSize;pos++)
 			nullGraph[pos]=[];
+
+		this.cbMaxRanking = 0;
 		
 		for(var typeIndex in this.cbVar.pieceTypes) {
 			var pType = this.cbVar.pieceTypes[typeIndex];
+			var r = (pType.ranking ? pType.ranking : 0);
+			if(r > this.cbMaxRanking) this.cbMaxRanking = r;
 			pTypes[typeIndex] = {
 				graph: pType.graph || nullGraph,
 				abbrev: pType.abbrev || '',
@@ -303,6 +307,7 @@
 				castle: !!pType.castle,
 				epTarget: !!pType.epTarget,
 				epCatch: !!pType.epCatch,
+				ranking: r,
 			}
 		}
 		
@@ -376,6 +381,7 @@
 						t: parseInt(typeIndex),
 						p: desc.p,
 						m: false,
+						r: aGame.g.pTypes[typeIndex].ranking,
 					}
 					this.pieces.push(piece);
 				}
@@ -444,6 +450,7 @@
 				t: piece.t,
 				i: piece.i,
 				m: piece.m,
+				r: piece.r,
 			});
 		}
 		this.kings={};
@@ -872,8 +879,8 @@
 								ept: lastPos==null || !pType.epTarget?undefined:lastPos,
 							});
 					} else if(tg1 & FLAG_SCREEN_CAPTURE) {
-						if(screen) {
-							var piece1=this.pieces[index1];
+						var piece1=this.pieces[index1];
+						if(screen || tg1 & FLAG_CAPTURE) { // direct capture might also be possible
 							if(piece1.s!=piece.s)
 								PromotedMoves(piece,{
 									f: piece.p,
@@ -881,9 +888,10 @@
 									c: piece1.i,
 									a: pType.abbrev,
 								});
-							break;
-						} else
-							screen=true;
+							if(!piece.r && screen) break; // normal hoppers terminate after first screen capture
+						}
+						if(piece.r && (piece.r|1) <= piece1.r) break; // blocking power too large
+						screen=true;
 					} else {
 						var piece1;
 						if(index1<0)
@@ -1000,30 +1008,41 @@
 		}
 	}
 
-	Model.Board.cbCollectAttackersScreen=function(who,graph,attackers,isKing,direct) {
+	var mr;
+
+	Model.Board.cbCollectAttackersScreen=function(who,graph,attackers,isKing,screen) {
 		for(var pos1 in graph) {
 			var branch=graph[pos1];
 			var index1=this.board[pos1];
 			if(index1<0)
-				this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,direct);
+				this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,screen);
 			else {
 				var piece1=this.pieces[index1];
-				if(direct) {
+				if(!screen) {
 					if(piece1.s==-who && (
 						(branch.t && (piece1.t in branch.t)) ||
 						(isKing && branch.tk && (piece1.t in branch.tk))))
+						attackers.push(piece1); // direct attacker
+				 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,piece1.r|1024); // 1024 bit: must jump 1 screen
+				} else {
+					if(piece1.s==-who && branch.ts && (piece1.t in branch.ts) &&
+					   (piece1.r ? (piece1.r|1) > (screen&1023) : screen&1024)) // normal hopper: 1 screen, ranked must top highest screen
 						attackers.push(piece1);
-				 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,direct-1);
-				} else if(piece1.s==-who && branch.ts && (piece1.t in branch.ts))
-					attackers.push(piece1);
+					if(!mr) continue; // no flying pieces in this game
+					var s=screen&1023; // we now have multiple screens
+					if(piece1.r > s) s=piece1.r; // this target screens better
+					if(s < (mr|1)) // but not maximally
+					 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,s|2048);
+				}
 			}
 		}
 	}
 
 	Model.Board.cbGetAttackers = function(aGame,pos,who,isKing) {
 		var attackers=[];
+		mr = aGame.cbMaxRanking;
 		if(aGame.cbUseScreenCapture)
-			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,1);
+			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,0);
 		else
 			this.cbCollectAttackers(who,aGame.g.threatGraph[who][pos],attackers,isKing);
 		return attackers;
