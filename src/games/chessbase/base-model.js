@@ -483,9 +483,9 @@
 
 	Model.Board.cbApplyCastle = function(aGame,move,updateSign) {
 		var spec=aGame.cbVar.castle[move.f+"/"+move.cg];
-		var rookTo=spec.r[spec.r.length-1];
+		var rookTo=spec.r[spec.r.length-1] + (move.t >> 16);
 		var rPiece=this.pieces[this.board[move.cg]];
-		var kingTo=spec.k[spec.k.length-1];
+		var kingTo=move.t & 0xffff;
 		var kPiece=this.pieces[this.board[move.f]];
 		if(updateSign) {
 			this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,move.cg);
