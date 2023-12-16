@@ -49,7 +49,7 @@
 			deltas.forEach(function(delta) {
 				var pos1=geometry.Graph(pos,delta);
 				if(pos1!=null && (!confine || (pos1 in confine))) 
-					graph[pos].push($this.cbTypedArray([pos1 | flags]));								
+					graph[pos].push($this.cbTypedArray([pos1 | (confine && confine[pos1]=='b' ? flags&~FLAG_MOVE : flags)]));
 			});
 		}
 		return graph;
@@ -71,10 +71,13 @@
 				var pos1=geometry.Graph(pos,delta);
 				var dist=0;
 				while(pos1!=null) {
-					if(confine && !(pos1 in confine))
-						break;
-					direction.push(pos1 | flags);
-					if(++dist==maxDist)
+					var brouhaha=0;
+					if(confine) {
+						if(!(pos1 in confine)) break;
+						if(confine[pos1]=='b') brouhaha=FLAG_MOVE;
+					}
+					if(flags & ~brouhaha) direction.push(pos1 | flags & ~brouhaha);
+					if(brouhaha || ++dist==maxDist)
 						break;
 					pos1=geometry.Graph(pos1,delta);
 				}
