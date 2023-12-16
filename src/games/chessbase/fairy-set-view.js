@@ -957,7 +957,6 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
-
 							}
 						}
 					}
@@ -1084,7 +1083,6 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
-
 							}
 						}
 					}
@@ -1100,12 +1098,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/wolf/wolf-diffusemap.jpg",
+								diffImg : "/res/fairy/wolf/wolf-diffuse-map.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/wolf/wolf-normalmap.jpg",
+								normalImg: "/res/fairy/wolf/wolf-normal-map.jpg",
 							}
 						}
 					}
@@ -1121,12 +1119,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/squirle/squirle-diffusemap.jpg",
+								diffImg : "/res/fairy/squirle/squirle-diffuse-map.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/squirle/squirle-normalmap.jpg",
+								normalImg: "/res/fairy/squirle/squirle-normal-map.jpg",
 							}
 						}
 					}
