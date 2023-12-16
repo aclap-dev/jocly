@@ -12,7 +12,6 @@ const rename = require("gulp-rename");
 const concat = require('gulp-concat');
 const add = require('gulp-add');
 const sourcemaps = require('gulp-sourcemaps');
-const runSequence = require('run-sequence');
 const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
 const browserify = require('browserify');
@@ -21,6 +20,7 @@ const source = require('vinyl-source-stream');
 const argv = require('yargs').argv;
 const gulpif = require('gulp-if');
 const gutil = require('gulp-util');
+const map = require('gulp-map');
 
 const modulifyHeaders = {
 	model:
@@ -114,16 +114,18 @@ function HandleModuleGames(modelOnly) {
 						files = files.map((file) => {
 							return path.join(modulesMap[moduleName], file);
 						});
-						var stream = gulp.src(files)
-							.pipe(rename(function (path) {
-								path.dirname = moduleName;
-							}))
-							.pipe(through.obj(function (file, enc, next) {
-								push(file);
-								next();
-							}))
-							;
-						streams.push(stream);
+            if(files.length>0) {
+              var stream = gulp.src(files, {"allowEmpty": true})
+                .pipe(rename(function (path) {
+                  path.dirname = moduleName;
+                }))
+                .pipe(through.obj(function (file, enc, next) {
+                  push(file);
+                  next();
+                }))
+                ;
+              streams.push(stream);
+            }
 					});
 				});
 			}
@@ -186,7 +188,7 @@ function ProcessJS(stream, concatName, skipBabel) {
 		stream = stream.pipe(sourcemaps.init());
 	if (!skipBabel)
 		stream = stream.pipe(babel({
-			presets: ['es2015'],
+			presets: ["@babel/preset-env"],
 			compact: !!argv.prod
 		}));
 	if (argv.prod)
@@ -221,6 +223,9 @@ gulp.task("build-node-core", function () {
 	allGamesStream = ProcessJS(allGamesStream.pipe(buffer()));
 
 	return merge(joclyCoreStream, allGamesStream, joclyBaseStream)
+    .pipe(map(function(file) {
+      return new Vinyl(file);
+    }))
 		.pipe(gulp.dest("dist/node"));
 
 });
@@ -238,9 +243,9 @@ gulp.task("copy-node-license", function () {
 	return CopyLicense("dist/node");
 });
 
-gulp.task("build-node", function (callback) {
-	runSequence("build-node-games", ["build-node-core", "copy-node-license"], callback);
-});
+gulp.task("build-node", 
+  gulp.series("build-node-games", 
+  gulp.parallel("build-node-core", "copy-node-license")));
 
 gulp.task("build-browser-games", function () {
 	return gulp.src(moduleDirs)
@@ -292,7 +297,10 @@ gulp.task("build-browser-core", function () {
 
 	return merge(joclyBrowserStream, joclyCoreStream, allGamesStream, joclyBaseStream,
 		joclyExtraStream, joclyExtraScriptsStream, joclyResStream)
-		.pipe(gulp.dest("dist/browser"));
+    .pipe(map(function(file) {
+      return new Vinyl(file);
+    }))
+    .pipe(gulp.dest("dist/browser"));
 
 });
 
@@ -335,19 +343,17 @@ gulp.task("build-browser-xdview", function () {
 
 });
 
-gulp.task("build-browser", function (callback) {
-	runSequence("build-browser-games", ["build-browser-core",
-		"build-browser-xdview", "copy-browser-license"], callback);
-});
-
-
-gulp.task("build", function (callback) {
-	runSequence("clean", ["build-browser", "build-node"], callback);
-});
-
 gulp.task("clean", function () {
 	return del(["dist/*"], { force: true });
 });
+
+gulp.task("build-browser", 
+  gulp.series("build-browser-games", 
+  gulp.parallel("build-browser-core", "build-browser-xdview", "copy-browser-license")));
+
+gulp.task("build", 
+  gulp.series("clean", 
+  gulp.parallel("build-browser", "build-node")));
 
 gulp.task("watch", function () {
 	gulp.watch(moduleDirs.map((dir) => { return dir + "/**/*"; }), ["build-node-games", "build-browser-games"]);
