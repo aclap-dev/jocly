@@ -842,7 +842,15 @@
 					var tg1=line[k];
 					var pos1=tg1 & MASK;
 					var index1=this.board[pos1];
-					if(index1<0 && (!pType.epCatch || !this.epTarget || this.epTarget.p!=pos1)) {
+					var nonCapt=(index1<0);
+					if(nonCapt && pType.epCatch && this.epTarget) { // destination empty, but could be e.p. capture
+						var ept=this.epTarget.p;
+						do {
+							if(ept==pos1) { nonCapt=false; break; }
+							ept+=this.epTarget.p-this.lastMove.t;
+						} while(ept!=this.lastMove.f);
+					}
+					if(nonCapt) {
 						if((tg1 & FLAG_MOVE) && screen==false)
 							PromotedMoves(piece,{
 								f: piece.p,
