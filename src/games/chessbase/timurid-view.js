@@ -2,7 +2,7 @@
  *
  *
  *
- * authors: fhoudebert
+ * authors: fh
  *
  */
 
@@ -46,28 +46,31 @@
 	View.Game.cbPromoSize = 1100;
 
 	// extending fairy pieces with some musketeer new pieces
-	View.Game.cbFairyGigachessPieceStyle3D = $.extend(true,{},View.Game.cbFairyPieceStyle3D,{
+	View.Game.cbFairyTimuridchessPieceStyle3D = $.extend(true,{},View.Game.cbFairyPieceStyle3D,{
 	});
 
 	View.Game.cbDefineView = function() {
 		
-		var gigachessBoardDelta = {
+		var timuridchessBoardDelta = {
 			notationMode: "out",
-			notationDebug: true,
+			//notationDebug: true,
 		}
 
-		gigachessBoardDelta3d = $.extend(true,{},gigachessBoardDelta,
+		timuridchessBoardDelta3d = $.extend(true,{},timuridchessBoardDelta,
 			{
-				
-/* //vert 
-'colorFill' : {
-					".": "#9ca364", // "575b36",
+				/*'colorFill' : {
+					".": "#575b36", // "rgba(180,213,80,.3)",
 					"#": "#474b36", // "black" cells
 					" ": "rgba(0,0,0,0)",
+				},
+//bleu
+				'colorFill' : {
+					"#": "#3b55a3",
+					".": "#73cbea",
 				},*/
-'colorFill' : {
-					"#": "#617a8e",
-					".": "#91a4b6",
+				'colorFill' : {
+					"#": "#a97b50",
+					".": "rgba(221,177,85,1)",
 				},
 				'texturesImg' : {
 					'crackles': '/res/images/crackles.jpg',
@@ -132,65 +135,50 @@
 			}
 		);
 
-		gigachessBoardDelta2d = $.extend(true,{},gigachessBoardDelta,
+		timuridchessBoardDelta2d = $.extend(true,{},timuridchessBoardDelta,
 			{
-				 //olive
-                    'colorFill' : {
-					".": "#ffffc0", // #ffffc0 "white" cells
-					"#": "#8F976D", // #8F976D "black" cells
+				'colorFill' : {
+					".": "#ffffc0", // "white" cells
+					"#": "#8F976D", // "black" cells
 					" ": "rgba(0,0,0,0)",
 				},
-                    'colorFill' : {
-					".": "#91a4b6", // #ffffc0 "white" cells
-					"#": "#617a8e", // #8F976D "black" cells
-					" ": "rgba(0,0,0,0)",
-				},
-                /*//green
-                'colorFill' : {
-					".": "#ffffdd",
-					"#": "#86a666",
-                    " ": "rgba(0,0,0,0)",
-				},*/
 				'texturesImg' : {}, // to avoid default wood texture
 				'margins' : {x:.47,y:.47},
 				/*'colorFill' : {
 					".": "rgba(224,50,0,1)",
 					"#": "rgba(220,220,0,1)",
 				},*/
-
 			}
 		);
 
-		var gigachessBoard3d = $.extend(true,{},this.cbGridBoardClassic3DMargin,gigachessBoardDelta3d);
-		var gigachessBoard2d = $.extend(true,{},this.cbGridBoardClassic2DMargin,gigachessBoardDelta2d);
+		var timuridchessBoard3d = $.extend(true,{},this.cbGridBoardClassic3DMargin,timuridchessBoardDelta3d);
+		var timuridchessBoard2d = $.extend(true,{},this.cbGridBoardClassic2DMargin,timuridchessBoardDelta2d);
 
 		return {
 			coords: {
-				"2d": this.cbGridBoard.coordsFn.call(this,gigachessBoard2d),
-				"3d": this.cbGridBoard.coordsFn.call(this,gigachessBoard3d),
+				"2d": this.cbGridBoard.coordsFn.call(this,timuridchessBoard2d),
+				"3d": this.cbGridBoard.coordsFn.call(this,timuridchessBoard3d),
 			},
 			boardLayout: [
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-	      		".#.#.#.#.#.#.#",
-	      		"#.#.#.#.#.#.#.",
-			],
+				".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+				".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+				".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+				".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+				".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+			  ".#.#.#.#.#.#",
+				   "#.#.#.#.#.#.",
+			  ],
 			board: {
 				"2d": {
-					draw: this.cbDrawBoardFn(gigachessBoard2d),
+					draw: this.cbDrawBoardFn(timuridchessBoard2d),
 				},
 				"3d": {
-					display: this.cbDisplayBoardFn(gigachessBoard3d),
+					display: this.cbDisplayBoardFn(timuridchessBoard3d),
 				},
 			},
 			clicker: {
@@ -210,7 +198,7 @@
 					},			
 					"3d": {
 						scale: [0.34285714285714,0.34285714285714,0.34285714285714],
-						display: this.cbDisplayPieceFn(this.cbFairyGigachessPieceStyle3D)
+						display: this.cbDisplayPieceFn(this.cbFairyTimuridchessPieceStyle3D)
 					},
 				},
 				"fr-amazon" :{
@@ -221,22 +209,19 @@
 			}),
 		};
 	}
-/* Make the jumps */
+
+	/* Make the jumps */
 	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
 		var geo=aGame.cbVar.geometry;
 		var dx=Math.abs(geo.C(aMove.t)-geo.C(aMove.f));
 		var dy=Math.abs(geo.R(aMove.t)-geo.R(aMove.f));
-// jump to move
-		if(("_N_E_W_K_L_M_T_F_G_J_Z_D_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
+		if(("_N_E_D_L_J_T_F_G_S_".indexOf("_"+aMove.a+"_")>=0) && (aGame.g.distGraph[aMove.f][aMove.t]>1))
 			return Math.max(zFrom,zTo)+2000;
-		else if(("_A_X_H_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
+		else if(("_A_C_M_".indexOf("_"+aMove.a+"_")>=0) && dx!=dy && dx!=0 && dy!=0)
 			return Math.max(zFrom,zTo)+2000;
-// jump to attack
-		else if(("_C_V_O_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
+		else if(("_Z_W_".indexOf("_"+aMove.a+"_")>=0) && aMove.c != null)
 			return Math.max(zFrom,zTo)+2000;
 		else
 			return (zFrom+zTo)/2;
 	}
-
 })();
-
