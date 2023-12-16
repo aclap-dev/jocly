@@ -547,7 +547,11 @@
 					},this);
 				} else if(currentInput.t==null) {
 					moves.forEach(function(move) {
-						var target = move.cg===undefined?move.t:move.cg;
+						var target = move.t;
+						if(move.cg!==undefined) {
+							var k=aGame.cbVar.castle[move.f+'/'+move.cg].k;
+							if(k[k.length-1]==move.t) target=move.cg;
+						}
 						if(actions[target]===undefined) {
 							actions[target]={
 								t: move.t,
@@ -714,7 +718,7 @@
 		var piece=this.pieces[this.board[aMove.f]];
 
 		var displaySpec0=aGame.cbMakeDisplaySpec(aMove.f,piece.s);
-		var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,aMove.t,piece);
+		var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,aMove.t&0xffff,piece);
 		for(var skin in displaySpec0) {
 			var spec=displaySpec0[skin];
 			if(spec.z===undefined)
@@ -803,7 +807,7 @@
 		
 		if(aMove.cg!==undefined) {
 			var spec=aGame.cbVar.castle[aMove.f+"/"+aMove.cg];
-			var rookTo=spec.r[spec.r.length-1];
+			var rookTo=spec.r[spec.r.length-1] + (aMove.t >> 16);
 			var piece=this.pieces[this.board[aMove.cg]];
 			var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,rookTo,piece);
 			animCount++;

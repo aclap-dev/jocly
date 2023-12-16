@@ -77,7 +77,11 @@
 						})
 					}
 					moves.forEach(function(move) {
-						var target = move.cg===undefined?move.t:move.cg;
+						var target = move.t;
+						if(move.cg!==undefined) {
+							var k=aGame.cbVar.castle[move.f+'/'+move.cg].k;
+							if(k[k.length-1]==move.t) target=move.cg;
+						}
 						if(currentInput.via == null && move.via !== undefined) target = move.via;
 						if(actions[target]===undefined) {
 							actions[target]={
