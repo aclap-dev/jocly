@@ -217,6 +217,41 @@
 					clipx: 3400,
 				},
 			},
+			"fr-giraffe": {
+				"2d": {
+					clipx: 4000,
+				},
+			},
+			"fr-wolf": {
+				"2d": {
+					clipx: 4100,
+				},
+			},
+			"fr-squirle": {
+				"2d": {
+					clipx: 4200,
+				},
+			},
+			"fr-crowned-rook": {
+				"2d": {
+					clipx: 4300,
+				},
+			},
+            "fr-crowned-knight": {
+				"2d": {
+					clipx: 4400,
+				},
+			},
+            "fr-crowned-bishop": {
+				"2d": {
+					clipx: 4500,
+				},
+			},
+            "fr-leopard": {
+				"2d": {
+					clipx: 4600,
+				},
+			},
 		},modifier);
 	}
 
@@ -951,12 +986,13 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								diffImg : "/res/fairy/giraffe/giraffe-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
+								normalImg: "/res/fairy/giraffe/giraffe-normalmap.jpg",
+
 							}
 						}
 					}
@@ -972,12 +1008,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/wolf/wolf-diffuse-map.jpg",
+								diffImg : "/res/fairy/wolf/wolf-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/wolf/wolf-normal-map.jpg",
+								normalImg: "/res/fairy/wolf/wolf-normalmap.jpg",
 							}
 						}
 					}
@@ -993,12 +1029,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/squirle/squirle-diffuse-map.jpg",
+								diffImg : "/res/fairy/squirle/squirle-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/squirle/squirle-normal-map.jpg",
+								normalImg: "/res/fairy/squirle/squirle-normalmap.jpg",
 							}
 						}
 					}
@@ -1014,12 +1050,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normalmap.jpg",
 							}
 						}
 					}
@@ -1035,12 +1071,12 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-knight/crowned-knight-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-knight/crowned-knight-normalmap.jpg",
 							}
 						}
 					}
@@ -1056,138 +1092,33 @@
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffuse-map.jpg",
+								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
+								normalImg: "/res/fairy/crowned-rook/crowned-rook-normalmap.jpg",
 							}
 						}
 					}
 				}
 			}
 		},
-		"fr-giraffe": {
+        "fr-leopard": {
 			mesh: {
-				jsFile:"/res/fairy/giraffe/giraffe.js"
+				jsFile:"/res/fairy/leopard/leopard.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								diffImg : "/res/fairy/leopard/leopard-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/giraffe/giraffe-normal-map.jpg",
-							}
-						}
-					}
-				}
-			}
-		},
-		"fr-wolf": {
-			mesh: {
-				jsFile:"/res/fairy/wolf/wolf.js"
-			},
-			materials: {
-				mat0: {
-					channels: {
-						diffuse: {
-							texturesImg: {
-								diffImg : "/res/fairy/wolf/wolf-diffuse-map.jpg",
-							}
-						},
-						normal: {
-							texturesImg: {
-								normalImg: "/res/fairy/wolf/wolf-normal-map.jpg",
-							}
-						}
-					}
-				}
-			}
-		},
-		"fr-squirle": {
-			mesh: {
-				jsFile:"/res/fairy/squirle/squirle.js"
-			},
-			materials: {
-				mat0: {
-					channels: {
-						diffuse: {
-							texturesImg: {
-								diffImg : "/res/fairy/squirle/squirle-diffuse-map.jpg",
-							}
-						},
-						normal: {
-							texturesImg: {
-								normalImg: "/res/fairy/squirle/squirle-normal-map.jpg",
-							}
-						}
-					}
-				}
-			}
-		},
-        "fr-crowned-bishop": {
-			mesh: {
-				jsFile:"/res/fairy/crowned-bishop/crowned-bishop.js"
-			},
-			materials: {
-				mat0: {
-					channels: {
-						diffuse: {
-							texturesImg: {
-								diffImg : "/res/fairy/crowned-bishop/crowned-bishop-diffuse-map.jpg",
-							}
-						},
-						normal: {
-							texturesImg: {
-								normalImg: "/res/fairy/crowned-bishop/crowned-bishop-normal-map.jpg",
-							}
-						}
-					}
-				}
-			}
-		},
-        "fr-crowned-knight": {
-			mesh: {
-				jsFile:"/res/fairy/crowned-knight/crowned-knight.js"
-			},
-			materials: {
-				mat0: {
-					channels: {
-						diffuse: {
-							texturesImg: {
-								diffImg : "/res/fairy/crowned-knight/crowned-knight-diffuse-map.jpg",
-							}
-						},
-						normal: {
-							texturesImg: {
-								normalImg: "/res/fairy/crowned-knight/crowned-knight-normal-map.jpg",
-							}
-						}
-					}
-				}
-			}
-		},
-        "fr-crowned-rook": {
-			mesh: {
-				jsFile:"/res/fairy/crowned-rook/crowned-rook.js"
-			},
-			materials: {
-				mat0: {
-					channels: {
-						diffuse: {
-							texturesImg: {
-								diffImg : "/res/fairy/crowned-rook/crowned-rook-diffuse-map.jpg",
-							}
-						},
-						normal: {
-							texturesImg: {
-								normalImg: "/res/fairy/crowned-rook/crowned-rook-normal-map.jpg",
+								normalImg: "/res/fairy/leopard/leopard-normalmap.jpg",
 							}
 						}
 					}
