@@ -90,7 +90,7 @@ function HandleModuleGames(modelOnly) {
 			// create the game config file
 			push(new Vinyl({
 				path: moduleName + "/" + game.name + "-config.js",
-				contents: new Buffer('exports.config = ' + JSON.stringify(game.config))
+				contents: Buffer.from('exports.config = ' + JSON.stringify(game.config))
 			}));
 
 			// create some specified resources
