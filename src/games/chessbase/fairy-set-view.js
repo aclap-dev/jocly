@@ -42,6 +42,21 @@
 					clipx: 0,
 				},
 			},
+			"fr-hoplit": {
+				"2d": {
+					clipx: 0,
+				},
+			},
+			"fr-ferz": {
+				"2d": {
+					clipx: 3900,
+				},
+			},
+			"fr-wazir": {
+				"2d": {
+					clipx: 3800,
+				},
+			},
 			"fr-knight": {
 				"2d": {
 					clipx: 100,
@@ -52,9 +67,29 @@
 					clipx: 200,
 				},
 			},
+			"fr-small-bishop": {
+				"2d": {
+					clipx: 3400,
+				},
+			},
+			"fr-crowned-bishop": {
+				"2d": {
+					clipx: 3300,
+				},
+			},
 			"fr-rook": {
 				"2d": {
 					clipx: 300,
+				},
+			},
+			"fr-small-rook": {
+				"2d": {
+					clipx: 3500,
+				},
+			},
+			"fr-gate": {
+				"2d": {
+					clipx: 3600,
 				},
 			},
 			"fr-queen": {
@@ -62,9 +97,24 @@
 					clipx: 400,
 				},
 			},
+			"fr-proper-queen": {
+				"2d": {
+					clipx: 400,
+				},
+			},
 			"fr-king": {
 				"2d": {
 					clipx: 500,
+				},
+			},
+			"fr-emperor": {
+				"2d": {
+					clipx: 500,
+				},
+			},
+			"fr-man": {
+				"2d": {
+					clipx: 3700,
 				},
 			},
 			"fr-cannon": {
@@ -78,6 +128,11 @@
 				},
 			},
 			"fr-elephant": {
+				"2d": {
+					clipx: 700,
+				},
+			},
+			"fr-proper-elephant": {
 				"2d": {
 					clipx: 700,
 				},
@@ -102,6 +157,11 @@
 					clipx: 1100,
 				},
 			},
+			"fr-birdie": {
+				"2d": {
+					clipx: 1100,
+				},
+			},
 			"fr-lion": {
 				"2d": {
 					clipx: 1200,
@@ -122,12 +182,27 @@
 					clipx: 1500,
 				},
 			},
+			"fr-proper-crowned-rook": {
+				"2d": {
+					clipx: 1500,
+				},
+			},
 			"fr-marshall": {
 				"2d": {
 					clipx: 1600,
 				},
 			},
+			"fr-proper-marshall": {
+				"2d": {
+					clipx: 1600,
+				},
+			},
 			"fr-cardinal": {
+				"2d": {
+					clipx: 1700,
+				},
+			},
+			"fr-proper-cardinal": {
 				"2d": {
 					clipx: 1700,
 				},
@@ -336,6 +411,72 @@
 			},
 		},
 
+		"fr-hoplit": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/hoplit.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/hoplit-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/pawn-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-ferz": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/ferz.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/pawn-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/pawn-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-wazir": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/wazir.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/pawn-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/pawn-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-knight": {
 			mesh: {
 				jsFile:"/res/fairy/knight/knight.js"
@@ -346,6 +487,94 @@
 						diffuse: {
 							texturesImg: {
 								diffImg : "/res/fairy/knight/knight-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/knight/knight-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-nightrider": {
+			mesh: {
+				jsFile:"/res/fairy/knight/nightrider.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/knight/pedestal-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/knight/knight-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-wazir-knight": {
+			mesh: {
+				jsFile:"/res/fairy/knight/wazirknight.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/knight/pedestal-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/knight/knight-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-ferz-knight": {
+			mesh: {
+				jsFile:"/res/fairy/knight/ferzknight.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/knight/knight-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/knight/knight-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-zebra": {
+			mesh: {
+				jsFile:"/res/fairy/knight/knight.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/knight/zebra-diffusemap.jpg",
 							}
 						},
 						normal: {
