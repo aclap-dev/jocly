@@ -621,7 +621,7 @@ exports.games = (function() {
 					"thumbnail": "alquerque-arabic-thumb.png",
 					"module": "checkers",
 					"description": "description.html",
-					"credits": "credits-arabic.html",
+					"credits": "credits-alquerque-arabic.html",
 					"js": modelScripts_2,
 					"gameOptions": {
 						"preventRepeat": true,
