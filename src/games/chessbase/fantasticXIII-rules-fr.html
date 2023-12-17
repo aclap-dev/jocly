@@ -1,0 +1,144 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .piece-icon {
+        width: 70px;
+        height: auto;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .piece-icon-promo {
+        width: 50px;
+        height: 50px;
+    }
+
+    #promo {
+        width: 200px;
+        margin: 0 auto;
+    }
+</style>
+
+<h1>Disposition de départ</h1>
+
+
+<p>Tablier de 13 x 13 cases. </p>
+
+<h1>Pieces</h1>
+
+<h2>Roi</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-king.png'>
+</p>
+<p class='piece-details'>Identique aux Échecs Orthodoxes mais le roi ne peut roquer.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
+</p>
+<h2>Serpent</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-dragon.png'>
+</p>
+<p class='piece-details'>Se déplace d’une case verticalement and peut ensuite glisser diagonalement.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/snake.png'>
+</p>
+<h2>Bateau</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-ship.png'>
+</p>
+<p class='piece-details'>Se déplace d’une case en diagonale et peut ensuite glisser verticalement mais pas horizontalement.Il peut être promu en aigle.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/ship.png'>
+</p>
+<h2>Mammouth</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-mammoth.png'>
+</p>
+<p class='piece-details'>Saute orthogonalement(horizontal+vertical) et diagonalement de 1 iu cases</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/mammoth.png'>
+</p>
+<h2>Ecureuil</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-squirle.png'>
+</p>
+<p class='piece-details'>Saute à 2 cases exactement</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/squirrel.png'>
+</p>
+<h2>Guépard</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-leopard.png'>
+</p>
+<p class='piece-details'>Saute à 3 cases exactement</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/cheetah.png'>
+</p>
+<h2>Troll</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-huscarl.png'>
+</p>
+<p class='piece-details'>Saute orthogonalement(horizontal+vertical) ou diagonalement à 3 cases. De plus se déplace d’une case en avant et capture en diagonale de 1(comme un pion classique). Cela lui donne accès à tout le tablier. Seul le mouvement du pion lui donne accès à la promotion en loup garou </p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/troll.png'>
+</p>
+<h2>Prince</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-prince.png'>
+</p>
+<p class='piece-details'>Combinaison du roi et du pion. Se déplace d’une case dans toutes les directions et peut avancer de 2 cases en avant mais sans prendre. il peut être promu en loup garou et pris en passant par un pion.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/prince.png'>
+</p>
+<h2>Pion</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-pawn.png'>
+</p>
+<p class='piece-details'>Se déplace directement d'une ou deux cases à partir de n'importe quelle position du tablier, sans capturer. Il capture en diagonale vers l'avant. La prise en passant est possible à chaque fois qu'un Pion ou Prince opposé a avancé de deux cases. Lorsqu'il atteint la dernière rangée, il peut être promu en loup garou.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/pawn.png'>
+</p>
+<h2>Griffon</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-griffon.png'>
+</p>
+<p class='piece-details'>Cette pièce peut apparaître par la promotion d’un bâteau. Se déplace d’une case en diagonale et peut ensuite glisser indéfiniment verticalement et horizontalement.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/griffon.png'>
+</p>
+<h2>Rhinoceros</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-rhino.png'>
+</p>
+<p class='piece-details'>Cette pièce peut apparaître par la promotion d’un serpent. Se déplace d’une case orthogonalement et peut ensuite glisser en diagonale indéfiniment.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rhinoceros.png'>
+</p>
+<h2>Loup garou</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-wolf.png'>
+</p>
+<p class='piece-details'>Cette pièce peut apparaître par la promotion d’un pion, d’un prince ou d’un Troll. Elle peut sauter à 2 ou 3 cases de distance.
+
+.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/wolf.png'>
+</p>
+<br clear="all">

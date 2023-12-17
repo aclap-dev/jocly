@@ -1130,6 +1130,7 @@ exports.games = (function () {
  		"fairy-set-view.js",
  		"leychessalpha-view.js"
 	]
+
 	var modelScripts_wtamerlane = [
  		"base-model.js",
  		"grid-geo-model.js",
@@ -1140,6 +1141,30 @@ exports.games = (function () {
  		"grid-board-view.js",
  		"fairy-set-view.js",
  		"wild-tamerlane-view.js"
+ 	]
+	var modelScripts_fantasticXIII = [
+ 		"base-model.js",
+ 		"grid-geo-model.js",
+ 		"fantasticXIII-model.js"
+ 	]
+ 	var config_view_js_fantasticXIII = [
+ 		"base-view.js",
+ 		"grid-board-view.js",
+ 		"fairy-set-view.js",
+ 		"fantasticXIII-view.js"
+ 	]
+	var modelScripts_bigorra = [
+ 		"base-model.js",
+ 		"grid-geo-model.js",
+
+ 		"bigorra-model.js"
+ 	]
+ 	var config_view_js_bigorra = [
+ 		"base-view.js",
+ 		"grid-board-view.js",
+ 		"fairy-set-view.js",
+
+ 		"bigorra-view.js"
  	]
 	var modelScripts_pemba = [
  		"base-model.js",
@@ -1256,7 +1281,6 @@ exports.games = (function () {
 		"fairy-set-view.js",
 		"zanzibar-view.js"
 	]
-
 	return [
 		{
 			"name": "classic-chess",
@@ -5295,6 +5319,257 @@ exports.games = (function () {
 			"viewScripts": config_view_js_lca
 		},
 		{
+			"name": "fantasticXIII-chess",
+			"modelScripts": modelScripts_fantasticXIII,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Fantastic XIII",
+					"summary": "Chess on 13x13 with fairy pieces",
+					"rules": {
+						"en": "fantasticXIII-rules.html",
+						"fr": "fantasticXIII-rules-fr.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "fantasticXIII-thumb.png",
+					"released": 1497771910,
+					"credits": {
+						"en": "fantasticXIII-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+
+					"obsolete": false,
+					"js": modelScripts_fantasticXIII,
+					"description": {
+						"en": "fantasticXIII-description.html",
+						"fr": "fantasticXIII-description-fr.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/fantasticXIII-600x600-3d.jpg",
+							"res/visuals/fantasticXIII-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png",
+								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/king/king.js",
+								"image|/res/fairy/king/king-diffusemap.jpg",
+								"image|/res/fairy/king/king-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/mamoth/mamoth.js",
+ 								"image|/res/fairy/mamoth/mamoth-diffusemap.jpg",
+ 								"image|/res/fairy/mamoth/mamoth-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/squirle/squirle.js",
+ 								"image|/res/fairy/cannon2/squirle-diffusemap.jpg",
+ 								"image|/res/fairy/cannon2/squirle-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/griffin/griffin.js",
+ 								"image|/res/fairy/griffin/griffin-diffusemap.jpg",
+ 								"image|/res/fairy/griffin/griffin-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/huscarl/huscarl.js",
+ 								"image|/res/fairy/huscarl/huscarl-diffusemap.jpg",
+ 								"image|/res/fairy/huscarl/huscarl-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/hawk/hawk.js",
+ 								"image|/res/fairy/hawk/hawk-diffusemap.jpg",
+ 								"image|/res/fairy/hawk/hawk-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/ship/ship.js",
+ 								"image|/res/fairy/ship/ship-diffusemap.jpg",
+ 								"image|/res/fairy/ship/ship-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/dragon/dragon.js",
+ 								"image|/res/fairy/dragon/dragon-diffusemap.jpg",
+ 								"image|/res/fairy/dragon/dragon-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/leopard/leopard.js",
+ 								"image|/res/fairy/leopard/leopard-diffusemap.jpg",
+ 								"image|/res/fairy/leopard/leopard-normalmap.jpg"	
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_9
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_fantasticXIII,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_fantasticXIII
+		},
+		{
+
+			"name": "bigorra-chess",
+			"modelScripts": modelScripts_bigorra,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Bigorra",
+
+					"summary": "FantasticXIII and Gigachess II on 16x16",
+					"rules": {
+						"en": "bigorra-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+
+					"thumbnail": "bigorra-thumb.png",
+					"released": 1497771910,
+					"credits": {
+						"en": "fantasticXIII-credits.html"
+					},
+
+					"gameOptions": config_model_gameOptions,
+
+					"obsolete": false,
+					"js": modelScripts_bigorra,
+					"description": {
+						"en": "bigorra-description.html",
+						"fr": "bigorra-description-fr.html"
+
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+
+						"600x600": [
+							"res/visuals/bigorra-600x600-3d.jpg",
+							"res/visuals/bigorra-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png",
+								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/king/king.js",
+								"image|/res/fairy/king/king-diffusemap.jpg",
+								"image|/res/fairy/king/king-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
+								"image|/res/fairy/prince/prince-diffusemap.jpg",
+								"image|/res/fairy/prince/prince-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/mamoth/elephant.js",
+ 								"image|/res/fairy/mamoth/mamoth-diffusemap.jpg",
+ 								"image|/res/fairy/mamoth/mamoth-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/squirle/squirle.js",
+ 								"image|/res/fairy/cannon2/squirle-diffusemap.jpg",
+ 								"image|/res/fairy/cannon2/squirle-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/griffin/griffin.js",
+ 								"image|/res/fairy/griffin/griffin-diffusemap.jpg",
+ 								"image|/res/fairy/griffin/griffin-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/huscarl/huscarl.js",
+ 								"image|/res/fairy/huscarl/huscarl-diffusemap.jpg",
+ 								"image|/res/fairy/huscarl/huscarl-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/hawk/hawk.js",
+ 								"image|/res/fairy/hawk/hawk-diffusemap.jpg",
+ 								"image|/res/fairy/hawk/hawk-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/knight/knight.js",
+								"image|/res/fairy/knight/knight-diffusemap.jpg",
+								"image|/res/fairy/knight/knight-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bishop/bishop.js",
+								"image|/res/fairy/bishop/bishop-diffusemap.jpg",
+								"image|/res/fairy/bishop/bishop-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/queen/queen.js",
+								"image|/res/fairy/queen/queen-diffusemap.jpg",
+								"image|/res/fairy/queen/queen-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
+								"image|/res/fairy/rook/rook-diffusemap.jpg",
+								"image|/res/fairy/rook/rook-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/cannon2/cannon2.js",
+								"image|/res/fairy/cannon2/cannon2-diffusemap.jpg",
+								"image|/res/fairy/cannon2/cannon2-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/elephant/elephant.js",
+								"image|/res/fairy/elephant/elephant-diffusemap.jpg",
+								"image|/res/fairy/elephant/elephant-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/prince/prince.js",
+								"image|/res/fairy/prince/prince-diffusemap.jpg",
+								"image|/res/fairy/prince/prince-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/camel/camel.js",
+								"image|/res/fairy/camel/camel-diffusemap.jpg",
+								"image|/res/fairy/camel/camel-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
+								"image|/res/fairy/lion/lion-diffusemap.jpg",
+								"image|/res/fairy/lion/lion-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"image|/res/fairy/bow/bow-diffusemap.jpg",
+								"image|/res/fairy/bow/bow-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/machine/machine.js",
+								"image|/res/fairy/machine/machine-diffusemap.jpg",
+								"image|/res/fairy/machine/machine-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/buffalo/buffalo.js",
+								"image|/res/fairy/buffalo/buffalo-diffusemap.jpg",
+								"image|/res/fairy/buffalo/buffalo-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rhino/rhino.js",
+								"image|/res/fairy/rhino/rhino-diffusemap.jpg",
+								"image|/res/fairy/rhino/rhino-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
+								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								"image|/res/fairy/giraffe/giraffe-normal-map.jpg",
+                                "smoothedfilegeo|0|/res/fairy/ship/ship.js",
+ 								"image|/res/fairy/ship/ship-diffusemap.jpg",
+ 								"image|/res/fairy/ship/ship-normalmap.jpg",
+                                "smoothedfilegeo|0|/res/fairy/dragon/dragon.js",
+ 								"image|/res/fairy/dragon/dragon-diffusemap.jpg",
+ 								"image|/res/fairy/dragon/dragon-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/leopard/leopard.js",
+ 								"image|/res/fairy/leopard/leopard-diffusemap.jpg",
+ 								"image|/res/fairy/leopard/leopard-normalmap.jpg"	
+							],
+							"world": config_view_skins_world,
+
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_9
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+
+					"sounds": config_view_sounds,
+					"js": config_view_js_bigorra,
+					"useAutoComplete": true
+				}
+			},
+
+			"viewScripts": config_view_js_bigorra
+		},
+{
  			"name": "wild-tamerlane-chess",
  			"modelScripts": modelScripts_wtamerlane,
  			"config": {
