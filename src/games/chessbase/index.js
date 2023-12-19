@@ -476,6 +476,18 @@ exports.games = (function () {
 		"drop-model.js",
 		"shogi/mini-shogi-model.js"
 	]
+	var modelScripts_108 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"fairy-move-model.js",
+		"shogi/chu-shogi-model.js"
+	]
+	var modelScripts_109 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"fairy-move-model.js",
+		"makromachy-model.js"
+	]
 	var config_model_levels_11 = {
 		"name": "easy",
 		"label": "Easy",
@@ -588,6 +600,20 @@ exports.games = (function () {
 		"shogi/shogi-set-view.js",
 		"drop-view.js",
 		"shogi/mini-shogi-view.js"
+	]
+	var config_view_js_108 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"shogi/tenjiku-set-view.js",
+		"multi-leg-view.js",
+		"shogi/chu-shogi-view.js"
+	]
+	var config_view_js_109 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"multi-leg-view.js",
+		"makromachy-view.js"
 	]
 	var modelScripts_14 = [
 		"base-model.js",
@@ -1255,7 +1281,6 @@ exports.games = (function () {
 	var modelScripts_bigorra = [
  		"base-model.js",
  		"grid-geo-model.js",
-
  		"bigorra-model.js"
  	]
  	var config_view_js_bigorra = [
@@ -5624,7 +5649,7 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
 								"image|/res/fairy/lion/lion-diffusemap.jpg",
 								"image|/res/fairy/lion/lion-normalmap.jpg",
-                                "smoothedfilegeo|0|/res/fairy/bow/bow.js",
+								"smoothedfilegeo|0|/res/fairy/bow/bow.js",
 								"image|/res/fairy/bow/bow-diffusemap.jpg",
 								"image|/res/fairy/bow/bow-normalmap.jpg",
 								"smoothedfilegeo|0|/res/fairy/machine/machine.js",
@@ -5639,10 +5664,10 @@ exports.games = (function () {
 								"smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
 								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
 								"image|/res/fairy/giraffe/giraffe-normal-map.jpg",
-                                "smoothedfilegeo|0|/res/fairy/ship/ship.js",
+								"smoothedfilegeo|0|/res/fairy/ship/ship.js",
  								"image|/res/fairy/ship/ship-diffusemap.jpg",
  								"image|/res/fairy/ship/ship-normalmap.jpg",
-                                "smoothedfilegeo|0|/res/fairy/dragon/dragon.js",
+								"smoothedfilegeo|0|/res/fairy/dragon/dragon.js",
  								"image|/res/fairy/dragon/dragon-diffusemap.jpg",
  								"image|/res/fairy/dragon/dragon-normalmap.jpg",
  								"smoothedfilegeo|0|/res/fairy/leopard/leopard.js",
@@ -7124,6 +7149,70 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_106
+		},
+		{
+			"name": "makromachy",
+			"modelScripts": modelScripts_109,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Makromachy",
+					"summary": "14x14 variant with flying pieces",
+					"rules": {
+						"en": "res/rules/makromachymakromachy-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/makromachy/makromachy-thumb.png",
+					"released": 1396536978,
+					"credits": {
+						"en": "res/rules/makromachymakromachy-credits.html"
+					},
+					"gameOptions": config_model_gameOptions_2,
+					"js": modelScripts_109,
+					"description": {
+						"en": "res/rules/makromachymakromachy-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/makromachy-600x600-3d.jpg",
+							"res/visuals/makromachy-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_2
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_109,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_109
 		}
 	  		
 
