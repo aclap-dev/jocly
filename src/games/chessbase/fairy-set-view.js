@@ -167,6 +167,11 @@
 					clipx: 1100,
 				},
 			},
+			"fr-stork": {
+				"2d": {
+					clipx: 5300,
+				},
+			},
 			"fr-lion": {
 				"2d": {
 					clipx: 1200,
@@ -376,6 +381,11 @@
 			"fr-hawk": {
 				"2d": {
 					clipx: 5100,
+					},
+			},
+			"fr-phoenix": {
+				"2d": {
+					clipx: 5400,
 					},
 			},
 		},modifier);
@@ -1126,6 +1136,28 @@
 			},
 		},
 
+		"fr-stork": {
+			mesh: {
+				jsFile:"/res/fairy/birds/stork.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/birds/stork-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/birds/stork-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
 		"fr-lion": {
 			mesh: {
 				jsFile:"/res/fairy/lion/lion.js"
@@ -1791,6 +1823,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/lighthouse/lighthouse-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-phoenix": {
+			mesh: {
+				jsFile:"/res/fairy/birds/phoenix.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/birds/phoenix-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/birds/phoenix-normalmap.jpg",
 							}
 						}
 					}
