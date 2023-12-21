@@ -124,7 +124,7 @@
 			},
 			"fr-cannon2": {
 				"2d": {
-					clipx: 600,
+					clipx: 5200,
 				},
 			},
 			"fr-elephant": {
