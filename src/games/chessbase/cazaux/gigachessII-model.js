@@ -50,82 +50,6 @@
 		);
 	}
 
-	Model.Game.cbRhinoGraph = function(geometry,confine){
-		var $this=this;
-
-		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
-		var graph={};
-		for(var pos=0;pos<geometry.boardSize;pos++) {
-
-			
-			var directions=[];
-			[[0,1],[1,0],[-1,0],[0,-1]].forEach(function(delta) { // loop on all 8 diagonals
-				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
-                
-				var pos1=geometry.Graph(pos,delta);
-
-                    if(movedir[0]==0){
-                     xleft=-1;
-                     xright=1;
-                    }else{
-                     xleft=movedir[0];
-                     xright=movedir[0];
-                    }
-                    if(movedir[1]==0){
-                     yleft=-1;
-                     yright=1;
-                    }else{
-                     yleft=movedir[1];
-                     yright=movedir[1];
-                    }
-
-				if(pos1!=null /*&& (!confine || (pos1 in confine))*/) {
-					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
-					//directions.push($this.cbTypedArray(direction));
-					var nbMax = Math.max(lastRow , lastCol) - 1;
-					var awayl=[] // hold the sliding line
-                   var awayr=[] // hold the sliding line
-
-					for(var n=1;n<nbMax;n++) {
-
-						var delta2=[xleft*n,yleft*n];
-                        var delta3=[xright*n,yright*n];
-						var pos2=geometry.Graph(pos1,delta2);
-                        var pos3=geometry.Graph(pos1,delta3);
-
-
-						if(pos2!=null ) {
-                        // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							//if(n==1) 
-								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
-							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
-                            
-						}
-                        if(pos3!=null ) {
-                            // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							//if(n==1) 
-								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
-							
-                            awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
-						}
-
-					}
-					if(awayl.length>0)
-						directions.push($this.cbTypedArray(awayl));
-                    if(awayr.length>0)
-						directions.push($this.cbTypedArray(awayr));
-				}
-			});
-			graph[pos]=directions;
-
-		}
-
-		return $this.cbMergeGraphs(geometry,
-		   $this.cbShortRangeGraph(geometry,[[0,1],[1,0],[-1,0],[0,-1]]),
-		   graph
-		);
-	}
-
 	Model.Game.cbPrinceGraph = function(geometry,side,confine) {
 		var $this=this;
 		var graph={};
@@ -171,7 +95,7 @@
       abbrev : '',
       fenAbbrev: 'P',
       aspect : 'fr-pawn',
-      graph : this.cbInitialPawnGraph(geometry,1,confine),
+      graph : this.cbInitialPawnGraph(geometry,1),
       value : 0.75,
       initial: [{s:1,p:28},{s:1,p:29},{s:1,p:30},{s:1,p:31},{s:1,p:38},{s:1,p:39},{s:1,p:40},{s:1,p:41},{s:1,p:46},{s:1,p:47},{s:1,p:48},{s:1,p:49},{s:1,p:50},{s:1,p:51}],
       epCatch : true,
@@ -183,7 +107,7 @@
       abbrev : '',
       fenAbbrev: 'P',
       aspect : 'fr-pawn',
-      graph : this.cbInitialPawnGraph(geometry,-1,confine),
+      graph : this.cbInitialPawnGraph(geometry,-1),
       value : 0.75,
       initial: [{s:-1,p:144},{s:-1,p:145},{s:-1,p:146},{s:-1,p:147},{s:-1,p:148},{s:-1,p:149},{s:-1,p:154},{s:-1,p:155},{s:-1,p:156},{s:-1,p:157},{s:-1,p:164},{s:-1,p:165},{s:-1,p:166},{s:-1,p:167}],
       epCatch : true,

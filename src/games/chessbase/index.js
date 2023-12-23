@@ -1283,69 +1283,49 @@ exports.games = (function () {
 	var modelScripts_fantasticXIII = [
  		"base-model.js",
  		"grid-geo-model.js",
- 		"fantasticXIII-model.js"
+ 		"fairy-move-model.js",
+ 		"cazaux/fantasticXIII-model.js"
  	]
  	var config_view_js_fantasticXIII = [
  		"base-view.js",
  		"grid-board-view.js",
  		"fairy-set-view.js",
- 		"fantasticXIII-view.js"
+ 		"cazaux/fantasticXIII-view.js"
  	]
 	var modelScripts_bigorra = [
  		"base-model.js",
  		"grid-geo-model.js",
- 		"bigorra-model.js"
+        "fairy-move-model.js",
+ 		"cazaux/bigorra-model.js"
  	]
  	var config_view_js_bigorra = [
  		"base-view.js",
  		"grid-board-view.js",
  		"fairy-set-view.js",
-
- 		"bigorra-view.js"
+ 		"cazaux/bigorra-view.js"
  	]
 	var modelScripts_pemba = [
  		"base-model.js",
  		"grid-geo-model.js",
- 		"pemba-model.js"
+ 		"cazaux/pemba-model.js"
  	]
  	var config_view_js_pemba = [
  		"base-view.js",
  		"grid-board-view.js",
  		"fairy-set-view.js",
- 		"pemba-view.js"
+ 		"cazaux/pemba-view.js"
  	]
 	var modelScripts_gigaII = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"gigachessII-model.js"
+        "fairy-move-model.js",
+		"cazaux/gigachessII-model.js"
 	]
 	var config_view_js_gigaII = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"gigachessII-view.js"
-	]
-	var modelScripts_pemba = [
- 		"base-model.js",
- 		"grid-geo-model.js",
- 		"pemba-model.js"
- 	]
- 	var config_view_js_pemba = [
- 		"base-view.js",
- 		"grid-board-view.js",
- 		"fairy-set-view.js",
- 		"pemba-view.js"
- 	]
-	var modelScripts_gigaII = [
-		"base-model.js",
-		"grid-geo-model.js",
-		"gigachessII-model.js"
-	]
-	var config_view_js_gigaII = [
-		"base-view.js",
-		"grid-board-view.js",
-		"fairy-set-view.js",
-		"gigachessII-view.js"
+		"cazaux/gigachessII-view.js"
 	]
 	var modelScripts_wtimurid = [
  		"base-model.js",
@@ -1410,13 +1390,13 @@ exports.games = (function () {
 
 		"base-model.js",
 		"grid-geo-model.js",
-		"zanzibar-s-model.js"
+		"cazaux/zanzibar-s-model.js"
 	]
 	var config_view_js_zanzibars = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"zanzibar-view.js"
+		"cazaux/zanzibar-view.js"
 	]
 	return [
 		{
@@ -2353,22 +2333,22 @@ exports.games = (function () {
 					"title-en": "Shako",
 					"summary": "10x10 Chess",
 					"rules": {
-						"en": "cazaux/shako-rules.html",
-						"fr": "cazaux/shako-rules-fr.html"
+						"en": "res/rules/shako/shako-rules.html",
+						"fr": "res/rules/shako/shako-rules-fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/shako/shako-thumb.png",
 					"released": 1396536978,
 					"credits": {
-						"en": "cazaux/shako-credits.html",
-						"fr": "cazaux/shako-credits-fr.html"
+						"en": "res/rules/shako/shako-credits.html",
+						"fr": "res/rules/shako/shako-credits-fr.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_13,
 					"description": {
-						"en": "cazaux/shako-description.html",
-						"fr": "cazaux/shako-description-fr.html"
+						"en": "res/rules/shako/shako-description.html",
+						"fr": "res/rules/shako/shako-description-fr.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -3365,14 +3345,14 @@ exports.games = (function () {
 					"title-en": "Rollerball Chess",
 					"summary": "Chess variant on an unusual board",
 					"rules": {
-						"en": "cazaux/rollerball-rules.html"
+						"en": "res/rules/rollerball/rollerball-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/rollerball/rollerball-thumb.png",
 					"released": 1397141778,
 					"credits": {
-						"en": "cazaux/rollerball-credits.html"
+						"en": "res/rules/rollerball/rollerball-credits.html"
 					},
 					"gameOptions": {
 						"preventRepeat": true,
@@ -3396,7 +3376,7 @@ exports.games = (function () {
 					"obsolete": false,
 					"js": modelScripts_27,
 					"description": {
-						"en": "cazaux/rollerball-description.html"
+						"en": "res/rules/rollerball/rollerball-description.html"
 					},
 					"levels": config_model_levels_5
 				},
@@ -3518,20 +3498,20 @@ exports.games = (function () {
 					"title-en": "Metamachy",
 					"summary": "Chess on 12x12 with fairy pieces",
 					"rules": {
-						"en": "cazaux/metamachy-rules.html"
+						"en": "res/rules/metamachy/metamachy-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/metamachy/metamachy-thumb.png",
 					"released": 1402412178,
 					"credits": {
-						"en": "cazaux/metamachy-credits.html"
+						"en": "res/rules/metamachy/metamachy-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_29,
 					"description": {
-						"en": "cazaux/metamachy-description.html"
+						"en": "res/rules/metamachy/metamachy-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -5080,20 +5060,20 @@ exports.games = (function () {
 					"title-en": "Terachess",
 					"summary": "Chess on 16x16 with fairy pieces",
 					"rules": {
-						"en": "cazaux/terachess-rules.html"
+						"en": "res/rules/terachess/terachess-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/terachess/terachess-thumb.png",
 					"released": 1497442763,
 					"credits": {
-						"en": "cazaux/terachess-credits.html"
+						"en": "res/rules/terachess/terachess-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_tera,
 					"description": {
-						"en": "cazaux/terachess-description.html"
+						"en": "res/rules/terachess/terachess-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -5217,20 +5197,20 @@ exports.games = (function () {
 					"title-en": "Gigachess",
 					"summary": "Chess on 14x14 with fairy pieces",
 					"rules": {
-						"en": "cazaux/gigachess-rules.html"
+						"en": "res/rules/gigachess/gigachess-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/gigachess/gigachess-thumb.png",
 					"released": 1497771910,
 					"credits": {
-						"en": "cazaux/gigachess-credits.html"
+						"en": "res/rules/gigachess/gigachess-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_giga,
 					"description": {
-						"en": "cazaux/gigachess-description.html"
+						"en": "res/rules/gigachess/gigachess-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -5342,7 +5322,7 @@ exports.games = (function () {
 					"title-en": "LeyChessAlpha",
 					"summary": "Chess on 12x12 with fairy pieces",
 					"rules": {
-						"en": "cazaux/metamachy-rules.html"
+						"en": "res/rules/metamachy/metamachy-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -5464,23 +5444,23 @@ exports.games = (function () {
 					"title-en": "Fantastic XIII",
 					"summary": "Chess on 13x13 with fairy pieces",
 					"rules": {
-						"en": "fantasticXIII-rules.html",
-						"fr": "fantasticXIII-rules-fr.html"
+						"en": "res/rules/fantasticXIII/fantasticXIII-rules.html",
+						"fr": "res/rules/fantasticXIII/fantasticXIII-rules-fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "fantasticXIII-thumb.png",
+					"thumbnail": "res/rules/fantasticXIII/fantasticXIII-thumb.png",
 					"released": 1497771910,
 					"credits": {
-						"en": "fantasticXIII-credits.html"
+						"en": "res/rules/fantasticXIII/fantasticXIII-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 
 					"obsolete": false,
 					"js": modelScripts_fantasticXIII,
 					"description": {
-						"en": "fantasticXIII-description.html",
-						"fr": "fantasticXIII-description-fr.html"
+						"en": "res/rules/fantasticXIII/fantasticXIII-description.html",
+						"fr": "res/rules/fantasticXIII/fantasticXIII-description-fr.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -5563,15 +5543,15 @@ exports.games = (function () {
 
 					"summary": "FantasticXIII and Gigachess II on 16x16",
 					"rules": {
-						"en": "bigorra-rules.html"
+						"en": "res/rules/fantasticXIII/bigorra-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 
-					"thumbnail": "bigorra-thumb.png",
+					"thumbnail": "res/rules/fantasticXIII/bigorra-thumb.png",
 					"released": 1497771910,
 					"credits": {
-						"en": "fantasticXIII-credits.html"
+						"en": "res/rules/fantasticXIII/fantasticXIII-credits.html"
 					},
 
 					"gameOptions": config_model_gameOptions,
@@ -5579,8 +5559,8 @@ exports.games = (function () {
 					"obsolete": false,
 					"js": modelScripts_bigorra,
 					"description": {
-						"en": "bigorra-description.html",
-						"fr": "bigorra-description-fr.html"
+						"en": "res/rules/fantasticXIII/bigorra-description.html",
+						"fr": "res/rules/fantasticXIII/bigorra-description-fr.html"
 
 					},
 					"levels": config_model_levels_15
@@ -5713,20 +5693,20 @@ exports.games = (function () {
  					"title-en": "Wild Tamerlane",
  					"summary": "Chess on 11x11 with fairy pieces",
  					"rules": {
- 						"en": "wild-tamerlane-rules.html"
+ 						"en": "res/rules/wildtamerlane/wild-tamerlane-rules.html"
  					},
  					"module": "chessbase",
  					"plazza": "true",
- 					"thumbnail": "wild-tamerlane-thumb.png",
+ 					"thumbnail": "res/rules/wildtamerlane/wild-tamerlane-thumb.png",
  					"released": 1497874349,
  					"credits": {
- 						"en": "wild-tamerlane-credits.html"
+ 						"en": "res/rules/wildtamerlane/wild-tamerlane-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
  					"js": modelScripts_wtamerlane,
  					"description": {
- 						"en": "wild-tamerlane-description.html"
+ 						"en": "res/rules/wildtamerlane/wild-tamerlane-description.html"
  					},
  					"levels": config_model_levels_15
  				},
@@ -5808,22 +5788,22 @@ exports.games = (function () {
  					"title-en": "Pemba",
  					"summary": "Extended Shako on 10x10 with fairy pieces",
  					"rules": {
- 						"en": "pemba-rules.html",
-						"fr": "pemba-rules-fr.html"
+ 						"en": "res/rules/shako/pemba-rules.html",
+						"fr": "res/rules/shako/pemba-rules-fr.html"
  					},
  					"module": "chessbase",
  					"plazza": "true",
- 					"thumbnail": "pemba-thumb.png",
+ 					"thumbnail": "res/rules/shako/pemba-thumb.png",
  					"released": 1497874349,
  					"credits": {
- 						"en": "pemba-credits.html"
+ 						"en": "res/rules/shako/pemba-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
  					"js": modelScripts_pemba,
  					"description": {
- 						"en": "pemba-description.html",
-						"fr": "pemba-description-fr.html"
+ 						"en": "res/rules/shako/pemba-description.html",
+						"fr": "res/rules/shako/pemba-description-fr.html"
  					},
  					"levels": config_model_levels_15
  				},
@@ -5908,21 +5888,21 @@ exports.games = (function () {
 					"title-en": "Gigachess II",
 					"summary": "Chess on 14x14 with fairy pieces",
 					"rules": {
-						"en": "gigachessII-rules.html"
+						"en": "res/rules/gigachess/gigachessII-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "gigachessII-thumb.png",
+					"thumbnail": "res/rules/gigachess/gigachessII-thumb.png",
 					"released": 1497771910,
 					"credits": {
-						"en": "gigachessII-credits.html"
+						"en": "res/rules/gigachess/gigachessII-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 
 					"obsolete": false,
 					"js": modelScripts_gigaII,
 					"description": {
-						"en": "gigachessII-description.html"
+						"en": "res/rules/gigachess/gigachessII-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -6044,7 +6024,7 @@ exports.games = (function () {
  					"thumbnail": "wild-timurid-thumb.png",
  					"released": 1497874349,
  					"credits": {
- 						"en": "wild-timurid-credits.html"
+ 						"en": "timurid-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
@@ -6246,7 +6226,7 @@ exports.games = (function () {
  					"released": 1497874349,
 
  					"credits": {
- 						"en": "wild-babur-credits.html"
+ 						"en": "timurid-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
@@ -6350,7 +6330,7 @@ exports.games = (function () {
  					"released": 1497874349,
 
  					"credits": {
- 						"en": "wild-mirza-credits.html"
+ 						"en": "timurid-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
@@ -6453,18 +6433,18 @@ exports.games = (function () {
  					"released": 1497874349,
 
  					"credits": {
- 						"en": "wild-babur-credits.html"
+ 						"en": "timurid-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
  					"obsolete": false,
  					"js": modelScripts_babur,
  					"description": {
- 						"en": "babur-description.html"
+ 						"en": "wild-babur-description"
  					},
  					"levels": config_model_levels_15
  				},
  				"view": {
- 					"title-en": "Wild Timurid view",
+ 					"title-en": "Wild babur view",
  					"visuals": {
  						"600x600": [
  							"res/visuals/babur-600x600-3d.jpg",
@@ -6544,20 +6524,20 @@ exports.games = (function () {
 					"title-en": "Zanzibar S",
 					"summary": "Extended Metamachy - 12x12",
 					"rules": {
-						"en": "zanzibar-s-rules.html"
+						"en": "res/rules/metamachy/zanzibar-s-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "zanzibar-s-thumb.png",
+					"thumbnail": "res/rules/metamachy/zanzibar-s-thumb.png",
 					"released": 1402412178,
 					"credits": {
-						"en": "zanzibar-credits.html"
+						"en": "res/rules/metamachy/zanzibar-credits.html"
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
 					"js": modelScripts_zanzibars,
 					"description": {
-						"en": "zanzibar-description.html"
+						"en": "res/rules/metamachy/zanzibar-description.html"
 					},
 					"levels": config_model_levels_15
 				},
