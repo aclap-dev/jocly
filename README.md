@@ -6,20 +6,20 @@ artificial intelligence to play against.
 Demos
 -----
 
-[Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
+[Controlled interface](https://aclap-dev.github.io/jocly/examples/browser/control.html) for playing Chess.
 Click _**Other Jocly games**_ to switch to other games.
 
-Simple human vs computer: [Classic chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=classic-chess),
-[Circular chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=circular-chess),
-[Multi layers chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=raumschach),
-[Hexagonal chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=glinski-chess),
-[Chinese chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=xiangqi),
-[Middle-age chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=courier-chess),
-[Scrum](https://mi-g.github.io/jocly/examples/browser/simple.html?game=scrum)
+Simple human vs computer: [Classic chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=classic-chess),
+[Circular chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=circular-chess),
+[Multi layers chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=raumschach),
+[Hexagonal chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=glinski-chess),
+[Chinese chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=xiangqi),
+[Middle-age chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=courier-chess),
+[Scrum](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=scrum)
 
-Or see and try [all available games](https://mi-g.github.io/jocly/examples/browser/multiple.html)
+Or see and try [all available games](https://aclap-dev.github.io/jocly/examples/browser/multiple.html)
 
-[JoclyBoard](https://github.com/mi-g/joclyboard) is a multi-platform desktop application based on Jocly 
+[JoclyBoard](https://github.com/aclap-dev/joclyboard) is a multi-platform desktop application based on Jocly 
 and [Electron](https://electron.atom.io/).
 
 Install
@@ -53,7 +53,7 @@ Building
 - install the *node.js* environment (using [nvm](https://github.com/creationix/nvm) is probably a good idea)
 - install *gulp*: `npm install -g gulp`
 - install [git](https://git-scm.com/downloads)
-- clone Jocly from *github*: `git clone https://github.com/mi-g/jocly.git`
+- clone Jocly from *github*: `git clone https://github.com/aclap-dev/jocly.git`
 - enter the `jocly` directory
 - download required modules: `npm install`
 - build: `gulp build`
@@ -69,5 +69,5 @@ API Documentation
 -----------------
 
 Jocly offers two distinct APIs:
-- the [Application API](https://github.com/mi-g/jocly/wiki/Application-API) to make Web applications
-- the [Game API](https://github.com/mi-g/jocly/wiki/Game-API) to create games to run with Jocly features
+- the [Application API](https://github.com/aclap-dev/jocly/wiki/Application-API) to make Web applications
+- the [Game API](https://github.com/aclap-dev/jocly/wiki/Game-API) to create games to run with Jocly features
