@@ -137,7 +137,7 @@
       4: {
       name : 'princew',
       abbrev : 'P',
-      aspect : 'fr-prince',
+      aspect : 'fr-admiral',
       graph : this.cbPrinceGraph(geometry,1,confine),
       value : 3,
       initial: [{s:1,p:32},{s:1,p:37}],
@@ -147,7 +147,7 @@
       5: {
       name : 'princeb',
       abbrev : 'P',
-      aspect : 'fr-prince',
+      aspect : 'fr-admiral',
       graph : this.cbPrinceGraph(geometry,-1,confine),
       value : 3,
       initial: [{s:-1,p:158},{s:-1,p:163}],
@@ -273,7 +273,7 @@
       18: {
       name : 'eagle',
       abbrev : 'G',
-      aspect : 'fr-eagle',
+      aspect : 'fr-griffin',
       graph : this.cbEagleGraph(geometry),
       value : 9,
       initial: [{s:1,p:34},{s:-1,p:160}],

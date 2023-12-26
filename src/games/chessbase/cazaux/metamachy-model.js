@@ -194,7 +194,7 @@
 			
 			 11: {
 	            	name: 'prince-w',
-	            	aspect: 'fr-prince',
+	            	aspect: 'fr-admiral',
 	            	graph: PrinceGraph(1),
 	            	value: 3,
 	            	epTarget: true,
@@ -204,7 +204,7 @@
 
 			12: {
 	            	name: 'prince-b',
-	            	aspect: 'fr-prince',
+	            	aspect: 'fr-admiral',
 	            	graph: PrinceGraph(-1),
 					epTarget: true,
 	            	value: 3,
@@ -236,7 +236,7 @@
 	            },	
 			15: {
 	            	name: 'eagle',
-	            	aspect: 'fr-eagle',
+	            	aspect: 'fr-griffin',
 	            	graph: EagleGraph(),
 	            	value: 8,
 	            	abbrev: 'A',

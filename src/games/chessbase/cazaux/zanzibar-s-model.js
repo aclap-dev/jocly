@@ -16,86 +16,6 @@
 		
 		var $this = this;
 		
-		/*
-		 * Movement/capture graph for the rhino
-		 */
-	function RhinoGraph(side) {
-		
-	    var lastCol=11;	
-        var lastRow=11;
-
-		var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
-		var graph={};
-		for(var pos=0;pos<geometry.boardSize;pos++) {
-
-			
-			var directions=[];
-			[[0,1],[1,0],[-1,0],[0,-1]].forEach(function(delta) { // loop on all 8 diagonals
-				var movedir = [Math.sign(delta[0]),Math.sign(delta[1])];
-                
-				var pos1=geometry.Graph(pos,delta);
-
-                    if(movedir[0]==0){
-                     xleft=-1;
-                     xright=1;
-                    }else{
-                     xleft=movedir[0];
-                     xright=movedir[0];
-                    }
-                    if(movedir[1]==0){
-                     yleft=-1;
-                     yright=1;
-                    }else{
-                     yleft=movedir[1];
-                     yright=movedir[1];
-                    }
-
-				if(pos1!=null /*&& (!confine || (pos1 in confine))*/) {
-					var direction=[pos1 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE | $this.cbConstants.FLAG_STOP];
-					//directions.push($this.cbTypedArray(direction));
-					var nbMax = Math.max(lastRow , lastCol) - 1;
-					var awayl=[] // hold the sliding line
-                   var awayr=[] // hold the sliding line
-
-					for(var n=1;n<nbMax;n++) {
-
-						var delta2=[xleft*n,yleft*n];
-                        var delta3=[xright*n,yright*n];
-						var pos2=geometry.Graph(pos1,delta2);
-                        var pos3=geometry.Graph(pos1,delta3);
-
-
-						if(pos2!=null ) {
-                        // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							//if(n==1) 
-								awayl.push(pos1 | $this.cbConstants.FLAG_STOP );
-							awayl.push(pos2 | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
-                            
-						}
-                        if(pos3!=null ) {
-                            // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-							//if(n==1) 
-								awayr.push(pos1 | $this.cbConstants.FLAG_STOP);
-							
-                            awayr.push(pos3 | flags | $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE| $this.cbConstants.FLAG_STOP);
-						}
-
-					}
-					if(awayl.length>0)
-						directions.push($this.cbTypedArray(awayl));
-                    if(awayr.length>0)
-						directions.push($this.cbTypedArray(awayr));
-				}
-			});
-			graph[pos]=directions;
-
-		}
-
-		return $this.cbMergeGraphs(geometry,
-		   $this.cbShortRangeGraph(geometry,[[0,1],[1,0],[-1,0],[0,-1]]),
-		   graph
-		);
-	}
 
 		/*
 		 * Movement/capture graph for the prince
@@ -120,41 +40,6 @@
 			);
 		}
 		
-		/*
-		 * Movement/capture graph for the eagle
-		 */
-		function EagleGraph() {
-			var flags = $this.cbConstants.FLAG_MOVE | $this.cbConstants.FLAG_CAPTURE;
-			var graph={};
-			for(var pos=0;pos<geometry.boardSize;pos++) {
-				graph[pos]=[];
-				[[-1,-1],[-1,1],[1,-1],[1,1]].forEach(function(delta) { // loop on all 4 diagonals
-					var pos1=geometry.Graph(pos,delta);
-					if(pos1!=null) {
-						for(var dir=0;dir<2;dir++) { // dir=0 for row, dir=1 for column
-							var away=[] // hold the sliding line
-							for(var n=1;n<11;n++) { // board is 12 cells long, so only consider max 11 cell displacements
-								var delta2=[];
-								delta2[dir]=delta[dir]*n;
-								delta2[1-dir]=0; // delta2 is now only about moving orthogonally, away from the piece
-								var pos2=geometry.Graph(pos1,delta2);
-								if(pos2!=null) {
-									if(n==1) // possible to slide at least 1 cell, make sure the diagonal cell is not occupied, but cannot move to this cell
-										away.push(pos1 | $this.cbConstants.FLAG_STOP);
-									away.push(pos2 | flags);
-								}
-							}
-							if(away.length>0)
-								graph[pos].push($this.cbTypedArray(away));
-						}
-					}					
-				});
-			}
-			return $this.cbMergeGraphs(geometry,
-			   $this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[1,-1],[1,1]]),
-			   graph
-			);
-		}
 		
 		return {
 			
@@ -273,7 +158,7 @@
 			
 			 11: {
 	            	name: 'prince-w',
-	            	aspect: 'fr-prince',
+	            	aspect: 'fr-admiral',
 	            	graph: PrinceGraph(1),
 	            	value: 3.5,
 	            	epTarget: true,
@@ -283,7 +168,7 @@
 
 			12: {
 	            	name: 'prince-b',
-	            	aspect: 'fr-prince',
+	            	aspect: 'fr-admiral',
 	            	graph: PrinceGraph(-1),
 					epTarget: true,
 	            	value: 3.5,
@@ -315,8 +200,8 @@
 	            },	
 			15: {
 	            	name: 'eagle',
-	            	aspect: 'fr-eagle',
-	            	graph: EagleGraph(),
+	            	aspect: 'fr-griffin',
+	            	graph : this.cbGriffonGraph(geometry),
 	            	value: 8,
 	            	abbrev: 'A',
 	            	initial: [{s:1,p:6},{s:-1,p:138}],

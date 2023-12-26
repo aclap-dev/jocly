@@ -178,7 +178,7 @@
             11: {
             name : 'gryphon',
             abbrev : 'G',
-            aspect : 'fr-eagle',
+            aspect : 'fr-griffin',
             graph : this.cbEagleGraph(geometry),
             value : 7.7,
             initial: [{s:1,p:14},{s:1,p:18},{s:-1,p:102},{s:-1,p:106}],
