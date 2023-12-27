@@ -231,8 +231,8 @@ exports.games = (function () {
 	var config_view_js_2 = [
 		"base-view.js",
 		"grid-board-view.js",
-		"xiangqi-board-view.js",
-		"xiangqi-set-view.js",
+		"famous/xiangqi-board-view.js",
+		"famous/xiangqi-set-view.js",
 		"famous/xiangqi-view.js"
 	]
 	var modelScripts_3 = [
@@ -336,7 +336,7 @@ exports.games = (function () {
 	var modelScripts_11 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"courier-model.js"
+		"historical/courier-model.js"
 	]
 	var config_model_levels_6 = {
 		"name": "easy",
@@ -394,9 +394,9 @@ exports.games = (function () {
 	var config_view_js_11 = [
 		"base-view.js",
 		"grid-board-view.js",
-		"courier-board-view.js",
-		"courierchess-set-view.js",
-		"courier-view.js"
+		"historical/courier-board-view.js",
+		"historical/courierchess-set-view.js",
+		"historical/courier-view.js"
 	]
 	var modelScripts_12 = [
 		"base-model.js",
@@ -1398,6 +1398,17 @@ exports.games = (function () {
 		"fairy-set-view.js",
 		"cazaux/zanzibar-view.js"
 	]
+	var modelScripts_acedrex = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"historical/grant-acedrex-model.js"
+	]
+	var config_view_js_acedrex = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"historical/grant-acedrex-view.js"
+	]
 	return [
 		{
 			"name": "classic-chess",
@@ -2135,19 +2146,19 @@ exports.games = (function () {
 					"title-en": "Courier Chess",
 					"summary": "12x8 chess (12th century)",
 					"rules": {
-						"en": "courier-rules.html"
+						"en": "res/rules/historical/courier-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "courier-thumb.png",
+					"thumbnail": "res/rules/historical/courier-thumb.png",
 					"released": 1393430178,
 					"credits": {
-						"en": "courier-credits.html"
+						"en": "res/rules/historical/courier-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_11,
 					"description": {
-						"en": "courier-description.html"
+						"en": "res/rules/historical/courier-description.html"
 					},
 					"levels": config_model_levels_10
 				},
@@ -7271,6 +7282,94 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_110
+		},
+		{
+			"name": "acedrex-chess",
+			"modelScripts": modelScripts_acedrex,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Grant acedrex",
+					"summary": "Medieval Castillan chess variant",
+					"rules": {
+						"en": "res/rules/historical/grant-acedrex-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/historical/grant-acedrex-thumb.png",
+					"released": 1394466978,
+					"credits": {
+						"en": "res/rules/historical/grant-acedrex-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+					"js": modelScripts_acedrex,
+					"description": {
+						"en": "res/rules/historical/grant-acedrex-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/grant-acedrex-600x600-3d.png",
+							"res/visuals/grant-acedrex-600x600-2d.png"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 0.9,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png",
+								"smoothedfilegeo|0|/res/fairy/pawn/pawn.js",
+								"image|/res/fairy/pawn/pawn-diffusemap.jpg",
+								"image|/res/fairy/pawn/pawn-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/griffin/griffin.js",
+ 								"image|/res/fairy/griffin/griffin-diffusemap.jpg",
+ 								"image|/res/fairy/griffin/griffin-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/bishop/bishop.js",
+								"image|/res/fairy/bishop/bishop-diffusemap.jpg",
+								"image|/res/fairy/bishop/bishop-normalmap.jpg",
+ 								"smoothedfilegeo|0|/res/fairy/lion/lion.js",
+								"image|/res/fairy/lion/lion-diffusemap.jpg",
+								"image|/res/fairy/lion/lion-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/king/king.js",
+								"image|/res/fairy/king/king-diffusemap.jpg",
+								"image|/res/fairy/king/king-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rook/rook.js",
+								"image|/res/fairy/rook/rook-diffusemap.jpg",
+								"image|/res/fairy/rook/rook-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/rhino/rhino.js",
+								"image|/res/fairy/rhino/rhino-diffusemap.jpg",
+								"image|/res/fairy/rhino/rhino-normalmap.jpg",
+								"smoothedfilegeo|0|/res/fairy/giraffe/giraffe.js",
+								"image|/res/fairy/giraffe/giraffe-diffuse-map.jpg",
+								"image|/res/fairy/giraffe/giraffe-normal-map.jpg",
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_9
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_acedrex,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_acedrex
 		}
 	  		
 
