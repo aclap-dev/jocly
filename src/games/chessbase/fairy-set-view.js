@@ -398,6 +398,21 @@
 					clipx: 5600,
 					},
 			},
+			"fr-gold": {
+				"2d": {
+					clipx: 5700,
+					},
+			},
+			"fr-silver": {
+				"2d": {
+					clipx: 5800,
+					},
+			},
+			"fr-copper": {
+				"2d": {
+					clipx: 5900,
+					},
+			},
 		},modifier);
 	}
 
@@ -1833,6 +1848,69 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/lighthouse/lighthouse-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-copper": {
+			mesh: {
+				jsFile:"/res/fairy/generals/copper.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/generals/copper-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/generals/copper-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-silver": {
+			mesh: {
+				jsFile:"/res/fairy/generals/silver.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/generals/silver-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/generals/silver-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-gold": {
+			mesh: {
+				jsFile:"/res/fairy/generals/gold.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/generals/gold-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/generals/gold-normalmap.jpg",
 							}
 						}
 					}
