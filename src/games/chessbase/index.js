@@ -1074,6 +1074,7 @@ exports.games = (function () {
 	var modelScripts_34 = [
 		"base-model.js",
 		"grid-geo-model.js",
+		"fairy-move-model.js",
 		"decimal/grand-model.js"
 	]
 	var config_view_js_31 = [
@@ -6035,6 +6036,7 @@ exports.games = (function () {
  					"thumbnail": "res/rules/duodecimal/wild-timurid-thumb.png",
  					"released": 1497874349,
  					"credits": {
+
  						"en": "res/rules/duodecimal/timurid-credits.html"
  					},
  					"gameOptions": config_model_gameOptions,
