@@ -418,6 +418,11 @@
 					clipx: 6000,
 					},
 			},
+			"fr-flamingo": {
+				"2d": {
+					clipx: 6100,
+					},
+			},
 		},modifier);
 	}
 
@@ -1958,6 +1963,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/omega/wizard-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-flamingo": {
+			mesh: {
+				jsFile:"/res/fairy/birds/flamingo.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/birds/flamingo-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/birds/flamingo-normalmap.jpg",
 							}
 						}
 					}
