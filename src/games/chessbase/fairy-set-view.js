@@ -47,6 +47,11 @@
 					clipx: 0,
 				},
 			},
+			"fr-berolina": {
+				"2d": {
+					clipx: 0,
+				},
+			},
 			"fr-ferz": {
 				"2d": {
 					clipx: 3800,
@@ -1946,6 +1951,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/lighthouse/lighthouse-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-berolina": {
+			mesh: {
+				jsFile:"/res/fairy/pawn/pawn-berolina.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/pawn/berolina-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/pawn/berolina-normalmap.jpg",
 							}
 						}
 					}
