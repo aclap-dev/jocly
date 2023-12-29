@@ -5,5 +5,4 @@ package.json
 gulpfile.js
 update-gh-pages.sh
 tmp/
-dist/
 private/
