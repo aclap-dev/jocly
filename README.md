@@ -6,18 +6,18 @@ artificial intelligence to play against.
 Demos
 -----
 
-[Controlled interface](https://mi-g.github.io/jocly/examples/browser/control.html) for playing Chess.
+[Controlled interface](https://aclap-dev.github.io/jocly/examples/browser/control.html) for playing Chess.
 Click _**Other Jocly games**_ to switch to other games.
 
-Simple human vs computer: [Classic chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=classic-chess),
-[Circular chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=circular-chess),
-[Multi layers chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=raumschach),
-[Hexagonal chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=glinski-chess),
-[Chinese chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=xiangqi),
-[Middle-age chess](https://mi-g.github.io/jocly/examples/browser/simple.html?game=courier-chess),
-[Scrum](https://mi-g.github.io/jocly/examples/browser/simple.html?game=scrum)
+Simple human vs computer: [Classic chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=classic-chess),
+[Circular chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=circular-chess),
+[Multi layers chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=raumschach),
+[Hexagonal chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=glinski-chess),
+[Chinese chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=xiangqi),
+[Middle-age chess](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=courier-chess),
+[Scrum](https://aclap-dev.github.io/jocly/examples/browser/simple.html?game=scrum)
 
-Or see and try [all available games](https://mi-g.github.io/jocly/examples/browser/multiple.html)
+Or see and try [all available games](https://aclap-dev.github.io/jocly/examples/browser/multiple.html)
 
 [JoclyBoard](https://github.com/mi-g/joclyboard) is a multi-platform desktop application based on Jocly 
 and [Electron](https://electron.atom.io/).
