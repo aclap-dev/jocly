@@ -777,19 +777,19 @@
 
 		"fr-saint": {
 			mesh: {
-				jsFile:"/res/fairy/bishop/tiara.js"
+				jsFile:"/res/fairy/saint/saint.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/bishop/bishop-diffusemap.jpg",
+								diffImg : "/res/fairy/saint/saint-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/bishop/bishop-normalmap.jpg",
+								normalImg: "/res/fairy/saint/saint-normalmap.jpg",
 							}
 						}
 					}
