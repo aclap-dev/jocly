@@ -171,7 +171,7 @@
 				},
 				7: {
 					name: 'snake',
-					aspect: 'fr-dragon',
+					aspect: 'fr-cobra',
 					graph: this.cbSnakeGraph(geometry),
 					value: 3.5,
 					abbrev: 'N',

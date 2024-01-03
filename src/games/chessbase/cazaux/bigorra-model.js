@@ -12,7 +12,7 @@
         return $this.cbSkiGraph(geometry,[[0,1],[0,-1]],1);
 	}
 
-    /** Move graph for the Snake */
+    /** Move graph for the Ship */
 	Model.Game.cbShipGraph = function(geometry){
 		var $this=this;
 
@@ -171,7 +171,7 @@
 				},
 				7: {
 					name: 'snake',
-					aspect: 'fr-dragon',
+					aspect: 'fr-cobra',
 					graph: this.cbSnakeGraph(geometry),
 					value: 3.7,
 					abbrev: 'N',

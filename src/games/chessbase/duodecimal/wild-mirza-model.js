@@ -222,7 +222,7 @@
       14: {
       name : 'snake',
       abbrev : 'SN',
-      aspect : 'fr-dragon',
+      aspect : 'fr-cobra',
       graph : this.cbSnakeGraph(geometry),
       value : 3.5,
       initial: [{s:1,p:18},{s:-1,p:126}],
