@@ -428,6 +428,11 @@
 					clipx: 6700,
 					},
 			},
+			"fr-owl": {
+				"2d": {
+					clipx: 6800,
+					},
+			},
 		},modifier);
 	}
 
@@ -2119,6 +2124,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/birds/phoenix-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-owl": {
+			mesh: {
+				jsFile:"/res/fairy/birds/owl.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/birds/owl-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/birds/owl-normalmap.jpg",
 							}
 						}
 					}
