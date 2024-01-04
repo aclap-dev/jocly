@@ -433,6 +433,11 @@
 					clipx: 6800,
 					},
 			},
+			"fr-scout": {
+				"2d": {
+					clipx: 6900,
+					},
+			},
 		},modifier);
 	}
 
@@ -2187,6 +2192,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/persons/samurai-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-scout": {
+			mesh: {
+				jsFile:"/res/fairy/persons/scout.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/persons/scout-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/persons/scout-normalmap.jpg",
 							}
 						}
 					}
