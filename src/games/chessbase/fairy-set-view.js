@@ -448,6 +448,11 @@
 					clipx: 7100,
 					},
 			},
+			"fr-sword": {
+				"2d": {
+					clipx: 7200,
+					},
+			},
 		},modifier);
 	}
 
@@ -2265,6 +2270,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/arms/lance-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-sword": {
+			mesh: {
+				jsFile:"/res/fairy/arms/sword.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/arms/sword-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/arms/sword-normalmap.jpg",
 							}
 						}
 					}
