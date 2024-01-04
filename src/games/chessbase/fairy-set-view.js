@@ -363,6 +363,11 @@
 					clipx: 6500,
 					},
 			},
+			"fr-flying-saint": {
+				"2d": {
+					clipx: 6600,
+					},
+			},
 			"fr-phoenix": {
 				"2d": {
 					clipx: 5400,
@@ -770,6 +775,28 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/saint/saint-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"fr-flying-saint": {
+			mesh: {
+				jsFile:"/res/fairy/saint/flying-saint.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/saint/fsaint-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/saint/fsaint-normalmap.jpg",
 							}
 						}
 					}
