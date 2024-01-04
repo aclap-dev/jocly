@@ -438,6 +438,11 @@
 					clipx: 6900,
 					},
 			},
+			"fr-caliph": {
+				"2d": {
+					clipx: 7000,
+					},
+			},
 		},modifier);
 	}
 
@@ -2213,6 +2218,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/persons/scout-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-caliph": {
+			mesh: {
+				jsFile:"/res/fairy/persons/caliph.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/persons/caliph-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/persons/caliph-normalmap.jpg",
 							}
 						}
 					}
