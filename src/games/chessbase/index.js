@@ -969,6 +969,7 @@ exports.games = (function () {
 	var modelScripts_30 = [
 		"base-model.js",
 		"grid-geo-model.js",
+		"fairy-move-model.js",
 		"capa10x8/capablanca-model.js"
 	]
 	var config_view_skins_preload_10 = [
