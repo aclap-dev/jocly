@@ -443,6 +443,11 @@
 					clipx: 7000,
 					},
 			},
+			"fr-lance": {
+				"2d": {
+					clipx: 7100,
+					},
+			},
 		},modifier);
 	}
 
@@ -2239,6 +2244,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/persons/caliph-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-lance": {
+			mesh: {
+				jsFile:"/res/fairy/arms/lance.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/arms/lance-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/arms/lance-normalmap.jpg",
 							}
 						}
 					}
