@@ -1392,6 +1392,7 @@ exports.games = (function () {
 	var modelScripts_zanzibars = [
 		"base-model.js",
 		"grid-geo-model.js",
+		"fairy-move-model.js",
 		"cazaux/zanzibar-s-model.js"
 	]
 	var config_view_js_zanzibars = [

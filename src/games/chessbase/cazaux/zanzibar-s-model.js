@@ -222,7 +222,7 @@
 			17: {
 	            	name: 'Rhino',
 	            	aspect: 'fr-rhino',
-	            	graph: RhinoGraph(),
+	            	graph: this.cbRhinoGraph(geometry),
 	            	value: 6,
 	            	abbrev: 'U',
 	            	initial: [{s:1,p:7},{s:-1,p:139}],
