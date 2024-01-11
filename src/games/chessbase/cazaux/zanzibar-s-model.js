@@ -221,7 +221,7 @@
 	            },	
 			17: {
 	            	name: 'Rhino',
-	            	aspect: 'fr-rhino',
+	            	aspect: 'fr-rhino2',
 	            	graph: this.cbRhinoGraph(geometry),
 	            	value: 6,
 	            	abbrev: 'U',
