@@ -10,14 +10,6 @@
 		return [x,y];
 	}
 
-	function All4(dirSet) {
-		var result = [];
-		for(var i=0; i<dirSet.length; i++) {
-			for(var j=0; j<4; j++) result.push(Rotate(dirSet[i],2*j));
-		}
-		return result;
-	}
-
 	// some new flags for various common forms of locust capture
 	// they can be used for other purposes if FLAG_FAIRY is not set
 	var c = Model.Game.cbConstants;
@@ -33,34 +25,49 @@
 
 	Model.Game.minimumBridge = 0; // for anti-trading rule of double capturing piece
 
-	Model.Game.cbSkiGraph = function(geometry, stepSet, bend, flags1, flags2) { // two-stage slider move, possibly bent
+	Model.Game.cbSkiGraph = function(geometry, stepSet, bend, flags1, flags2, confine, range) { // two-stage slider move, possibly bent
 
 		var graph = {};
 		var $this=this;
 
 		function SkiSlide(start, vec, flags, bend, iflags, range) { // trace out bent trajectory
-			var path = [], f = iflags, corner = geometry.Graph(start, vec);
+			var path = [], f = iflags, corner = geometry.Graph(start, vec), brouhaha=0;
 			while(f < -1 && corner) corner = geometry.Graph(corner, vec), f++; // negative iflags jump to corner
 			if(corner != null) {
+				f=(iflags<0 ? flags : iflags);
+				if(confine) {
+					if(!(corner in confine)) return;
+					if(confine[corner]=='b') f &= ~(brouhaha=c.FLAG_MOVE|c.FLAG_SPECIAL); // not to empty brouhaha squares
+				}
 				var vec2 = Rotate(vec, bend);
-				if(iflags != -1 && iflags != c.FLAG_STOP) // defer adding stop until something follows it
-					path.push(corner | (iflags<0 ? flags : iflags)); // use iflags on 1st square if it did not indikate skipping
+				if(f && iflags != c.FLAG_STOP) // defer adding stop until something follows it
+					path.push(corner | f); // use iflags on 1st square if it did not indikate skipping
+				if(brouhaha) return; // never past occupied brouhaha square
 				for(var n=1; n<range; n++) {
 					var delta = [n*vec2[0], n*vec2[1]], pos = geometry.Graph(corner, delta);
-					if(pos != null) { // path continues after corner
-						if(n == 1 && iflags == c.FLAG_STOP) path.push(corner | c.FLAG_STOP);
-						path.push(pos | flags);
-			}	}	}
+					if(pos == null) break // path strays off board
+					if(confine) {
+						if(!(pos in confine)) break;
+						if(confine[pos]=='b') flags &= ~(brouhaha=c.FLAG_MOVE|c.FLAG_SPECIAL);
+						if(!flags) break;
+					}
+					if(n == 1 && iflags == c.FLAG_STOP) path.push(corner | c.FLAG_STOP);
+					path.push(pos | flags);
+					if(brouhaha) break; // never past occupied brouhaha square
+			}	}
 			if(path.length > 0) graph[start].push($this.cbTypedArray(path));
 		}
 
-		if(flags1 === undefined) flags1 = c.FLAG_MOVE | c.FLAG_CAPTURE;
-		if(flags2 === undefined) flags2 = c.FLAG_MOVE | c.FLAG_CAPTURE;
+		if(!flags1) flags1 = c.FLAG_MOVE | c.FLAG_CAPTURE;
+		if(!flags2) flags2 = c.FLAG_MOVE | c.FLAG_CAPTURE;
+		if(!range) range=Infinity;
 		for(pos=0; pos<geometry.boardSize; pos++) {
+			if(confine && !(pos in confine))
+				continue;
 			graph[pos] = [];
 			stepSet.forEach(function(vec){
-				SkiSlide(pos, vec, flags2, bend, flags1, 1000);
-				if(bend&3 && bend>0) SkiSlide(pos, vec, flags2, -bend, (flags1<0 ? flags1 : c.FLAG_STOP), 1000); // for bent: both forks
+				SkiSlide(pos, vec, flags2, bend, flags1, range);
+				if(bend&3 && bend>0) SkiSlide(pos, vec, flags2, -bend, (flags1<0 ? flags1 : c.FLAG_STOP), range); // for bent: both forks
 			});
 		}
 		return graph;
@@ -137,69 +144,67 @@
 	}
 
 	Model.Game.cbCamelGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,[[1,3],[-1,3],[1,-3],[-1,-3],[3,1],[-3,1],[3,-1],[-3,-1]],confine);
+		return this.cbSymmetricGraph(geometry,[31],confine);
 	}
 
 	Model.Game.cbZebraGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,[[2,3],[-2,3],[2,-3],[-2,-3],[3,2],[-3,2],[3,-2],[-3,-2]],confine);
+		return this.cbSymmetricGraph(geometry,[32],confine);
 	}
 
 	Model.Game.cbElephantGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,All4([[1,1],[2,2]]),confine);
+		return this.cbSymmetricGraph(geometry,[11,22],confine);
 	}
 
 	Model.Game.cbWarMachineGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,All4([[1,0],[2,0]]),confine);
+		return this.cbSymmetricGraph(geometry,[10,20],confine);
 	}
 
 	Model.Game.cbAlibabaGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,All4([[2,0],[2,2]]),confine);
+		return this.cbSymmetricGraph(geometry,[20,22],confine);
 	}
 
 	Model.Game.cbWizardGraph = function(geometry,confine) {
-		return this.cbMergeGraphs(geometry, this.cbFersGraph(geometry,confine), this.cbCamelGraph(geometry,confine));
+		return this.cbSymmetricGraph(geometry,[11,31],confine);
 	}
 
 	Model.Game.cbChampionGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,All4([[1,0],[2,0],[2,2]]),confine);
+		return this.cbSymmetricGraph(geometry,[10,20,22],confine);
 	}
 
 	Model.Game.cbCardinalGraph = function(geometry,confine) {
-		return this.cbMergeGraphs(geometry, this.cbKnightGraph(geometry,confine), this.cbBishopGraph(geometry,confine));
+		return this.cbSymmetricGraph(geometry,[-11,21],confine);
 	}
 
 	Model.Game.cbMarshallGraph = function(geometry,confine) {
-		return this.cbMergeGraphs(geometry, this.cbKnightGraph(geometry,confine), this.cbRookGraph(geometry,confine));
+		return this.cbSymmetricGraph(geometry,[-10,21],confine);
 	}
 
 	Model.Game.cbAmazonGraph = function(geometry,confine) {
-		return this.cbMergeGraphs(geometry, this.cbKnightGraph(geometry,confine), this.cbQueenGraph(geometry,confine));
+		return this.cbSymmetricGraph(geometry,[-10,-11,21],confine);
 	}
 
 	Model.Game.cbVaoGraph = function(geometry,confine) {
-		return this.cbLongRangeGraph(geometry,All4([[1,-1]]),confine,c.FLAG_MOVE | c.FLAG_SCREEN_CAPTURE);
+		return this.cbSymmetricGraph(geometry,[c.FLAG_MOVE|c.FLAG_SCREEN_CAPTURE,-11],confine);
 	}
 	
 	Model.Game.cbGriffonGraph = function(geometry,confine) {
-		return this.cbSkiGraph(geometry,All4([[1,1]]),1);
+		return this.cbSkiGraph(geometry,[[1,1],[1,-1],[-1,1],[-1,-1]],1);
 	}
 
 	Model.Game.cbRhinoGraph = function(geometry,confine) {
-		return this.cbSkiGraph(geometry,All4([[1,0]]),1);
+		return this.cbSkiGraph(geometry,[[1,0],[0,1],[-1,0],[0,-1]],1);
 	}
 
 	Model.Game.cbLionGraph = function(geometry,confine) {
-		return this.cbMergeGraphs(geometry,
-				this.cbShortRangeGraph(geometry,All4([[1,0],[1,1],[2,0],[2,2]]),confine),
-				this.cbKnightGraph(geometry,confine));
+		return this.cbSymmetricGraph(geometry,[10,11,20,21,22],confine);
 	}
 
 	Model.Game.extraInit = function(geometry) { // called from InitGame
-		if(!this.neighbors) this.neighbors = this.cbShortRangeGraph(geometry,All4([[1,0],[1,1]]), null, RIFLE_BIT | c.FLAG_MOVE | c.FLAG_CAPTURE);
-		if(!this.burnZone)  this.burnZone  = this.cbShortRangeGraph(geometry,All4([[1,0],[1,1]]));
+		if(!this.neighbors) this.neighbors = this.cbSymmetricGraph(geometry,[RIFLE_BIT|c.FLAG_MOVE|c.FLAG_CAPTURE,10,11]);
+		if(!this.burnZone)  this.burnZone  = this.cbSymmetricGraph(geometry,[10,11]);
 	}
 
-	Model.Game.cbPiecesFromFEN = function(geometry, fen, pawnRank, maxPush) {
+	Model.Game.cbPiecesFromFEN = function(geometry, fen, pawnRank, maxPush,confine) {
 		var $this=this;
 		var locations=[];
 		var sqr=geometry.boardSize;
@@ -315,72 +320,69 @@
 			if(sqr>=0) locations[cc][c==cc?0:1].push(geometry.width*(geometry.R(sqr)+1)-geometry.C(sqr)-1);
 		}
 
+		var s=1, f=(geometry.width+2*geometry.height)/24; // leaper value correction for board size
+
 		if('P' in locations) {
 			if(pawnRank===undefined) pawnRank=geometry.R(locations['P'][0][locations['P'][0].length-1]);
 			MakePiece('pawnw', 'P', 'fr-pawn', this.cbFlexiPawnGraph(geometry,1,pawnRank,maxPush), 1, [locations['P'][0],[]], 'epTarget', 'epCatch');
 			MakePiece('pawnb', 'P', 'fr-pawn', this.cbFlexiPawnGraph(geometry,-1,pawnRank,maxPush), 1, [[],locations['P'][1]], 'epTarget', 'epCatch');
 		}
+		
 		if('S' in locations) { // Shogi Pawn
+			if(pawnRank===undefined) pawnRank=geometry.R(locations['S'][0][locations['S'][0].length-1]);
 			MakePiece('soldierw', 'S', 'fr-pawn', this.cbShortRangeGraph(geometry,[[0,1]]), 1, [locations['P'][0],[]]);
 			MakePiece('soldierb', 'S', 'fr-pawn', this.cbShortRangeGraph(geometry,[[0,-1]]), 1, [[],locations['P'][1]]);
 		}
 
+		if(pawnRank) {
+			s=geometry.width-geometry.height+2*pawnRank; if(s<0) s=0;
+			s=0.9+0.4*s/geometry.width; // Bishop value correction for 2 forward slides hitting enemy camp
+		}
+
 		if('A' in locations)
-			MakePiece('archbishop', 'A', 'fr-proper-cardinal', this.cbCardinalGraph(geometry), 8.75, locations['A']);
+			MakePiece('archbishop', 'A', 'fr-proper-cardinal', this.cbCardinalGraph(geometry,confine), 8.25*Math.sqrt(s/f), locations['A']);
 		if('B' in locations)
-			MakePiece('bishop', 'B', 'fr-bishop', this.cbBishopGraph(geometry), 3.50, locations['B']);
+			MakePiece('bishop', 'B', 'fr-bishop', this.cbBishopGraph(geometry,confine), 3.50*s, locations['B']);
 		if('C' in locations)
-			MakePiece('camel', 'C', 'fr-camel', this.cbCamelGraph(geometry), 2.5, locations['C']);
-		if('D' in locations) {
-			var graph=this.cbMergeGraphs(geometry,
-					this.cbRookGraph(geometry),
-					this.cbFersGraph(geometry));
-			MakePiece('dragon-king', 'D', 'fr-proper-crowned-rook', graph, 7.0, locations['D']);
-		}
+			MakePiece('camel', 'C', 'fr-camel', this.cbCamelGraph(geometry,confine), 2.5/(0.5*f+0.5), locations['C']);
+		if('D' in locations)
+			MakePiece('dragon-king', 'D', 'fr-proper-crowned-rook', this.cbSymmetricGraph(geometry,[-10,11],confine), 7.0/Math.sqrt(f), locations['D']);
 		if('E' in locations)
-			MakePiece('elephant', 'E', 'fr-proper-elephant', this.cbElephantGraph(geometry), 3.35, locations['E']);
+			MakePiece('elephant', 'E', 'fr-proper-elephant', this.cbElephantGraph(geometry,confine), 3.35, locations['E']);
 		if('G' in locations)
-			MakePiece('griffon', 'G', 'fr-griffon', this.cbGriffonGraph(geometry), 8.3, locations['G']);
-		if('H' in locations) {
-			var graph=this.cbMergeGraphs(geometry,
-					this.cbBishopGraph(geometry),
-					this.cbSchleichGraph(geometry));
-			MakePiece('dragon-horse', 'H', 'fr-saint', graph, 5.25, locations['H']);
-		}
-		if('J' in locations) {
-			var graph=this.cbMergeGraphs(geometry,
-					this.cbKnightGraph(geometry),
-					this.cbKingGraph(geometry));
-			MakePiece('centaur', 'J', 'fr-crowned-knight', this.graph, 8, locations['J']);
-		}
+			MakePiece('griffon', 'G', 'fr-griffon', this.cbGriffonGraph(geometry,confine), 8.3, locations['G']);
+		if('H' in locations)
+			MakePiece('dragon-horse', 'H', 'fr-saint', this.cbSymmetricGraph(geometry,[-11,10],confine), 5.25*Math.sqrt(s/f), locations['H']);
+		if('J' in locations)
+			MakePiece('centaur', 'J', 'fr-crowned-knight', this.cbSymmetricGraph(geometry,[10,11,21],confine), 8/f, locations['J']);
 		if('L' in locations)
-			MakePiece('lion', 'L', 'fr-lion', this.cbLionGraph(geometry), 11, locations['L']);
+			MakePiece('lion', 'L', 'fr-lion', this.cbLionGraph(geometry,confine), 11/f, locations['L']);
 		if('M' in locations)
-			MakePiece('marshall', 'M', 'fr-proper-marshall', this.cbMarshallGraph(geometry), 9.0, locations['M']);
+			MakePiece('marshall', 'M', 'fr-proper-marshall', this.cbMarshallGraph(geometry,confine), 9.0/Math.sqrt(f), locations['M']);
 		if('N' in locations)
-			MakePiece('knight', 'N', 'fr-knight', this.cbKnightGraph(geometry), 3.25, locations['N']);
+			MakePiece('knight', 'N', 'fr-knight', this.cbKnightGraph(geometry,confine), 3.25/f, locations['N']);
 		if('O' in locations)
-			MakePiece('champion', 'O', 'fr-champion', this.cbChampionGraph(geometry), 4.5, locations['O']);
+			MakePiece('champion', 'O', 'fr-champion', this.cbChampionGraph(geometry,confine), 4.5/f, locations['O']);
 		if('Q' in locations)
-			MakePiece('queen', 'Q', 'fr-proper-queen', this.cbQueenGraph(geometry), 9.5, locations['Q']);
+			MakePiece('queen', 'Q', 'fr-proper-queen', this.cbQueenGraph(geometry,confine), 9.5*Math.sqrt(s), locations['Q']);
 		if('R' in locations)
-			MakePiece('rook', 'R', 'fr-rook', this.cbRookGraph(geometry), 5.0, locations['R'], 'castle');
+			MakePiece('rook', 'R', 'fr-rook', this.cbRookGraph(geometry,confine), 5.0, locations['R'], 'castle');
 		if('T' in locations)
-			MakePiece('amazon', 'T', 'fr-amazon', this.cbAmazonGraph(geometry), 12.5, locations['T']);
+			MakePiece('amazon', 'T', 'fr-amazon', this.cbAmazonGraph(geometry,confine), 12.5*Math.sqrt(0.5*s+0.5), locations['T']);
 		if('U' in locations)
-			MakePiece('rhino', 'U', 'fr-rhino', this.cbRhinoGraph(geometry), 7.8, locations['U']);
+			MakePiece('rhino', 'U', 'fr-rhino', this.cbRhinoGraph(geometry,confine), 7.8, locations['U']);
 		if('V' in locations)
-			MakePiece('vao', 'V', 'fr-cannon2', this.cbVaoGraph(geometry), 2, locations['V']);
+			MakePiece('vao', 'V', 'fr-cannon2', this.cbVaoGraph(geometry,confine), 2*s, locations['V']);
 		if('W' in locations)
-			MakePiece('wizard', 'W', 'fr-wizard', this.cbWizardGraph(geometry), 4, locations['W']);
+			MakePiece('wizard', 'W', 'fr-wizard', this.cbWizardGraph(geometry,confine), 4/(0.5*f+0.5), locations['W']);
 		if('X' in locations)
-			MakePiece('cannon', 'X', 'fr-cannon', this.cbXQCannonGraph(geometry), 3, locations['X']);
+			MakePiece('cannon', 'X', 'fr-cannon', this.cbXQCannonGraph(geometry,confine), 3, locations['X']);
 		if('Y' in locations)
-			MakePiece('man', 'Y', 'fr-man', this.cbKingGraph(geometry), 3, locations['Y']);
+			MakePiece('man', 'Y', 'fr-man', this.cbKingGraph(geometry,confine), 3/f, locations['Y']);
 		if('Z' in locations)
-			MakePiece('zebra', 'Z', 'fr-zebra', this.cbZebraGraph(geometry), 2.5, locations['Z']);
+			MakePiece('zebra', 'Z', 'fr-zebra', this.cbZebraGraph(geometry,confine), 2.5/(0.5*f+0.5), locations['Z']);
 		if('K' in locations)
-			MakePiece('king', 'K', 'fr-king', this.cbKingGraph(geometry), 100, locations['K'],'isKing');
+			MakePiece('king', 'K', 'fr-king', this.cbKingGraph(geometry,confine), 100, locations['K'],'isKing');
 
 		res.setCastling(); // now we know where all pieces are
 
