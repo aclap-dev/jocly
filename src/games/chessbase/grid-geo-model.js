@@ -164,6 +164,26 @@
  	<position>: 0xffff (invalid) or next position
 	*/
 	
+	Model.Game.cbSymmetricGraph = function(geometry,spec,confine) {
+		var graph, flags;
+		for(var i=0; i<spec.length; i++) {
+			var h=spec[i], range=1, x=h, y, t, deltas=[];
+			if(h>10000) { flags=h; continue; } // set new flags
+			if(h<0) x=-h, range=Infinity; // negative indicates unlimited ride
+			else if(h>99) x=h%100, range=(h-x)/100; // extract range
+			y=x%10; x=(x-y)/10; t=x+y; // get step coords and total
+			var oblique=(x && y && x!=y); // not orthogonal or diagonal
+			for(var j=0; j<4; j++) { // for all 4 quadrants
+				deltas.push([x,y]);
+				if(oblique) deltas.push([y,x]); // diagonal mirror
+				h=x; x=y; y=-h; // rotate 90 degrees
+			}
+			h = this.cbLongRangeGraph(geometry,deltas,confine,flags,range);
+			graph=(graph===undefined ? h : this.cbMergeGraphs(geometry,graph,h));
+		}
+		return graph;
+	}
+
 	Model.Game.cbPawnGraph = function(geometry,side,confine) {
 		var $this=this;
 		var graph={};
@@ -214,11 +234,11 @@
 	}
 
 	Model.Game.cbKingGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,[[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]],confine);
+		return this.cbSymmetricGraph(geometry,[10,11],confine);
 	}
 
 	Model.Game.cbKnightGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,[[2,-1],[2,1],[-2,-1],[-2,1],[-1,2],[-1,-2],[1,2],[1,-2]],confine);
+		return this.cbSymmetricGraph(geometry,[21],confine);
 	}
 
 	Model.Game.cbHorseGraph = function(geometry) {
@@ -240,15 +260,15 @@
 
 	
 	Model.Game.cbRookGraph = function(geometry,confine) {
-		return this.cbLongRangeGraph(geometry,[[0,-1],[0,1],[-1,0],[1,0]],confine);
+		return this.cbSymmetricGraph(geometry,[-10],confine);
 	}
 	
 	Model.Game.cbBishopGraph = function(geometry,confine) {
-		return this.cbLongRangeGraph(geometry,[[1,-1],[1,1],[-1,1],[-1,-1]],confine);
+		return this.cbSymmetricGraph(geometry,[-11],confine);
 	}
 	
 	Model.Game.cbQueenGraph = function(geometry,confine) {
-		return this.cbLongRangeGraph(geometry,[[0,-1],[0,1],[-1,0],[1,0],[1,-1],[1,1],[-1,1],[-1,-1]],confine);
+		return this.cbSymmetricGraph(geometry,[-10,-11],confine);
 	}
 
 	Model.Game.cbXQGeneralGraph = function(geometry,confine) {
@@ -289,11 +309,11 @@
 	}
 
 	Model.Game.cbXQAdvisorGraph = function(geometry,confine) {
-		return this.cbShortRangeGraph(geometry,[[1,1],[-1,1],[1,-1],[-1,-1]],confine);
+		return this.cbSymmetricGraph(geometry,[11],confine);
 	}
 
-	Model.Game.cbXQCannonGraph = function(geometry) {
-		return this.cbLongRangeGraph(geometry,[[0,-1],[0,1],[-1,0],[1,0]],null,this.cbConstants.FLAG_MOVE | this.cbConstants.FLAG_SCREEN_CAPTURE);
+	Model.Game.cbXQCannonGraph = function(geometry,confine) {
+		return this.cbSymmetricGraph(geometry,[this.cbConstants.FLAG_MOVE | this.cbConstants.FLAG_SCREEN_CAPTURE,-10],confine);
 	}
 	
 	Model.Game.cbXQElephantGraph = function(geometry,confine) {
@@ -319,16 +339,16 @@
 		return this.cbShortRangeGraph(geometry,[[0,side],[-1,-1],[-1,1],[1,-1],[1,1]]);
 	}
 	
-	Model.Game.cbFersGraph = function(geometry,side) {
-		return this.cbShortRangeGraph(geometry,[[-1,-1],[-1,1],[1,-1],[1,1]]);
+	Model.Game.cbFersGraph = function(geometry,confine) {
+		return this.cbSymmetricGraph(geometry,[11]);
 	}	
 
-	Model.Game.cbSchleichGraph = function(geometry,side) {
-		return this.cbShortRangeGraph(geometry,[[-1,0],[1,0],[0,-1],[0,1]]);
+	Model.Game.cbSchleichGraph = function(geometry,side,confine) {
+		return this.cbSymmetricGraph(geometry,[10],confine);
 	}	
 	
-	Model.Game.cbAlfilGraph = function(geometry,side) {
-		return this.cbShortRangeGraph(geometry,[[-2,-2],[-2,2],[2,2],[2,-2]]);
+	Model.Game.cbAlfilGraph = function(geometry,side,confine) {
+		return this.cbSymmetricGraph(geometry,[22],confine);
 	}	
 
 })();
