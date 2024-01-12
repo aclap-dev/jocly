@@ -488,6 +488,12 @@ exports.games = (function () {
 		"fairy-move-model.js",
 		"makromachy-model.js"
 	]
+	var modelScripts_110 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"fairy-move-model.js",
+		"minjiku-shogi-model.js"
+	]
 	var config_model_levels_11 = {
 		"name": "easy",
 		"label": "Easy",
@@ -614,6 +620,13 @@ exports.games = (function () {
 		"fairy-set-view.js",
 		"multi-leg-view.js",
 		"makromachy-view.js"
+	]
+	var config_view_js_110 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"multi-leg-view.js",
+		"minjiku-shogi-view.js"
 	]
 	var modelScripts_14 = [
 		"base-model.js",
@@ -7213,6 +7226,71 @@ exports.games = (function () {
 				}
 			},
 			"viewScripts": config_view_js_109
+		},
+		{
+			"name": "minjiku-shogi",
+			"modelScripts": modelScripts_110,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Minjiku Shogi",
+					"summary": "10x10 variant with flying pieces and Fire Dragon",
+					"rules": {
+						"en": "res/rules/minjiku-shogi/minjiku-shogi-rules.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/minjiku-shogi/minjiku-shogi-thumb.png",
+					"released": 1396536978,
+					"credits": {
+						"en": "res/rules/minjiku-shogi/minjiku-shogi-credits.html"
+					},
+					"gameOptions": config_model_gameOptions_2,
+					"js": modelScripts_110,
+
+					"description": {
+						"en": "res/rules/minjiku-shogi/minjiku-shogi-description.html"
+					},
+					"levels": config_model_levels_15
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/minjiku-600x600-3d.jpg",
+							"res/visuals/minjiku-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": [
+						{
+							"name": "skin3d",
+							"title": "3D Classic",
+							"3d": true,
+							"preload": [
+								"smoothedfilegeo|0|/res/ring-target.js",
+								"image|/res/images/cancel.png",
+								"image|/res/images/wikipedia.png"
+							],
+							"world": config_view_skins_world,
+							"camera": config_view_skins_camera
+						},
+						config_view_skins_2
+					],
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_110,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_110
 		}
 	  		
 
