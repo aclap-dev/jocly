@@ -200,7 +200,7 @@
 	            },	
 			15: {
 	            	name: 'eagle',
-	            	aspect: 'fr-griffin',
+	            	aspect: 'fr-griffon',
 	            	graph : this.cbGriffonGraph(geometry),
 	            	value: 8,
 	            	abbrev: 'A',

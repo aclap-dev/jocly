@@ -273,7 +273,7 @@
       18: {
       name : 'eagle',
       abbrev : 'G',
-      aspect : 'fr-griffin',
+      aspect : 'fr-griffon',
       graph : this.cbEagleGraph(geometry),
       value : 9,
       initial: [{s:1,p:34},{s:-1,p:160}],

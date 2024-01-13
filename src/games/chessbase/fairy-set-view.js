@@ -308,7 +308,7 @@
 					clipx: 4100,
 				},
 			},
-			"fr-squirle": {
+			"fr-squirrel": {
 				"2d": {
 					clipx: 4200,
 				},
@@ -333,12 +333,12 @@
 					clipx: 4600,
 				},
 			},
-			"fr-huscarl": {
+			"fr-axe": {
 				"2d": {
 					clipx: 4700,
 					},
 			},
-			"fr-griffin": {
+			"fr-griffon": {
 				"2d": {
 					clipx: 4800,
 					},
@@ -1793,21 +1793,21 @@
 				}
 			}
 		},
-		"fr-squirle": {
+		"fr-squirrel": {
 			mesh: {
-				jsFile:"/res/fairy/squirle/squirle.js"
+				jsFile:"/res/fairy/squirrel/squirrel.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/squirle/squirle-diffusemap.jpg",
+								diffImg : "/res/fairy/squirrel/squirrel-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/squirle/squirle-normalmap.jpg",
+								normalImg: "/res/fairy/squirrel/squirrel-normalmap.jpg",
 							}
 						}
 					}
@@ -1898,42 +1898,42 @@
 				}
 			}
 		},
-		"fr-huscarl": {
+		"fr-axe": {
 			mesh: {
-				jsFile:"/res/fairy/huscarl/huscarl.js"
+				jsFile:"/res/fairy/axe/axe.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/huscarl/huscarl-diffusemap.jpg",
+								diffImg : "/res/fairy/axe/axe-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/huscarl/huscarl-normalmap.jpg",
+								normalImg: "/res/fairy/axe/axe-normalmap.jpg",
 							}
 						}
 					}
 				}
 			}
 		},
-		"fr-griffin": {
+		"fr-griffon": {
 			mesh: {
-				jsFile:"/res/fairy/griffin/griffin.js"
+				jsFile:"/res/fairy/griffon/griffon.js"
 			},
 			materials: {
 				mat0: {
 					channels: {
 						diffuse: {
 							texturesImg: {
-								diffImg : "/res/fairy/griffin/griffin-diffusemap.jpg",
+								diffImg : "/res/fairy/griffon/griffon-diffusemap.jpg",
 							}
 						},
 						normal: {
 							texturesImg: {
-								normalImg: "/res/fairy/griffin/griffin-normalmap.jpg",
+								normalImg: "/res/fairy/griffon/griffon-normalmap.jpg",
 							}
 						}
 					}

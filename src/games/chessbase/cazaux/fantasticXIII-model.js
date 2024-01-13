@@ -136,8 +136,8 @@
 					initial: [{s:1,p:1},{s:1,p:11},{s:-1,p:157},{s:-1,p:167}],
 				},
 				4: {
-					name: 'squirle',
-					aspect: 'fr-squirle',
+					name: 'squirrel',
+					aspect: 'fr-squirrel',
 					graph: this.cbShortRangeGraph(geometry,[
 						[-2,0],[-2,-1],[-2,-2],[-1,-2],[0,-2],
 						[1,-2],[2,-2],[2,-1],[2,0],[2,1],
@@ -189,7 +189,7 @@
       			9: {
                     name : 'troll-w',
                     abbrev : 'T',
-                    aspect : 'fr-huscarl',
+                    aspect : 'fr-axe',
                     graph : this.cbMergeGraphs(geometry,
                   this.cbPawnGraph(geometry,1),
                   this.cbShortRangeGraph(geometry,[
@@ -201,7 +201,7 @@
                 10: {
                     name : 'troll-b',
                     abbrev : 'T',
-                    aspect : 'fr-huscarl',
+                    aspect : 'fr-axe',
                     graph : this.cbMergeGraphs(geometry,
                   this.cbPawnGraph(geometry,-1),
                   this.cbShortRangeGraph(geometry,[
@@ -232,7 +232,7 @@
       			13: {
                   name : 'griffon',
                   abbrev : 'G',
-                  aspect : 'fr-griffin',
+                  aspect : 'fr-griffon',
                   graph : this.cbGriffonGraph(geometry),
                   value : 8.5,
                   initial: [],

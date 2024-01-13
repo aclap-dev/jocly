@@ -341,7 +341,7 @@
       18: {
       name : 'eagle',
       abbrev : 'H',
-      aspect : 'fr-griffin',
+      aspect : 'fr-griffon',
       graph : this.cbEagleGraph(geometry),
       value : 8.1,
       initial: [{s:1,p:6},{s:-1,p:188}],

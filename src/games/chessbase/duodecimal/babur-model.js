@@ -192,7 +192,7 @@
       11: {
       name : 'eagle',
       abbrev : 'H',
-      aspect : 'fr-griffin',
+      aspect : 'fr-griffon',
       graph : this.cbGriffonGraph(geometry),
       value : 8.1,
       initial: [],

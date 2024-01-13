@@ -149,7 +149,7 @@
 				
 				4: {
 	            	name: 'anqa',
-	            	aspect: 'fr-griffin',
+	            	aspect: 'fr-griffon',
 	            	graph: EagleGraph(),
 	            	value: 9,
 	            	abbrev: 'A',

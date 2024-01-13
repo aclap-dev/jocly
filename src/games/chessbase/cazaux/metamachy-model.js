@@ -236,7 +236,7 @@
 	            },	
 			15: {
 	            	name: 'eagle',
-	            	aspect: 'fr-griffin',
+	            	aspect: 'fr-griffon',
 	            	graph: EagleGraph(),
 	            	value: 8,
 	            	abbrev: 'A',

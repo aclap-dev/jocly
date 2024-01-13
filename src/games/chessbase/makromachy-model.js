@@ -256,7 +256,7 @@
 		    17: { // R after F bent slider
 			name : 'griffon',
 			abbrev : 'G',
-			aspect : 'fr-griffin',
+			aspect : 'fr-griffon',
 			graph : this.cbGriffonGraph(geometry),
 			value : 9.61,
 			initial: [{s:1,p:5},{s:-1,p:187}],
