@@ -458,6 +458,11 @@
 					clipx: 7300,
 					},
 			},
+			"fr-ram": {
+				"2d": {
+					clipx: 7400,
+					},
+			},
 		},modifier);
 	}
 
@@ -2317,6 +2322,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/farm/goat-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-ram": {
+			mesh: {
+				jsFile:"/res/fairy/farm/ram.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/farm/ram-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/farm/ram-normalmap.jpg",
 							}
 						}
 					}
