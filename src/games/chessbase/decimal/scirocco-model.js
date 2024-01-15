@@ -148,7 +148,7 @@
 
 				8: {
 					name: 'stork',
-					aspect: 'fr-birdie',
+					aspect: 'fr-stork',
 					graph: this.cbMergeGraphs(geometry,
 						this.cbShortRangeGraph(geometry, All4([[0,1]]), null, c),
 						this.cbShortRangeGraph(geometry, All4([[2,2]]))
@@ -160,7 +160,7 @@
 
 				9: {
 					name: 'goat',
-					aspect: 'fr-antelope',
+					aspect: 'fr-goat',
 					graph: this.cbMergeGraphs(geometry,
 						this.cbShortRangeGraph(geometry, All4([[2,0]])),
 						this.cbShortRangeGraph(geometry, All4([[1,1]]), null, m)
@@ -328,7 +328,7 @@
 
 				25: {
 					name: 'squirrel',
-					aspect: 'fr-ship',
+					aspect: 'fr-squirrel',
 					graph: this.cbMergeGraphs(geometry,
 						this.cbKnightGraph(geometry),
 						this.cbShortRangeGraph(geometry, alibaba)
@@ -346,7 +346,7 @@
 				},
 
 				27: {
-					name: 'lion',
+					name: 'lioness',
 					aspect: 'fr-lion',
 					graph: this.cbMergeGraphs(geometry,
 						this.cbKingGraph(geometry),
@@ -400,7 +400,7 @@
 
 				32: {
 					name: 'octopus',
-					aspect: 'fr-dragon',
+					aspect: 'fr-griffon',
 					graph: SkiGraph(geometry, All4([[1,1]]), 1, m, m|c),
 					value: 8.5,
 					abbrev: 'O',
@@ -408,7 +408,7 @@
 
 				33: {
 					name: 'spider',
-					aspect: 'fr-rhino',
+					aspect: 'fr-rhino2',
 					graph: SkiGraph(geometry, All4([[1,0]]), 1, m, m|c),
 					value: 8,
 					abbrev: 'Sp',
