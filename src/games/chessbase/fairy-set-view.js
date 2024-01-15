@@ -453,6 +453,11 @@
 					clipx: 7200,
 					},
 			},
+			"fr-goat": {
+				"2d": {
+					clipx: 7300,
+					},
+			},
 		},modifier);
 	}
 
@@ -2291,6 +2296,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/arms/sword-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-goat": {
+			mesh: {
+				jsFile:"/res/fairy/farm/goat.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/farm/goat-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/farm/goat-normalmap.jpg",
 							}
 						}
 					}
