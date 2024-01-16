@@ -393,7 +393,11 @@
 			'1': false,
 			'-1': false,
 		}
-		this.lastMove=null;
+		this.lastMove={  // (invalid) dummy, to make sure it exists...
+			f: -1,
+			t: 0,
+			c: null, // ... and is not mistaken for a capture
+		};
 		if(aGame.cbVar.castle)
 			this.castled={
 				'1': false,
@@ -417,6 +421,7 @@
 				this.lastMove={
 					f: aGame.mInitial.lastMove.f,
 					t: aGame.mInitial.lastMove.t,
+					c: aGame.mInitial.lastMove.c,
 				}
 			if(aGame.mInitial.noCaptCount!==undefined)
 				this.noCaptCount=aGame.mInitial.noCaptCount;
@@ -518,14 +523,11 @@
 			this.kings[i] = aBoard.kings[i];
 		this.check=aBoard.check;
 		this.oppoCheck=aBoard.oppoCheck;
-		if(aBoard.lastMove)
-			this.lastMove={
-				f: aBoard.lastMove.f,
-				t: aBoard.lastMove.t,
-				c: aBoard.lastMove.c,
-			}
-		else
-			this.lastMove=null;
+		this.lastMove={
+			f: aBoard.lastMove.f,
+			t: aBoard.lastMove.t,
+			c: aBoard.lastMove.c,
+		}
 		this.ending={
 			'1': aBoard.ending[1],
 			'-1': aBoard.ending[-1],
@@ -797,7 +799,7 @@
 			return;
 		}
 		
-		if(this.lastMove && this.lastMove.c!=null) {
+		if(this.lastMove.c!==null) {
 			var piece=this.pieces[this.board[this.lastMove.t]];
 			pieceValue[-piece.s]+=this.cbStaticExchangeEval(aGame,piece.p,piece.s,{piece:piece})
 		}
