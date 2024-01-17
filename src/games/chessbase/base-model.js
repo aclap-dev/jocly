@@ -379,14 +379,40 @@
 		this.zSign=0;
 	}
 
+	Model.Board.cbPlacePieces = function(aGame) {
+
+		var $this=this;
+
+		this.pieces.sort(function(p1,p2) {
+			if(p1.s!=p2.s)
+				return p2.s-p1.s;
+			var v1=aGame.cbVar.pieceTypes[p1.t].value || 100;
+			var v2=aGame.cbVar.pieceTypes[p2.t].value || 100;
+			if(v1!=v2)
+				return v1-v2;
+			return p1.p-p2.p;
+		});
+
+		this.zSign=aGame.wKey(0);
+		for(var pos=0;pos<aGame.g.boardSize;pos++)
+			this.board[pos]=-1;
+		this.pieces.forEach(function(piece,index) {
+			piece.i=index;
+			$this.board[piece.p]=index;
+			var pType=aGame.g.pTypes[piece.t];
+			if(pType.isKing)
+				$this.kings[piece.s*pType.isKing]=piece.p;
+			$this.zSign^=aGame.bKey(piece) ^ aGame.tKey(piece);
+		});
+		
+	}
+
 	Model.Board.InitialPosition = function(aGame) {
 		var $this=gameState=this;
 		if(USE_TYPED_ARRAYS)
 			this.board=new Int16Array(aGame.g.boardSize);
 		else
 			this.board=[];
-		for(var pos=0;pos<aGame.g.boardSize;pos++)
-			this.board[pos]=-1;
 		this.kings={};
 		this.pieces=[];
 		this.ending={
@@ -403,7 +429,6 @@
 				'1': false,
 				'-1': false,
 			}
-		this.zSign=aGame.wKey(0);
 
 		this.noCaptCount = this.check = this.oppoCheck = 0;
 		this.mWho = 1;
@@ -453,25 +478,8 @@
 				}
 			}
 		}
-		
-		this.pieces.sort(function(p1,p2) {
-			if(p1.s!=p2.s)
-				return p2.s-p1.s;
-			var v1=aGame.cbVar.pieceTypes[p1.t].value || 100;
-			var v2=aGame.cbVar.pieceTypes[p2.t].value || 100;
-			if(v1!=v2)
-				return v1-v2;
-			return p1.p-p2.p;
-		});
 
-		this.pieces.forEach(function(piece,index) {
-			piece.i=index;
-			$this.board[piece.p]=index;
-			var pType=aGame.g.pTypes[piece.t];
-			if(pType.isKing)
-				$this.kings[piece.s*pType.isKing]=piece.p;
-			$this.zSign^=aGame.bKey(piece) ^ aGame.tKey(piece);
-		});
+		this.cbPlacePieces(aGame);
 		
 		//console.log("sign",this.zSign);
 		
