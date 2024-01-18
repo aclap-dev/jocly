@@ -98,7 +98,7 @@
 		if(this.lastMove.f==-2) { // in prelude
 			var stage=this.lastMove.t;
 			var dialog=aGame.cbVar.prelude[stage];
-			if(!dialog)
+			if(!dialog || dialog.persistent && dialog.persistent!==true)
 				return {
 					initial: {},
 					getActions: function(moves,currentInput) { return null; },
