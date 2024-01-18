@@ -970,6 +970,7 @@ exports.games = (function () {
 		"base-model.js",
 		"grid-geo-model.js",
 		"fairy-move-model.js",
+		"prelude-model.js",
 		"capa10x8/capablanca-model.js"
 	]
 	var config_view_skins_preload_10 = [
@@ -1017,6 +1018,7 @@ exports.games = (function () {
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
+		"prelude-view.js",
 		"capa10x8/capablanca-view.js"
 	]
 	var modelScripts_31 = [
