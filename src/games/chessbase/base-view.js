@@ -551,6 +551,7 @@
 						if(move.cg!==undefined) {
 							var k=aGame.cbVar.castle[move.f+'/'+move.cg].k;
 							if(k[k.length-1]==move.t) target=move.cg;
+							else target&=0xffff;
 						}
 						if(actions[target]===undefined) {
 							actions[target]={
