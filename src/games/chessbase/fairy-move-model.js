@@ -225,9 +225,12 @@
 			setProperty: function(name, property, value) {
 					this.pieceTypes[this.name2nr[name]][property] = value;
 				},
-			addMoves: function(name,graph) {
+			addMoves: function(name,graph,squares) {
 					var p = this.pieceTypes[this.name2nr[name]];
-					p.graph = $this.cbMergeGraphs(geometry,p.graph,graph);
+					var newGraph = $this.cbMergeGraphs(geometry,p.graph,graph);
+					if(squares===undefined) p.graph=newGraph;
+					else for(var pos in squares)
+						p.graph[squares[pos]]=newGraph[squares[pos]]; // only merge moves from given squares
 				},
 			addPiece: function(typeDef) {
 					this.pieceTypes[this.nr] = typeDef;
