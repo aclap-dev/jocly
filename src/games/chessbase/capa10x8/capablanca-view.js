@@ -68,7 +68,7 @@
 	var x1 = geometry.C(aMove.t);
 	var y0 = geometry.R(aMove.f);
 	var y1 = geometry.R(aMove.t);
-	if(x1-x0==0 || y1-y0==0 || Math.abs(x1-x0)==Math.abs(y1-y0))
+	if((x1-x0==0 || y1-y0==0 || Math.abs(x1-x0)==Math.abs(y1-y0)) && aMove.cg===undefined)
 		return (zFrom+zTo)/2;
 	else
 		return Math.max(zFrom,zTo)+1500;
