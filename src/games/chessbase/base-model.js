@@ -916,8 +916,7 @@
 					castlePieces=null;
 				else
 					king=piece;
-			}
-			if(castlePieces && pType.castle && !piece.m) // rook considered for castle
+			} else if(pType.castle && !piece.m && castlePieces) // rook considered for castle
 				castlePieces.push(piece);
 			
 			var graph, graphLength;
@@ -1018,21 +1017,24 @@
 					}
 				}
 				if(rookOk) {
-					var kingOk=true;
-					for(var j=0;j<spec.k.length;j++) {
-						var pos=spec.k[j];
+					var step=(rook.p>king.p ? 1 : -1);
+					var last=spec.k.length-1; // nominal King destination found here
+					var extra=spec.extra || 0;
+					var d=0;
+					if(extra<0) extra*=-1,d=1;
+					for(var j=0;j<=last+extra;j++) { // allow optional extension of King move
+						var pos=(j<last ? spec.k[j] : spec.k[last]+step*(j-last));
 						if((this.board[pos]>=0 && pos!=rook.p && pos!=king.p) || this.cbGetAttackers(aGame,pos,who).length>0) {
-							kingOk=false;
 							break;
 						}
-					}
-					if(kingOk) {
-						moves.push({
-							f: king.p,
-							t: spec.k[spec.k.length-1],
-							c: null,
-							cg: rook.p,
-						});
+						if(j>=last+d) {
+							moves.push({
+								f: king.p,
+								t: pos | step*(j-last)<<16,
+								c: null,
+								cg: rook.p,
+							});
+						}
 					}
 				}
 			}
