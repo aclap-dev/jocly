@@ -966,11 +966,18 @@ exports.games = (function () {
 		"fairy-set-view.js",
 		"cazaux/metamachy-view.js"
 	]
-	var modelScripts_30 = [
+	var modelScripts_capablanca = [
+
 		"base-model.js",
 		"grid-geo-model.js",
 		"fairy-move-model.js",
 		"prelude-model.js",
+		"capa10x8/capablanca-model.js"
+	]
+	var modelScripts_30 = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"fairy-move-model.js",
 		"capa10x8/capablanca-model.js"
 	]
 	var config_view_skins_preload_10 = [
@@ -1015,6 +1022,12 @@ exports.games = (function () {
 		config_view_skins_9
 	]
 	var config_view_js_30 = [
+		"base-view.js",
+		"grid-board-view.js",
+		"fairy-set-view.js",
+		"capa10x8/capablanca-view.js"
+	]
+	var config_view_js_capablanca = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
@@ -3562,7 +3575,7 @@ exports.games = (function () {
 		},
 		{
 			"name": "capablanca-chess",
-			"modelScripts": modelScripts_30,
+			"modelScripts": modelScripts_capablanca,
 			"config": {
 				"status": true,
 				"model": {
@@ -3580,7 +3593,7 @@ exports.games = (function () {
 					},
 					"gameOptions": config_model_gameOptions,
 					"obsolete": false,
-					"js": modelScripts_30,
+					"js": modelScripts_capablanca,
 					"description": {
 						"en": "res/rules/capablanca/capablanca-description.html"
 					},
@@ -3605,11 +3618,11 @@ exports.games = (function () {
 					"animateSelfMoves": false,
 					"switchable": true,
 					"sounds": config_view_sounds,
-					"js": config_view_js_30,
+					"js": config_view_js_capablanca,
 					"useAutoComplete": true
 				}
 			},
-			"viewScripts": config_view_js_30
+			"viewScripts": config_view_js_capablanca
 		},
 		{
 			"name": "carrera-chess",
