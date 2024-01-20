@@ -100,11 +100,8 @@
 						var id=pieceIDs[j++];  // next piece
 						while(id=='/' || id==' ') id=pieceIDs[j++]; // but skip slash or space
 						var pieceIndex=this.board[pos];
-						var offs=aGame.cbVar.prelude.blackTypeOffsets;
 						var piece=this.pieces[pieceIndex];
-						this.zSign^=aGame.bKey(piece);
 						piece.t=abbrev2typeIndex(id,who); // 'promote' the piece to the desired type
-						this.zSign^=aGame.bKey(piece);
 					}
 				}
 				this.cbPlacePieces(aGame); // this sorts the piece list again, based on the new piece values
