@@ -634,13 +634,16 @@
 								for(var i=1; i<n; i++) {
 									to = map[i];
 									victim = $this.board[to];
-									if(victim < 0 || $this.pieces[victim].s != $this.mWho) // to-square accessible
-										moves.push({
+									if(victim < 0 || $this.pieces[victim].s != $this.mWho) { // to-square accessible
+										var m={
 											f: from,
 											t: to,
 											c: victim < 0 ? null : victim,
 											a: aGame.g.pTypes[piece.t].abbrev
-										});
+										}
+										if(victim >= 0) m.ep=false; // captures must have this
+										moves.push(m);
+									}
 						} } }
 					});
 			}	}
