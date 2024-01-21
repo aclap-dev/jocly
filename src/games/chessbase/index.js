@@ -1362,12 +1362,14 @@ exports.games = (function () {
 		"base-model.js",
 		"grid-geo-model.js",
 		"fairy-move-model.js",
+		"prelude-model.js",
 		"cazaux/zanzibar-s-model.js"
 	]
 	var config_view_js_zanzibars = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
+		"prelude-view.js",
 		"cazaux/zanzibar-view.js"
 	]
 	var modelScripts_acedrex = [
@@ -6731,19 +6733,19 @@ exports.games = (function () {
 					"title-en": "Chu Shogi",
 					"summary": "Historic 12x12 Shogi variant",
 					"rules": {
-						"en": "shogi/chu-shogi-rules.html"
+						"en": "res/rules/shogi/chu-shogi-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
 					"thumbnail": "res/rules/shogi/chu-shogi-thumb.png",
 					"released": 1396536978,
 					"credits": {
-						"en": "shogi/shogi-credits.html"
+						"en": "res/rules/shogi/shogi-credits.html"
 					},
 					"gameOptions": config_model_gameOptions_2,
 					"js": modelScripts_108,
 					"description": {
-						"en": "shogi/chu-shogi-description.html"
+						"en": "res/rules/shogi/chu-shogi-description.html"
 					},
 					"levels": config_model_levels_15
 				},
@@ -6751,8 +6753,8 @@ exports.games = (function () {
 					"title-en": "Chessbase view",
 					"visuals": {
 						"600x600": [
-							"res/visuals/tori-600x600-3d.jpg",
-							"res/visuals/tori-600x600-2d.jpg"
+							"res/visuals/chu-shogi-600x600-3d.jpg",
+							"res/visuals/chu-shogi-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
