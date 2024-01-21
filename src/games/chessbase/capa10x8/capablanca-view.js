@@ -62,7 +62,5 @@
 	}
 
 	/* rely on grid-board default for making pieces hop */
-}
-
 
 })();
