@@ -1028,12 +1028,14 @@
 							break;
 						}
 						if(j>=last+d) {
-							moves.push({
+							move={
 								f: king.p,
 								t: pos | step*(j-last)<<16,
 								c: null,
 								cg: rook.p,
-							});
+							}
+							if(j>last) move.a=pType.abbrev;
+							moves.push(move);
 						}
 					}
 				}
@@ -1205,7 +1207,8 @@
 		function NaturalFormat() {
 			var str;
 			if(self.cg!==undefined) {
-				str=cbVar.castle[self.f+"/"+self.cg].n;
+				if(self.t>>16) str=self.a+cbVar.geometry.PosName(self.f)+'~'+cbVar.geometry.PosName(self.t&0xffff);
+				else str=cbVar.castle[self.f+"/"+self.cg].n;
 			} else {
 				str=self.a || '';
 				str+=cbVar.geometry.PosName(self.f);

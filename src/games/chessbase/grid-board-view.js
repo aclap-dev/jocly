@@ -312,6 +312,7 @@
 	});
 
 	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
+		if(aMove.cg!==undefined) return (zFrom+zTo+3000)/2; // castling, King hops over Rook
 		var d=aGame.g.distGraph[aMove.f][aMove.t];
 		if(d==1) return (zFrom+zTo)/2; // adjacent: always slide
 		var types=aGame.cbVar.pieceTypes;
@@ -322,11 +323,11 @@
 				for(var j=0; j<g.length; j++) { // for all directions
 					var path=g[j], first=path[0]&0xffff;
 					if(first==aMove.t) // does first step go to where we went?
-						return (zFrom+zTo+1100+100*d)/2; // yes, jump
+						return (zFrom+zTo+2200+200*d)/2; // yes, jump
 					for(var k=1; k<path.length; k++) {
 						if((path[k]&0xffff)==aMove.t) {
 							if(aMove.c && path[k]&aGame.cbConstants.FLAG_SCREEN_CAPTURE)
-								return (zFrom+zTo+1300)/2; // screen capture: jump
+								return (zFrom+zTo+2600)/2; // screen capture: jump
 							hit=first; // remember first step of path
 						}
 					}
@@ -334,7 +335,7 @@
 				// no, so intermediate squares must be visited
 				if(hit>=0) {
 					d=aGame.g.distGraph[aMove.f][hit];
-					if(d>1) return (zFrom+zTo+1100+100*d)/2; // non-contiguous path: jump
+					if(d>1) return (zFrom+zTo+2200+200*d)/2; // non-contiguous path: jump
 					g=aGame.cbVar.geometry;
 					var dx=g.C(aMove.t)-g.C(aMove.f), dy=g.R(aMove.t)-g.R(aMove.f);
 					if(dx*dy*(dx*dx-dy*dy)) { // move is oblique
