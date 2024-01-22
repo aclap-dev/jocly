@@ -1362,14 +1362,12 @@ exports.games = (function () {
 		"base-model.js",
 		"grid-geo-model.js",
 		"fairy-move-model.js",
-		"prelude-model.js",
 		"cazaux/zanzibar-s-model.js"
 	]
 	var config_view_js_zanzibars = [
 		"base-view.js",
 		"grid-board-view.js",
 		"fairy-set-view.js",
-		"prelude-view.js",
 		"cazaux/zanzibar-view.js"
 	]
 	var modelScripts_acedrex = [
