@@ -6283,7 +6283,7 @@ exports.games = (function () {
 					"title-en": "Werewolf Chess",
 					"summary": "a contageous Werewolf replaces the Queen",
 					"rules": {
-						"en": "werewolf-rules.html"
+						"en": "res/rules/werewolf-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
