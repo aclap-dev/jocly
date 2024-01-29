@@ -200,7 +200,7 @@
       initial: [{s:1,p:4},{s:1,p:7},{s:-1,p:136},{s:-1,p:139}],
       },
       11: {
-      name : 'eagle',
+      name : 'griffon',
       abbrev : 'H',
       aspect : 'fr-griffon',
       graph : this.cbGriffonGraph(geometry),
@@ -252,6 +252,17 @@
       value : 7.5,
       initial: [],
       },
+      17: {
+      name : 'sultan',
+      abbrev : 'C',
+      aspect : 'fr-caliph',
+      graph : this.cbMergeGraphs(geometry,
+                  this.cbShortRangeGraph(geometry,[[-1,-1],[1,1],[1,-1],[-1,1]]),
+                  this.cbKnightGraph(geometry),
+                  this.cbCamelGraph(geometry)),
+      value : 7.5,
+      initial: [],
+      },
 		}
 
 		// defining types for readable promo cases
@@ -299,8 +310,8 @@
 			prelude: [{
 				panelWidth: 2, // two buttons per row 
 				panelBackground: "/res/rules/duodecimal/timurid-parameter-panel.png",
-				setups: ["XQX","HQH","XLX","HLH","XSX","HSH"], 
-				castle: [ undefined, undefined, undefined, undefined, undefined],
+				setups: ["XQX","HQH","XLX","HLH","XSX","HUH","XCX","HCH"], 
+				castle: [ undefined, undefined, undefined, undefined, undefined, undefined, undefined],
 				squares: { 1:[15,18,20], '-1':[123,126,128] },
 				//participants: promoChoice, // adapt the auto-generated promotion choice to the selected variant
 				persistent: true, // stick with selection for all subsequent games
