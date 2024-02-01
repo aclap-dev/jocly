@@ -172,7 +172,7 @@
       abbrev : 'Q',
       aspect : 'fr-queen',
       graph : this.cbQueenGraph(geometry,confine),
-      value : 10,
+      value : 10.2,
       initial: [{s:1,p:18},{s:-1,p:126}],
       },
       8: {
@@ -212,7 +212,7 @@
       abbrev : 'J',
       aspect : 'fr-camel',
       graph : this.cbShortRangeGraph(geometry,[[-3,-1],[-3,1],[3,-1],[3,1],[1,3],[1,-3],[-1,3],[-1,-3]]),
-      value : 2.7,
+      value : 2.6,
       initial: [{s:1,p:2},{s:1,p:9},{s:-1,p:134},{s:-1,p:141}],
       },
        13: {
@@ -220,7 +220,7 @@
       abbrev : 'X',
       aspect : 'fr-ship',
       graph : this.cbShipGraph(geometry),
-      value : 4.8,
+      value : 4.9,
       initial: [{s:1,p:15},{s:1,p:20},{s:-1,p:123},{s:-1,p:128}],
       },
       14: {
@@ -253,14 +253,14 @@
       initial: [],
       },
       17: {
-      name : 'sultan',
+      name : 'emir',
       abbrev : 'C',
       aspect : 'fr-caliph',
       graph : this.cbMergeGraphs(geometry,
                   this.cbShortRangeGraph(geometry,[[-1,-1],[1,1],[1,-1],[-1,1]]),
                   this.cbKnightGraph(geometry),
                   this.cbCamelGraph(geometry)),
-      value : 7.5,
+      value : 8,
       initial: [],
       },
 		}

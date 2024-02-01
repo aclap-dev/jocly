@@ -5305,11 +5305,11 @@ exports.games = (function () {
 					"title-en": "LeyChessAlpha",
 					"summary": "Chess on 12x12 with fairy pieces",
 					"rules": {
-						"en": "res/rules/metamachy/metamachy-rules.html"
+						"en": "res/rules/duodecimal/leychessalpha-rules.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "res/rules/metamachy/metamachy-thumb.png",
+                    "thumbnail": "res/rules/duodecimal/leychessalpha-thumb.png",
 					"released": 1402412178,
 					"credits": {
 						"en": "res/rules/duodecimal/leychessalpha-credits.html"
@@ -5526,7 +5526,8 @@ exports.games = (function () {
 
 					"summary": "FantasticXIII and Gigachess II on 16x16",
 					"rules": {
-						"en": "res/rules/fantasticXIII/bigorra-rules.html"
+						"en": "res/rules/fantasticXIII/bigorra-rules.html",
+                        "fr": "res/rules/fantasticXIII/bigorra-rules-fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -5871,7 +5872,8 @@ exports.games = (function () {
 					"title-en": "Gigachess II",
 					"summary": "Chess on 14x14 with fairy pieces",
 					"rules": {
-						"en": "res/rules/gigachess/gigachessII-rules.html"
+						"en": "res/rules/gigachess/gigachessII-rules.html",
+                        "fr": "res/rules/gigachess/gigachessII-rules_fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -6103,7 +6105,8 @@ exports.games = (function () {
 					"title-en": "Zanzibar S",
 					"summary": "Extended Metamachy - 12x12",
 					"rules": {
-						"en": "res/rules/metamachy/zanzibar-s-rules.html"
+						"en": "res/rules/metamachy/zanzibar-s-rules.html",
+                        "fr": "res/rules/metamachy/zanzibar-s-rules_fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -6924,7 +6927,8 @@ exports.games = (function () {
 					"title-en": "Grant acedrex",
 					"summary": "Medieval Castillan chess variant",
 					"rules": {
-						"en": "res/rules/historical/grant-acedrex-rules.html"
+						"en": "res/rules/historical/grant-acedrex-rules.html",
+                        "fr": "res/rules/historical/grant-acedrex-rules_fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
