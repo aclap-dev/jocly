@@ -1,0 +1,140 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .piece-icon {
+        width: 70px;
+        height: auto;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .piece-icon-promo {
+        width: 50px;
+        height: 50px;
+    }
+
+    #promo {
+        width: 200px;
+        margin: 0 auto;
+    }
+</style>
+
+<h1>Initial setup</h1>
+
+
+<p>The board has 10 x 10 squares. </p>
+<img  src='{GAME}/res/visuals/hectochess-600x600-2d.jpg'>
+
+
+
+<h1>Pieces</h1>
+<h2>Champion</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/champion.png"/>
+</p>
+<p class='piece-details'>The Champion leaps two spaces in any orthogonal or diagonal direction, or one space in any orthogonal direction. It is a compound of the Alfil, Dababbah, and Wazir. It was introduced in Omega Chess, and it moves the same as it does in that game.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/champion.png'>
+</p>
+<h2>Wizard</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/wizard.png"/>
+</p>
+<p class='piece-details'>The Wizard moves one space diagonally or leaps to a space one file and three ranks away or three files and one rank away. It is a compound of the Ferz and the Camel. It was introduced in Omega Chess, and it moves the same as it does in that game. </p>
+<div style='clear:both'></div>
+<p>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/wizard.png'>
+</p>
+<h2>Marshall</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/chancellor.png"/>
+</p>
+<p class='piece-details'>It combines the move of Rook and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca and many others like Grand Chess or Gothic Chess. (under many other names: Champion, Guard, Empress, Concubine, Chancellor, etc. The later is sometimes preferred, however it is confusing since Capablanca used it once for R+N and once for B+N. It is an Elephant in Seirawan Chess).</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/marshall.png'>
+</p>
+<h2>Archbishop</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/archbishop.png"/>
+</p>
+<p class='piece-details'>It combines the move of Bishop and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca, Modern and many others like Grand Chess or Gothic Chess. (under many other names: Centaur, Minister, Equerry, Janus, Archbishop, Princess, Chancellor, etc. It is a Hawk in Seirawan Chess). </p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/cardinal.png'>
+</p>
+<h2>Leo</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/star.png"/>
+</p>
+<p class='piece-details'>The Leo moves as a Queen but must hop over an intervening piece to capture.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/star.png'>
+</p>
+<h2>King</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/king.png"/>
+</p>
+<p class='piece-details'>Moves as in usual Chess but castle 2 or 3 squares away with the rook.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
+</p>
+<h2>Queen</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/queen.png"/>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/queen.png'>
+</p>
+<h2>Bishop</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/bishop.png"/>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/bishop.png'>
+</p>
+<h2>Knight</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/knight.png"/>
+</p>
+<p class='piece-details'>Moves as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/knight.png'>
+</p>
+<h2>Rook</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/rook.png"/>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rook.png'>
+</p>
+
+</p>
+<h1>Promotions table</h1>
+<div id="promo">
+<p>
+<img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-pawn.png'>promotes to <img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-queen.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-marshall.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-cardinal.png'>
+<img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-rook.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-champion.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-star.png'>
+<img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-knight.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-bishop.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-wizard.png'>
+</p>
+
+
+<br clear="all">
+
+

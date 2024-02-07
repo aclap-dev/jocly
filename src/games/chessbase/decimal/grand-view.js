@@ -10,7 +10,7 @@
 
 (function() {
 	
-	View.Game.cbPromoSize = 1500;
+	View.Game.cbPromoSize = 1100;
 
 	View.Game.cbDefineView = function() {
 
@@ -26,17 +26,17 @@
 				"2d": this.cbGridBoard.coordsFn.call(this,shakoBoard2d),
 				"3d": this.cbGridBoard.coordsFn.call(this,shakoBoard3d),
 			},
-			boardLayout: [
-	      		".#.#.#.#.#",
+			boardLayout: [	      		
 	     		"#.#.#.#.#.",
-	      		".#.#.#.#.#",
+	     		".#.#.#.#.#",	      		
 	     		"#.#.#.#.#.",
-	      		".#.#.#.#.#",
+	     		".#.#.#.#.#",	      		
 	     		"#.#.#.#.#.",
-	      		".#.#.#.#.#",
+	     		".#.#.#.#.#",	      		
 	     		"#.#.#.#.#.",
-	      		".#.#.#.#.#",
+	     		".#.#.#.#.#",	      		
 	     		"#.#.#.#.#.",
+	     		".#.#.#.#.#",
 			],
 			board: {
 				"2d": {

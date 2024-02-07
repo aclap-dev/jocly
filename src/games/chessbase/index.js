@@ -1093,6 +1093,12 @@ exports.games = (function () {
 		"fairy-move-model.js",
 		"decimal/grand-model.js"
 	]
+	var modelScripts_hectochess = [
+		"base-model.js",
+		"grid-geo-model.js",
+		"fairy-move-model.js",
+		"decimal/hectochess-model.js"
+	]
 	var config_view_js_31 = [
 		"base-view.js",
 		"grid-board-view.js",
@@ -3809,6 +3815,58 @@ exports.games = (function () {
 						"600x600": [
 							"res/visuals/grand-600x600-3d.jpg",
 							"res/visuals/grand-600x600-2d.jpg"
+						]
+					},
+					"xdView": true,
+					"css": config_view_css,
+					"preferredRatio": 1,
+					"useShowMoves": true,
+					"useNotation": true,
+					"module": "chessbase",
+					"defaultOptions": config_view_defaultOptions,
+					"skins": config_view_skins_11,
+					"animateSelfMoves": false,
+					"switchable": true,
+					"sounds": config_view_sounds,
+					"js": config_view_js_31,
+					"useAutoComplete": true
+				}
+			},
+			"viewScripts": config_view_js_31
+		},
+		{
+			"name": "hectochess",
+			"modelScripts": modelScripts_hectochess,
+			"config": {
+				"status": true,
+				"model": {
+					"title-en": "Hectochess",
+					"summary": "Chess on 10x10 with champions and wizards",
+					"rules": {
+						"en": "res/rules/decimal/hectochess-rules.html",
+                        "fr": "res/rules/decimal/hectochess-rules_fr.html"
+					},
+					"module": "chessbase",
+					"plazza": "true",
+					"thumbnail": "res/rules/decimal/hectochess-thumb.png",
+					"released": 1404985842,
+					"credits": {
+						"en": "res/rules/decimal/hectochess-credits.html"
+					},
+					"gameOptions": config_model_gameOptions,
+					"obsolete": false,
+					"js": modelScripts_hectochess,
+					"description": {
+						"en": "res/rules/decimal/hectochess-description.html"
+					},
+					"levels": config_model_levels_5
+				},
+				"view": {
+					"title-en": "Chessbase view",
+					"visuals": {
+						"600x600": [
+							"res/visuals/hectochess-600x600-3d.jpg",
+							"res/visuals/hectochess-600x600-2d.jpg"
 						]
 					},
 					"xdView": true,
