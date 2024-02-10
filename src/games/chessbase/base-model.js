@@ -56,8 +56,14 @@
 				continue;
 			deltas.forEach(function(delta) {
 				var pos1=geometry.Graph(pos,delta);
-				if(pos1!=null && (!confine || (pos1 in confine))) 
-					graph[pos].push($this.cbTypedArray([pos1 | (confine && confine[pos1]=='b' ? flags&~FLAG_MOVE : flags)]));
+				if(pos1!=null) {
+					var f=flags;
+					if(confine) {
+						if(!(pos1 in confine)) return;
+						if(confine[pos1] == 'b') f &= ~(FLAG_MOVE|FLAG_SPECIAL);
+					}
+					if(!flags || f) graph[pos].push($this.cbTypedArray([pos1 | f]));
+				}
 			});
 		}
 		return graph;
@@ -82,9 +88,9 @@
 					var brouhaha=0;
 					if(confine) {
 						if(!(pos1 in confine)) break;
-						if(confine[pos1]=='b') brouhaha=FLAG_MOVE;
+						if(confine[pos1]=='b') brouhaha=FLAG_MOVE|FLAG_SPECIAL;
 					}
-					if(flags & ~brouhaha) direction.push(pos1 | flags & ~brouhaha);
+					if(!flags || flags & ~brouhaha) direction.push(pos1 | flags & ~brouhaha);
 					if(brouhaha || ++dist==maxDist)
 						break;
 					pos1=geometry.Graph(pos1,delta);

@@ -14,11 +14,12 @@
 
 	// various alternative castling rules (default is f -> c or i)
 	var janus={ // asymmetric, to b- or i-file
-		"4/0": {k:[3,2,1],r:[1,2],n:"O-O"},
-		"4/9": {k:[5,6,7,8],r:[8,7],n:"O-O-O"},
-		"74/70": {k:[73,72,71],r:[71,72],n:"O-O"},
-		"74/79": {k:[75,76,77,78],r:[78,77],n:"O-O-O"},
-	}
+        "4/0": {k:[3,2,1],r:[1,2],n:"O-O"},
+        "4/9": {k:[5,6,7,8],r:[8,7],n:"O-O-O"},
+        "74/70": {k:[73,72,71],r:[71,72],n:"O-O"},
+        "74/79": {k:[75,76,77,78],r:[78,77],n:"O-O-O"},
+    } 
+    
 	var mirrored={ // e -> b or h
 		"4/0": {k:[3,2,1],r:[1,2],n:"O-O"},
 		"4/9": {k:[5,6,7],r:[8,7,6],n:"O-O-O"},
@@ -54,18 +55,20 @@
 
 		var p=this.cbPiecesFromFEN(geometry, "rnabqkbmnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNABQKBMNR");
 
+        // short syntax for castling (kingOrigin, shortKingDesination, shortRook, longKingDestination, longRook)
+        
 		p.prelude=[{
 			panelWidth: 2, // two buttons per row
 			panelBackground: "/res/rules/capablanca/capablanca-panel.png",
 			//	 Capablanca   Gothic      Bird     Carrera    Embassy    Ladorean  Grotesque  Schoolbook  Univers     Janus
-			setups: ["NABQKBMN","NBQMKABN","NBMQKABN","ANBQKBNM","NBQKMABN","BQNKANMB","BQNKMNAB","QNBAKBNM","BNMQKANB","ANBQKBNA"],
+			setups: ["NABQKBMN","NBQMKABN","NBMQKABN","ANBQKBNM","NBQKMABN","BQNKANMB","BQNKMNAB","QNBAKBNM","BNMQKANB","ANBKQBNA"],
 			castle: [ p.castle,  p.castle,  p.castle, undefined,  mirrored,  mirror2,   mirror_f,  flexible,  flexible,   janus   ],
 			squares: {1:[1,2,3,4,5,6,7,8], '-1':[71,72,73,74,75,76,77,78]},
 			participants: p.promoChoice, // adapt auto-generated promotion choice to selected variant (Janus has no Marshall!)
 			persistent: true, // stick with selection for all subsequent games
 		},0];
-
-	        return p;
+        p.setValues({P:1, N:2.9, B:3.1, R:5, Q:9, M:7.8, A:6});
+	    return p;
 	}
 	
 })();
