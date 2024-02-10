@@ -139,8 +139,8 @@
 			this.kings[this.mWho*geometry.C(move.f)]--;
 		if(move.c != null) {
 			var victim = this.pieces[move.c];
-			victim.t = Model.Game.demoted[victim.t]; // demote and flip orientation
 			if(victim.t < 2) this.kings[victim.s*geometry.C(move.t)]--; // pawn captured
+			victim.t = Model.Game.demoted[victim.t]; // demote and flip orientation
 			var hand = Model.Game.hand[this.mWho][victim.t];
 			if(hand !== undefined) { // not all types have to go in hand!
 				victim.s *= -1;
