@@ -439,13 +439,15 @@ exports.games = (function () {
 	var modelScripts_101 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
+		"locust-move-model.js",
 		"werewolf-model.js"
 	]
 	var modelScripts_102 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
+		"locust-move-model.js",
 		"decimal/elven-model.js"
 	]
 	var modelScripts_103 = [
@@ -479,19 +481,21 @@ exports.games = (function () {
 	var modelScripts_108 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"locust-move-model.js",
 		"shogi/chu-shogi-model.js"
 	]
 	var modelScripts_109 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
+		"locust-move-model.js",
 		"makromachy-model.js"
 	]
 	var modelScripts_110 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
+		"locust-move-model.js",
 		"minjiku-shogi-model.js"
 	]
 	var config_model_levels_11 = {
@@ -969,7 +973,7 @@ exports.games = (function () {
 	var modelScripts_30 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
 		"prelude-model.js",
 		"capa10x8/capablanca-model.js"
 	]
@@ -1077,7 +1081,7 @@ exports.games = (function () {
 	var modelScripts_34 = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
 		"decimal/grand-model.js"
 	]
 	var config_view_js_31 = [
@@ -1287,7 +1291,7 @@ exports.games = (function () {
 	var modelScripts_fantasticXIII = [
  		"base-model.js",
  		"grid-geo-model.js",
- 		"fairy-move-model.js",
+ 		"fairy-piece-model.js",
  		"cazaux/fantasticXIII-model.js"
  	]
  	var config_view_js_fantasticXIII = [
@@ -1299,7 +1303,7 @@ exports.games = (function () {
 	var modelScripts_bigorra = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"cazaux/bigorra-model.js"
  	]
  	var config_view_js_bigorra = [
@@ -1322,7 +1326,7 @@ exports.games = (function () {
 	var modelScripts_gigaII = [
 		"base-model.js",
 		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
 		"cazaux/gigachessII-model.js"
 	]
 	var config_view_js_gigaII = [
@@ -1334,7 +1338,7 @@ exports.games = (function () {
 	var modelScripts_wtimurid = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"duodecimal/wild-timurid-model.js"
  	]
  	var config_view_js_wtimurid = [
@@ -1346,7 +1350,7 @@ exports.games = (function () {
 	var modelScripts_timurid = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"duodecimal/timurid-model.js"
  	]
  	var config_view_js_timurid = [
@@ -1358,7 +1362,7 @@ exports.games = (function () {
 	var modelScripts_wbabur = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"duodecimal/wild-babur-model.js"
  	]
  	var config_view_js_wbabur = [
@@ -1370,7 +1374,7 @@ exports.games = (function () {
 	var modelScripts_babur = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"duodecimal/babur-model.js"
  	]
  	var config_view_js_babur = [
@@ -1382,7 +1386,7 @@ exports.games = (function () {
 	var modelScripts_wmirza = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-move-model.js",
+        "fairy-piece-model.js",
  		"duodecimal/wild-mirza-model.js"
  	]
  	var config_view_js_wmirza = [
@@ -1394,7 +1398,7 @@ exports.games = (function () {
 	var modelScripts_zanzibars = [
 		"base-model.js",
 		"grid-geo-model.js",
-		"fairy-move-model.js",
+		"fairy-piece-model.js",
 		"cazaux/zanzibar-s-model.js"
 	]
 	var config_view_js_zanzibars = [
