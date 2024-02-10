@@ -149,6 +149,24 @@
 		return this.cbSymmetricGraph(geometry,[10,11,20,21,22],confine);
 	}
 
+        Model.Game.cbCastlingDef(wKing, wShortDest, wShortRook, wLongDest, wLongRook, bKing, bShortDest, bShortRook, bLongDest, bLongRook) {
+
+		function OneCastling(king, dest, rook, notation) {
+			var def={k: [], r: [], n: notation};
+			var i, step=(dest<king ? -1 : 1);
+			i=king; do def.k.push(i+=step); while(i!=dest);
+			i=rook; do def.r.push(i-=step); while(i!=dest-step);
+			return def;
+		}
+
+		var def = {};
+		def[wKing + '/' + wShortRook] = OneCastling(wKing, wShortDest, wShortRook, 'O-O');
+		def[bKing + '/' + bShortRook] = OneCastling(bKing, bShortDest, bShortRook, 'O-O');
+		def[wKing + '/' + wLongRook] = OneCastling(wKing, wLongDest, wLongRook, 'O-O-O');
+		def[bKing + '/' + bLongRook] = OneCastling(bKing, bLongDest, bLongRook, 'O-O-O');
+		return def;
+        }
+
 	Model.Game.cbPiecesFromFEN = function(geometry, fen, pawnRank, maxPush,confine) {
 		var $this=this;
 		var locations=[];
