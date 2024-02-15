@@ -32,7 +32,7 @@
 					display: this.cbDisplayPieceFn(this.cbChuPieceStyle3D),
 				},
 				"2d": {
-					file: this.mViewOptions.fullPath + "/res/fairy/tenjiku-shogi-picto-sprites.png",
+					file: this.mViewOptions.fullPath + "/res/shogi/tenjiku-shogi-picto-sprites.png",
 					clipwidth: 100,
 					clipheight: 100,
 				},
@@ -55,10 +55,12 @@
 			"sh-rook":		{"2d":{clipx:300}},
 			"sh-horse":		{"2d":{clipx:3200}},
 			"sh-dragon":		{"2d":{clipx:1500}},
+			"sh-falcon":		{"2d":{clipx:5100}},
+			"sh-eagle":		{"2d":{clipx:1100}},
 			"sh-queen":		{"2d":{clipx:400}},
 			"sh-lion":		{"2d":{clipx:1200}},
 			"sh-king":		{"2d":{clipx:500}},
-			"sh-tokin":		{"2d":{clipx:3700}},
+			"sh-tokin":		{"2d":{clipx:3500}},
 			"sh-promotion-elephant":{"2d":{clipx:4400}},
 			"sh-promotion-sweeper":	{"2d":{clipx:1600}},
 			"sh-promotion-climber":	{"2d":{clipx:2400}},
@@ -76,6 +78,37 @@
 			"sh-promotion-dragon":	{"2d":{clipx:4300}},
 			"sh-promotion-falcon":	{"2d":{clipx:5100}},
 			"sh-promotion-eagle":	{"2d":{clipx:1100}},
+			"sh-iron":		{"2d":{clipx:6000}},
+			"sh-knight":		{"2d":{clipx:100}},
+			"sh-buffalo":		{"2d":{clipx:2000}},
+			"sh-wolf":		{"2d":{clipx:4100}},
+			"sh-dog":		{"2d":{clipx:4100}},
+			"sh-stone":		{"2d":{clipx:6900}},
+			"sh-angryboar":		{"2d":{clipx:3700}},
+			"sh-flyingdragon":	{"2d":{clipx:5200}},
+			"sh-violentox":		{"2d":{clipx:5300}},
+			"sh-catsword":		{"2d":{clipx:3800}},
+			"sh-vertsoldier":	{"2d":{clipx:5500}},
+			"sh-sidesoldier":	{"2d":{clipx:6700}},
+			"sh-chariot":		{"2d":{clipx:600}},
+			"sh-lionhawk":		{"2d":{clipx:4800}},
+			"sh-freeeagle":		{"2d":{clipx:2600}},
+			"sh-bishopgeneral":	{"2d":{clipx:6500}},
+			"sh-rookgeneral":	{"2d":{clipx:6400}},
+			"sh-vicegeneral":	{"2d":{clipx:6600}},
+			"sh-greatgeneral":	{"2d":{clipx:6300}},
+			"sh-demon":		{"2d":{clipx:900}},
+			"sh-promotion-bishgen":	{"2d":{clipx:6200}},
+			"sh-promotion-rookgen":	{"2d":{clipx:6100}},
+			"sh-promotion-vicegen":	{"2d":{clipx:6600}},
+			"sh-promotion-greatgen":{"2d":{clipx:6300}},
+			"sh-promotion-demon":	{"2d":{clipx:900}},
+			"sh-promotion-vertsol":	{"2d":{clipx:5600}},
+			"sh-promotion-sidesol":	{"2d":{clipx:6800}},
+			"sh-promotion-chariot":	{"2d":{clipx:800}},
+			"sh-promotion-buffalo":	{"2d":{clipx:1900}},
+			"sh-promotion-multigen":{"2d":{clipx:3900}},
+			"sh-promotion-tetrarch":{"2d":{clipx:7000}},
 			"sh-jade": {
 				"2d": {
 					clipx: 500,
@@ -1000,6 +1033,666 @@
 						diffuse: {
 							texturesImg: {
 								diffImg : "/res/shogi/diffusemaps/king-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-iron": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/iron-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-catsword": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/catsword-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-angryboar": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/angryboar-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-flyingdragon": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/flyingdragon-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-violentox": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/violentox-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-evilwolf": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/wolf-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-stone": {
+			mesh: {
+				jsFile:"/res/shogi/n-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/dai-diffusemaps/stone-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-buffalo": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/buffalo-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-dog": {
+			mesh: {
+				jsFile:"/res/shogi/p-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/dog-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-vertsoldier": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/verticalsoldier-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-sidesoldier": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/sidesoldier-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-chariot": {
+			mesh: {
+				jsFile:"/res/shogi/b-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/chariotsoldier-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-lionhawk": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/hawk-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-freeeagle": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/freeeagle-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-bishopgeneral": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/bishopgeneral-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-rookgeneral": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/rookgeneral-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-vicegeneral": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/vicegeenral-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-greatgeneral": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/greatgeneral-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-demon": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/demon-b.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-bishgen": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/bishopgeneral-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-rookgen": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/rookgeneral-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-vicegen": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/vicegeneral-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-greatgen": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/greatgeneral-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-demon": {
+			mesh: {
+				jsFile:"/res/shogi/j-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/demon-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-vertsol": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/verticalsoldier-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-sidesol": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/sidesoldier-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-chariot": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/chariotsoldier-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-buffalo": {
+			mesh: {
+				jsFile:"/res/shogi/g-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-multigen": {
+			mesh: {
+				jsFile:"/res/shogi/p-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/multigeneral-r.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/shogi/tile-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+
+		"sh-promotion-tertrarch": {
+			mesh: {
+				jsFile:"/res/shogi/b-tile.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/shogi/tenjiku-diffusemaps/tetrarch-r.jpg",
 							}
 						},
 						normal: {
