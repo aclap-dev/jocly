@@ -177,8 +177,8 @@
 	            	name: 'leon',
 	            	aspect: 'fr-lion',
 	            	graph: this.cbShortRangeGraph(geometry,[
-						[-1,3],[0,3],[1,3],[3,1],[3,0],[3,1],[-1,-3],[0,-3],
-						[-1,-3],[-3,-1],[-3,0],[-3,1]]),
+						[-1,3],[0,3],[1,3],[3,1],[3,0],[3,-1],[-1,-3],[0,-3],
+						[1,-3],[-3,-1],[-3,0],[-3,1]]),
 	            	value: 4.2,
 	            	abbrev: 'L',
 	            	initial: [{s:1,p:1},{s:1,p:10},{s:-1,p:133},{s:-1,p:142}],
@@ -281,9 +281,8 @@
 		SuperModelBoardGenerateMoves.apply(this,arguments); // call regular GenerateMoves method
 		// now consider special 2 cases king moves
 		var kPiece=this.pieces[this.board[this.kings[this.mWho]]];
-console.log("this.mWho"+this.mWho);
 		if(!kPiece.m && !this.check) {
-console.log("kPiece"+kPiece.p);
+
 
 			var lMoves=kingLongMoves[this.mWho][kPiece.p];
 			for(var i=0;i<lMoves.length;i++) {
@@ -331,5 +330,34 @@ console.log("kPiece"+kPiece.p);
 		
 			SuperModelBoardApplyMove.apply(this,arguments);
 	}
+
+	Model.Board.customGen = function(moves, move, aBoard) {
+
+
+
+		//move.c == null
+		var mid = move.f + move.t >> 1; // jumped-over square
+		var victim = aBoard.board[mid];
+
+		if(victim < 0) return; // slide did already reach move.t
+
+		moves.push({ // reach target through jump
+			f: move.f,
+			t: move.t,
+			c: move.c,
+			a: move.a
+		});
+
+		if(aBoard.pieces[victim].s != aBoard.mWho) // jumped over foe
+			moves.push({ // also try to capture it
+				f: move.f,
+				t: move.t,
+				c: move.c,
+				via: mid,
+				kill: victim,
+				a: move.a
+			});
+	}
+
 	
 })();
