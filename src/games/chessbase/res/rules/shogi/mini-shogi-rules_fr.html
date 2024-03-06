@@ -1,0 +1,60 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 300px;
+        margin: 0 auto;
+        display: inline-flex;
+    }
+</style>
+<p>Le Mini-shogi est une variante très répandue du Shogi(Échecs japonais).</p>
+
+<p>Pour gagner, vous devez mettre le roi de votre adversaire échec et mat.</p>
+
+<h2>Shogiban</h2>
+
+<p>Le tablier est de 5x5</p>
+
+<h2>Pièces</h2>
+<p>Pour chaque joueur :
+<ul>
+<li>1 Roi</li>
+<li>1 Général d’or</li>
+<li>1 Général d’argent</li>
+<li>1 Fou</li>
+<li>1 Tour</li>
+<li>1 Pion</li>
+</ul>
+</p>
+
+<h2>Disposition Initiale</h2>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shogi/mini-shogi-initial-2d.png"/></p>
+<p>Il existe un jeu de pièces 2d avec des pictogrammes pour les joueurs qui ne sont pas familier avec la représentation traditionnelle (kanjis).</p>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shogi/mini-shogi-initial-2d-western.png"/></p>
+
+<h2>Pièces</h2>
+
+
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/gold.png"/><b>Général d’or</b>: se déplace et capture sur les cases adjacentes dans n'importe quelle direction orthogonale ou diagonale avant.</p>
+<p><img class='piece-graph' src="{GAME}/res/rules/graphs/gold.png"/></p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/silver.png"/><b>Général d’argent</b>: se déplace et capture sur les cases adjacentes dans n'importe quelle diagonale ou dans la direction orthogonale vers l'avant.</p>
+<p><img class='piece-graph' src="{GAME}/res/rules/graphs/silver.png"/></p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/pawn.png"/><b>Pion</b> : se déplace <strong>et</strong> capture en avant.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/rook.png"/><b>Tour</b> : comme aux échecs classiques.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/bishop.png"/><b>Fou</b> : comme aux échecs classiques.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/king.png"/><b>Roi</b> : comme aux échecs classiques.</p>
+
+<h2>Promotion</h2>
+
+<ul>
+<li><b>Général d'argent et pion</b> se promeuvent en général d'or</li>
+<li><b>Tour et fou</b> obtienne en plus un déplacement de roi avec la promotion</li>
+</ul>
+
+
+<h2>Parachutage</h2>
+<p>Les pièces capturées deviennent des prisonniers et perdent leur promotion, elles sont conservées sur votre droite. Vous pouvez les utiliser à votre tour pour les remettre en jeu. Un joueur peut soit déplacer une de ses pièces, soit remettre en jeu un prisonnier pour son compte. </p>
+<p>Un pion ne peut pas mettre échec et mat immédiatement lorsqu'il est parachuté. C'est autorisé pour les autres pièces.</p> 
+<p>Une pièce ne peut pas être parachutée si aucun mouvement ultérieur n'est possible, donc un pion ne peut pas être lâché sur la dernière ligne.</p>
+
+

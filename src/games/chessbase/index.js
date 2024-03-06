@@ -1316,7 +1316,7 @@ exports.games = (function () {
 	var modelScripts_bigorra = [
  		"base-model.js",
  		"grid-geo-model.js",
-        "fairy-piece-model.js",
+ 		"fairy-piece-model.js",
  		"cazaux/bigorra-model.js"
  	]
  	var config_view_js_bigorra = [
@@ -6599,7 +6599,8 @@ exports.games = (function () {
 					"title-en": "Shogi",
 					"summary": "Japanese Chess",
 					"rules": {
-						"en": "res/rules/shogi-rules.html"
+						"en": "res/rules/shogi/shogi-rules.html",
+						"fr": "res/rules/shogi/shogi-rules_fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -6643,6 +6644,14 @@ exports.games = (function () {
 							"world": config_view_skins_world,
 							"camera": config_view_skins_camera
 						},
+						{
+							"name": "skin2dwestern",
+							"title": "2D Pictos",
+							"3d": false,
+							"preload": [
+								"image|/res/shogi/shogi-picto-sprites.png"
+							]
+						},
 						config_view_skins_2
 					],
 					"animateSelfMoves": false,
@@ -6663,7 +6672,8 @@ exports.games = (function () {
 					"title-en": "Mini-Shogi",
 					"summary": "Shogi on 5x5 with 6 pieces",
 					"rules": {
-						"en": "res/rules/mini-shogi-rules.html"
+						"en": "res/rules/shogi/mini-shogi-rules.html",
+						"fr": "res/rules/shogi/mini-shogi-rules_fr.html"
 					},
 					"module": "chessbase",
 					"plazza": "true",
@@ -6706,6 +6716,14 @@ exports.games = (function () {
 							],
 							"world": config_view_skins_world,
 							"camera": config_view_skins_camera
+						},
+						{
+							"name": "skin2dwestern",
+							"title": "2D Pictos",
+							"3d": false,
+							"preload": [
+								"image|/res/shogi/shogi-picto-sprites.png"
+							]
 						},
 						config_view_skins_2
 					],
