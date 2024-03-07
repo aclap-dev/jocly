@@ -33,7 +33,7 @@
 					display: this.cbDisplayPieceFn(this.cbToriPieceStyle3D),
 				},
 				"2d": {
-					file: this.mViewOptions.fullPath + "/res/shogi/tori-sprites.png",
+					file: this.mViewOptions.fullPath + "/res/shogi/tori-shogi-picto-sprites.png",
 					clipwidth: 100,
 					clipheight: 100,
 				},
@@ -333,5 +333,6 @@
 		},
 
 	});
+
 
 })();
