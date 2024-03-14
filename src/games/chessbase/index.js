@@ -6677,7 +6677,7 @@ exports.games = (function () {
 					},
 					"module": "chessbase",
 					"plazza": "true",
-					"thumbnail": "res/rules/shogi/shogi-thumb.png",
+					"thumbnail": "res/rules/shogi/mini-shogi-thumb.png",
 					"released": 1396536978,
 					"credits": {
 						"en": "res/rules/shogi/shogi-credits.html"
