@@ -175,7 +175,7 @@
 				
 				9: {
 					name: 'phoenix',
-					aspect: 'fr-lighthouse',
+					aspect: 'fr-phoenix',
 					graph: this.cbShortRangeGraph(geometry,
 						[[0,-1],[0,1],[1,0],[-1,0],[-2,2],[2,2],[2,-2],[-2,-2]]),
 					value: 3.1,
@@ -185,7 +185,7 @@
 				
 				10: {
 					name: 'cobra',
-					aspect: 'fr-buffalo',
+					aspect: 'fr-cobra',
 					graph: CobraGraph(2),
 					value: 4.8,
 					abbrev: 'C',
@@ -205,8 +205,8 @@
 				},
 				
 				12: {
-					name: 'aanca',
-					aspect: 'fr-eagle',
+					name: 'acromantula',
+					aspect: 'fr-spider',
 					graph: AancaGraph(),
 					value: 8.75,
 					abbrev: 'A',
