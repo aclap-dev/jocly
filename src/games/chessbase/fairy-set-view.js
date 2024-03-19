@@ -463,6 +463,11 @@
 					clipx: 7400,
 					},
 			},
+			"fr-spider": {
+				"2d": {
+					clipx: 7500,
+					},
+			},
 		},modifier);
 	}
 
@@ -2406,6 +2411,27 @@
 						normal: {
 							texturesImg: {
 								normalImg: "/res/fairy/terror/terror-normalmap.jpg",
+							}
+						}
+					}
+				}
+			},
+		},
+		"fr-spider": {
+			mesh: {
+				jsFile:"/res/fairy/critters/spider.js"
+			},
+			materials: {
+				mat0: {
+					channels: {
+						diffuse: {
+							texturesImg: {
+								diffImg : "/res/fairy/critters/spider-diffusemap.jpg",
+							}
+						},
+						normal: {
+							texturesImg: {
+								normalImg: "/res/fairy/critters/spider-normalmap.jpg",
 							}
 						}
 					}
