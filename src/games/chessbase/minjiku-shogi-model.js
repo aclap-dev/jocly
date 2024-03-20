@@ -302,7 +302,7 @@
 		    23: {
 			name : 'ninja',
 			abbrev : '+L',
-			aspect : 'fr-ship',
+			aspect : 'fr-gate',
 			graph : this.cbMergeGraphs(geometry,
 			            this.cbSkiGraph(geometry,[[1,0],[-1,0]],0,-1),
 			            this.cbShortRangeGraph(geometry,[[1,0],[0,-1],[-1,0],[0,1]],area,rifle),
