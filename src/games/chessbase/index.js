@@ -6926,7 +6926,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/decimal/scirocco-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_104,
 					"description": {
 						"en": "res/rules/decimal/scirocco-description.html"

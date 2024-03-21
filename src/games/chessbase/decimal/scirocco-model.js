@@ -503,9 +503,9 @@
 					pawnsLength=pawns.length;
 					for(var i=0;i<pawnsLength;i++)
 						switch(height-geometry.R(pawns[i].p)) {
-						case 2: distPromo[0]++; break;
-						case 3: distPromo[1]++; break;
-						case 4: distPromo[2]++; break;
+						case 4: distPromo[0]++; break;
+						case 5: distPromo[1]++; break;
+						case 6: distPromo[2]++; break;
 						}
 				}
 				pawns=material[-1].byType[2],pawnsLength;
@@ -513,9 +513,9 @@
 					pawnsLength=pawns.length;
 					for(var i=0;i<pawnsLength;i++)
 						switch(geometry.R(pawns[i].p)) {
-						case 1: distPromo[0]--; break;
-						case 2: distPromo[1]--; break;
-						case 3: distPromo[2]--; break;
+						case 3: distPromo[0]--; break;
+						case 4: distPromo[1]--; break;
+						case 5: distPromo[2]--; break;
 						}
 				}
 				if(distPromo[0]!=0)
