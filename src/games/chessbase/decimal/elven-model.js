@@ -36,14 +36,14 @@
 				var black=material[-1].count;
 				if(totalPieces[1] == 1) { // white king single
 					var n = totalPieces[-1];
-					if(n<4 && (black[4]==2 || n==2 && black[4]+black[5] || n==1)) {
+					if(n<4 && (black[6]==2 || n==2 && black[6]+black[2] || n==1)) {
 						this.mFinished=true;
 						this.mWinner=JocGame.DRAW;
 					}
 				}
 				if(totalPieces[-1] == 1) { // black king single
 					var n = totalPieces[1];
-					if(n<4 && (white[4]==2 || n==2 && white[4]+white[4])) {
+					if(n<4 && (white[6]==2 || n==2 && white[6]+white[2])) {
 						this.mFinished=true;
 						this.mWinner=JocGame.DRAW;
 					}
@@ -55,6 +55,10 @@
 					this.mWinner=JocGame.DRAW;					
 				}
 				
+				// Bishop pair (penalize single Bishop)
+				if(white[2]==1) evalValues.pieceValue-=0.25;
+				if(black[2]==1) evalValues.pieceValue+=0.25;
+				
 				// motivate pawns to reach the promotion line
 				var distPromo=aGame.cbUseTypedArrays?new Int8Array(3):[0,0,0];
 				var height=geometry.height;
@@ -63,9 +67,9 @@
 					pawnsLength=pawns.length;
 					for(var i=0;i<pawnsLength;i++)
 						switch(height-geometry.R(pawns[i].p)) {
-						case 2: distPromo[0]++; break;
-						case 3: distPromo[1]++; break;
-						case 4: distPromo[2]++; break;
+						case 4: distPromo[0]++; break;
+						case 5: distPromo[1]++; break;
+						case 6: distPromo[2]++; break;
 						}
 				}
 				pawns=material[-1].byType[2],pawnsLength;
@@ -73,9 +77,9 @@
 					pawnsLength=pawns.length;
 					for(var i=0;i<pawnsLength;i++)
 						switch(geometry.R(pawns[i].p)) {
-						case 1: distPromo[0]--; break;
-						case 2: distPromo[1]--; break;
-						case 3: distPromo[2]--; break;
+						case 3: distPromo[0]--; break;
+						case 4: distPromo[1]--; break;
+						case 5: distPromo[2]--; break;
 						}
 				}
 				if(distPromo[0]!=0)

@@ -6798,7 +6798,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/elven/elven-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_102,
 					"description": {
 						"en": "res/rules/elven/elven-description.html"
