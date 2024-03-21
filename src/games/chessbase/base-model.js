@@ -404,6 +404,7 @@
 			this.board[pos]=-1;
 		this.pieces.forEach(function(piece,index) {
 			piece.i=index;
+			if(piece.p<0) return;
 			$this.board[piece.p]=index;
 			var pType=aGame.g.pTypes[piece.t];
 			if(pType.isKing)
