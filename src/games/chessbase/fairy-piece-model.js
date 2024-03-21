@@ -23,14 +23,14 @@
 			var path = [], f = iflags, corner = geometry.Graph(start, vec), brouhaha=0;
 			while(f < -1 && corner) corner = geometry.Graph(corner, vec), f++; // negative iflags jump to corner
 			if(corner != null) {
-				f=(iflags<0 ? flags : iflags);
+				f=(iflags<-1 ? flags : iflags);
 				if(confine) {
 					if(!(corner in confine)) return;
 					if(confine[corner]=='b') f &= ~(brouhaha=c.FLAG_MOVE|c.FLAG_SPECIAL); // not to empty brouhaha squares
 				}
 				var vec2 = Rotate(vec, bend);
-				if(f && iflags != c.FLAG_STOP) // defer adding stop until something follows it
-					path.push(corner | f); // use iflags on 1st square if it did not indikate skipping
+				if(f>=0 && iflags != c.FLAG_STOP) // defer adding stop until something follows it
+					path.push(corner | f);    // use iflags on 1st square if it did not indicate skipping
 				if(brouhaha) return; // never past occupied brouhaha square
 				for(var n=1; n<range; n++) {
 					var delta = [n*vec2[0], n*vec2[1]], pos = geometry.Graph(corner, delta);

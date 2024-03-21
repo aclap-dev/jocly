@@ -2331,7 +2331,7 @@ exports.games = (function () {
 						"en": "res/rules/shako/shako-credits.html",
 						"fr": "res/rules/shako/shako-credits-fr.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_13,
 					"description": {
 						"en": "res/rules/shako/shako-description.html",
@@ -6288,7 +6288,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/team-mate/team-mate-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_100,
 					"description": {
 						"en": "res/rules/team-mate/team-mate-description.html"
