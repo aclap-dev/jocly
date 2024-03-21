@@ -214,6 +214,9 @@
 					}
 				}
 				
+				// Bishop pair (penalize single Bishop)
+				if(white[5]==1) evalValues.pieceValue-=0.25;
+				
 				// check 50 moves without capture
 				if(this.noCaptCount>=100) {
 					this.mFinished=true;
@@ -252,9 +255,9 @@
 				
 				// motivate knights and bishops to deploy early
 				var minorPiecesMoved=0;
-				for(var t=4;t<=5;t++)
+				for(var t=13;t<=15;t+=2)
 					for(var s=1;s>=-1;s-=2) {
-						var pieces=material[s].byType[t];
+						var pieces=material[s].byType[t-5*s>>1];
 						if(pieces)
 							for(var i=0;i<pieces.length;i++)
 								if(pieces[i].m)

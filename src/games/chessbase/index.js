@@ -6862,7 +6862,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "spartan-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_103,
 					"description": {
 						"en": "spartan-description.html"
