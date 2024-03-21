@@ -42,17 +42,17 @@
 
 			castle: p.castle,
 			
-			evaluate: function(aGame,evalValues,material) {
+			evaluate: function(aGame,evalValues,material,pieceCount) {
 				// check lack of material to checkmate
 				var white=material[1].count;
 				var black=material[-1].count;
-				if(!white[0] && !white[1] && !white[4] && !white[5] && !white[6] && !white[7]) { // white king single
+				if(pieceCount[1]==1) { // white king single
 					if(!black[2] && !black[3] && !black[6] && !black[7] && (black[4]+black[5]<2 || black[5]<2)) {
 						this.mFinished=true;
 						this.mWinner=JocGame.DRAW;
 					}
 				}
-				if(!black[2] && !black[3] && !black[4] && !black[5] && !black[6] && !black[7]) { // black king single
+				if(pieceCount[-1]==1) { // black king single
 					if(!white[0] && !white[1] && !white[6] && !white[7] && (white[4]+white[5]<2 || white[5]<2)) {
 						this.mFinished=true;
 						this.mWinner=JocGame.DRAW;
@@ -64,6 +64,10 @@
 					this.mFinished=true;
 					this.mWinner=JocGame.DRAW;					
 				}
+
+				// Bishop pair (penalize single Bishop)
+				if(white[5]==1) evalValues.pieceValue-=0.25;
+				if(black[5]==1) evalValues.pieceValue+=0.25;
 				
 				// motivate pawns to reach the promotion line
 				var distPromo=aGame.cbUseTypedArrays?new Int8Array(3):[0,0,0];

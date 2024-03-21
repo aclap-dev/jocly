@@ -6734,7 +6734,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/werewolf/werewolf-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_101,
 					"description": {
 						"en": "res/rules/werewolf/werewolf-description.html"
