@@ -1,4 +1,6 @@
 (function() {
+
+	View.Game.cbPromoSize = 1300;
 	
 	View.Game.cbDefineView = function() {
 		
@@ -46,17 +48,6 @@
 				},
 			}),
 		};
-	}
-
-	/* Make the knight jump when moving */
-	View.Board.cbMoveMidZ = function(aGame,aMove,zFrom,zTo) {
-		var d = aMove.t - aMove.f;
-		var dist = (d>9 || d < -9 || d==2 || d==-2 || d==6 || d==-6);
-		if(aMove.a=='N' || aMove.a=='M' || aMove.a=='C' || 
-		  (aMove.a=='U' || aMove.a=='F' || aMove.a=='E') && dist)
-			return Math.max(zFrom,zTo)+1500+1000*(d>18 || d<-18);
-		else
-			return (zFrom+zTo)/2;
 	}
 
 })();

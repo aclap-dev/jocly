@@ -6670,7 +6670,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/team-mate/team-mate-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_100,
 					"description": {
 						"en": "res/rules/team-mate/team-mate-description.html"
