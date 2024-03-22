@@ -111,7 +111,7 @@
 				
 				9: {
 					name: 'captain',
-					aspect: 'fr-machine',
+					aspect: 'fr-lighthouse',
 					graph: this.cbShortRangeGraph(geometry,[[0,-1],[0,1],[1,0],[-1,0],[-2,0],[0,2],[0,-2],[2,0]]),
 					value: 3.1,
 					abbrev: 'C',
