@@ -457,88 +457,47 @@
 			castle:{
 			},
 
-			evaluate: function(aGame,evalValues,material) {
+			evaluate: function(aGame,evalValues,material,pieceCnt,pieceValue) {
 
 				// check lack of material to checkmate
 				var white=material[1].count;
 				var black=material[-1].count;
-				var pieceCnt = 0, n = white.length;
-				
-				for(var i=0; i<n && pieceCnt<2; i++) pieceCnt += white[i];
-				if(pieceCnt <= 1		    // white king single
+
+				if(pieceCnt[1] <= 1		    // white king single
 				   || white[10] + white[28] == 0) { // or captured
 					this.mFinished=true;
 					this.mWinner=-1;
 				}
-				pieceCnt = 0;
-				for(var i=0; i<n && pieceCnt<2; i++) pieceCnt += black[i];
-				if(pieceCnt <= 1		    // black king single
+
+				if(pieceCnt[-1] <= 1		    // black king single
 				   || black[10] + black[28] == 0) { // or captured
 					this.mFinished=true;
 					this.mWinner=1;
 				}
 				
 				// reconstruct piece values per player
-				var difVal = evalValues['pieceValue'];
-				var totVal = difVal/evalValues['pieceValueRatio'] - 1;
-				var wVal = 0.5*(totVal + difVal) + 4;
-				var bVal = 0.5*(totVal - difVal) + 4;
+				var wVal = pieceValue[1] + 4;
+				var bVal = pieceValue[-1] + 4;
 
 				// calculate expected material gain from promotions
 				var wProm = 0, bProm = 0; // promotion gain
-				for(var i=0; i<n; i++) {  // what players gain if all their pieces promote
-					var gain = promoGain[i];
-					wProm += white[i] * gain;
-					bProm += black[i] * gain;
-				}
+				this.pieces.forEach(function(piece,index) {
+					if(piece.p<0 || piece.t>18 || piece.t==10) return; // absent, already promoted or king
+					var h=geometry.height;
+					var factor=0.9, s=speed[piece.t];
+					if(s) { // reduce bonus for leapers that have far to go
+						var rank=geometry.R(piece.p);
+						if(piece.s<0) rank=h-1-rank;    // convert to player POV
+						if(rank>8) rank=8;              // flat in zone
+						rank+=2;
+						factor-=(64-rank*rank)*s*0.002; // deduct up to 0.72 (for 1st-rank stepper)
+					}
+					factor*=promoGain[piece.t];
+					if(piece.s>0) wProm+=factor; else bProm +=factor;
+				});
 				var wFrac = (bVal < 20 ? 1 : (wVal - bVal + 20)/wVal); // likely fraction to promote
 				var bFrac = (wVal < 20 ? 1 : (bVal - wVal + 20)/bVal);
-//				evalValues['pieceValue'] += 0.9*(wFrac*wProm - bFrac*bProm);
-				
-				// motivate pawns to reach the promotion line
-				var distPromo=aGame.cbUseTypedArrays?new Int8Array(3):[0,0,0];
-				var height=geometry.height;
-				var pawns=material[1].byType[0],pawnsLength;
-				if(pawns) {
-					pawnsLength=pawns.length;
-					for(var i=0;i<pawnsLength;i++)
-						switch(height-geometry.R(pawns[i].p)) {
-						case 4: distPromo[0]++; break;
-						case 5: distPromo[1]++; break;
-						case 6: distPromo[2]++; break;
-						}
-				}
-				pawns=material[-1].byType[2],pawnsLength;
-				if(pawns) {
-					pawnsLength=pawns.length;
-					for(var i=0;i<pawnsLength;i++)
-						switch(geometry.R(pawns[i].p)) {
-						case 3: distPromo[0]--; break;
-						case 4: distPromo[1]--; break;
-						case 5: distPromo[2]--; break;
-						}
-				}
-				if(distPromo[0]!=0)
-					evalValues['distPawnPromo1']=distPromo[0];
-				if(distPromo[1]!=0)
-					evalValues['distPawnPromo2']=distPromo[1];
-				if(distPromo[2]!=0)
-					evalValues['distPawnPromo3']=distPromo[2];
-				
-				// motivate knights and bishops to deploy early
-				var minorPiecesMoved=0;
-				for(var tt=4;tt<=5;tt++)
-					for(var s=1;s>=-1;s-=2) {
-						var pieces=material[s].byType[tt];
-						if(pieces)
-							for(var i=0;i<pieces.length;i++)
-								if(pieces[i].m)
-									minorPiecesMoved+=s;
-					}
-				if(minorPiecesMoved!=0) {
-					evalValues['minorPiecesMoved']=minorPiecesMoved;
-				}
-
+				evalValues['pieceValue'] += 0.9*(wFrac*wProm - bFrac*bProm);
 			}
 
 		}
@@ -672,6 +631,7 @@
 	}	}	}
 
 	var promoGain = [];
+	var speed = [9,9,6,7,3,4,3,2,3,4,-6,5,3,3,0,0,7,3,0];
 
 	var OriginalInitialPosition = Model.Board.InitialPosition;
 	Model.Board.InitialPosition = function(aGame) {
