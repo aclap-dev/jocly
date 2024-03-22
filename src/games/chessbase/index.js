@@ -6352,7 +6352,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/werewolf/werewolf-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_101,
 					"description": {
 						"en": "res/rules/werewolf/werewolf-description.html"
@@ -6416,7 +6416,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/elven/elven-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_102,
 					"description": {
 						"en": "res/rules/elven/elven-description.html"
@@ -6480,7 +6480,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "spartan-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_103,
 					"description": {
 						"en": "spartan-description.html"
@@ -6544,7 +6544,7 @@ exports.games = (function () {
 					"credits": {
 						"en": "res/rules/decimal/scirocco-credits.html"
 					},
-					"gameOptions": config_model_gameOptions_2,
+					"gameOptions": config_model_gameOptions,
 					"js": modelScripts_104,
 					"description": {
 						"en": "res/rules/decimal/scirocco-description.html"
