@@ -1,0 +1,401 @@
+<h1>General rules</h1>
+<p>Scirocco is a chess variant on a 10x10 board.
+Initially each player has 27 pieces of 18 different types.
+Each of these pieces (even the King) has a distinct promoted form,
+moving differently from the initial, unpromoted piece.
+Promotion of a piece is always optional,
+and can be done at the end of any move with it
+that starts or end in the promotion zone
+formed by the farthest three ranks of the board.
+Once promoted a piece cannot unpromote or promote again.
+</p>
+<p>
+A game is won by checkmating or stalemating the opponent,
+or capturing all his non-royal pieces ('baring' the royal).
+The latter finishes the game immediately,
+so that it is safe to leave your King in
+what otherwise would be check after the baring move.
+Baring is thus similar to King capture,
+making your last non-royal effectively royal too.
+</p><p>
+Repeating a position that occurred before also ends the game.
+The player that made the last move (and thus caused the repetition) then loses,
+unless none of the moves since the previous occurrence of the final position
+by either player attacked anything;
+in that case the game ends in a draw.
+There is no limit on the number of reversible moves;
+the only other way to draw is by mutual agreement.
+</p>
+<p>Other rules are as in orthodox chess. White starts to play.</p>
+<h2>Unusual aspects</h2>
+<p>
+Apart from the promotion rules (which makes Scirocco more like a shogi variant than a chess variant),
+there are several other peculiarities.
+Some pieces can capture like in Checkers, by jumping over an adjacent piece to the empty square behind it.
+Another piece can capture adjacent enemies without moving ('rifle capture');
+the entire move consist of just taking such an enemy piece from the board.
+There are also pieces that induce moves in other friendly pieces instead of being able to capture foes.
+Any friendly piece in the range of such a move inducer can then gets its move repertoire expanded.
+Finally, many pieces are <i>divergent</i>, meaning that they capture in a different way from how they move to empty squares.
+In orthodox Chess only Pawns have this property.
+</p>
+
+<h1>Initial setup</h1>
+
+<p>The board is a 10 x 10 checkered squares with a white one at the right end of each player.</p>
+
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/scirocco/scirocco-start-setup.png'>
+</p>
+
+<p>There are 27 pieces per side:
+<ul>
+    <li>1 Chariot, 1 Alfil, 1 Stork, 1 Knight, 1 Camel, 1 Dervish,</li>
+    <li>1 Goat, 1 Dabbaba, 1 Wagon on 1st row,</li>
+    <li>1 Marquis, 2 Sciroccos, 1 King, 1 Wazir, 1 Ferz, 1 Commoner, 1 Priest on 2nd row,</li>
+    <li>8 Pawns and 2 Guards on 3rd row.</li>
+</ul>
+</p>
+<h1>Pieces</h1>
+<h2>Pawns</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/pawn.png'>
+</p>
+<p class='piece-details'>Moves and captures as in orthodox Chess,
+but no initial double-push, and thus no en-passant capture.
+Promotes to Tadpole
+</p>
+<div style='clear:both'></div>
+<h2>Guard</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/corporal.png'>
+</p>
+<p class='piece-details'>Moves one step orthogonally,
+captures one step diagonally.
+Promotes to Zebra.
+</p>
+<div style='clear:both'></div>
+<h2>Wazir</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/wazir.png'>
+</p>
+<p class='piece-details'>Moves and captures one step orthogonally.
+Promotes to Zig.
+</p>
+<div style='clear:both'></div>
+<h2>Firzan</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/ferz.png'>
+</p>
+<p class='piece-details'>Moves and captures one step diagonally.
+Promotes to Zag.
+</p>
+<div style='clear:both'></div>
+<h2>Alfil</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/elephant.png'>
+</p>
+<p class='piece-details'>Moves and captures two steps diagonally
+(possibly jumping over an occupied square).
+Promotes to Bishop.
+</p>
+<div style='clear:both'></div>
+<h2>Dabbaba</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/machine.png'>
+</p>
+<p class='piece-details'>Moves and captures two steps orthonally
+(possibly jumping over an occupied square).
+Promotes to Genie.
+</p>
+<div style='clear:both'></div>
+<h2>Stork</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/stork.png'>
+</p>
+<p class='piece-details'>Moves and captures two steps diagonally
+(possibly jumping), or captures one step orthogonally.
+Promotes to Queen.
+</p>
+<h2>Goat</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/goat.png'>
+</p>
+<p class='piece-details'>Moves and captures two steps orthogonally
+(possibly jumping), or moves without capturing one step diagonally.
+Promotes to Lioness.
+</p>
+<div style='clear:both'></div>
+<div style='clear:both'></div>
+<h2>Commoner</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/man.png'>
+</p>
+<p class='piece-details'>Moves and captures like an orthodox King,
+but is not royal.
+Promotes to Wildebeest.
+</p>
+<div style='clear:both'></div>
+<h2>Knight</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/knight.png'>
+</p>
+<p class='piece-details'>Moves and captures like a Knight in usual Chess.
+Promotes to Rook.
+</p>
+<div style='clear:both'></div>
+<h2>Camel</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/camel.png'>
+</p>
+<p class='piece-details'>Moves and captures directly to squares
+three steps removed from it in one orthogonal dimension,
+and one step in the other (like a Knight, but landing one step further away).
+Promotes to Squirrel.
+</p>
+<div style='clear:both'></div>
+<h2>Marquis</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/wazir-knight.png'>
+</p>
+<p class='piece-details'>Moves and captures like a Knight,
+or one step orthogonally.
+Promotes to Abbot.
+</p>
+<div style='clear:both'></div>
+<h2>Priest</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/ferz-knight.png'>
+</p>
+<p class='piece-details'>Moves and captures like a Knight,
+ore one step diagonally.
+Promotes to Duke.
+</p>
+<div style='clear:both'></div>
+<h2>Wagon</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/gate.png'>
+</p>
+<p class='piece-details'>Moves and captures like an orthodox Rook,
+but cannot end on an adjacent square.
+(But it can be blocked there!)
+Promotes to Spider.
+</p>
+<div style='clear:both'></div>
+<h2>Chariot</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/small-rook.png'>
+</p>
+<p class='piece-details'>Moves and captures like an orthodox Rook,
+but not farther away than four steps.
+Promotes to Octopus.
+</p>
+<div style='clear:both'></div>
+<h2>Dervish</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/star.png'>
+</p>
+<p class='piece-details'>Moves two steps orthogonally or diagonally,
+possibly jumping over an occupied square.
+Cannot capture, but may induce new moves in friendly pieces adjacent to it:
+these can then jump over it to the diametrically opposite square,
+or make one step diagonally provided this ends next to the Dervish.
+These induced moves can both move and capture,
+but they can never be promotions.
+Promotes to Harpy.
+</p>
+<div style='clear:both'></div>
+<h2>Scirocco</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/saint.png'>
+</p>
+<p class='piece-details'>Moves and captures like an orthodox Bishop,
+or one step orthogonally.
+Promotes to Vulture.
+</p>
+<div style='clear:both'></div>
+<h2>King</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/king.png'>
+</p>
+<p class='piece-details'>Moves and captures like an orthodox King.
+Moves that would expose the King to capture are illegal.
+Promotes to Emperor.
+</p>
+<div style='clear:both'></div>
+<h2>Tadpole</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/bow.png'>
+</p>
+<p class='piece-details'>Promoted Pawn.
+Moves and captures one step diagonally or 3 steps orthogonally
+(jumping over anythin that might be on the two squares in between).
+In addition it can also capture one square orthogonally.
+</p>
+<div style='clear:both'></div>
+<h2>Zebra</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/zebra.png'>
+</p>
+<p class='piece-details'>Promoted Guard.
+Moves and captures diectly to squares
+three steps away in one orthogonal dimension, and two steps in the other.
+(Like a Knight, but one step further diagonally out.)
+</p>
+<div style='clear:both'></div>
+<h2>Zig</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/small-bishop.png'>
+</p>
+<p class='piece-details'>Promoted Wazir.
+Moves and captures one or two steps diagonally
+(possibly jumping over an occupied square).
+In addition it can capture an adjacent enemy piece
+by jumping (two steps) over it orthogonally to an empty square.
+</p>
+<div style='clear:both'></div>
+<h2>Zag</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/lighthouse.png'>
+</p>
+<p class='piece-details'>Promoted Ferz.
+Moves and captures one or two steps orthogonally
+(possibly jumping over an occupied square).
+In addition it can capture an adjacent enemy piece
+by jumping (two steps) over it diagonally to an empty square
+(like a King in Checkers).
+</p>
+<div style='clear:both'></div>
+<h2>Bishop</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/bishop.png'>
+</p>
+<p class='piece-details'>Promoted Alfil.
+Moves and captures like an orthodox Bishop.
+</p>
+<div style='clear:both'></div>
+<h2>Genie</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/cannon.png'>
+</p>
+<p class='piece-details'>Promoted Dabbaba.
+Moves and captures like an orthodox Queen, but not farther than 3 squares away.
+In addition it can capture an adjacent enemy piece without moving
+('rifle capture').
+</p>
+<div style='clear:both'></div>
+<h2>Queen</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/queen.png'>
+</p>
+<p class='piece-details'>Promoted Stork.
+Moves and captures as an orthodox Queen.
+</p>
+<div style='clear:both'></div>
+<h2>Lioness</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/lion.png'>
+</p>
+<p class='piece-details'>Promoted Goat.
+Moves and captures directly to any square in a 5x5 area around it.
+</p>
+<div style='clear:both'></div>
+<h2>Wildebeest</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/buffalo.png'>
+</p>
+<p class='piece-details'>Promoted Commoner.
+Moves and captures like a Knight or a Camel.
+</p>
+<div style='clear:both'></div>
+<h2>Rook</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/rook.png'>
+</p>
+<p class='piece-details'>Promoted Knight.
+Moves and captures like an orthodox Rook.
+</p>
+<div style='clear:both'></div>
+<h2>Squirrel</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/squirrel.png'>
+</p>
+<p class='piece-details'>Promoted Camel.
+Moves and captures directly two steps orthogonally or diagonally
+(possibly jumping over an occupied square),
+or like an orthodox Knight.
+</p>
+<div style='clear:both'></div>
+<h2>Abbot</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/archbishop.png'>
+</p>
+<p class='piece-details'>Promoted Marquis.
+Moves and captures like a Knight or like a Bishop,
+but not farther than 4 squares away.
+</p>
+<div style='clear:both'></div>
+<h2>Duke</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/chancellor.png'>
+</p>
+<p class='piece-details'>Promoted Priest.
+Moves and captures like a Knight or like a Rook,
+but not farther than 4 squares away.
+</p>
+<div style='clear:both'></div>
+<h2>Spider</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/griffon.png'>
+</p>
+<p class='piece-details'>Promoted Wagon.
+Moves to an empty orthogonally adjacent square,
+possibly continuing from there like a Bishop in any of the two outward directions
+for moving or capturing to more distant destinations.
+</p>
+<div style='clear:both'></div>
+<h2>Octopus</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/rhino2.png'>
+</p>
+<p class='piece-details'>Promoted Chariot.
+Moves to an empty diagonally adjacent square,
+possibly continuing from there like a Rook in any of the two outward directions
+for moving or capturing to more distant destinations.
+</p>
+<div style='clear:both'></div>
+<h2>Harpy</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/amazon.png'>
+</p>
+<p class='piece-details'>Promoted Dervish.
+Moves like a Queen, but no farther than 3 steps away.
+The Harpy cannot capture,
+but it induces extra Knight moves on any friendly piece
+on a square it could have reached with this 3-step Queen move
+if it had been empty.
+The induced Knight moves can both move and capture,
+but they can never be promotions.
+</p>
+<div style='clear:both'></div>
+<h2>Vulture</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/proper-crowned-rook.png'>
+</p>
+<p class='piece-details'>Promoted Scirocco.
+Moves like a King or a Bisop, and captures like a King or a Rook.
+(So to adjacent squares it can both move and capture.)
+</p>
+<div style='clear:both'></div>
+<h2>Emperor</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/rules/fairy/champion.png'>
+</p>
+<p class='piece-details'>Promoted King.
+Moves and captures one step orthogonally,
+or two steps in all eight directions (possibly jumping over an occupied square).
+Moves that would expose the Emperor to capture are illegal.
+</p>
+<div style='clear:both'></div>
+
+

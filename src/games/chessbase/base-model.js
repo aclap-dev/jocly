@@ -1,7 +1,7 @@
 
 (function() {
 
-	var cbVar;
+	var cbVar, gameState;
 
 	var MASK = 0xffff;   // unreachable position
 	var FLAG_MOVE = 0x10000; // move to if target pos empty
@@ -10,6 +10,10 @@
 	var FLAG_SCREEN_CAPTURE = 0x80000; // capture if occupied by and a piece has been jumped in the path (like cannon in xiangqi) 
 	var FLAG_CAPTURE_KING = 0x100000; // capture if occupied by enemy king
 	var FLAG_CAPTURE_NO_KING = 0x200000; // capture if not occupied by enemy king
+	var FLAG_SPECIAL = 0x400000; // non-captures to go on special move stack
+	var FLAG_CAPTURE_SELF = 0x800000; // special move to square occupied by friend
+	var FLAG_SPECIAL_CAPTURE = 0x2000000; // special move to square occupied by foe
+	var FLAG_THREAT = 0x1000000; // forces inclusion in threat graph
 	Model.Game.cbConstants = {
 		MASK: MASK,
 		FLAG_MOVE: FLAG_MOVE,
@@ -18,6 +22,10 @@
 		FLAG_SCREEN_CAPTURE: FLAG_SCREEN_CAPTURE,
 		FLAG_CAPTURE_KING: FLAG_CAPTURE_KING,
 		FLAG_CAPTURE_NO_KING: FLAG_CAPTURE_NO_KING,
+		FLAG_SPECIAL: FLAG_SPECIAL,
+		FLAG_CAPTURE_SELF: FLAG_CAPTURE_SELF,
+		FLAG_SPECIAL_CAPTURE: FLAG_SPECIAL_CAPTURE,
+		FLAG_THREAT: FLAG_THREAT,
 	}
 	var USE_TYPED_ARRAYS = typeof Int32Array != "undefined";
 	
@@ -48,8 +56,14 @@
 				continue;
 			deltas.forEach(function(delta) {
 				var pos1=geometry.Graph(pos,delta);
-				if(pos1!=null && (!confine || (pos1 in confine))) 
-					graph[pos].push($this.cbTypedArray([pos1 | flags]));								
+				if(pos1!=null) {
+					var f=flags;
+					if(confine) {
+						if(!(pos1 in confine)) return;
+						if(confine[pos1] == 'b') f &= ~(FLAG_MOVE|FLAG_SPECIAL);
+					}
+					if(!flags || f) graph[pos].push($this.cbTypedArray([pos1 | f]));
+				}
 			});
 		}
 		return graph;
@@ -71,10 +85,13 @@
 				var pos1=geometry.Graph(pos,delta);
 				var dist=0;
 				while(pos1!=null) {
-					if(confine && !(pos1 in confine))
-						break;
-					direction.push(pos1 | flags);
-					if(++dist==maxDist)
+					var brouhaha=0;
+					if(confine) {
+						if(!(pos1 in confine)) break;
+						if(confine[pos1]=='b') brouhaha=FLAG_MOVE|FLAG_SPECIAL;
+					}
+					if(!flags || flags & ~brouhaha) direction.push(pos1 | flags & ~brouhaha);
+					if(brouhaha || ++dist==maxDist)
 						break;
 					pos1=geometry.Graph(pos1,delta);
 				}
@@ -136,11 +153,11 @@
 						} else if(tg1 & FLAG_CAPTURE_NO_KING) {
 							$this.cbUseCaptureNoKing=true;
 							line.unshift({d:tg1 & MASK,a:pos,tnk:typeName});
-						} else if(tg1 & FLAG_CAPTURE)
+						} else if(tg1 & (FLAG_CAPTURE | FLAG_THREAT))
 							line.unshift({d:tg1 & MASK,a:pos,t:typeName});
 						else if(tg1 & FLAG_STOP)
 							line.unshift({d:tg1 & MASK,a:pos});
-						else if(tg1 & FLAG_SCREEN_CAPTURE) {
+						if(tg1 & FLAG_SCREEN_CAPTURE) {
 							$this.cbUseScreenCapture=true;
 							line.unshift({d:tg1 & MASK,a:pos,ts:typeName});
 						}
@@ -227,7 +244,20 @@
 
 		return threatGraph;
 	}
-	
+
+	var boardKeys=[], typeKeys=[];
+
+	function ZobristInit(t, pTypes, size) { // home-brewn hash scheme
+		var mt = JocGame.LetsTwist(12345);
+		for(var i=0; i<size; i++)
+			boardKeys[i]=mt.genrand_int32()|1<<16;
+		for(var i=0; i<pTypes.length; i++) {
+			var k = pTypes[i];
+			typeKeys[3*k-1]=mt.genrand_int32()|1;
+			typeKeys[3*k+1]=mt.genrand_int32()|1;
+		}
+	}
+
 	Model.Game.InitGame = function() {
 		var $this=this;
 		this.cbVar = cbVar = this.cbDefine();
@@ -239,7 +269,16 @@
 		this.g.distGraph = this.cbVar.geometry.GetDistances();
 		
 		this.cbPiecesCount = 0;
-		
+		if(this.cbMaxRepeats === undefined) this.cbMaxRepeats = 3;
+		if(this.cbPawnTypes === undefined) {
+			var k, first; // assume Pawns are defined first
+			for(k in this.g.pTypes) {
+				var a = this.g.pTypes[k].abbrev;
+				if(first === undefined) first = a;
+				if(a != first) break;
+			}
+			this.cbPawnTypes=k;
+		}
 		this.g.castleablePiecesCount = { '1': 0, '-1': 0 };
 		for(var i in cbVar.pieceTypes) {
 			var pType=cbVar.pieceTypes[i];
@@ -253,10 +292,15 @@
 				this.cbPiecesCount += pType.initial.length; 
 		}
 
+		if(typeof(this.extraInit) == 'function') this.extraInit(this.cbVar.geometry);
+
+		var typeValues = Object.keys(cbVar.pieceTypes);
+
+	    if(cbVar.zobrist == "old") {
+		// Deprecated Zobrist initialization, kept for book probing
 		var boardValues=[];
 		for(var i=0;i<this.cbPiecesCount;i++) 
 			boardValues.push(i);
-		var typeValues = Object.keys(cbVar.pieceTypes);
 		this.zobrist=new JocGame.Zobrist({
 			board: {
 				type: "array",
@@ -271,8 +315,39 @@
 				size: this.cbPiecesCount,
 				values: typeValues
 			}
-		});	
-		
+		});
+
+		// the following three can replace the active functions for backward compatibility
+		this.bKey = function(piece) {
+			return $this.zobrist.update(0,"board",piece.i,piece.p);
+		}
+
+		this.tKey = function(piece) {
+			return $this.zobrist.update(0,"type",piece.t,piece.i);
+		}
+
+		this.wKey = function(h) {
+			var w = $this.zobrist.update(0,"who",-1)
+			if(h) w ^= $this.zobrist.update(0,"who",1);
+			return w;
+		}
+	    } else {
+		// three active update functions called by ApplyMove()
+		this.bKey = function(piece) { // takes care of type and location dependence
+			return typeKeys[3*piece.t+piece.s]*boardKeys[piece.p];
+		}
+
+		this.tKey= function(piece) { // dummy in new scheme
+			return 0;
+		}
+
+		this.wKey= function() { // side-to-move key
+			return 2;
+		}
+
+		ZobristInit(this, typeValues, this.cbVar.geometry.boardSize);
+	    }
+
 	}
 	
 	Model.Game.cbGetPieceTypes = function() {
@@ -283,17 +358,23 @@
 		var nullGraph = {};
 		for(var pos=0;pos<this.cbVar.geometry.boardSize;pos++)
 			nullGraph[pos]=[];
+
+		this.cbMaxRanking = 0;
 		
 		for(var typeIndex in this.cbVar.pieceTypes) {
 			var pType = this.cbVar.pieceTypes[typeIndex];
+			var r = (pType.ranking ? pType.ranking : 0);
+			if(r > this.cbMaxRanking) this.cbMaxRanking = r;
 			pTypes[typeIndex] = {
 				graph: pType.graph || nullGraph,
 				abbrev: pType.abbrev || '',
-				value: pType.isKing?100:(pType.value || 1),
-				isKing: !!pType.isKing,
+				value: pType.value || (pType.isKing ? 100 : 1),
+				isKing: pType.isKing || false,
 				castle: !!pType.castle,
 				epTarget: !!pType.epTarget,
 				epCatch: !!pType.epCatch,
+				ranking: r,
+				antiTrade: pType.antiTrade || 0,
 			}
 		}
 		
@@ -304,29 +385,59 @@
 		this.zSign=0;
 	}
 
-	Model.Board.InitialPosition = function(aGame) {
+	Model.Board.cbPlacePieces = function(aGame) {
+
 		var $this=this;
+
+		this.pieces.sort(function(p1,p2) {
+			if(p1.s!=p2.s)
+				return p2.s-p1.s;
+			var v1=aGame.cbVar.pieceTypes[p1.t].value || 100;
+			var v2=aGame.cbVar.pieceTypes[p2.t].value || 100;
+			if(v1!=v2)
+				return v1-v2;
+			return p1.p-p2.p;
+		});
+
+		this.zSign=aGame.wKey(0);
+		for(var pos=0;pos<aGame.g.boardSize;pos++)
+			this.board[pos]=-1;
+		this.pieces.forEach(function(piece,index) {
+			piece.i=index;
+			if(piece.p<0) return;
+			$this.board[piece.p]=index;
+			var pType=aGame.g.pTypes[piece.t];
+			if(pType.isKing)
+				$this.kings[piece.s*pType.isKing]=piece.p;
+			$this.zSign^=aGame.bKey(piece) ^ aGame.tKey(piece);
+		});
+		
+	}
+
+	Model.Board.InitialPosition = function(aGame) {
+		var $this=gameState=this;
 		if(USE_TYPED_ARRAYS)
 			this.board=new Int16Array(aGame.g.boardSize);
 		else
 			this.board=[];
-		for(var pos=0;pos<aGame.g.boardSize;pos++)
-			this.board[pos]=-1;
 		this.kings={};
 		this.pieces=[];
 		this.ending={
 			'1': false,
 			'-1': false,
 		}
-		this.lastMove=null;
+		this.lastMove={  // (invalid) dummy, to make sure it exists...
+			f: -1,
+			t: 0,
+			c: null, // ... and is not mistaken for a capture
+		};
 		if(aGame.cbVar.castle)
 			this.castled={
 				'1': false,
 				'-1': false,
 			}
-		this.zSign=aGame.zobrist.update(0,"who",-1);
 
-		this.noCaptCount = 0;
+		this.noCaptCount = this.check = this.oppoCheck = 0;
 		this.mWho = 1;
 
 		if(aGame.mInitial) {
@@ -342,6 +453,7 @@
 				this.lastMove={
 					f: aGame.mInitial.lastMove.f,
 					t: aGame.mInitial.lastMove.t,
+					c: aGame.mInitial.lastMove.c,
 				}
 			if(aGame.mInitial.noCaptCount!==undefined)
 				this.noCaptCount=aGame.mInitial.noCaptCount;
@@ -367,31 +479,14 @@
 						t: parseInt(typeIndex),
 						p: desc.p,
 						m: false,
+						r: aGame.g.pTypes[typeIndex].ranking,
 					}
 					this.pieces.push(piece);
 				}
 			}
 		}
-		
-		this.pieces.sort(function(p1,p2) {
-			if(p1.s!=p2.s)
-				return p2.s-p1.s;
-			var v1=aGame.cbVar.pieceTypes[p1.t].value || 100;
-			var v2=aGame.cbVar.pieceTypes[p2.t].value || 100;
-			if(v1!=v2)
-				return v1-v2;
-			return p1.p-p2.p;
-		});
 
-		this.pieces.forEach(function(piece,index) {
-			piece.i=index;
-			$this.board[piece.p]=index;
-			var pType=aGame.g.pTypes[piece.t];
-			if(pType.isKing)
-				$this.kings[piece.s]=piece.p;
-			$this.zSign=aGame.zobrist.update($this.zSign,"board",index,piece.p);
-			$this.zSign=aGame.zobrist.update($this.zSign,"type",piece.t,index);
-		});
+		this.cbPlacePieces(aGame);
 		
 		//console.log("sign",this.zSign);
 		
@@ -435,21 +530,19 @@
 				t: piece.t,
 				i: piece.i,
 				m: piece.m,
+				r: piece.r,
 			});
 		}
-		this.kings={
-			'1': aBoard.kings[1],
-			'-1': aBoard.kings[-1],
-		}
+		this.kings={};
+		for(var i in aBoard.kings)
+			this.kings[i] = aBoard.kings[i];
 		this.check=aBoard.check;
-		if(aBoard.lastMove)
-			this.lastMove={
-				f: aBoard.lastMove.f,
-				t: aBoard.lastMove.t,
-				c: aBoard.lastMove.c,
-			}
-		else
-			this.lastMove=null;
+		this.oppoCheck=aBoard.oppoCheck;
+		this.lastMove={
+			f: aBoard.lastMove.f,
+			t: aBoard.lastMove.t,
+			c: aBoard.lastMove.c,
+		}
 		this.ending={
 			'1': aBoard.ending[1],
 			'-1': aBoard.ending[-1],
@@ -474,15 +567,13 @@
 
 	Model.Board.cbApplyCastle = function(aGame,move,updateSign) {
 		var spec=aGame.cbVar.castle[move.f+"/"+move.cg];
-		var rookTo=spec.r[spec.r.length-1];
+		var rookTo=spec.r[spec.r.length-1] + (move.t >> 16);
 		var rPiece=this.pieces[this.board[move.cg]];
-		var kingTo=spec.k[spec.k.length-1];
+		var kingTo=move.t & 0xffff;
 		var kPiece=this.pieces[this.board[move.f]];
 		if(updateSign) {
-			this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,move.cg);
-			this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,rookTo);
-			this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,move.f);
-			this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,kingTo);
+			this.zSign^=aGame.bKey(rPiece);
+			this.zSign^=aGame.bKey(kPiece);
 		}
 		
 		rPiece.p=rookTo;
@@ -492,6 +583,11 @@
 		kPiece.p=kingTo;
 		kPiece.m=true;
 		this.board[move.f]=-1;
+		
+		if(updateSign) {
+			this.zSign^=aGame.bKey(rPiece);
+			this.zSign^=aGame.bKey(kPiece);
+		}
 		
 		this.board[rookTo]=rPiece.i;
 		this.board[kingTo]=kPiece.i;
@@ -522,7 +618,6 @@
 	Model.Board.cbQuickApply = function(aGame,move) {
 		if(move.cg!==undefined)
 			return this.cbApplyCastle(aGame,move,false);
-
 		var undo=[];
 		var index=this.board[move.f];
 		var piece=this.pieces[index];
@@ -536,20 +631,22 @@
 			this.board[piece1.p]=-1;
 			piece1.p=-1;
 		}
-		var kp=this.kings[piece.s];
-		if(aGame.g.pTypes[piece.t].isKing)
-			this.kings[piece.s]=move.t;
 		undo.unshift({
 			i: index,
 			f: move.t,
 			t: move.f,
-			kp: kp,
-			who: piece.s,
 			ty: piece.t,
 		});
 		piece.p=move.t;
 		if(move.pr!==undefined)
 			piece.t=move.pr;
+		var royal = aGame.g.pTypes[piece.t].isKing;
+		if(royal) {
+			royal *= piece.s;
+			undo[0].who=royal; // only add these fields when needed
+			undo[0].kp=this.kings[royal];
+			this.kings[royal]=move.t;
+		}
 		this.board[move.f]=-1;
 		this.board[move.t]=index;
 
@@ -584,30 +681,35 @@
 		if(move.cg!==undefined)
 			this.cbApplyCastle(aGame,move,true);
 		else {
-			this.zSign=aGame.zobrist.update(this.zSign,"board",piece.i,move.f);
+			this.zSign^=aGame.bKey(piece);
 			this.board[piece.p]=-1;
 			if(move.pr!==undefined) {
-				this.zSign=aGame.zobrist.update(this.zSign,"type",piece.t,piece.i);
+				this.zSign^=aGame.tKey(piece);
 				piece.t=move.pr;
-				this.zSign=aGame.zobrist.update(this.zSign,"type",piece.t,piece.i);
+				this.zSign^=aGame.tKey(piece);
 			}
 			if(move.c!=null) {
 				var piece1=this.pieces[move.c];
-				this.zSign=aGame.zobrist.update(this.zSign,"board",piece1.i,piece1.p);
+				this.zSign^=aGame.bKey(piece1);
 				this.board[piece1.p]=-1;
 				piece1.p=-1;
 				piece1.m=true;
 				this.noCaptCount=0;
-			} else 
+			} else if(piece.t < aGame.cbPawnTypes)
+				this.noCaptCount = 0;
+			else
 				this.noCaptCount++;
 			piece.p=move.t;
 			piece.m=true;
 			this.board[move.t]=piece.i;
-			this.zSign=aGame.zobrist.update(this.zSign,"board",piece.i,move.t);
-			if(aGame.g.pTypes[piece.t].isKing)
-				this.kings[piece.s]=move.t;
+			this.zSign^=aGame.bKey(piece);
+			var royal = aGame.g.pTypes[piece.t].isKing;
+			if(royal)
+				this.kings[piece.s*royal]=move.t;
 		}
-		this.check=!!move.ck;
+		var h=this.oppoCheck;
+		this.oppoCheck=this.check;
+		this.check=(move.ck ? h+1 : 0);
 		this.lastMove={
 			f: move.f,
 			t: move.t,
@@ -622,8 +724,7 @@
 			}
 		else
 			this.epTarget=null;
-		this.zSign=aGame.zobrist.update(this.zSign,"who",-this.mWho);
-		this.zSign=aGame.zobrist.update(this.zSign,"who",this.mWho);	
+		this.zSign^=aGame.wKey(1); // side-to-move key
 		//this.cbIntegrity(aGame);
 	}
 
@@ -660,9 +761,13 @@
 				material["1"].count[i]=material["-1"].count[i]=0;
 		}
 		
-		if(aGame.mOptions.preventRepeat && aGame.GetRepeatOccurence(this)>2) {
-			this.mFinished=true;
-			this.mWinner=aGame.cbOnPerpetual?who*aGame.cbOnPerpetual:JocGame.DRAW;
+		if(aGame.mOptions.preventRepeat &&
+			 aGame.GetRepeatOccurence(this)>=aGame.cbMaxRepeats) {
+			if(typeof aGame.cbPerpEval == 'function')
+				this.mWinner=aGame.cbPerpEval(this, aGame);
+			else
+				this.mWinner=aGame.cbOnPerpetual?who*aGame.cbOnPerpetual:JocGame.DRAW;
+			this.mFinished=(this.mWinner !== undefined);
 			return;
 		}
 		
@@ -676,7 +781,7 @@
 		var posValue={ '1': 0, '-1': 0 };
 		
 		var castlePiecesCount={ '1': 0, '-1': 0 };
-		var kingMoved={ '1': false, '-1': false };
+		var kingMoved={ '1': 0, '-1': 0 }; // kludge: should become false or true
 		
 		var pieces=this.pieces;
 		var piecesLength=pieces.length;
@@ -703,8 +808,13 @@
 					byType[piece.t].push(piece);					
 			}
 		}
+
+		if(kingMoved[who]===0 && this.kings[who]!==undefined) { // no King found, but had one before
+			this.mWinner=-who; this.mFinished=true; // opponent wins
+			return;
+		}
 		
-		if(this.lastMove && this.lastMove.c!=null) {
+		if(this.lastMove.c!==null) {
 			var piece=this.pieces[this.board[this.lastMove.t]];
 			pieceValue[-piece.s]+=this.cbStaticExchangeEval(aGame,piece.p,piece.s,{piece:piece})
 		}
@@ -748,7 +858,7 @@
 				(this.castled[-1] ? 1 : (kingMoved[-1]? 0 : castlePiecesCount[-1] / (g.castleablePiecesCount[-1]+1)));
 		
 		if(cbVar.evaluate)
-			cbVar.evaluate.call(this,aGame,evalValues,material);
+			cbVar.evaluate.call(this,aGame,evalValues,material,pieceCount,pieceValue);
 
 		var evParams=aGame.mOptions.levelOptions;
 		for(var name in evalValues) {
@@ -813,8 +923,7 @@
 					castlePieces=null;
 				else
 					king=piece;
-			}
-			if(castlePieces && pType.castle && !piece.m) // rook considered for castle
+			} else if(pType.castle && !piece.m && castlePieces) // rook considered for castle
 				castlePieces.push(piece);
 			
 			var graph, graphLength;
@@ -824,23 +933,39 @@
 				var line=graph[j];
 				var screen=false;
 				var lineLength=line.length;
-				var lastPos=null;
+				var lastPos=piece.p;
 				for(var k=0;k<lineLength;k++) {
 					var tg1=line[k];
 					var pos1=tg1 & MASK;
 					var index1=this.board[pos1];
-					if(index1<0 && (!pType.epCatch || !this.epTarget || this.epTarget.p!=pos1)) {
+					var nonCapt=(index1<0);
+					if(nonCapt && pType.epCatch && this.epTarget) { // destination empty, but could be e.p. capture
+						var ept=this.epTarget.p;
+						do {
+							if(ept==pos1) { nonCapt=false; break; }
+							ept+=this.epTarget.p-this.lastMove.t;
+						} while(ept!=this.lastMove.f);
+					}
+					if(nonCapt) {
 						if((tg1 & FLAG_MOVE) && screen==false)
 							PromotedMoves(piece,{
 								f: piece.p,
 								t: pos1,
 								c: null,
 								a: pType.abbrev,
-								ept: lastPos==null || !pType.epTarget?undefined:lastPos,
+								ept: lastPos==piece.p || !pType.epTarget?undefined:lastPos,
+							});
+						else if(tg1 & FLAG_SPECIAL)
+							this.specials.push({
+								f: piece.p,
+								t: pos1,
+								c: null,
+								a: pType.abbrev,
+								x: tg1 ^ lastPos
 							});
 					} else if(tg1 & FLAG_SCREEN_CAPTURE) {
-						if(screen) {
-							var piece1=this.pieces[index1];
+						var piece1=this.pieces[index1];
+						if(screen || tg1 & FLAG_CAPTURE) { // direct capture might also be possible
 							if(piece1.s!=piece.s)
 								PromotedMoves(piece,{
 									f: piece.p,
@@ -848,24 +973,35 @@
 									c: piece1.i,
 									a: pType.abbrev,
 								});
-							break;
-						} else
-							screen=true;
+							if(!piece.r && screen) break; // normal hoppers terminate after first screen capture
+						}
+						if(piece.r && (piece.r|1) <= piece1.r) break; // blocking power too large
+						screen=true;
 					} else {
 						var piece1;
 						if(index1<0)
 							piece1=this.pieces[this.epTarget.i];
 						else
 							piece1=this.pieces[index1];
-						if(piece1.s!=piece.s && (tg1 & FLAG_CAPTURE) && (!(tg1 & FLAG_CAPTURE_KING) || aGame.g.pTypes[piece1.t].isKing) &&
-								(!(tg1 & FLAG_CAPTURE_NO_KING) || !aGame.g.pTypes[piece1.t].isKing))
-							PromotedMoves(piece,{
+						if(tg1 & FLAG_CAPTURE) {
+							if(piece1.s!=piece.s && !(tg1 & (aGame.g.pTypes[piece1.t].isKing ? FLAG_CAPTURE_NO_KING : FLAG_CAPTURE_KING)))
+								PromotedMoves(piece,{
+									f: piece.p,
+									t: pos1,
+									c: piece1.i,
+									a: pType.abbrev,
+									ep: index1<0,
+								});
+						} else if(tg1 & (FLAG_CAPTURE_SELF | FLAG_SPECIAL_CAPTURE)) {
+							if(tg1 & (piece1.s==piece.s ? FLAG_CAPTURE_SELF : FLAG_SPECIAL_CAPTURE))
+							this.specials.push({
 								f: piece.p,
 								t: pos1,
 								c: piece1.i,
 								a: pType.abbrev,
-								ep: index1<0,
+								x: tg1 ^ lastPos
 							});
+						}
 						break;
 					}
 					lastPos=pos1;
@@ -888,21 +1024,26 @@
 					}
 				}
 				if(rookOk) {
-					var kingOk=true;
-					for(var j=0;j<spec.k.length;j++) {
-						var pos=spec.k[j];
+					var step=(rook.p>king.p ? 1 : -1);
+					var last=spec.k.length-1; // nominal King destination found here
+					var extra=spec.extra || 0;
+					var d=0;
+					if(extra<0) extra*=-1,d=1;
+					for(var j=0;j<=last+extra;j++) { // allow optional extension of King move
+						var pos=(j<last ? spec.k[j] : spec.k[last]+step*(j-last));
 						if((this.board[pos]>=0 && pos!=rook.p && pos!=king.p) || this.cbGetAttackers(aGame,pos,who).length>0) {
-							kingOk=false;
 							break;
 						}
-					}
-					if(kingOk) {
-						moves.push({
-							f: king.p,
-							t: spec.k[spec.k.length-1],
-							c: null,
-							cg: rook.p,
-						});
+						if(j>=last+d) {
+							move={
+								f: king.p,
+								t: pos | step*(j-last)<<16,
+								c: null,
+								cg: rook.p,
+							}
+							if(j>last) move.a=pType.abbrev;
+							moves.push(move);
+						}
 					}
 				}
 			}
@@ -967,6 +1108,8 @@
 		}
 	}
 
+	var mr;
+
 	Model.Board.cbCollectAttackersScreen=function(who,graph,attackers,isKing,screen) {
 		for(var pos1 in graph) {
 			var branch=graph[pos1];
@@ -975,22 +1118,31 @@
 				this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,screen);
 			else {
 				var piece1=this.pieces[index1];
-				if(!screen && piece1.s==-who && (
+				if(!screen) {
+					if(piece1.s==-who && (
 						(branch.t && (piece1.t in branch.t)) ||
 						(isKing && branch.tk && (piece1.t in branch.tk))))
-					attackers.push(piece1);
-				else if(!screen)
-					this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,true);
-				else if(screen && piece1.s==-who && branch.ts && (piece1.t in branch.ts))
-					attackers.push(piece1);
+						attackers.push(piece1); // direct attacker
+				 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,piece1.r|1024); // 1024 bit: must jump 1 screen
+				} else {
+					if(piece1.s==-who && branch.ts && (piece1.t in branch.ts) &&
+					   (piece1.r ? (piece1.r|1) > (screen&1023) : screen&1024)) // normal hopper: 1 screen, ranked must top highest screen
+						attackers.push(piece1);
+					if(!mr) continue; // no flying pieces in this game
+					var s=screen&1023; // we now have multiple screens
+					if(piece1.r > s) s=piece1.r; // this target screens better
+					if(s < (mr|1)) // but not maximally
+					 	this.cbCollectAttackersScreen(who,branch.e,attackers,isKing,s|2048);
+				}
 			}
 		}
 	}
 
 	Model.Board.cbGetAttackers = function(aGame,pos,who,isKing) {
 		var attackers=[];
+		mr = aGame.cbMaxRanking;
 		if(aGame.cbUseScreenCapture)
-			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,false);
+			this.cbCollectAttackersScreen(who,aGame.g.threatGraph[who][pos],attackers,isKing,0);
 		else
 			this.cbCollectAttackers(who,aGame.g.threatGraph[who][pos],attackers,isKing);
 		return attackers;
@@ -1005,9 +1157,9 @@
 		for(var i=0;i<movesLength;i++) {
 			var move=moves[i];
 			var undo=this.cbQuickApply(aGame,move);
-			var inCheck=this.cbGetAttackers(aGame,this.kings[this.mWho],this.mWho,true).length>0;
+			var inCheck=this.cbGetAttackers(aGame,this.kings[this.mWho],this.mWho,100).length>0;
 			if(!inCheck) {
-				var oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
+				var oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,100).length>0;
 				move.ck = oppInCheck; 
 				this.mMoves.push(move);
 				if(move.f!=selfKingPos)
@@ -1019,7 +1171,7 @@
 			this.mFinished=true;
 			this.mWinner=aGame.cbOnStaleMate?aGame.cbOnStaleMate*this.mWho:JocGame.DRAW;
 			if(this.check)
-				this.mWinner=-this.mWho;
+				this.mWinner=(aGame.cbMateEval ? aGame.cbMateEval(this) : -this.mWho);
 		} else if(this.ending[this.mWho]) {
 			if(!kingOnly) {
 				for(var i=0;i<this.mMoves.length;i++)
@@ -1062,7 +1214,8 @@
 		function NaturalFormat() {
 			var str;
 			if(self.cg!==undefined) {
-				str=cbVar.castle[self.f+"/"+self.cg].n;
+				if(self.t>>16) str=self.a+cbVar.geometry.PosName(self.f)+'~'+cbVar.geometry.PosName(self.t&0xffff);
+				else str=cbVar.castle[self.f+"/"+self.cg].n;
 			} else {
 				str=self.a || '';
 				str+=cbVar.geometry.PosName(self.f);

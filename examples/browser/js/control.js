@@ -128,7 +128,6 @@ $(document).ready(function () {
     var gameName = m && m[1] || "classic-chess";
     var elementId = "applet";
     var area = document.getElementById(elementId);
-
     Jocly.createMatch(gameName).then((match) => {
         // get game configuration to setup control UI
         match.getConfig()
@@ -138,16 +137,15 @@ $(document).ready(function () {
                 $("#game-status").show();
 
                 var viewOptions = config.view;
+
                 // fills Skins dropdown with available skins
                 viewOptions.skins.forEach(function(skin) {
                     $("<option/>").attr("value",skin.name).text(skin.title).appendTo($("#options-skin"));
                 });
                 $("#options").show();
-
                 // get saved view options if any
                 var viewOptions = window.localStorage && window.localStorage[gameName+".options"] && 
                     JSON.parse(window.localStorage[gameName+".options"]) || undefined;
-
                 // the match need to be attached to a DOM element for displaying the board
                 match.attachElement(area, { viewOptions: viewOptions })
                     .then( () => {
@@ -213,7 +211,6 @@ $(document).ready(function () {
                             });
                             var mode = window.localStorage && window.localStorage[gameName+".mode"] || "self-comp";
                             $("#mode").val(mode).trigger("change");
-
                             if(config.view.switchable) {
                                 $("#view-as").show().on("change",()=>{
                                     var playerMode = $("#view-as").val();
@@ -224,17 +221,28 @@ $(document).ready(function () {
                                         player = Jocly.PLAYER_A;
                                     else if(playerMode=="player-b")
                                         player = Jocly.PLAYER_B;
-                                    if(player)
+                                    if(player){
                                         match.setViewOptions({
 												viewAs: player
 											})
                                             .then( () => {
                                                 RunMatch(match,progressBar);                                
                                             });
+                                    }
                                 });
+
                                 var viewAs = window.localStorage && window.localStorage[gameName+".view-as"];
-                                if(viewAs)
+
+                                if(viewAs===undefined || Object.is(viewAs, null) /*|| viewAs==="null"*/)
+                                    viewAs="player-a";
+
+                                if(viewAs){
                                     $("#view-as").val(viewAs).trigger("change");
+                                    var playerMode = $("#view-as").val();
+                                }else{
+                                    console.log("viewAs",viewAs );
+                                    console.log("window.localStorage",window.localStorage );
+                                }    
                             }
 
                         })

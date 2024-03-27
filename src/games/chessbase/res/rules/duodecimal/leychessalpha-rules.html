@@ -1,0 +1,201 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .piece-icon {
+        width: 70px;
+        height: auto;
+        float: left;
+        margin-right: 10px;
+    }
+    .piece-icon-promo {
+        width: 50px;
+        height: 50px;
+    }
+
+    #promo {
+        width: 200px;
+        margin: 0 auto;
+    }
+</style>
+<h1 style="font-size:300%;">LeyChessAlpha Rules</h1>
+<h1>Setup</h1>
+<img src="{GAME}/res/visuals/leychessalpha-600x600-2d.jpg" alt="Your Browser suck:(" style="width:320px;height:320px;">
+<h1>Pieces</h1>
+<h2>King</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-king.png'>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
+</p>
+<h2>Queen</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-queen.png'>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/queen.png'>
+</p>
+<h2>Bishop</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-bishop.png'>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/bishop.png'>
+</p>
+<h2>Knight</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-knight.png'>
+</p>
+<p class='piece-details'>Moves as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/knight.png'>
+</p>
+<h2>Rook</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-rook.png'>
+</p>
+<p class='piece-details'>Exactly as in usual Chess.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rook.png'>
+</p>
+<h2>Pawn</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-pawn.png'>
+</p>
+<p class='piece-details'>The Pawn is almost similar to usual Chess. There is a difference: it can advance one or two square from ANY position on the board. However, its capturing move is unchanged: one square diagonally forward. As a consequence, the en-passant capture is possible every time the opposite Pawn or Corporal or Prince has advanced two squares.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/pawn.png'>
+</p>
+<h2>Prince</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-admiral.png'>
+</p>
+<p class='piece-details'>This piece is simply a non-royal King combined with a Pawn. It can be found in Metamachy and has been inspired by medieval games like the Courier chess , an old chess variant, played in Germany, where it is called "Man". It moves one square in an arbitrary direction, like the King, but without being hindered by check. Here, like the Pawn, he can move without capturing to the second square straight ahead. When the Prince reaches the last row it promotes to an Emperor.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/leychess/lcb/prince.png' style="width:50%;height:50%;">
+</p>
+<h2>Elephant</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-elephant.png'>
+</p>
+<p class='piece-details'>As in Shako.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/elephant.png'>
+</p>
+<h2>Lion</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-lion.png'>
+</p>
+<p class='piece-details'>As in Metamachy, inspired (although with some simplification) by Chu Shogi, the most popular variant of the Japanese Chess. Here the Lion may move as a King (a single step move in any direction), or it may jump to a position two squares away, jumping in any orthogonal or diagonal direction, or alternatively jumping as a Knight in usual Chess. (Then this Lion has the same range but is more restricted than the Lion in Chu Shogi which can move two times in a turn). </p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/lion.png'>
+</p>
+<h2>Eagle</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-eagle.png'>
+</p>
+<p class='piece-details'>As in Metamachy, moves one square diagonally and then, goes away of an indefinite number of cases vertically or horizontally. It is authorized to go only one square diagonal. It can not jump and the unobstructed path must start with the diagonal movement. This piece is almost as powerful as the Queen and is inspired by the Giraffe from Tamerlane's Chess and the Aanca from Alfonso X's Grande Acedrex.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/eagle.png'>
+</p>
+<h2>Camel</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-camel.png'>
+</p>
+<p class='piece-details'>As in Metamachy, a well known piece from medieval Muslim great Chess like Tamerlane's Chess. It jumps to the opposite case of a 2x4 rectangle, like an extended Knight. No matter what intermediate cases contain. Note that it always stays on the same color of square.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/camel.png'>
+</p>
+<h2>Cannon</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-cannon.png'>
+</p>
+<p class='piece-details'>As in Xiangqi, in Shako and in Metamachy. (Also known as Pao by problemists).</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/cannon.png'>
+</p>
+<h2>Chancellor</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-marshall.png'>
+</p>
+<p class='piece-details'>It combines the move of Rook and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca and many others like Grand Chess or Gothic Chess. (under many other names: Champion, Guard, Empress, Concubine, Chancellor, etc. The later is sometimes preferred, however it is confusing since Capablanca used it once for R+N and once for B+N. It is an Elephant in Seirawan Chess).</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/marshall.png'>
+</p>
+<h2>Cardinal</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-cardinal.png'>
+</p>
+<p class='piece-details'>It combines the move of Bishop and Knight. It can be found in many, many chess variants since Carrera, Bird, Capablanca, Modern and many others like Grand Chess or Gothic Chess. (under many other names: Centaur, Minister, Equerry, Janus, Archbishop, Princess, Chancellor, etc. It is a Hawk in Seirawan Chess). </p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/cardinal.png'>
+</p>
+<h2>Commander</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-amazon.png'>
+</p>
+<p class='piece-details'>It combines the move of Queen and Knight. It was used in the Turkish-Indian Grand Chess (as a Giraffe). </p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/amazon.png'>
+</p>
+<h2>Lighthouse</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-lighthouse.png'>
+</p>
+<p class='piece-details'>It combines the Star and the Queen.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/leychess/lcb/lighthouse.png'>
+</p>
+<h2>Unicorn</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-unicorn.png'>
+</p>
+<p class='piece-details'>The Unicorn combines the Camel, Lion and Antelope and additionaly it can jump infinite times like a Knight in the same direction(like the Knightrider).</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/leychess/lcb/unicorn.png' >
+</p>
+<h2>Dragon</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-dragon.png'>
+</p>
+<p class='piece-details'>The Dragon combines the Queen and the Eagle.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/leychess/lcb/dragon.png' >
+</p>
+<h2>Emperor</h2>
+<p>
+<img class='piece-icon' src='{GAME}/res/fairy/icons/w-emperor.png'>
+</p>
+<p class='piece-details'>The Emperor combines the Dragon, Unicorn and Lighthouse. That means, that every Piece is included in the Emperor. You can only get the Emperor, when you promote a Prince.</p>
+<div style='clear:both'></div>
+<h1>Promotion</h1>
+<h2>Pawn</h2>
+<img alt='Restart your Browser' src='{GAME}/res/rules/graphs/leychess/lca/pawnpromo.png'>
+<h2>Prince</h2>
+<img alt='Restart your Browser' src='{GAME}/res/rules/graphs/leychess/lca/princepromo.png'>

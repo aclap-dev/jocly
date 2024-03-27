@@ -547,7 +547,12 @@
 					},this);
 				} else if(currentInput.t==null) {
 					moves.forEach(function(move) {
-						var target = move.cg===undefined?move.t:move.cg;
+						var target = move.t;
+						if(move.cg!==undefined) {
+							var k=aGame.cbVar.castle[move.f+'/'+move.cg].k;
+							if(k[k.length-1]==move.t) target=move.cg;
+							else target&=0xffff;
+						}
 						if(actions[target]===undefined) {
 							actions[target]={
 								t: move.t,
@@ -607,6 +612,10 @@
 												if(aGame.cbView.pieces[this.mWho])
 													aspectSpec = $.extend(true,aspectSpec,
 															aGame.cbView.pieces[this.mWho]["default"],aGame.cbView.pieces[this.mWho][aspect]);
+												                                                   // use alternative skin sprites for promotion in shogi when specified
+												if( typeof aspectSpec[xdv.game.mSkin] !== "undefined"){														
+													aspectSpec["2d"].file = aspectSpec[xdv.game.mSkin].file;
+												}
 												xdv.updateGadget("promo#"+move.pr, {
 													base: $.extend(aspectSpec["2d"], { 
 														x: (index-promoMoves.length/2)*aGame.cbPromoSize 
@@ -698,10 +707,11 @@
 		});
 	}
 
-	View.Board.cbAnimate = function(xdv,aGame,aMove,callback) {
+	View.Board.cbAnimate = function(xdv,aGame,aMove,callback,speed) {
 		var $this=this;
 		var animCount=1;
 		var tacSound=false;
+		if(speed === undefined || speed == null) speed = 600;
 		
 		function EndAnim() {
 			if(--animCount==0){
@@ -713,7 +723,7 @@
 		var piece=this.pieces[this.board[aMove.f]];
 
 		var displaySpec0=aGame.cbMakeDisplaySpec(aMove.f,piece.s);
-		var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,aMove.t,piece);
+		var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,aMove.t&0xffff,piece);
 		for(var skin in displaySpec0) {
 			var spec=displaySpec0[skin];
 			if(spec.z===undefined)
@@ -726,7 +736,8 @@
 				var S1=c-z1;
 				var S2=c-z2;
 				
-				if(z1!=(z0+z2)/2)
+				var hop = z1 - (z0+z2)/2;
+				if(hop > 0)
 					tacSound=true;
 
 				var A=-1;
@@ -741,9 +752,31 @@
 					a=a2;
 					b=-a-S2;
 				}
+				var x0=spec.x, y0=spec.y;
+				var x2=displaySpec[skin].x, y2=displaySpec[skin].y;
+				var xa=x0, xb=x2, ya=y0, yb=y2;
+				var h=1, l=1, dx = Math.abs(x2-x0), dy = Math.abs(y2-y0);
+				if(hop < 0) { // use bent trajectory for oblique slides
+					if(dx<dy) {
+						h = dy - dx; l = dy;
+						if(hop==-1)
+							xa = (l*x0 - h*x2)/(l-h), xb = x0;
+						else if(hop==-2)
+							xb = (l*x2 - h*x0)/(l-h), xa = x2, h = l - h;
+					} else {
+						h = dx - dy; l = dx;
+						if(hop==-1)
+							ya = (l*y0 - h*y2)/(l-h), yb = y0;
+						else if(hop==-2)
+							yb = (l*y2 - h*y0)/(l-h), ya = y2, h = l - h;
+					}
+					h /= l;
+				}
 				displaySpec[skin].positionEasingUpdate = function(ratio) {
 					var y=(a*ratio*ratio+b*ratio+c)*this.SCALE3D;
 					this.object3d.position.y=y;
+					this.object3d.position.x=(ratio<=h ? ratio*xb + (1-ratio)*x0 : ratio*x2 + (1-ratio)*xa)*this.SCALE3D;
+					this.object3d.position.z=(ratio<=h ? ratio*yb + (1-ratio)*y0 : ratio*y2 + (1-ratio)*ya)*this.SCALE3D;
 				}
 			})(skin);
 		}
@@ -751,7 +784,7 @@
 		if (!tacSound)
 			aGame.PlaySound("move"+(1+Math.floor(Math.random()*4)));
 		
-		xdv.updateGadget("piece#"+piece.i,displaySpec,600,function() {
+		xdv.updateGadget("piece#"+piece.i,displaySpec,speed,function() {
 			EndAnim();
 		});
 
@@ -774,16 +807,16 @@
 					opacity: 0,
 				},
 				"3d": anim3d,
-			},600,EndAnim);
+			},speed,EndAnim);
 		}
 		
 		if(aMove.cg!==undefined) {
 			var spec=aGame.cbVar.castle[aMove.f+"/"+aMove.cg];
-			var rookTo=spec.r[spec.r.length-1];
+			var rookTo=spec.r[spec.r.length-1] + (aMove.t >> 16);
 			var piece=this.pieces[this.board[aMove.cg]];
 			var displaySpec=aGame.cbMakeDisplaySpecForPiece(aGame,rookTo,piece);
 			animCount++;
-			xdv.updateGadget("piece#"+piece.i,displaySpec,600,function() {
+			xdv.updateGadget("piece#"+piece.i,displaySpec,speed,function() {
 				EndAnim();
 			});
 		}

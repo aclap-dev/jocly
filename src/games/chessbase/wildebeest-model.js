@@ -19,6 +19,7 @@
 			);
 	}
 
+	Model.Game.cbOnStaleMate = -1; // stalemate = last player wins
 	
 	Model.Game.cbDefine = function() {
 		
@@ -176,153 +177,13 @@
 			},
 			
 			castle: {
-				"5/0": {k:[4],r:[1,2,3,4,5],n:"O-O-O"},
-				"5/10": {k:[6],r:[9,8,7,6,5],n:"O-O"},
-				"104/99": {k:[103],r:[100,101,102,103,104],n:"O-O-O"},
-				"104/109": {k:[105],r:[108,107,106,105,104],n:"O-O"},
+				"5/0": {k:[4],r:[1,2,3,4,5],n:"O-O-O",extra:3},
+				"5/10": {k:[6],r:[9,8,7,6,5],n:"O-O",extra:3},
+				"104/99": {k:[103],r:[100,101,102,103,104],n:"O-O-O",extra:3},
+				"104/109": {k:[105],r:[108,107,106,105,104],n:"O-O",extra:3},
 			},
 			
 		};
 	}
-
-	var extraCastle={0:{k:[3,2,1],r:[4,3,2]},10:{k:[7,8,9],r:[6,7,8]},
-		99:{k:[102,101,100],r:[103,102,101]},109:{k:[106,107,108],r:[105,106,107]}
-	}
-	
-	var SuperModelBoardGenerateMoves=Model.Board.GenerateMoves;
-	Model.Board.GenerateMoves = function(aGame) {
-		SuperModelBoardGenerateMoves.apply(this,arguments); // call regular GenerateMoves method
-		if(!this.castled[this.mWho]) {
-			for(var i=0;i<this.mMoves.length;i++) {
-				var move=this.mMoves[i];
-				var extra = extraCastle[move.cg];
-				if(extra) {
-					var kIndex=this.board[move.f];
-					var kPiece=this.pieces[kIndex];
-					this.board[move.f]=-1;
-					this.board[extra.k[0]]=kIndex;
-					kPiece.p=extra.k[0];
-					
-					var inCheck=this.cbGetAttackers(aGame,kPiece.p,this.mWho,true).length>0;
-					if(!inCheck) {
-						var rIndex=this.board[move.cg];
-						var rPiece=this.pieces[rIndex];
-						this.board[move.cg]=-1;
-						this.board[extra.r[0]]=rIndex;
-						rPiece.p=extra.r[0];
-						
-						var oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
-						this.mMoves.push({
-							f: move.f,
-							t: extra.k[0],
-							c: null,
-							ck: oppInCheck,
-							a: 'K',
-						});
-
-						this.board[move.f]=kIndex;
-						this.board[extra.k[0]]=-1;
-						this.board[move.cg]=rIndex;
-						this.board[extra.r[0]]=-1;
-
-						this.board[move.f]=-1;
-						this.board[extra.k[1]]=kIndex;
-						kPiece.p=extra.k[1];
-
-						inCheck=this.cbGetAttackers(aGame,kPiece.p,this.mWho,true).length>0;
-						if(!inCheck) {
-							this.board[move.cg]=-1;
-							this.board[extra.r[1]]=rIndex;
-							rPiece.p=extra.r[1];
-							
-							oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
-							this.mMoves.push({
-								f: move.f,
-								t: extra.k[1],
-								c: null,
-								ck: oppInCheck,
-								a: 'K',
-							});
-
-							/*---*/
-							
-							this.board[move.f]=-1;
-							this.board[extra.k[2]]=kIndex;
-							kPiece.p=extra.k[2];
-
-							inCheck=this.cbGetAttackers(aGame,kPiece.p,this.mWho,true).length>0;
-							if(!inCheck) {
-								this.board[move.cg]=-1;
-								this.board[extra.r[2]]=rIndex;
-								rPiece.p=extra.r[2];
-								
-								oppInCheck=this.cbGetAttackers(aGame,this.kings[-this.mWho],-this.mWho,true).length>0;
-								this.mMoves.push({
-									f: move.f,
-									t: extra.k[2],
-									c: null,
-									ck: oppInCheck,
-									a: 'K',
-								});
-
-								this.board[move.cg]=rIndex;
-								this.board[extra.r[2]]=-1;
-							}
-
-							this.board[move.f]=kIndex;
-							this.board[extra.k[2]]=-1;
-
-							/*---*/
-							
-							this.board[move.cg]=rIndex;
-							this.board[extra.r[1]]=-1;
-						}
-						this.board[move.f]=kIndex;
-						this.board[extra.k[1]]=-1;
-
-						this.board[move.cg]=rIndex;
-						rPiece.p=move.cg;						
-					}
-					this.board[move.f]=kIndex;
-					kPiece.p=move.f;
-				}
-			}
-		}
-	}
-	
-	Model.Game.wbExtraCastleRook={ // rook identification and displacement from king destination
-		1:{r0:0,r:2},2:{r0:0,r:3},3:{r0:0,r:4},
-		7:{r0:10,r:6},8:{r0:10,r:7},9:{r0:10,r:8},
-		100:{r0:99,r:101},101:{r0:99,r:102},102:{r0:99,r:103},
-		105:{r0:109,r:104},106:{r0:109,r:105},107:{r0:109,r:106}
-	}
-	
-	var SuperModelBoardApplyMove=Model.Board.ApplyMove;
-	Model.Board.ApplyMove = function(aGame,move) {
-		if(move.a=='K' && !this.castled[this.mWho] && move.cg===undefined) {
-			var dc=Math.abs(geometry.C(move.t)-geometry.C(move.f));
-			if(dc>=2) {
-				var kPiece=this.pieces[this.board[move.f]];
-				this.board[move.f]=-1;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,move.f);
-				this.board[move.t]=kPiece.i;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",kPiece.i,move.t);
-				kPiece.p=move.t;
-				this.kings[this.mWho]=kPiece.p;
-				var extra=aGame.wbExtraCastleRook[move.t];
-				var rPiece=this.pieces[this.board[extra.r0]];
-				this.board[extra.r0]=-1;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,extra.r0);
-				this.board[extra.r]=rPiece.i;
-				this.zSign=aGame.zobrist.update(this.zSign,"board",rPiece.i,extra.r);
-				rPiece.p=extra.r;				
-				this.check=!!move.ck;
-				this.castled[this.mWho]=true;
-				return;
-			}
-		}
-		SuperModelBoardApplyMove.apply(this,arguments);
-	}
-
 	
 })();

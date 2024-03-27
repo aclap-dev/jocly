@@ -1,0 +1,203 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 300px;
+        margin: 0 auto;
+        display: inline-flex;
+    }
+
+    .piece-icon {
+        width: 70px;
+        height: auto;
+        float: left;
+        margin-right: 10px;
+    }
+	
+    .piece-icon-promo {
+        width: 50px;
+        height: 50px;
+    }
+
+    #promo {
+        width: 200px;
+        margin: 0 auto;
+    }
+</style>
+
+<h1>Disposition de départ</h1>
+
+
+<p>Tablier de 12 x 12 cases.</p>
+
+<p>
+<img src='{GAME}/res/visuals/timurid-600x600-2d.jpg'>
+</p>
+
+
+<h1>Pieces</h1>
+
+<h2>Bateau</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/ship.png"/>
+</p>
+<p class='piece-details'>se déplace d’une case en diagonale et peut ensuite glisser verticalement mais pas horizontalement.Il peut être promu en aigle.</p>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/ship.png'>
+</p>
+<h2>Griffon</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/griffon.png"/>
+</p>
+<p class='piece-details'>L'Aigle ou le Griffon se déplace d'une case diagonalement et s'éloigne ensuite d'un nombre indéfini horizontalement ou verticalement. Il peut avancer à une case en diagonale seulement. Il ne peut pas sauter par dessus des cases occupées et doit obligatoirement commencer son déplacement par le pas en diagonale. C'est une pièce originale empruntée au Grant Acedrex.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/griffon.png'>
+</p>
+<p>
+<h2>Snake</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/cobra.png"/>
+</p>
+<p class='piece-details'>se déplace d’une case verticalement et peut ensuite glisser en diagonale.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/snake.png'>
+</p>
+<h2>Rhinoceros</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/rhino2.png"/>
+</p>
+<p class='piece-details'>se déplace d’une case orthogonalement et peut ensuite glisser en diagonale.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rhinoceros.png'>
+</p>
+<h2>Ecureuil</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/squirrel.png"/>
+</p>
+<p class='piece-details'>Saute à 2 cases exactement.Il peut être promu en Lion.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/squirrel.png'>
+</p>
+<h2>Lion</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/lion.png"/>
+</p>
+<p class='piece-details'>se déplace comme le roi d’une case et peut sauter à 2 cases. Pièce inspiré du Chu Shogi Japonais.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/lion.png'>
+</p>
+<h2>Enchanteur</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/wizard.png"/>
+</p>
+<p class='piece-details'>L’Enchanteur se déplace d'une case en diagonale ou saute vers une case située à une colonne et trois rangs de distance ou à trois colonnes et un rang de distance. Il s'agit d'un composé du Ferz et du Chameau.Il peut être promu en Émir</p>
+<div style='clear:both'></div>
+<p>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/wizard.png'>
+</p>
+<h2>Émir</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/caliph.png"/>
+</p>
+<p class='piece-details'>Combine le mouvement du chameau, du cavalier et du ferz (1 case en diagonale).</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/duodecimal/emir.png'>
+</p>
+<h2>Amiral</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/crowned-rook.png"/>
+</p>
+<p class='piece-details'>Combine le movement d’un roi et d’une tour.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/admiral.png'>
+</p>
+<h2>Eléphant</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/elephant.png"/>
+</p>
+<p class='piece-details'>se déplace au choix d'une ou de deux cases en diagonale, en avant comme en arrière. Il peut sauter par dessus la première case, si celle-ci est occupée, pour atteindre la deuxième case en diagonale.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/elephant.png'>
+</p>
+<h2>Chameau</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/camel.png"/>
+</p>
+<p class='piece-details'>saute vers la case opposée d'un rectangle 2x4. Cela revient à enchaîner deux pas de Tour avec un pas de Fou dans n'importe quel ordre. Peu importe ce que contiennent les cases intermédiaires. Le Chameau est emprunté aux Échecs de Tamerlan.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/camel.png'>
+</p>
+
+<h2>Canon</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/cannon2.png"/>
+</p>
+<p class='piece-details'>se déplace comme une Tour. La prise d'une pièce ennemie se fait lorsque le Canon se trouve aligné (rangée ou colonne, jamais en diagonale) avec elle et qu'une et une seule autre pièce, amie ou ennemie, s'interpose entre eux. La pièce intermédiaire "charge" le Canon qui peut alors prendre la pièce ennemie. Dans ce cas, le Canon prend la place de la pièce ennemie en sautant par dessus la pièce intermédiaire qui, elle, ne bouge pas. Le Canon est repris du Xiangqi.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/cannon.png'>
+</p>
+
+<img class='piece-graph' src='{GAME}/res/rules/graphs/eagle.png'>
+</p>
+<h2>Prince</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/prince.png"/>
+</p>
+<p class='piece-details'>Combinaison du roi et du pion. Se déplace d’une case dans toutes les directions et peut avancer de 2 cases en avant mais sans prendre. il peut être promu en reine et pris en passant par un pion.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/prince.png'>
+</p>
+<h2>Rhinoceros</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/rhino2.png"/>
+</p>
+<p class='piece-details'>Cette pièce peut apparaître par la promotion d’un serpent. Se déplace d’une case orthogonalement et peut ensuite glisser en diagonale indéfiniment.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rhinoceros.png'>
+</p>
+<h2>Roi, Reine, fou, cavalier et tour</h2>
+<p>
+<img style="max-width:100%;" src="{GAME}/res/rules/fairy/king.png"/>
+</p>
+<p class='piece-details'>Identique aux Échecs Orthodoxes mais le roi ne peut roquer et les pions peuvent avancer vers l’avant de 2 cases.</p>
+<div style='clear:both'></div>
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/king.png'>
+</p>
+
+<p>
+<img class='piece-graph' src='{GAME}/res/rules/graphs/rook.png'>
+</p>
+<h1>Promotions</h1>
+<div id="promo">
+<table>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-pawn.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-prince.png'><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-crowned-rook.png'>
+</td><td>promu en
+</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-queen.png'></td></tr>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-ship.png'>
+</td><td>promu en
+</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-griffon.png'></td></tr>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-snake.png'>
+</td><td>promu en
+</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-rhino.png'></td></tr>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-squirrel.png'>
+</td><td>promu en
+</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-lion.png'></td></tr>
+<tr><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-wizard.png'>
+</td><td>promu en
+</td><td><img class='piece-icon-promo' src='{GAME}/res/fairy/icons/w-caliph.png'></td></tr>
+</table>
+<div style='clear:both'></div>
+

@@ -1,0 +1,72 @@
+<style>
+    .piece-graph {
+        height: auto;
+        max-width: 300px;
+        margin: 0 auto;
+        display: inline-flex;
+    }
+</style>
+<h2>Shogi (Japanese Chess)</h2>
+<p>Shogi is the Japanese cousin of Chess. Very similar to it in some respects, it differs from Chess mainly by allowing players to keep captured pieces and replay them as their own. To win you have to checkmate the king of your opponent.</p>
+
+<h2>Board</h2>
+
+<p>The board is a 9x9</p>
+
+<h2>Pieces</h2>
+
+<p>for each team:
+<ul>
+<li>1 King</li>
+<li>2 Gold generals</li>
+<li>2 Silver generals</li>
+<li>1 Bishop</li>
+<li>1 Rook</li>
+<li>2 lances</li>
+<li>2 Horses</li>
+<li>9 Pawns</li>
+</ul>
+</p>
+
+<h2>Initial setup</h2>
+
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shogi/shogi-initial-2d.png"/></p>
+<p>A skin with pictograms is available for players not familiar with the traditional japanese version.</p>
+<p style="text-align:center"><img style='max-width:100%' src="{GAME}/res/rules/shogi/shogi-initial-2d-western.png"/></p>
+
+<h2>Pieces actions and properties</h2>
+
+
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/gold.png"/><b>Gold general</b>: moves and captures to adjacent squares in any orthogonal or the forward diagonal direction.</p>
+<p><img class='piece-graph' src="{GAME}/res/rules/graphs/gold.png"/></p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/silver.png"/><b>Silver general</b>: moves and captures to adjacent squares in any diagonal or the forward orthogonal direction.</p>
+<p><img class='piece-graph' src="{GAME}/res/rules/graphs/silver.png"/></p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/pawn.png"/><b>Pawn</b> : The Pawn: moves <strong>and</strong> captures to the square directly in front of it.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/rook.png"/><b>Rook</b> : as in chess.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/bishop.png"/><b>Bishop</b> : as in chess.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/king.png"/><b>King</b> : as in chess.</p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/horse.png"/><b>Horse</b> : The Knight has the two forward-most moves of the Chess knight.</p>
+<p><img class='piece-graph'  src="{GAME}/res/rules/shogi/shogi-horse.png"/></p>
+<p><img style="max-width:100%;" src="{GAME}/res/rules/shogi/lance.png"/><b>Lance</b> : The Lance moves as a Rook but only forward in the same file, never sideways or backward.</p>
+<p><img class='piece-graph'  src="{GAME}/res/rules/shogi/shogi-lance.png"/></p>
+<h2>Promotion</h2>
+
+<ul>
+<li><b>Silver general, horse, lance and pawn</b> promote to gold general</li>
+<li><b>Rook and bishop</b> gain king move with promotion</li>
+</ul>
+
+<h2>Drops</h2>
+<p>Captured pieces become prisoners and lose their promotion, guarded on your right. You can use your turn to put them back into play. A player can either move one of his pieces or drop a prisoner back into play on his behalf. </p>
+
+<p>A pawn can’t be dropped on a column with an unpromoted pawn of the same color.</p>
+
+<p>A pawn can’t make an immediate checkmate when dropped. It is allowed for other pieces.</p>
+
+<p>A piece can’t be dropped is no subsequent move is possible, so a pawn cannot be dropped on the last line.</p>
+
+<h2>Available skins</h2>
+<p>2D skins are available for all, 3D skins need WebGL so please use Chrome or Firefox.</p>
+
+
+
