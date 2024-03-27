@@ -858,7 +858,7 @@
 				(this.castled[-1] ? 1 : (kingMoved[-1]? 0 : castlePiecesCount[-1] / (g.castleablePiecesCount[-1]+1)));
 		
 		if(cbVar.evaluate)
-			cbVar.evaluate.call(this,aGame,evalValues,material,pieceCount);
+			cbVar.evaluate.call(this,aGame,evalValues,material,pieceCount,pieceValue);
 
 		var evParams=aGame.mOptions.levelOptions;
 		for(var name in evalValues) {
